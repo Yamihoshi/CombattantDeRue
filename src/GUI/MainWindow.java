@@ -2,19 +2,15 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 public class MainWindow extends JFrame{
 
 	boolean debug_mode = true;
-	public static final String IMAGE_PATH = "ressource/img/street-fighter-logo.jpg";
+	public static final String IMAGE_PATH = "ressource/img/Street_Fighter_logo.png";
 	
 	public MainWindow()
 	{
@@ -23,6 +19,23 @@ public class MainWindow extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		showLoadingScreen();
+		
+		Action actionListener = new AbstractAction() {
+		      public void actionPerformed(ActionEvent actionEvent) {
+		    	  getContentPane().removeAll();
+		    	  getContentPane().add(new CharacterSelection(),BorderLayout.CENTER);
+		    	  repaint();
+		    	  revalidate();
+		      }
+		    };
+		    JPanel content = (JPanel) this.getContentPane();
+
+		    KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,0,true);
+
+		    InputMap inputMap = content.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		    inputMap.put(stroke, "OPEN");
+		    content.getActionMap().put("OPEN", actionListener);
+		
 		this.setVisible(true);
 	}
 	

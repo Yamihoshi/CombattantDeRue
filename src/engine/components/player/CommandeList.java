@@ -14,5 +14,7 @@ public enum CommandeList {
 	DOWNLEFT,
 	
 	ATTACK,
-	GUARD
+	GUARD,
+	
+	NEUTRAL
 }
