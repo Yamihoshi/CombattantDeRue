@@ -18,29 +18,24 @@ public class EngineDecorator implements EngineService{
 		this.delegate.init(h, w, s, j1, j2);
 	}
 
-	@Override
-	public int height() {
-		return this.delegate.height();
+	public int getHeight() {
+		return delegate.getHeight();
 	}
 
-	@Override
-	public int width() {
-		return this.delegate.width();
+	public int getWidth() {
+		return delegate.getWidth();
 	}
 
-	@Override
-	public Character chara(int n) {
-		return this.delegate.chara(n);
+	public Character getCharacter(int n) {
+		return delegate.getCharacter(n);
 	}
 
-	@Override
-	public Player player(int n) {
-		return this.delegate.player(n);
+	public Player getPlayer(int n) {
+		return delegate.getPlayer(n);
 	}
 
-	@Override
-	public boolean gameOver() {
-		return this.delegate.gameOver();
+	public boolean isGameOver() {
+		return delegate.isGameOver();
 	}
 
 	@Override
