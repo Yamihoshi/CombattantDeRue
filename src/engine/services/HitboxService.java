@@ -6,8 +6,8 @@ public interface HitboxService {
 	public void init(int x, int y);
 	
 	/* Observators */
-	public int positionX();
-	public int positionY();
+	public int getPositionX();
+	public int getPositionY();
 	public boolean belongsTo(int x, int y);
 	public boolean collidesWith(HitboxService other_hitbox);
 	public boolean equalsTo(HitboxService other_hitbox);

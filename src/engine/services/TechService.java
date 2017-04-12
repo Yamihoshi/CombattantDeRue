@@ -3,16 +3,17 @@ package engine.services;
 public interface TechService {
 
 	/* Constructors */
-	public void init();
+	public void init(String name,int damage, int hstun, int bstun, int sframe, int hframe, int rframe,HitboxService hitbox);
 	
 	/* Observators */
-	public int damage();
-	public int hstun();
-	public int bstun();
-	public int sframe();
-	public int hframe();
-	public int rframe();
-	public HitboxService hitbox(int x, int y); //x et y en param WHAT ?
+	public String getName();
+	public int getDamage();
+	public int getHit_stun();
+	public int getBlock_stun();
+	public int getStart_up_frame();
+	public int getHit_frame();
+	public int getRecovery_Frame();
+	public HitboxService getHitbox();
 	
 	/* Operators */
 }

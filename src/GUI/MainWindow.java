@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 public class MainWindow extends JFrame{
 
 	boolean debug_mode = true;
-	public static final String IMAGE_PATH = "ressource/img/street-fighter-logo.jpg";
+	public static final String IMAGE_PATH = "ressource/img/Street_Fighter_logo.png";
 	
 	public MainWindow()
 	{

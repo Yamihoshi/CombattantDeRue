@@ -6,14 +6,13 @@ public interface CharacterService {
 	public void init(int x, int y, EngineService engine ); // What does they mean by this ?
 	
 	/* Observators */
-	public int positionX();
-	public int positionY();
-	public EngineService engine();
-	public HitboxService charBox();
-	public int life();
-	public int speed();
+	public int getPositionX();
+	public int getPositionY();
+	public EngineService getEngine();
+	public HitboxService getCharBox();
+	public int getLife();
+	public int getSpeed();
 	public boolean faceRight();
-	public boolean faceLeft();
 	
 	
 	/* Operators */

@@ -10,7 +10,7 @@ public interface FightCharService extends CharacterService{
 	public boolean isBlockStunned();
 	public boolean isHitStunned();
 	public boolean isTeching();
-	public TechService tech();
+	public TechService getTech();
 	public boolean techFrame(); // What does it do ?
 	public boolean techHasAlreadyHit();
 	
