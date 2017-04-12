@@ -6,6 +6,7 @@
   <property name="src" location="src"/>
   <property name="build" location="build"/>
   <property name="jars" location="jars"/>
+	<property name="test.class.name" value="tests.StreetTest"/>
 
   <target name="init">
     <!-- Create the build directory structure used by compile -->
@@ -25,11 +26,27 @@
 	    </java>
 	  </target>
 	
+	<path id="test.classpath">
+		<pathelement location="${build}" />
+	  <pathelement location="${jars}" />
+	  <fileset dir="${jars}">
+	    <include name="**/*.jar"/>
+	  </fileset>
+	</path>
+	
 	<target name="test" depends="compile"
 	          description="run JUnit Test">
 	    <echo>================ Testing Application================</echo>
-	    <java classname="tests.StreetTest" classpath="${build}">
-	    </java>
+		 <junit printsummary="no" haltonfailure="no" fork="true">
+		 	<assertions><enable/></assertions>
+		 	    <classpath refid="test.classpath" />
+		 	<formatter type="brief" usefile="false" />
+		 	        <batchtest>
+		 	            <fileset dir="${src}" includes="**/*Test.java" />
+		 	        </batchtest>
+		 	</junit>
 	  </target>
+	
+
   
 </project>
