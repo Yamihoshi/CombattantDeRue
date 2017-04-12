@@ -1,0 +1,35 @@
+<project name="Street Fighter" default="compile" basedir=".">
+    <description>
+       Projet CPS : Street Fighter
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="jars" location="jars"/>
+
+  <target name="init">
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac debug="true" classpath="${jars}/junit.jar" srcdir="${src}" excludes="" destdir="${build}" includeantruntime="false" />
+  </target>
+
+	<target name="run" depends="compile"
+	          description="run application">
+	    <echo>================ Run Street Fighter================</echo>
+	    <java classname="release.StreetFighter" classpath="${build}" fork="true">
+	    </java>
+	  </target>
+	
+	<target name="test" depends="compile"
+	          description="run JUnit Test">
+	    <echo>================ Testing Application================</echo>
+	    <java classname="tests.StreetTest" classpath="${build}">
+	    </java>
+	  </target>
+  
+</project>
