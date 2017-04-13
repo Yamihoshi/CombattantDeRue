@@ -1,15 +1,26 @@
 package GUI;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-public class CharacterSelection extends StackPane{
+public class CharacterSelection{
 
-	public CharacterSelection()
+	private AnchorPane pane;
+	
+	public CharacterSelection() throws IOException
 	{
-		this.setId("character_selection");
+		this.pane = FXMLLoader.load(getClass().getResource("/character_selection.fxml"));
+		this.pane.setId("character_selection");
+	}
+	
+	public AnchorPane getPane()
+	{
+		return this.pane;
 	}
 	
 	

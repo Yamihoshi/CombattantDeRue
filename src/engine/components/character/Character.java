@@ -1,12 +1,16 @@
 package engine.components.character;
 
+import java.util.ArrayList;
+
 import engine.components.player.Commande;
 import engine.services.CharacterService;
 import engine.services.EngineService;
 import engine.services.HitboxService;
+import engine.services.TechService;
 
 public class Character implements CharacterService{
 
+	protected String name;
 	protected int vie = -1;
 	protected int vitesse = -1;
 	protected int positionX = -1;
@@ -14,10 +18,9 @@ public class Character implements CharacterService{
 	protected EngineService engine;
 	protected HitboxService hitbox;
 	protected boolean faceRight;
+	
+	protected ArrayList<TechService> techniques;
 
-	//protected Hitbox hitbox;
-	//protected Technique[] ou ArrayList techniques
-	String sprite_src = null;
 	@Override 
 	public void init(int life, int speed, EngineService engine, boolean faceRight) {
 		vie = life;

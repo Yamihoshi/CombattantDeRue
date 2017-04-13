@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -25,8 +26,10 @@ public class MainWindow extends Application{
 		
 		 this.stage = stageParam;
 		 
-		 stage.setWidth(800);
-		 stage.setHeight(600);
+		 this.stage.setResizable(false);
+		 
+		 stage.setWidth(1280);
+		 stage.setHeight(720);
 		 
 		 stage.setTitle("Street Fighter V2 desu");
 		 
@@ -34,7 +37,7 @@ public class MainWindow extends Application{
 		 root.setId("title_screen");
 		 Scene scene = new Scene(root);
 		 
-		 Media media = new Media(getClass().getResource("/music/Guile_Theme.mp3").toURI().toString());
+		 Media media = new Media(getClass().getResource(Ressource.music+"Guile_Theme.mp3").toURI().toString());
 		 mediaPlayer = new MediaPlayer(media);
 		 mediaPlayer.setVolume(0.2);
 		 mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
@@ -45,7 +48,7 @@ public class MainWindow extends Application{
 		   });*/
 		 mediaPlayer.play();
 		 
-		 stage.getIcons().add(new Image(getClass().getResource("/img/icon.png").toURI().toString()));
+		 stage.getIcons().add(new Image(getClass().getResource(Ressource.icon).toURI().toString()));
 		 scene.getStylesheets().addAll(getClass().getResource("/style.css").toURI().toString());
 		 
 		 stage.setScene(scene);
@@ -54,7 +57,8 @@ public class MainWindow extends Application{
 	            public void handle(KeyEvent ke) {
 	               System.out.println("Key Pressed: " + ke.getCode());
 	                try {
-						switch_screen(new CharacterSelection());
+	                	CharacterSelection selection = new CharacterSelection();
+						switch_screen(selection.getPane());
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -65,7 +69,7 @@ public class MainWindow extends Application{
 		 stage.show();
 	 }
 	 
-	 public void switch_screen(StackPane pane) throws Exception
+	 public void switch_screen(Pane pane) throws Exception
 	 {
 		 mediaPlayer.stop();
 		 
