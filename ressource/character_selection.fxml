@@ -1,32 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="GUI.controller.CharacterSelectionController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.CharacterSelectionController">
    <children>
-      <BorderPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <right>
-            <ImageView fx:id="character_display_J1" fitHeight="400.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fx:id="character_display_J1" fitHeight="400.0" fitWidth="750.0" layoutX="872.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Character_Display/Chun_Li_J2.png" />
+         </image>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+      </ImageView>
+      <ImageView fx:id="character_display_J2" fitHeight="400.0" fitWidth="750.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Character_Display/Chun_Li_J1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="713.0" layoutX="291.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/select_character_A.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="font" alignment="CENTER" layoutX="66.0" layoutY="550.0" prefHeight="50.0" prefWidth="268.0" stylesheets="@style.css" text="Chun" />
+      <GridPane layoutX="334.0" layoutY="121.0" prefHeight="421.0" prefWidth="593.0" AnchorPane.leftAnchor="334.0" AnchorPane.topAnchor="121.0">
+        <columnConstraints>
+          <ColumnConstraints maxWidth="122.0" minWidth="105.0" prefWidth="110.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="102.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="508.0" minWidth="0.0" prefWidth="318.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="508.0" minWidth="10.0" prefWidth="64.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="101.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="212.0" minHeight="0.0" prefHeight="198.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="317.0" minHeight="10.0" prefHeight="122.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
-                  <Image url="@Character_Display/Chun_Li_J2.png" />
+                  <Image url="@Portraits/Chun_Li.jpg" />
                </image>
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
             </ImageView>
-         </right>
-         <left>
-            <ImageView fx:id="character_display_J2" fitHeight="400.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Character_Display/Chun_Li_J1.png" />
+                  <Image url="@Portraits/Random.jpg" />
                </image>
             </ImageView>
-         </left>
-      </BorderPane>
+            <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@Portraits/Ryu.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
