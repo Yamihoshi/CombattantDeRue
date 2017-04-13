@@ -8,13 +8,11 @@ import engine.services.EngineService;
 import engine.services.HitboxService;
 import engine.services.TechService;
 
-public class Character implements CharacterService{
+public class CharacterImpl implements CharacterService{
 
 	protected String name;
 	protected int vie = -1;
 	protected int vitesse = -1;
-	protected int positionX = -1;
-	protected int positionY = -1;
 	protected EngineService engine;
 	protected HitboxService hitbox;
 	protected boolean faceRight;
@@ -22,7 +20,8 @@ public class Character implements CharacterService{
 	protected ArrayList<TechService> techniques;
 
 	@Override 
-	public void init(int life, int speed, EngineService engine, boolean faceRight) {
+	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight) {
+		name = nom;
 		vie = life;
 		vitesse = speed;
 		this.engine = engine;
@@ -31,12 +30,12 @@ public class Character implements CharacterService{
 	@Override
 	public int getPositionX() {
 		// TODO Auto-generated method stub
-		return positionX;
+		return hitbox.getPositionX();
 	}
 	@Override
 	public int getPositionY() {
 		// TODO Auto-generated method stub
-		return positionY;
+		return hitbox.getPositionY();
 	}
 	@Override
 	public EngineService getEngine() {
@@ -66,13 +65,12 @@ public class Character implements CharacterService{
 
 	@Override
 	public void moveLeft() {
-		// TODO Auto-generated method stub
+		hitbox.moveTo(getPositionX()-1, getPositionY());
 		
 	}
 	@Override
 	public void moveRight() {
-		// TODO Auto-generated method stub
-		
+		hitbox.moveTo(getPositionX()+1, getPositionY());
 	}
 	@Override
 	public void switchSide() {
@@ -87,5 +85,10 @@ public class Character implements CharacterService{
 	@Override
 	public boolean isDead() {
 		return vie > 0;
+	}
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return name;
 	}
 }

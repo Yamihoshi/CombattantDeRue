@@ -10,8 +10,8 @@ public class CharacterDecorator implements CharacterService{
 	CharacterService character;
 	
 
-	public void init(int x, int y, EngineService engine, boolean faceRight) {
-		character.init(x, y, engine, faceRight);
+	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight) {
+		character.init(null, life, speed, engine, faceRight);
 	}
 
 	public int getPositionX() {
@@ -61,5 +61,11 @@ public class CharacterDecorator implements CharacterService{
 
 	public void step(Commande c) {
 		character.step(c);
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return character.getName();
 	}
 }

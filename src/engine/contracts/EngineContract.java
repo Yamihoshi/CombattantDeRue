@@ -7,7 +7,7 @@ import engine.contracts.error.PreconditionError;
 import engine.decorators.EngineDecorator;
 import engine.services.CharacterService;
 import engine.services.EngineService;
-import engine.components.character.Character;
+import engine.components.character.CharacterImpl;
 
 public class EngineContract extends EngineDecorator{
 

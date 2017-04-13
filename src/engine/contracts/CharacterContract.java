@@ -11,11 +11,11 @@ import engine.services.HitboxService;
 public class CharacterContract extends CharacterDecorator {
 
 	@Override
-	public void init(int l, int s, EngineService engine, boolean faceRight) {
+	public void init(String nom, int l, int s, EngineService engine, boolean faceRight) {
 		if(!(l > 0 && s>0)){
 			new PreconditionError("Erreur init precondition character");
 		}
-		super.init(l, s, engine, faceRight);
+		super.init(nom, l, s, engine, faceRight);
 		if(!(getLife() == l && getSpeed() == s && isFaceRight() == faceRight && getEngine().equals(engine))){
 			new PostconditionError("Erreur post condition error");
 		}

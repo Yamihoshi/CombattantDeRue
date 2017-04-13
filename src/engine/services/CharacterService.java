@@ -5,7 +5,7 @@ import engine.components.player.Commande;
 public interface CharacterService {
 
 	/* Constructors */
-	public void init(int x, int y, EngineService engine, boolean faceRight ); // What does they mean by this ?
+	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight ); // What does they mean by this ?
 	
 	/* Observators */
 	public int getPositionX();
@@ -14,6 +14,7 @@ public interface CharacterService {
 	public HitboxService getCharBox();
 	public int getLife();
 	public int getSpeed();
+	public String getName();
 	public boolean isFaceRight();
 	
 	public boolean isDead(); 
