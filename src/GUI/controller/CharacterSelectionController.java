@@ -16,7 +16,7 @@ import javafx.scene.text.Font;
 public class CharacterSelectionController implements Initializable {
 
 	@FXML 
-    private AnchorPane root; 
+    private AnchorPane root;
 	
 	@FXML 
     private ImageView character_display_J1; 

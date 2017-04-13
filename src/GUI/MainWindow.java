@@ -39,7 +39,7 @@ public class MainWindow extends Application{
 		 
 		 Media media = new Media(getClass().getResource(Ressource.music+"Guile_Theme.mp3").toURI().toString());
 		 mediaPlayer = new MediaPlayer(media);
-		 mediaPlayer.setVolume(0.2);
+		 mediaPlayer.setVolume(0.3);
 		 mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		 /*mediaPlayer.setOnEndOfMedia(new Runnable() {
 		       public void run() {
@@ -57,8 +57,7 @@ public class MainWindow extends Application{
 	            public void handle(KeyEvent ke) {
 	               System.out.println("Key Pressed: " + ke.getCode());
 	                try {
-	                	CharacterSelection selection = new CharacterSelection();
-						switch_screen(selection.getPane());
+	                	switch_to_Character_Selection();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -69,12 +68,34 @@ public class MainWindow extends Application{
 		 stage.show();
 	 }
 	 
-	 public void switch_screen(Pane pane) throws Exception
+	 public void switch_to_Character_Selection() throws Exception
 	 {
 		 mediaPlayer.stop();
 		 
-		 Scene scene = new Scene(pane);
-		 scene.getStylesheets().addAll(getClass().getResource("/style.css").toURI().toString());
+		 CharacterSelection selection = new CharacterSelection();
+		 
+		 Scene scene = new Scene(selection.getPane());
+		 
+		 scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+	            public void handle(KeyEvent ke) {
+	               System.out.println("Key Pressed: " + ke.getCode());
+	                try {
+	                	switch_to_Fight();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	            }
+	        });
+		 stage.setScene(scene);
+	 }
+	 
+	 
+	 public void switch_to_Fight() throws Exception
+	 {
+		 FightScreen fight = new FightScreen();
+		 Scene scene = new Scene(fight.getPane());
+		 
 		 stage.setScene(scene);
 	 }
 	
