@@ -1,5 +1,20 @@
 package engine.components.player;
 
-public class Commande {
+public enum Commande {
 
+	LEFT,
+	RIGHT,
+	
+	UP,
+	UPRIGHT,
+	UPLEFT,
+	
+	DOWN,
+	DOWNRIGHT,
+	DOWNLEFT,
+	
+	ATTACK,
+	GUARD,
+	
+	NEUTRAL
 }

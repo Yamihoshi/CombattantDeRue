@@ -2,7 +2,7 @@ package engine.decorators;
 
 import engine.components.player.Commande;
 import engine.components.player.Player;
-import engine.services.CommandeService;
+import engine.services.CharacterService;
 import engine.services.EngineService;
 
 public class EngineDecorator implements EngineService{
@@ -26,7 +26,7 @@ public class EngineDecorator implements EngineService{
 		return delegate.getWidth();
 	}
 
-	public Character getCharacter(int n) {
+	public CharacterService getCharacter(int n) {
 		return delegate.getCharacter(n);
 	}
 
@@ -39,7 +39,7 @@ public class EngineDecorator implements EngineService{
 	}
 
 	@Override
-	public void step(CommandeService c1, CommandeService c2) {
+	public void step(Commande c1, Commande c2) {
 		this.delegate.step(c1, c2);
 	}
 

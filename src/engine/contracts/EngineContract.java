@@ -1,11 +1,13 @@
 package engine.contracts;
 
+import engine.components.player.Commande;
 import engine.components.player.Player;
 import engine.contracts.error.PostconditionError;
 import engine.contracts.error.PreconditionError;
 import engine.decorators.EngineDecorator;
-import engine.services.CommandeService;
+import engine.services.CharacterService;
 import engine.services.EngineService;
+import engine.components.character.Character;
 
 public class EngineContract extends EngineDecorator{
 
@@ -25,8 +27,20 @@ public class EngineContract extends EngineDecorator{
 		}
 		if(!(j1.equals(this.getPlayer(0)) && j2.equals(getPlayer(1))))
 			new PostconditionError("Erreur init player");
+		if(!(getCharacter(0).getPositionX() == (int) w/2 - (int)s/2 && getCharacter(1).getPositionX() == (int) w/2 + (int)s/2)){
+			new PostconditionError("Erreur init char width");
+		}
+		if(!(getCharacter(0).getPositionY() == 0 && getCharacter(1).getPositionY() == 0)){
+			new PostconditionError("Erreur init char height");
+		}
+		if(!(getCharacter(0).isFaceRight() && !getCharacter(1).isFaceRight())){
+			new PostconditionError("Erreur init char face right");
+		}
 	}
-
+	
+	public boolean checkInvariant(){
+		return true;
+	}
 	@Override
 	public int getHeight() {
 		// TODO Auto-generated method stub
@@ -40,15 +54,25 @@ public class EngineContract extends EngineDecorator{
 	}
 
 	@Override
-	public Character getCharacter(int n) {
-		// TODO Auto-generated method stub
-		return super.getCharacter(n);
+	public CharacterService getCharacter(int i) {
+		if(!(i == 0 || i == 1)){
+			new PreconditionError("Entier i =/= 0 | 1 ");
+			return null;
+		}
+		else{
+			return super.getCharacter(i);
+		}
 	}
 
 	@Override
 	public Player getPlayer(int n) {
-		// TODO Auto-generated method stub
-		return super.getPlayer(n);
+		if(!(n == 0 || n == 1)){
+			new PreconditionError("Entier i =/= 0 | 1 ");
+			return null;
+		}
+		else{
+			return super.getPlayer(n);
+		}
 	}
 
 	@Override
@@ -58,7 +82,7 @@ public class EngineContract extends EngineDecorator{
 	}
 
 	@Override
-	public void step(CommandeService c1, CommandeService c2) {
+	public void step(Commande c1, Commande c2) {
 		// TODO Auto-generated method stub
 		super.step(c1, c2);
 	}

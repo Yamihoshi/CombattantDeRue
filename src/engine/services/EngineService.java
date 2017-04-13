@@ -10,10 +10,10 @@ public interface EngineService {
 	/* Observators */
 	public int getHeight();
 	public int getWidth();
-	public Character getCharacter(int n);
+	public CharacterService getCharacter(int n);
 	public Player getPlayer(int n);
 	public boolean isGameOver();
 	
 	/* Operators */
-	public void step(CommandeService c1,CommandeService c2);
+	public void step(Commande c1,Commande c2);
 }

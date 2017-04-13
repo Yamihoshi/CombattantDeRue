@@ -1,7 +1,7 @@
 package engine.components.character;
 
+import engine.components.player.Commande;
 import engine.services.CharacterService;
-import engine.services.CommandeService;
 import engine.services.EngineService;
 import engine.services.HitboxService;
 
@@ -11,14 +11,19 @@ public class Character implements CharacterService{
 	protected int vitesse = -1;
 	protected int positionX = -1;
 	protected int positionY = -1;
+	protected EngineService engine;
+	protected HitboxService hitbox;
+	protected boolean faceRight;
 
 	//protected Hitbox hitbox;
 	//protected Technique[] ou ArrayList techniques
 	String sprite_src = null;
-	@Override
-	public void init(int x, int y, EngineService engine) {
-		// TODO Auto-generated method stub
-		
+	@Override 
+	public void init(int life, int speed, EngineService engine, boolean faceRight) {
+		vie = life;
+		vitesse = speed;
+		this.engine = engine;
+		this.faceRight = faceRight;
 	}
 	@Override
 	public int getPositionX() {
@@ -33,12 +38,12 @@ public class Character implements CharacterService{
 	@Override
 	public EngineService getEngine() {
 		// TODO Auto-generated method stub
-		return null;
+		return engine;
 	}
 	@Override
 	public HitboxService getCharBox() {
 		// TODO Auto-generated method stub
-		return null;
+		return hitbox;
 	}
 	@Override
 	public int getLife() {
@@ -53,13 +58,9 @@ public class Character implements CharacterService{
 	@Override
 	public boolean isFaceRight() {
 		// TODO Auto-generated method stub
-		return false;
+		return faceRight;
 	}
-	@Override
-	public boolean isFaceLeft() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 	@Override
 	public void moveLeft() {
 		// TODO Auto-generated method stub
@@ -72,12 +73,16 @@ public class Character implements CharacterService{
 	}
 	@Override
 	public void switchSide() {
+		faceRight = !faceRight;
+		
+	}
+	@Override
+	public void step(Commande c) {
 		// TODO Auto-generated method stub
 		
 	}
 	@Override
-	public void step(CommandeService c) {
-		// TODO Auto-generated method stub
-		
+	public boolean isDead() {
+		return vie > 0;
 	}
 }
