@@ -4,6 +4,7 @@
     </description>
   <!-- set global properties for this build -->
   <property name="src" location="src"/>
+  <property name="ressource" location="ressource"/>
   <property name="build" location="build"/>
   <property name="jars" location="jars"/>
 
@@ -16,6 +17,9 @@
         description="compile the source " >
     <!-- Compile the java code from ${src} into ${build} -->
     <javac debug="true" classpath="${jars}/junit.jar" srcdir="${src}" excludes="" destdir="${build}" includeantruntime="false" />
+    <copy todir="${build}" >  
+          <fileset dir="${ressource}" includes="**"/>  
+   </copy> 
   </target>
 
 	<target name="run" depends="compile"
@@ -46,6 +50,9 @@
 		 	</junit>
 	  </target>
 	
-
+	<target name="clean">
+	  <echo>=== CLEAN ===</echo>
+	  <delete dir="${build}" />
+	</target>
   
 </project>

@@ -34,9 +34,9 @@ public class MainWindow extends Application{
 		 root.setId("title_screen");
 		 Scene scene = new Scene(root);
 		 
-		 Media media = new Media(getClass().getResource("/music/Guile_Theme.mp3").toURI().toString());;
+		 Media media = new Media(getClass().getResource("/music/Guile_Theme.mp3").toURI().toString());
 		 mediaPlayer = new MediaPlayer(media);
-		 mediaPlayer.setVolume(0.5);
+		 mediaPlayer.setVolume(0.2);
 		 mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		 /*mediaPlayer.setOnEndOfMedia(new Runnable() {
 		       public void run() {
