@@ -1,47 +1,16 @@
 package GUI;
 
-import java.awt.*;
-import javax.swing.*;
+import java.net.URISyntaxException;
 
-public class CharacterSelection extends JPanel{
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
-	private JLabel chara_1;
-	private JLabel chara_2;
-	
-	
-	
+public class CharacterSelection extends StackPane{
+
 	public CharacterSelection()
 	{
-		this.setLayout(new BorderLayout());
-		this.setBackground(Color.BLACK);
-		this.add(selectPlayer1(),BorderLayout.WEST);
-		this.add(selectPlayer2(),BorderLayout.EAST);
+		this.setId("character_selection");
 	}
 	
-	public JPanel selectPlayer1()
-	{
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
-		panel.setLayout(new BorderLayout());
-		panel.add(new JLabel("J1"),BorderLayout.SOUTH);
-		ImageIcon imageIcon = new ImageIcon(new ImageIcon("ressource/Portraits/Chun_Li.jpg").getImage().getScaledInstance(150,300, Image.SCALE_DEFAULT));
-		panel.add(new JLabel(imageIcon),BorderLayout.CENTER);
-		return panel;
-	}
 	
-	public JPanel selectPlayer2()
-	{
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
-		panel.setLayout(new BorderLayout());
-		panel.add(new JLabel("J2"),BorderLayout.SOUTH);
-		ImageIcon imageIcon = new ImageIcon(new ImageIcon("ressource/Portraits/Cammy.jpg").getImage().getScaledInstance(150,300, Image.SCALE_DEFAULT));
-		panel.add(new JLabel(imageIcon),BorderLayout.CENTER);
-		return panel;
-	}
-	
-	public void switchCharacter()
-	{
-
-	}
 }

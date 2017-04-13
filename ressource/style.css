@@ -1,0 +1,13 @@
+#title_screen{
+  -fx-background-image: url("img/Street_Fighter_logo.png");
+  -fx-background-repeat: stretch;   
+  -fx-background-size: 800 600;
+  -fx-background-position: center center;
+}
+
+#character_selection{
+  -fx-background-color: black;
+  -fx-background-repeat: stretch;   
+  -fx-background-size: 800 600;
+  -fx-background-position: center center;
+}
