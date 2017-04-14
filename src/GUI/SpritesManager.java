@@ -9,6 +9,7 @@ public class SpritesManager {
 	private Image[] currentSprite;
 	private String[] currentAnimation;
 	private int frame;
+	private int walid;
 	
 	public SpritesManager()
 	{
@@ -24,7 +25,7 @@ public class SpritesManager {
 	
 	public void stepAnimation()
 	{
-		this.frame = ( this.frame + 1 ) % 5; // %Animation.length		
+		this.frame = ( this.frame + 1) % 60;  // %Animation.length		
 		this.currentSprite[0] = this.loader.getImageFromAnimation(CharacterType.IBUKI,AnimationType.IDLE,this.frame);
 		this.currentSprite[1] = this.loader.getImageFromAnimation(CharacterType.RYU,AnimationType.IDLE,this.frame);
 	}

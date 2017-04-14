@@ -45,7 +45,12 @@ public class SpritesLoader {
 			String path = getPathOfSprite(chara,AnimationType.IDLE,i);
 			try {
 				System.out.println(getClass().getResource(path).toURI().toString());
-				sprites.add(new Image(getClass().getResource(path).toURI().toString()));
+				Image tmp = new Image(getClass().getResource(path).toURI().toString());
+				for(int j = 0; j < 12; j++){
+					sprites.add(tmp);
+				}
+
+
 			} catch (URISyntaxException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

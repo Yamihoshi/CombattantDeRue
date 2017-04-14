@@ -50,24 +50,31 @@ public class StageController implements Initializable {
     	this.sprites_manager = new SpritesManager();
     	
 		Task<Void> task = new Task<Void>() {
+			int desiredRate = 60;
+			long timeNeeded = 1000 / desiredRate;
+
 		    @Override 
 		    protected Void call() throws Exception{
 		        while(true){
+			        long time = System.nanoTime(); 
+
 		        	if (isCancelled()) {
 		                break;
 		             }
-		        	
 		        	refreshFighter();
-		        	
+		            long executionTime = System.nanoTime() - time;
+		            long remainingTime = timeNeeded - executionTime;
+
 		        	try {
-		                Thread.sleep(110);
+			            if (remainingTime > 0) 
+		                Thread.sleep(remainingTime);
 		            } catch (InterruptedException interrupted) {
 		                if (isCancelled()) {
 		                    updateMessage("Cancelled");
 		                    break;
 		                }
 		            }
-		        }
+		        } 
 		        return null;
 		    }
 		};
