@@ -51,7 +51,7 @@ public class StageController implements Initializable {
     	
 		Task<Void> task = new Task<Void>() {
 			int desiredRate = 60;
-			long timeNeeded = 1000 / desiredRate;
+			long timeNeeded = 1_000_000 / desiredRate;
 
 		    @Override 
 		    protected Void call() throws Exception{
@@ -64,10 +64,14 @@ public class StageController implements Initializable {
 		        	refreshFighter();
 		            long executionTime = System.nanoTime() - time;
 		            long remainingTime = timeNeeded - executionTime;
-
+		            
 		        	try {
-			            if (remainingTime > 0) 
-		                Thread.sleep(remainingTime);
+			            if (remainingTime > 0){ 
+			            	Thread.sleep(remainingTime/1000);
+			            	System.out.println(remainingTime);
+			            }
+			            else
+			            	System.out.println(remainingTime);
 		            } catch (InterruptedException interrupted) {
 		                if (isCancelled()) {
 		                    updateMessage("Cancelled");
