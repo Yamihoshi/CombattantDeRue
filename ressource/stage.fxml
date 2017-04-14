@@ -60,7 +60,12 @@
       </FlowPane>
       <ImageView fx:id="character_J1" fitHeight="300.0" fitWidth="300.0" layoutX="46.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@sprites/Ibuki/Ibuki_0-0.png" />
+            <Image url="@sprites/Ibuki/Ibuki_idle_1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="character_J2" fitHeight="300.0" fitWidth="300.0" layoutX="1000.0" layoutY="379.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@sprites/Ryu/Ryu_idle_1.png" />
          </image>
       </ImageView>
    </children>

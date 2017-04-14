@@ -15,6 +15,7 @@ public class SpritesLoader {
 	{		
 		this.loader = new HashMap<String,HashMap<String,ArrayList<Image>>>();
 		this.init(CharacterType.IBUKI);
+		this.init(CharacterType.RYU);
 	}
 	
 	public void init(String chara)

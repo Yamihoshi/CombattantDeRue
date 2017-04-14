@@ -27,6 +27,9 @@ public class StageController implements Initializable {
 	
 	@FXML 
     private ImageView character_J1;
+	
+	@FXML 
+    private ImageView character_J2;
   
 	private List<KeyEvent> key_event;
 	private SpritesManager sprites_manager;
@@ -77,7 +80,8 @@ public class StageController implements Initializable {
 	public void refreshFighter()
 	{
 		this.sprites_manager.stepAnimation();
-		character_J1.setImage(this.sprites_manager.getCurrentSprite());
+		character_J1.setImage(this.sprites_manager.getCurrentSprite(0));
+		character_J2.setImage(this.sprites_manager.getCurrentSprite(1));
 	}
 	
 	public void keyPressed(KeyCode key)
