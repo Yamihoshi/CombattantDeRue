@@ -5,10 +5,18 @@ import engine.contracts.error.InvariantError;
 import engine.contracts.error.PostconditionError;
 import engine.contracts.error.PreconditionError;
 import engine.decorators.CharacterDecorator;
+import engine.services.CharacterService;
 import engine.services.EngineService;
 import engine.services.HitboxService;
 
 public class CharacterContract extends CharacterDecorator {
+
+
+
+	public CharacterContract(CharacterService character) {
+		super(character);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void init(String nom, int l, int s, EngineService engine, boolean faceRight) {

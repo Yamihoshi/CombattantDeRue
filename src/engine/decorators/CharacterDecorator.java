@@ -7,11 +7,18 @@ import engine.services.EngineService;
 import engine.services.HitboxService;
 
 public class CharacterDecorator implements CharacterService{
+
+
 	CharacterService character;
 	
 
+	public CharacterDecorator(CharacterService character) {
+		super();
+		this.character = character;
+	}
+
 	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight) {
-		character.init(null, life, speed, engine, faceRight);
+		character.init(nom, life, speed, engine, faceRight);
 	}
 
 	public int getPositionX() {
@@ -67,5 +74,10 @@ public class CharacterDecorator implements CharacterService{
 	public String getName() {
 		// TODO Auto-generated method stub
 		return character.getName();
+	}
+	
+	@Override
+	public String toString() {
+		return "CharacterDecorator [character=" + character + "]";
 	}
 }

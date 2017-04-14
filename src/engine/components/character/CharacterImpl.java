@@ -10,6 +10,11 @@ import engine.services.TechService;
 
 public class CharacterImpl implements CharacterService{
 
+	@Override
+	public String toString() {
+		return "CharacterImpl [name=" + name + ", vie=" + vie + ", vitesse=" + vitesse + ", engine=" + engine
+				+ ", hitbox=" + hitbox + ", faceRight=" + faceRight + ", techniques=" + techniques + "]";
+	}
 	protected String name;
 	protected int vie = -1;
 	protected int vitesse = -1;
@@ -79,7 +84,24 @@ public class CharacterImpl implements CharacterService{
 	}
 	@Override
 	public void step(Commande c) {
-		// TODO Auto-generated method stub
+		switch(c){
+			case ATTACK:
+				break;
+			case DOWN:
+				break;
+			case UP:
+				break;
+			case NEUTRAL:
+				break;
+			case LEFT:
+				moveLeft();
+				break;
+			case RIGHT:
+				moveRight();
+				break;
+			case DOWNLEFT:
+				break;
+		}
 		
 	}
 	@Override

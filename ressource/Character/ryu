@@ -1,5 +1,5 @@
-nom="Ryu";
-vitesse=120;
-technique1="Hadoken";
-technique2="Shoryuken";
-
+nom=Ryu
+vie=100
+vitesse=120
+technique1="Hadoken"
+technique2="Shoryuken"
