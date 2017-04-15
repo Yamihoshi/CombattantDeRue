@@ -57,7 +57,7 @@ public class SpritesLoader {
 			try {
 				System.out.println(getClass().getResource(path).toURI().toString());
 				Image tmp = new Image(getClass().getResource(path).toURI().toString());
-				double duree = i*3*StageController.frameTime;
+				double duree = i*4*StageController.frameTime;
 				KeyFrame frame = new KeyFrame(Duration.seconds(duree), new KeyValue(this.characterImage, tmp));
 				timeline.getKeyFrames().add(frame);
 			} catch (Exception e) {
@@ -66,6 +66,9 @@ public class SpritesLoader {
 				continue;
 			}
 		}
+		
+		KeyFrame frame = new KeyFrame(Duration.seconds(timeline.getKeyFrames().size()*4*StageController.frameTime), new KeyValue(this.characterImage, null));
+		timeline.getKeyFrames().add(frame);
 		
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		
