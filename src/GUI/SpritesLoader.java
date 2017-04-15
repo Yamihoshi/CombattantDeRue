@@ -3,6 +3,7 @@ package GUI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import GUI.controller.StageController;
 import engine.components.character.CharacterType;
@@ -16,24 +17,25 @@ import javafx.util.Duration;
 
 public class SpritesLoader {
 
-	private HashMap<String,HashMap<String,Timeline>> loader;
-	private ObjectProperty<Image> characterImage;
+	private List<HashMap<String,Timeline>> loader;
+	private List<ObjectProperty<Image>> characterImage;
 	
-	public SpritesLoader(ObjectProperty<Image> characterImage, String chara)
+	public SpritesLoader(List<ObjectProperty<Image>> characterImage, String chara[])
 	{			
 		this.characterImage = characterImage;
-		this.loader = new HashMap<String,HashMap<String,Timeline>>();
-		this.init(CharacterType.CHUN_LI);
+		this.loader = new ArrayList<HashMap<String,Timeline>>();
+		for(int i=0;i<chara.length;i++)
+			this.init(chara[i],i);
 		
 	}
 	
-	public void init(String chara)
+	public void init(String chara, int joueur)
 	{
 		HashMap<String,Timeline> sprites_list = new HashMap<String,Timeline>();
 		
-		initSTAND(chara,sprites_list);
+		initSTAND(chara,sprites_list, joueur);
 		
-		this.loader.put(chara,sprites_list);
+		this.loader.add(sprites_list);
 	}
 	
 	private String getPathOfSprite(String chara,String animation,int frame)
@@ -44,7 +46,7 @@ public class SpritesLoader {
 		return path;
 	}
 	
-	public void initSTAND(String chara,HashMap<String,Timeline> sprites_list)
+	public void initSTAND(String chara,HashMap<String,Timeline> sprites_list, int joueur)
 	{
 		Timeline timeline = new Timeline();
 		
@@ -58,7 +60,7 @@ public class SpritesLoader {
 				System.out.println(getClass().getResource(path).toURI().toString());
 				Image tmp = new Image(getClass().getResource(path).toURI().toString());
 				double duree = i*4*StageController.frameTime;
-				KeyFrame frame = new KeyFrame(Duration.seconds(duree), new KeyValue(this.characterImage, tmp));
+				KeyFrame frame = new KeyFrame(Duration.seconds(duree), new KeyValue(this.characterImage.get(joueur), tmp));
 				timeline.getKeyFrames().add(frame);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -67,7 +69,7 @@ public class SpritesLoader {
 			}
 		}
 		
-		KeyFrame frame = new KeyFrame(Duration.seconds(timeline.getKeyFrames().size()*4*StageController.frameTime), new KeyValue(this.characterImage, null));
+		KeyFrame frame = new KeyFrame(Duration.seconds(timeline.getKeyFrames().size()*4*StageController.frameTime), new KeyValue(this.characterImage.get(joueur), null));
 		timeline.getKeyFrames().add(frame);
 		
 		timeline.setCycleCount(Timeline.INDEFINITE);
@@ -88,9 +90,9 @@ public class SpritesLoader {
 	}*/
 	
 	
-	public Timeline getAnimation(String chara,String animation)
+	public Timeline getAnimation(int joueur,String animation)
 	{
 		//System.out.println("loading " +animation + " of "+chara);
-		return this.loader.get(chara).get(animation);
+		return this.loader.get(joueur).get(animation);
 	}
 }

@@ -1,6 +1,7 @@
 package GUI;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import engine.components.character.CharacterType;
 import javafx.animation.Timeline;
@@ -12,20 +13,21 @@ public class SpritesManager {
 	
 	private SpritesLoader loader;
 	private String[] currentAnimation;
-	private Timeline animation;
+	private Timeline[] animation;
 	
-	public SpritesManager(ObjectProperty<Image> characterImage, String chara)
+	public SpritesManager(List<ObjectProperty<Image>> characterImage, String[] chara)
 	{		
 		this.loader = new SpritesLoader(characterImage,chara);
 		this.currentAnimation = new String[2];
 		this.currentAnimation[0] = AnimationType.STAND;
 		this.currentAnimation[1] = AnimationType.STAND;
+		this.animation = new Timeline[2];
 	}
 	
-	public void beginAnimation(String animation)
+	public void beginAnimation(String animation, int joueur)
 	{
-		this.animation = this.loader.getAnimation(CharacterType.CHUN_LI,animation);
-		this.animation.play();
+		this.animation[joueur] = this.loader.getAnimation(joueur,animation);
+		this.animation[joueur].play();
 		
 	}	
 	

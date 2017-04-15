@@ -2,6 +2,7 @@ package GUI.controller;
 
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -9,6 +10,7 @@ import GUI.AnimationType;
 import GUI.SpritesManager;
 import engine.components.character.CharacterType;
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.ObjectProperty;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -94,8 +96,18 @@ public class StageController implements Initializable {
     	character_J1.setCache(true);
     	character_J1.setCacheHint(CacheHint.SPEED);
     	
-    	this.sprites_manager = new SpritesManager(character_J1.imageProperty(),CharacterType.CHUN_LI);
-    	this.sprites_manager.beginAnimation(AnimationType.STAND);
+    	
+    	String[] charas = new String[2];
+    	charas[0] = CharacterType.CHUN_LI;
+    	charas[1] = charas[0];
+    	
+    	List<ObjectProperty<Image>> sprites = new ArrayList<ObjectProperty<Image>>(); 
+    	sprites.add(character_J1.imageProperty());
+    	sprites.add(character_J2.imageProperty());
+    	
+    	this.sprites_manager = new SpritesManager(sprites,charas);
+    	this.sprites_manager.beginAnimation(AnimationType.STAND,0);
+    	this.sprites_manager.beginAnimation(AnimationType.STAND,1);
     	
 		/*Task<Void> task = new Task<Void>() {
 			int desiredRate = 20;
