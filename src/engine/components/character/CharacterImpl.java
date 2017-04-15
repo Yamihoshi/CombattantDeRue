@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import engine.components.player.Commande;
 import engine.services.CharacterService;
 import engine.services.EngineService;
+import engine.services.FightChar;
 import engine.services.HitboxService;
 import engine.services.TechService;
 
-public class CharacterImpl implements CharacterService{
+public class CharacterImpl implements FightChar{
 
 	@Override
 	public String toString() {
@@ -24,6 +25,7 @@ public class CharacterImpl implements CharacterService{
 	
 	protected ArrayList<TechService> techniques;
 
+	
 	@Override 
 	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight) {
 		name = nom;
@@ -51,6 +53,10 @@ public class CharacterImpl implements CharacterService{
 	public HitboxService getCharBox() {
 		// TODO Auto-generated method stub
 		return hitbox;
+	}
+	@Override
+	public void setCharBox(HitboxService hit) {
+		this.hitbox = hit;		
 	}
 	@Override
 	public int getLife() {
@@ -113,4 +119,30 @@ public class CharacterImpl implements CharacterService{
 		// TODO Auto-generated method stub
 		return name;
 	}
+	@Override
+	public boolean isBlocking() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean isBlockstunned() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean isHitstunned() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean isTeching() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public TechService tech() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

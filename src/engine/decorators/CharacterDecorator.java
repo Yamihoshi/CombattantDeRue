@@ -11,7 +11,6 @@ public class CharacterDecorator implements CharacterService{
 
 	CharacterService character;
 	
-
 	public CharacterDecorator(CharacterService character) {
 		super();
 		this.character = character;
@@ -79,5 +78,10 @@ public class CharacterDecorator implements CharacterService{
 	@Override
 	public String toString() {
 		return "CharacterDecorator [character=" + character + "]";
+	}
+
+	@Override
+	public void setCharBox(HitboxService hit) {
+		character.setCharBox(hit);
 	}
 }

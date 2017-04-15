@@ -12,12 +12,12 @@ public interface CharacterService {
 	public int getPositionY();
 	public EngineService getEngine();
 	public HitboxService getCharBox();
+	public void setCharBox(HitboxService hit);
 	public int getLife();
 	public int getSpeed();
 	public String getName();
 	public boolean isFaceRight();
-	
-	public boolean isDead(); 
+	public boolean isDead();
 	/* Operators */
 	public void moveLeft();
 	public void moveRight();

@@ -23,7 +23,10 @@ public class CharacterContract extends CharacterDecorator {
 		if(!(l > 0 && s>0)){
 			new PreconditionError("Erreur init precondition character");
 		}
+		
 		super.init(nom, l, s, engine, faceRight);
+		
+		
 		if(!(getLife() == l && getSpeed() == s && isFaceRight() == faceRight && getEngine().equals(engine))){
 			new PostconditionError("Erreur post condition error");
 		}
@@ -89,10 +92,17 @@ public class CharacterContract extends CharacterDecorator {
 		// TODO Auto-generated method stub
 		
 		int other = getOtherIndice();
+		int pre_positionX = getPositionX();
 		
 		checkInvariant();
 		super.moveLeft();
 		checkInvariant();
+		
+		if((!(getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))
+				|| (getPositionX() == pre_positionX))
+				){
+			new PostconditionError("Collision with a changement of posX");
+		}
 	}
 	int getMyIndice(){
 		if(getEngine().getCharacter(0) == this)
