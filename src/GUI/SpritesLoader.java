@@ -57,7 +57,7 @@ public class SpritesLoader {
 			String path = getPathOfSprite(chara,AnimationType.STAND,i);
 			
 			try {
-				System.out.println(getClass().getResource(path).toURI().toString());
+				//System.out.println(getClass().getResource(path).toURI().toString());
 				Image tmp = new Image(getClass().getResource(path).toURI().toString());
 				double duree = i*4*StageController.frameTime;
 				KeyFrame frame = new KeyFrame(Duration.seconds(duree), new KeyValue(this.characterImage.get(joueur), tmp));

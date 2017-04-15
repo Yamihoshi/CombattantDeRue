@@ -55,7 +55,7 @@ public class CharacterSelection{
 	{
     	FightScreen fight;
 		try {
-			fight = new FightScreen();
+			fight = new FightScreen(CharacterType.values()[this.index_chara_J1],CharacterType.values()[this.index_chara_J2]);
 			Scene scene = new Scene(fight.getPane());
         	
         	Stage stage = (Stage) pane.getScene().getWindow();
