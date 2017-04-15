@@ -11,6 +11,8 @@ public class CharacterDecorator implements CharacterService{
 
 	CharacterService character;
 	
+
+
 	public CharacterDecorator(CharacterService character) {
 		super();
 		this.character = character;
@@ -59,6 +61,30 @@ public class CharacterDecorator implements CharacterService{
 
 	public void moveRight() {
 		character.moveRight();
+	}
+	
+	public void moveUpRight() {
+		character.moveUpRight();
+	}
+
+	public void moveUpLeft() {
+		character.moveUpLeft();
+	}
+
+	public void moveUp() {
+		character.moveUp();
+	}
+
+	public void moveDown() {
+		character.moveDown();
+	}
+
+	public void moveDownLeft() {
+		character.moveDownLeft();
+	}
+
+	public void moveDownRight() {
+		character.moveDownRight();
 	}
 
 	public void switchSide() {

@@ -18,9 +18,16 @@ public interface CharacterService {
 	public String getName();
 	public boolean isFaceRight();
 	public boolean isDead();
+	
 	/* Operators */
 	public void moveLeft();
 	public void moveRight();
+	public void moveUpRight();
+	public void moveUpLeft();
+	public void moveUp();
+	public void moveDown();
+	public void moveDownLeft();
+	public void moveDownRight();
 	public void switchSide();
 	public void step(Commande c);
 }

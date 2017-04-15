@@ -11,11 +11,7 @@ import engine.services.TechService;
 
 public class CharacterImpl implements FightChar{
 
-	@Override
-	public String toString() {
-		return "CharacterImpl [name=" + name + ", vie=" + vie + ", vitesse=" + vitesse + ", engine=" + engine
-				+ ", hitbox=" + hitbox + ", faceRight=" + faceRight + ", techniques=" + techniques + "]";
-	}
+	public static final int DEPLACEMENT = 10;
 	protected String name;
 	protected int vie = -1;
 	protected int vitesse = -1;
@@ -74,15 +70,7 @@ public class CharacterImpl implements FightChar{
 		return faceRight;
 	}
 
-	@Override
-	public void moveLeft() {
-		hitbox.moveTo(getPositionX()-1, getPositionY());
-		
-	}
-	@Override
-	public void moveRight() {
-		hitbox.moveTo(getPositionX()+1, getPositionY());
-	}
+
 	@Override
 	public void switchSide() {
 		faceRight = !faceRight;
@@ -143,6 +131,50 @@ public class CharacterImpl implements FightChar{
 	public TechService tech() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public void moveLeft() {
+		hitbox.moveTo(getPositionX() - CharacterImpl.DEPLACEMENT, getPositionY());
+	}
+	@Override
+	public void moveRight() {
+		hitbox.moveTo(getPositionX() + CharacterImpl.DEPLACEMENT, getPositionY());
+	}
+	@Override
+	public void moveUpRight() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void moveUpLeft() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void moveUp() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void moveDown() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void moveDownLeft() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void moveDownRight() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public String toString() {
+		return "CharacterImpl [name=" + name + ", vie=" + vie + ", vitesse=" + vitesse + ", engine=" + engine
+				+ ", hitbox=" + hitbox + ", faceRight=" + faceRight + ", techniques=" + techniques + "]";
 	}
 
 }
