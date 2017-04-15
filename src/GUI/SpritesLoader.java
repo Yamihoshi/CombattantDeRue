@@ -4,25 +4,34 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import GUI.controller.StageController;
 import engine.components.character.CharacterType;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.ObjectProperty;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class SpritesLoader {
 
-	private HashMap<String,HashMap<String,ArrayList<Image>>> loader;
+	private HashMap<String,HashMap<String,Timeline>> loader;
+	private ObjectProperty<Image> characterImage;
 	
-	public SpritesLoader()
-	{		
-		this.loader = new HashMap<String,HashMap<String,ArrayList<Image>>>();
-		this.init(CharacterType.IBUKI);
-		this.init(CharacterType.RYU);
+	public SpritesLoader(ObjectProperty<Image> characterImage, String chara)
+	{			
+		this.characterImage = characterImage;
+		this.loader = new HashMap<String,HashMap<String,Timeline>>();
+		this.init(CharacterType.CHUN_LI);
+		
 	}
 	
 	public void init(String chara)
 	{
-		HashMap<String,ArrayList<Image>> sprites_list = new HashMap<String,ArrayList<Image>>();
+		HashMap<String,Timeline> sprites_list = new HashMap<String,Timeline>();
 		
-		initIdle(chara,sprites_list);
+		initSTAND(chara,sprites_list);
 		
 		this.loader.put(chara,sprites_list);
 	}
@@ -35,32 +44,35 @@ public class SpritesLoader {
 		return path;
 	}
 	
-	public void initIdle(String chara,HashMap<String,ArrayList<Image>> sprites_list)
+	public void initSTAND(String chara,HashMap<String,Timeline> sprites_list)
 	{
-		ArrayList<Image> sprites = new ArrayList<Image>();
+		Timeline timeline = new Timeline();
 		
-		/* i< nb_frame idle */
-		for(int i=1;i<=5;i++)
+		
+		/* i< nb_frame STAND */
+		for(int i=0;i<=60;i++)
 		{
-			String path = getPathOfSprite(chara,AnimationType.IDLE,i);
+			String path = getPathOfSprite(chara,AnimationType.STAND,i);
+			
 			try {
 				System.out.println(getClass().getResource(path).toURI().toString());
 				Image tmp = new Image(getClass().getResource(path).toURI().toString());
-				for(int j = 0; j < 12; j++){
-					sprites.add(tmp);
-				}
-
-
-			} catch (URISyntaxException e) {
+				double duree = i*3*StageController.frameTime;
+				KeyFrame frame = new KeyFrame(Duration.seconds(duree), new KeyValue(this.characterImage, tmp));
+				timeline.getKeyFrames().add(frame);
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				continue;
 			}
 		}
 		
-		sprites_list.put(AnimationType.IDLE,sprites);
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		
+		sprites_list.put(AnimationType.STAND,timeline);
 	}
 	
-	public Image getImageFromAnimation(String chara,String animation, int i)
+	/*public Image getImageFromAnimation(String chara,String animation, int i)
 	{
 		ArrayList<Image> images = getSpritesListOfAnimation(chara,animation);
 		
@@ -70,10 +82,10 @@ public class SpritesLoader {
 		}
 		else
 			return null;
-	}
+	}*/
 	
 	
-	public ArrayList<Image> getSpritesListOfAnimation(String chara,String animation)
+	public Timeline getAnimation(String chara,String animation)
 	{
 		//System.out.println("loading " +animation + " of "+chara);
 		return this.loader.get(chara).get(animation);

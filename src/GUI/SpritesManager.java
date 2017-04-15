@@ -1,45 +1,32 @@
 package GUI;
 
+import java.util.ArrayList;
+
 import engine.components.character.CharacterType;
+import javafx.animation.Timeline;
+import javafx.beans.property.ObjectProperty;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class SpritesManager {
-
+	
 	private SpritesLoader loader;
-	private Image[] currentSprite;
 	private String[] currentAnimation;
-	private int frame;
-	private int walid;
+	private Timeline animation;
 	
-	public SpritesManager()
-	{
-		this.loader = new SpritesLoader();
-		this.frame = 0;
+	public SpritesManager(ObjectProperty<Image> characterImage, String chara)
+	{		
+		this.loader = new SpritesLoader(characterImage,chara);
 		this.currentAnimation = new String[2];
-		this.currentAnimation[0] = AnimationType.IDLE;
-		this.currentAnimation[1] = AnimationType.IDLE;
-		this.currentSprite = new Image[2];
-		this.currentSprite[0] = this.loader.getImageFromAnimation(CharacterType.IBUKI,AnimationType.IDLE,0);
-		this.currentSprite[1] = this.loader.getImageFromAnimation(CharacterType.RYU,AnimationType.IDLE,0);
+		this.currentAnimation[0] = AnimationType.STAND;
+		this.currentAnimation[1] = AnimationType.STAND;
 	}
 	
-	public void stepAnimation()
+	public void beginAnimation(String animation)
 	{
-		this.frame = ( this.frame + 1) % 60;  // %Animation.length		
-		this.currentSprite[0] = this.loader.getImageFromAnimation(CharacterType.IBUKI,AnimationType.IDLE,this.frame);
-		this.currentSprite[1] = this.loader.getImageFromAnimation(CharacterType.RYU,AnimationType.IDLE,this.frame);
-	}
-	
-	public void resetAnimation()
-	{
-		this.frame = 0;
-	}
-	
-	public Image getCurrentSprite(int joueur)
-	{
-		return this.currentSprite[joueur];
-	}
-	
-	
+		this.animation = this.loader.getAnimation(CharacterType.CHUN_LI,animation);
+		this.animation.play();
+		
+	}	
 	
 }

@@ -1,27 +1,25 @@
 package GUI.controller;
 
-import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import GUI.SpritesLoader;
+import GUI.AnimationType;
 import GUI.SpritesManager;
+import engine.components.character.CharacterType;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Font;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class StageController implements Initializable {
 
+	public static final double frameTime = 1.0/60.0;
+	
 	@FXML 
     private AnchorPane root; 
 	
@@ -47,10 +45,11 @@ public class StageController implements Initializable {
             }
         });
     	
-    	this.sprites_manager = new SpritesManager();
+    	this.sprites_manager = new SpritesManager(character_J1.imageProperty(),CharacterType.CHUN_LI);
+    	this.sprites_manager.beginAnimation(AnimationType.STAND);
     	
-		Task<Void> task = new Task<Void>() {
-			int desiredRate = 60;
+		/*Task<Void> task = new Task<Void>() {
+			int desiredRate = 20;
 			long timeNeeded = 1_000_000 / desiredRate;
 
 		    @Override 
@@ -85,14 +84,12 @@ public class StageController implements Initializable {
 		
 		Thread t = new Thread(task);
 		t.setDaemon(true);
-		t.start();
+		t.start();*/
     }  
     
 	public void refreshFighter()
-	{
-		this.sprites_manager.stepAnimation();
-		character_J1.setImage(this.sprites_manager.getCurrentSprite(0));
-		character_J2.setImage(this.sprites_manager.getCurrentSprite(1));
+	{		
+		
 	}
 	
 	public void keyPressed(KeyCode key)
