@@ -3,6 +3,7 @@ package GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import GUI.controller.StageController;
 import engine.components.character.CharacterType;
@@ -27,6 +28,12 @@ public class FightScreen{
 		
 		this.controller = loader.<StageController>getController();
 		
+		if(chara_J1==CharacterType.RANDOM)
+			chara_J1 = this.randomizeCharacter();
+		
+		if(chara_J2==CharacterType.RANDOM)
+			chara_J2 = this.randomizeCharacter();
+		
     	String[] charas = new String[2];
     	charas[0] = chara_J1.toString();
     	charas[1] = chara_J2.toString();
@@ -45,4 +52,11 @@ public class FightScreen{
 		return this.pane;
 	}
 	
+	public CharacterType randomizeCharacter()
+	{
+		Random rand = new Random();
+		int index = rand.nextInt(CharacterType.values().length);
+		
+		return CharacterType.values()[index];
+	}
 }
