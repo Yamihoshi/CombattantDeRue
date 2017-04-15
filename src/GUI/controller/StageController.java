@@ -98,7 +98,7 @@ public class StageController implements Initializable {
     	
     	
     	String[] charas = new String[2];
-    	charas[0] = CharacterType.CHUN_LI;
+    	charas[0] = CharacterType.CHUN_LI.toString();
     	charas[1] = charas[0];
     	
     	List<ObjectProperty<Image>> sprites = new ArrayList<ObjectProperty<Image>>(); 

@@ -2,10 +2,12 @@ package GUI;
 
 import java.net.URISyntaxException;
 
+import game.StreetFighterGame;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -20,11 +22,13 @@ public class MainWindow extends Application{
 	boolean debug_mode = true;
 	private Stage stage;
 	private MediaPlayer mediaPlayer;
+	private StreetFighterGame game;
 	 
 	 @Override
 	 public void start(Stage stageParam) throws Exception {
 		
 		 this.stage = stageParam;
+		 this.game = new StreetFighterGame();
 		 
 		 this.stage.setResizable(false);
 		 
@@ -41,11 +45,6 @@ public class MainWindow extends Application{
 		 mediaPlayer = new MediaPlayer(media);
 		 mediaPlayer.setVolume(0.3);
 		 mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-		 /*mediaPlayer.setOnEndOfMedia(new Runnable() {
-		       public void run() {
-		    	   mediaPlayer.seek(Duration.ZERO);
-		       }
-		   });*/
 		 mediaPlayer.play();
 		 
 		 stage.getIcons().add(new Image(getClass().getResource(Ressource.icon).toURI().toString()));
@@ -76,26 +75,8 @@ public class MainWindow extends Application{
 		 
 		 Scene scene = new Scene(selection.getPane());
 		 
-		 scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-	            public void handle(KeyEvent ke) {
-	               System.out.println("Key Pressed: " + ke.getCode());
-	                try {
-	                	switch_to_Fight();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	            }
-	        });
-		 stage.setScene(scene);
-	 }
-	 
-	 
-	 public void switch_to_Fight() throws Exception
-	 {
-		 FightScreen fight = new FightScreen();
-		 Scene scene = new Scene(fight.getPane());
-		 
+		 selection.addEventHandler();
+
 		 stage.setScene(scene);
 	 }
 	

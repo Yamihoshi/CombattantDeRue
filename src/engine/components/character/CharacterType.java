@@ -1,9 +1,19 @@
 package engine.components.character;
 
-public abstract class CharacterType {
+public enum CharacterType {
 
-	public static final String RYU = "Ryu";
-	public static final String CHUN_LI = "Chun_Li";
-	public static final String CAMMY = "Cammy";
-	public static final String IBUKI = "Ibuki";
+	RANDOM("Random"),
+	CHUN_LI("Chun_Li"),
+	RYU("Ryu");
+	
+	private String name = "";
+	
+	CharacterType(String name) {
+		this.name = name;
+	}
+	
+	public String toString()
+	{
+		return this.name;
+	}
 }

@@ -65,7 +65,7 @@ public class SpritesLoader {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				//e.printStackTrace();
-				continue;
+				break;
 			}
 		}
 		
