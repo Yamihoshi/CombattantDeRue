@@ -8,8 +8,11 @@ import java.util.Random;
 import GUI.controller.StageController;
 import engine.components.character.CharacterType;
 import javafx.beans.property.ObjectProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class FightScreen{
@@ -58,5 +61,20 @@ public class FightScreen{
 		int index = rand.nextInt(CharacterType.values().length);
 		
 		return CharacterType.values()[index];
+	}
+	
+	public void addEventHandler()
+	{
+		this.pane.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+            @Override
+            public void handle(KeyEvent event) {
+            	if(event.getCode()==KeyCode.F2)
+            	{
+            		controller.toggleHitBox();
+            	}
+            	
+            }
+        });
 	}
 }

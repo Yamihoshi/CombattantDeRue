@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane id="stage" fx:id="root" prefHeight="720.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.StageController">
    <children>
@@ -68,5 +69,7 @@
             <Image url="@sprites/Chun_Li/Chun_Li_stand_0.png" />
          </image>
       </ImageView>
+      <Rectangle fx:id="hitbox_J1" arcHeight="5.0" arcWidth="5.0" fill="#00ff33" height="448.0" layoutX="88.0" layoutY="250.0" opacity="0.5" stroke="BLACK" strokeType="OUTSIDE" width="200.0" />
+      <Rectangle fx:id="hitbox_J2" arcHeight="5.0" arcWidth="5.0" fill="#00ff33" height="448.0" layoutX="999.0" layoutY="250.0" opacity="0.5" stroke="BLACK" strokeType="OUTSIDE" width="200.0" />
    </children>
 </AnchorPane>

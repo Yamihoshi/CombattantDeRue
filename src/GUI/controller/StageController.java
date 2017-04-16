@@ -19,6 +19,7 @@ import javafx.scene.CacheHint;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -34,6 +35,14 @@ public class StageController implements Initializable {
 	
 	@FXML 
     private ImageView character_J2;
+	
+	@FXML 
+    private Rectangle hitbox_J1;
+	
+	@FXML 
+    private Rectangle hitbox_J2;
+	
+	private boolean showHitbox;
   	
     @Override  
     public void initialize(URL location, ResourceBundle resources) {  
@@ -42,6 +51,9 @@ public class StageController implements Initializable {
     	character_J1.setCacheHint(CacheHint.SPEED);
     	character_J2.setCache(true);
     	character_J2.setCacheHint(CacheHint.SPEED);	
+    	
+    	this.showHitbox = true;
+    	this.toggleHitBox();
     }
     
     public ImageView getCharacterOfJ1()
@@ -54,4 +66,23 @@ public class StageController implements Initializable {
     	return this.character_J2;
     }
 
+    public void toggleHitBox()
+    {
+    	this.showHitbox = ! this.showHitbox;
+    	
+    	hitbox_J1.setVisible(showHitbox);
+    	hitbox_J2.setVisible(showHitbox);
+    }
+    
+    public void setHitbox(boolean hit)
+    {
+    	if(hit)
+    	{
+    		//set Color to RED
+    	}
+    	else
+    	{
+    		//set Color to GREEN
+    	}
+    }
 }

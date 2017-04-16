@@ -59,6 +59,8 @@ public class CharacterSelection{
 			Scene scene = new Scene(fight.getPane());
         	
         	Stage stage = (Stage) pane.getScene().getWindow();
+        	
+        	fight.addEventHandler();
         	stage.setScene(scene);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
