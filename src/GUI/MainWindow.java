@@ -21,7 +21,7 @@ public class MainWindow extends Application{
 
 	boolean debug_mode = true;
 	private Stage stage;
-	private MediaPlayer mediaPlayer;
+	private MediaPlayer mediaPlayer = null;
 	private StreetFighterGame game;
 	 
 	 @Override
@@ -41,11 +41,14 @@ public class MainWindow extends Application{
 		 root.setId("title_screen");
 		 Scene scene = new Scene(root);
 		 
-		 Media media = new Media(getClass().getResource(Ressource.music+"Guile_Theme.mp3").toURI().toString());
-		 mediaPlayer = new MediaPlayer(media);
-		 mediaPlayer.setVolume(0.3);
-		 mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-		 mediaPlayer.play();
+		 try
+		 {
+			 Media media = new Media(getClass().getResource(Ressource.music+"Guile_Theme.mp3").toURI().toString());
+			 mediaPlayer = new MediaPlayer(media);
+			 mediaPlayer.setVolume(0.3);
+			 mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+			 mediaPlayer.play();
+		 }catch(Exception e){System.out.println("Can't load mediaPlayer");mediaPlayer=null;}
 		 
 		 stage.getIcons().add(new Image(getClass().getResource(Ressource.icon).toURI().toString()));
 		 scene.getStylesheets().addAll(getClass().getResource("/style.css").toURI().toString());
@@ -64,12 +67,19 @@ public class MainWindow extends Application{
 	            }
 	        });
 		 
+		 stage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
+		        if (KeyCode.ESCAPE == event.getCode()) {
+		            stage.close();
+		        }
+		    });
+		 
 		 stage.show();
 	 }
 	 
 	 public void switch_to_Character_Selection() throws Exception
 	 {
-		 mediaPlayer.stop();
+		 if(mediaPlayer!=null)
+			 mediaPlayer.stop();
 		 
 		 CharacterSelection selection = new CharacterSelection();
 		 
