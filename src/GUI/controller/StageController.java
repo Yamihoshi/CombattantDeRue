@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import GUI.AnimationType;
-import GUI.SpritesManager;
+import GUI.animations.AnimationType;
+import GUI.animations.SpritesManager;
 import engine.components.character.CharacterType;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;

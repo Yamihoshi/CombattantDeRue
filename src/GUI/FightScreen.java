@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import GUI.animations.AnimationType;
+import GUI.animations.SpritesManager;
 import GUI.controller.StageController;
 import engine.components.character.CharacterType;
 import javafx.beans.property.ObjectProperty;
@@ -46,8 +48,8 @@ public class FightScreen{
     	sprites.add(this.controller.getCharacterOfJ2().imageProperty());
 		
     	this.sprites_manager = new SpritesManager(sprites,charas);
-    	this.sprites_manager.beginAnimation(AnimationType.STAND.toString(),0);
-    	this.sprites_manager.beginAnimation(AnimationType.STAND.toString(),1);
+    	this.sprites_manager.beginAnimation(AnimationType.STAND,0);
+    	this.sprites_manager.beginAnimation(AnimationType.STAND,1);
 	}
 	
 	public AnchorPane getPane()
