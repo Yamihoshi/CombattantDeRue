@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import game.StreetFighterGame;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -14,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -32,8 +34,8 @@ public class MainWindow extends Application{
 		 
 		 this.stage.setResizable(false);
 		 
-		 stage.setWidth(1280);
-		 stage.setHeight(720);
+		 stage.setWidth(1280+5);
+		 stage.setHeight(720+25);
 		 
 		 stage.setTitle("Street Fighter V2 desu");
 		 
