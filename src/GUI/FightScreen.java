@@ -13,6 +13,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -43,13 +44,13 @@ public class FightScreen{
     	charas[0] = chara_J1.toString();
     	charas[1] = chara_J2.toString();
     	
-    	List<ObjectProperty<Image>> sprites = new ArrayList<ObjectProperty<Image>>(); 
-    	sprites.add(this.controller.getCharacterOfJ1().imageProperty());
-    	sprites.add(this.controller.getCharacterOfJ2().imageProperty());
+    	List<ImageView> sprites = new ArrayList<ImageView>(); 
+    	sprites.add(this.controller.getCharacterOfJ1());
+    	sprites.add(this.controller.getCharacterOfJ2());
 		
     	this.sprites_manager = new SpritesManager(sprites,charas);
-    	this.sprites_manager.beginAnimation(AnimationType.STAND,0);
-    	this.sprites_manager.beginAnimation(AnimationType.STAND,1);
+    	this.sprites_manager.beginAnimation(0);
+    	this.sprites_manager.beginAnimation(1);
 	}
 	
 	public AnchorPane getPane()

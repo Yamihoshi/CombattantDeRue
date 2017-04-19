@@ -15,20 +15,20 @@ import javafx.util.Duration;
 
 public class SpritesLoader {
 
-	private List<HashMap<AnimationType,Timeline>> loader;
 	private List<ObjectProperty<Image>> characterImage;
+	private List<HashMap<AnimationType, Animation>> animations;
 	
 	public SpritesLoader(List<ObjectProperty<Image>> characterImage, String chara[])
 	{			
 		this.characterImage = characterImage;
-		this.loader = new ArrayList<HashMap<AnimationType,Timeline>>();
+		this.animations = new ArrayList<HashMap<AnimationType, Animation>>();
 		this.initAnimations(chara);	
 	}
 	
-	private String getPathOfSprite(String chara,AnimationType animation,int frame)
+	private String getPathOfSprite(String chara,Animation animation,int frame)
 	{
 		String path = Ressource.sprites+chara+"/";
-		path += chara+"_"+animation+"_"+frame+".png";
+		path += chara+"_"+animation.toString()+"_"+frame+".png";
 		
 		return path;
 	}
@@ -36,10 +36,9 @@ public class SpritesLoader {
 	public void initAnimations(String chara[])
 	{	
 		for(int joueur=0;joueur<chara.length;joueur++)
-		{
-			HashMap<AnimationType,Timeline> sprites_list = new HashMap<AnimationType,Timeline>();
-			
-			for(AnimationType animation : AnimationType.values())
+		{			
+			HashMap<AnimationType,Animation> hashmapAnimation = new AnimationCreator(chara[joueur]).getAnimations();
+			for(Animation animation : hashmapAnimation.values())
 			{
 				Timeline timeline = new Timeline();
 				
@@ -64,15 +63,15 @@ public class SpritesLoader {
 				
 				timeline.setCycleCount(Timeline.INDEFINITE);
 				
-				sprites_list.put(animation,timeline);
+				animation.setTimeLine(timeline);
 			}
 			
-			this.loader.add(sprites_list);
+			this.animations.add(hashmapAnimation);
 		}
-	}	
+	}
 	
-	public Timeline getAnimation(int joueur,AnimationType animation)
+	public Animation getAnimation(int joueur,AnimationType type)
 	{
-		return this.loader.get(joueur).get(animation);
+		return this.animations.get(joueur).get(type);
 	}
 }
