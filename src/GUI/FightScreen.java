@@ -46,8 +46,8 @@ public class FightScreen{
     	sprites.add(this.controller.getCharacterOfJ2().imageProperty());
 		
     	this.sprites_manager = new SpritesManager(sprites,charas);
-    	this.sprites_manager.beginAnimation(AnimationType.STAND,0);
-    	this.sprites_manager.beginAnimation(AnimationType.STAND,1);
+    	this.sprites_manager.beginAnimation(AnimationType.STAND.toString(),0);
+    	this.sprites_manager.beginAnimation(AnimationType.STAND.toString(),1);
 	}
 	
 	public AnchorPane getPane()

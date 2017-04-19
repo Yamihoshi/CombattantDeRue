@@ -54,7 +54,7 @@ public class SpritesLoader {
 		/* i< nb_frame STAND */
 		for(int i=0;i<=60;i++)
 		{
-			String path = getPathOfSprite(chara,AnimationType.STAND,i);
+			String path = getPathOfSprite(chara,AnimationType.STAND.toString(),i);
 			
 			try {
 				//System.out.println(getClass().getResource(path).toURI().toString());
@@ -74,7 +74,7 @@ public class SpritesLoader {
 		
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		
-		sprites_list.put(AnimationType.STAND,timeline);
+		sprites_list.put(AnimationType.STAND.toString(),timeline);
 	}
 	
 	/*public Image getImageFromAnimation(String chara,String animation, int i)
