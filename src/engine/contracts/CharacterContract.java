@@ -21,14 +21,14 @@ public class CharacterContract extends CharacterDecorator {
 	@Override
 	public void init(String nom, int l, int s, EngineService engine, boolean faceRight) {
 		if(!(l > 0 && s>0)){
-			new PreconditionError("Erreur init precondition character");
+			throw new PreconditionError("Erreur init precondition character");
 		}
 		
 		super.init(nom, l, s, engine, faceRight);
 		
 		
 		if(!(getLife() == l && getSpeed() == s && isFaceRight() == faceRight && getEngine().equals(engine))){
-			new PostconditionError("Erreur post condition error");
+			throw new PostconditionError("Erreur post condition error");
 		}
 	}
 
@@ -101,7 +101,7 @@ public class CharacterContract extends CharacterDecorator {
 		if((!(getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))
 				|| (getPositionX() == pre_positionX))
 				){
-			new PostconditionError("Collision with a deplacement of posX on a left deplacement");
+			throw new PostconditionError("Collision with a changement of posX");
 		}
 	}
 	int getMyIndice(){
@@ -141,7 +141,7 @@ public class CharacterContract extends CharacterDecorator {
 		int pre_positionX = getPositionX();
 		super.switchSide();
 		if(!(pre_positionX == getPositionX() && pre_faceRight != isFaceRight())){
-			new PostconditionError("Erreur post condition error switchSide");
+			throw new PostconditionError("Erreur post condition error switchSide");
 		}
 		checkInvariant();
 	}
@@ -156,13 +156,13 @@ public class CharacterContract extends CharacterDecorator {
 	
 	public void checkInvariant(){
 		if(!(getPositionX() > 0 && getPositionX() < getEngine().getWidth())){
-			new InvariantError("Erreur Characteur X");
+			throw new InvariantError("Erreur Character X " + getPositionX());
 		}
 		if(!(getPositionY() > 0 && getPositionY() < getEngine().getHeight())){
-			new InvariantError("Erreur Characteur Y");
+			throw new InvariantError("Erreur Character Y " + getPositionY());
 		}
 		if(!(isDead() == !(getLife()>0))){
-			new InvariantError("Erreur Characteur Y");
+			throw new InvariantError("Erreur Character not really dead kek");
 		}
 	}
 }

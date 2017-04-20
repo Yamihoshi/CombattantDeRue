@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 
 import GUI.controller.CharacterSelectionController;
 import engine.components.character.CharacterType;
+import game.StreetFighterGame;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,14 +24,18 @@ public class CharacterSelection{
 	
     private int index_chara_J1 = 1;
     private int index_chara_J2 = 2;
+    
+    private StreetFighterGame game;
 	
-	public CharacterSelection() throws IOException
+	public CharacterSelection(StreetFighterGame game) throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/character_selection.fxml"));
 		
 		this.pane = (AnchorPane) loader.load();
 		
-		this.controller = loader.<CharacterSelectionController>getController();		
+		this.controller = loader.<CharacterSelectionController>getController();
+		
+		this.game = game;
 	}
 	
 	public void addEventHandler()
@@ -53,9 +58,17 @@ public class CharacterSelection{
 	
 	public void switch_to_fight_screen()
 	{
+		String chara_J1 = CharacterType.values()[this.index_chara_J1].toString();
+		String chara_J2 = CharacterType.values()[this.index_chara_J2].toString();
+		
+		this.game.getPlayers()[0].getCharacter().init(chara_J1, 100, 5, this.game.getEngine(), true);
+		this.game.getPlayers()[1].getCharacter().init(chara_J2, 100, 5, this.game.getEngine(), false);
+		
+		this.game.getEngine().init(1280, 720, 250,this.game.getPlayers()[0], this.game.getPlayers()[1]);
+		
     	FightScreen fight;
 		try {
-			fight = new FightScreen(CharacterType.values()[this.index_chara_J1],CharacterType.values()[this.index_chara_J2]);
+			fight = new FightScreen(this.game);
 			Scene scene = new Scene(fight.getPane());
         	
         	Stage stage = (Stage) pane.getScene().getWindow();

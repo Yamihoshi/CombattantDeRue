@@ -2,13 +2,17 @@ package engine.decorators;
 
 import engine.components.player.Commande;
 import engine.components.player.Player;
-import engine.services.CharacterService;
 import engine.services.EngineService;
+import engine.services.FightCharService;
 
 public class EngineDecorator implements EngineService{
 
 	private final EngineService delegate;
 	
+	public FightCharService[] getCharacters() {
+		return delegate.getCharacters();
+	}
+
 	public EngineDecorator(EngineService delegate) {
 		this.delegate = delegate;
 	}
@@ -26,7 +30,7 @@ public class EngineDecorator implements EngineService{
 		return delegate.getWidth();
 	}
 
-	public CharacterService getCharacter(int n) {
+	public FightCharService getCharacter(int n) {
 		return delegate.getCharacter(n);
 	}
 

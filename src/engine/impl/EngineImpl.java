@@ -4,20 +4,19 @@ import engine.components.player.Commande;
 import engine.components.player.Player;
 import engine.services.CharacterService;
 import engine.services.EngineService;
+import engine.services.FightCharService;
 
 public class EngineImpl implements EngineService{
 
 	public static final int NOMBRE_PERSO = 2;
-	private Player player[];
-	private CharacterService character[];
+	private Player players[];
 	private int width;
 	private int height;
 	private int space;
 	
 	public EngineImpl() {
 		super();
-		player = new Player[2];
-		character = new CharacterService[2];
+		players = new Player[2];
 	}
 
 	@Override
@@ -25,8 +24,9 @@ public class EngineImpl implements EngineService{
 		width = w;
 		height = h;
 		space = s;
-		player[0] = j1;
-		player[1] = j2;
+		players[0] = j1;
+		players[1] = j2;
+		
 	}
 
 	@Override
@@ -42,15 +42,15 @@ public class EngineImpl implements EngineService{
 	}
 
 	@Override
-	public CharacterService getCharacter(int n) {
+	public FightCharService getCharacter(int n) {
 		// TODO Auto-generated method stub
-		return character[n];
+		return players[n].getCharacter();
 	}
 
 	@Override
 	public Player getPlayer(int n) {
 		// TODO Auto-generated method stub
-		return player[n];
+		return players[n];
 	}
 
 	@Override
@@ -64,8 +64,18 @@ public class EngineImpl implements EngineService{
 
 	@Override
 	public void step(Commande c1, Commande c2) {
+		this.getCharacter(0).step(c1);
+		this.getCharacter(1).step(c2);
+	}
+
+	@Override
+	public FightCharService[] getCharacters() {
 		// TODO Auto-generated method stub
+		FightCharService[] charas = new FightCharService[2];
+		charas[0] = this.getCharacter(0);
+		charas[1] = this.getCharacter(1);
 		
+		return charas;
 	}
 
 }
