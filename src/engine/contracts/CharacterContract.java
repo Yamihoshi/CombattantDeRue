@@ -101,7 +101,7 @@ public class CharacterContract extends CharacterDecorator {
 		if((!(getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))
 				|| (getPositionX() == pre_positionX))
 				){
-			new PostconditionError("Collision with a changement of posX");
+			new PostconditionError("Collision with a deplacement of posX on a left deplacement");
 		}
 	}
 	int getMyIndice(){
@@ -118,8 +118,18 @@ public class CharacterContract extends CharacterDecorator {
 	@Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
+		int other = getOtherIndice();
+		int pre_positionX = getPositionX();
+		
 		checkInvariant();
 		super.moveRight();
+		
+		if((!(getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))
+				|| (getPositionX() == pre_positionX))
+				){
+			new PostconditionError("Collision with a deplacement of posX on a right deplacement");
+		}
+		
 		checkInvariant();
 	}
 
