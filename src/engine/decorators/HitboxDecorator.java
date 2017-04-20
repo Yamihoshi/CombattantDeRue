@@ -4,6 +4,11 @@ import engine.services.HitboxService;
 
 public class HitboxDecorator implements HitboxService{
 	HitboxService hitbox;
+	
+	public HitboxDecorator(HitboxService hitbox) {
+		super();
+		this.hitbox = hitbox;
+	}
 
 	public void setHauteur(int hauteur) {
 		hitbox.setHauteur(hauteur);

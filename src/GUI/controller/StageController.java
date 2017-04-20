@@ -85,4 +85,10 @@ public class StageController implements Initializable {
     		//set Color to GREEN
     	}
     }
+    
+    public void updatePosition_J1(int x)
+    {
+    	this.character_J1.setLayoutX(x);
+    	this.hitbox_J1.setLayoutX(x);
+    }
 }

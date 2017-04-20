@@ -5,8 +5,8 @@ import engine.components.player.Player;
 import engine.contracts.error.PostconditionError;
 import engine.contracts.error.PreconditionError;
 import engine.decorators.EngineDecorator;
-import engine.services.CharacterService;
 import engine.services.EngineService;
+import engine.services.FightCharService;
 import engine.components.character.CharacterImpl;
 
 public class EngineContract extends EngineDecorator{
@@ -14,6 +14,12 @@ public class EngineContract extends EngineDecorator{
 	public EngineContract(EngineService delegate) {
 		super(delegate);
 		// TODO Auto-generated constructor stub
+	}
+ 
+	@Override
+	public FightCharService[] getCharacters() {
+		// TODO Auto-generated method stub
+		return super.getCharacters();
 	}
 
 	@Override
@@ -54,7 +60,7 @@ public class EngineContract extends EngineDecorator{
 	}
 
 	@Override
-	public CharacterService getCharacter(int i) {
+	public FightCharService getCharacter(int i) {
 		if(!(i == 0 || i == 1)){
 			new PreconditionError("Entier i =/= 0 | 1 ");
 			return null;

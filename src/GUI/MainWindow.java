@@ -83,7 +83,7 @@ public class MainWindow extends Application{
 		 if(mediaPlayer!=null)
 			 mediaPlayer.stop();
 		 
-		 CharacterSelection selection = new CharacterSelection();
+		 CharacterSelection selection = new CharacterSelection(this.game);
 		 
 		 Scene scene = new Scene(selection.getPane());
 		 

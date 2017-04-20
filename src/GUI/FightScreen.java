@@ -9,6 +9,8 @@ import GUI.animations.AnimationType;
 import GUI.animations.SpritesManager;
 import GUI.controller.StageController;
 import engine.components.character.CharacterType;
+import engine.components.player.Commande;
+import game.StreetFighterGame;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -26,29 +28,29 @@ public class FightScreen{
 	
 	private SpritesManager sprites_manager;
 	
-	public FightScreen(CharacterType chara_J1, CharacterType chara_J2) throws IOException
+	private StreetFighterGame game;
+	
+	public FightScreen(StreetFighterGame game) throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/stage.fxml"));
 		
 		this.pane = (AnchorPane) loader.load();
 		
-		this.controller = loader.<StageController>getController();
+		this.controller = loader.<StageController>getController();  
 		
-		if(chara_J1==CharacterType.RANDOM)
+		this.game = game;
+		
+		/*if(chara_J1==CharacterType.RANDOM)
 			chara_J1 = this.randomizeCharacter();
 		
 		if(chara_J2==CharacterType.RANDOM)
-			chara_J2 = this.randomizeCharacter();
-		
-    	String[] charas = new String[2];
-    	charas[0] = chara_J1.toString();
-    	charas[1] = chara_J2.toString();
+			chara_J2 = this.randomizeCharacter();*/
     	
     	List<ImageView> sprites = new ArrayList<ImageView>(); 
     	sprites.add(this.controller.getCharacterOfJ1());
     	sprites.add(this.controller.getCharacterOfJ2());
 		
-    	this.sprites_manager = new SpritesManager(sprites,charas);
+    	this.sprites_manager = new SpritesManager(sprites, this.game.getEngine().getCharacters());
     	this.sprites_manager.beginAnimation(0);
     	this.sprites_manager.beginAnimation(1);
 	}
@@ -75,6 +77,16 @@ public class FightScreen{
             	if(event.getCode()==KeyCode.F2)
             	{
             		controller.toggleHitBox();
+            	}
+            	else if(event.getCode()==KeyCode.LEFT)
+            	{
+            		game.getEngine().getCharacter(0).moveLeft();
+            		controller.updatePosition_J1(game.getEngine().getCharacter(0).getPositionX());
+            	}
+            	else if(event.getCode()==KeyCode.RIGHT)
+            	{
+            		game.getEngine().step(Commande.RIGHT, Commande.NEUTRAL);
+            		controller.updatePosition_J1(game.getEngine().getCharacter(0).getPositionX());
             	}
             	
             }

@@ -7,6 +7,10 @@ import engine.services.HitboxService;
 
 public class HitboxContract extends HitboxDecorator {
 
+	public HitboxContract(HitboxService hitbox) {
+		super(hitbox);
+		// TODO Auto-generated constructor stub
+	}
 	public void checkInvariant(){
 		
 	}

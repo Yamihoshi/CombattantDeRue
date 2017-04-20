@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import engine.services.FightCharService;
 import GUI.Ressource;
 import GUI.controller.StageController;
 import javafx.animation.KeyFrame;
@@ -18,7 +19,7 @@ public class SpritesLoader {
 	private List<ObjectProperty<Image>> characterImage;
 	private List<HashMap<AnimationType, Animation>> animations;
 	
-	public SpritesLoader(List<ObjectProperty<Image>> characterImage, String chara[])
+	public SpritesLoader(List<ObjectProperty<Image>> characterImage, FightCharService chara[])
 	{			
 		this.characterImage = characterImage;
 		this.animations = new ArrayList<HashMap<AnimationType, Animation>>();
@@ -33,18 +34,18 @@ public class SpritesLoader {
 		return path;
 	}
 	
-	public void initAnimations(String chara[])
+	public void initAnimations(FightCharService chara[])
 	{	
 		for(int joueur=0;joueur<chara.length;joueur++)
 		{			
-			HashMap<AnimationType,Animation> hashmapAnimation = new AnimationCreator(chara[joueur]).getAnimations();
+			HashMap<AnimationType,Animation> hashmapAnimation = new AnimationCreator(chara[joueur].getName()).getAnimations();
 			for(Animation animation : hashmapAnimation.values())
 			{
 				Timeline timeline = new Timeline();
 				
 				for(int i=0;i<=60;i++)
 				{
-					String path = getPathOfSprite(chara[joueur],animation,i);
+					String path = getPathOfSprite(chara[joueur].getName(),animation,i);
 					
 					try {
 						//System.out.println(getClass().getResource(path).toURI().toString());

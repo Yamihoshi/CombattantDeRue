@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.components.character.CharacterType;
+import engine.services.FightCharService;
 import javafx.animation.Timeline;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.image.Image;
@@ -15,7 +16,7 @@ public class SpritesManager {
 	private Animation[] currentAnimation;
 	private List<ImageView> characterImages;
 	
-	public SpritesManager(List<ImageView> viewList, String[] chara)
+	public SpritesManager(List<ImageView> viewList, FightCharService[] chara)
 	{	
 		this.characterImages = viewList;
 		
@@ -29,7 +30,8 @@ public class SpritesManager {
 		this.currentAnimation[0] = this.loader.getAnimation(0, AnimationType.STAND);
 		this.currentAnimation[1] = this.loader.getAnimation(1, AnimationType.STAND);
 	}
-	
+
+
 	public void beginAnimation(int joueur)
 	{
 		this.currentAnimation[joueur].play();

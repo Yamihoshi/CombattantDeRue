@@ -4,9 +4,11 @@ import engine.components.player.Commande;
 import engine.contracts.error.InvariantError;
 import engine.services.CharacterService;
 import engine.services.EngineService;
+import engine.services.FightCharService;
 import engine.services.HitboxService;
+import engine.services.TechService;
 
-public class CharacterDecorator implements CharacterService{
+public class CharacterDecorator implements FightCharService{
 
 
 	CharacterService character;
@@ -109,5 +111,59 @@ public class CharacterDecorator implements CharacterService{
 	@Override
 	public void setCharBox(HitboxService hit) {
 		character.setCharBox(hit);
+	}
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isBlocking() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isBlockStunned() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHitStunned() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isTeching() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public TechService getTech() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean techFrame() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean techHasAlreadyHit() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void startTech(TechService tech) {
+		// TODO Auto-generated method stub
+		
 	}
 }

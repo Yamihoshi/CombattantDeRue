@@ -2,7 +2,9 @@ package engine.components.character;
 
 import java.util.ArrayList;
 
+import engine.components.hitbox.HitboxImpl;
 import engine.components.player.Commande;
+import engine.contracts.HitboxContract;
 import engine.services.CharacterService;
 import engine.services.EngineService;
 import engine.services.FightChar;
@@ -25,10 +27,14 @@ public class CharacterImpl implements FightChar{
 	@Override 
 	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight) {
 		name = nom;
+		
 		vie = life;
+		System.out.println(vie);
 		vitesse = speed;
 		this.engine = engine;
 		this.faceRight = faceRight;
+		this.hitbox = new HitboxContract(new HitboxImpl());
+		System.err.println("im a alive" + isDead());
 	}
 	@Override
 	public int getPositionX() {
@@ -100,7 +106,7 @@ public class CharacterImpl implements FightChar{
 	}
 	@Override
 	public boolean isDead() {
-		return vie > 0;
+		return vie <= 0;
 	}
 	@Override
 	public String getName() {
