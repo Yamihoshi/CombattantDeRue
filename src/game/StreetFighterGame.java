@@ -5,10 +5,11 @@ import engine.components.player.Player;
 import engine.contracts.CharacterContract;
 import engine.contracts.EngineContract;
 import engine.impl.EngineImpl;
+import engine.services.EngineService;
 
 public class StreetFighterGame {
 
-	private EngineContract engine;
+	private EngineService engine;
 	private Player[] players;
 	
 	public StreetFighterGame()
@@ -19,7 +20,7 @@ public class StreetFighterGame {
 		this.players[1] = new Player(new CharacterContract(new CharacterImpl()));
 	}
 	
-	public EngineContract getEngine() {
+	public EngineService getEngine() {
 		return engine;
 	}
 

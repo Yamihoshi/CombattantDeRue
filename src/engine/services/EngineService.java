@@ -10,6 +10,7 @@ public interface EngineService {
 	/* Observators */
 	public int getHeight();
 	public int getWidth();
+	public int getSpace();
 	public FightCharService getCharacter(int n);
 	public FightCharService[] getCharacters();
 	public Player getPlayer(int n);

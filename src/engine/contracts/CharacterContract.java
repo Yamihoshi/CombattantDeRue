@@ -25,9 +25,8 @@ public class CharacterContract extends CharacterDecorator {
 		}
 		
 		super.init(nom, l, s, engine, faceRight);
-		
-		
-		if(!(getLife() == l && getSpeed() == s && isFaceRight() == faceRight && getEngine().equals(engine))){
+	
+		if(!(getLife() == l && getSpeed() == s && isFaceRight() == faceRight && getEngine().equals(engine)) && getCharBox() != null ){
 			throw new PostconditionError("Erreur post condition error");
 		}
 	}
@@ -101,7 +100,7 @@ public class CharacterContract extends CharacterDecorator {
 		if((!(getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))
 				|| (getPositionX() == pre_positionX))
 				){
-			throw new PostconditionError("Collision with a changement of posX");
+			throw new PostconditionError("Collision with a changement of posX" + getPositionX() + "==" + pre_positionX);
 		}
 	}
 	int getMyIndice(){

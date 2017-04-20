@@ -47,4 +47,9 @@ public class EngineDecorator implements EngineService{
 		this.delegate.step(c1, c2);
 	}
 
+	@Override
+	public int getSpace() {
+		return delegate.getSpace();
+	}
+
 }

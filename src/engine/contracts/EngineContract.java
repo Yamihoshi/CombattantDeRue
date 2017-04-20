@@ -15,12 +15,6 @@ public class EngineContract extends EngineDecorator{
 		super(delegate);
 		// TODO Auto-generated constructor stub
 	}
- 
-	@Override
-	public FightCharService[] getCharacters() {
-		// TODO Auto-generated method stub
-		return super.getCharacters();
-	}
 
 	@Override
 	public void init(int h, int w, int s, Player j1, Player j2) {
@@ -115,6 +109,19 @@ public class EngineContract extends EngineDecorator{
 	public int hashCode() {
 		// TODO Auto-generated method stub
 		return super.hashCode();
+	}
+	
+	 
+	@Override
+	public FightCharService[] getCharacters() {
+		// TODO Auto-generated method stub
+		return super.getCharacters();
+	}
+
+	@Override
+	public int getSpace() {
+		// TODO Auto-generated method stub
+		return super.getSpace();
 	}
 
 	@Override

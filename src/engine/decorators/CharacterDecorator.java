@@ -13,8 +13,6 @@ public class CharacterDecorator implements FightCharService{
 
 	CharacterService character;
 	
-
-
 	public CharacterDecorator(CharacterService character) {
 		super();
 		this.character = character;

@@ -27,14 +27,11 @@ public class CharacterImpl implements FightChar{
 	@Override 
 	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight) {
 		name = nom;
-		
 		vie = life;
-		System.out.println(vie);
 		vitesse = speed;
 		this.engine = engine;
 		this.faceRight = faceRight;
 		this.hitbox = new HitboxContract(new HitboxImpl());
-		System.err.println("im a alive" + isDead());
 	}
 	@Override
 	public int getPositionX() {

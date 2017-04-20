@@ -10,12 +10,11 @@ public class HitboxImpl implements HitboxService{
 	private int longueur;
 	
 	public  HitboxImpl() {
-		// TODO Auto-generated constructor stub
-		positionY = 8;
-		positionX = 5;
+		
 	}
 	@Override
 	public void init(int x, int y, int h, int l) {
+		System.out.println("my x" +x);
 		positionX =x;
 		positionY = y;
 		hauteur = h;

@@ -78,4 +78,10 @@ public class EngineImpl implements EngineService{
 		return charas;
 	}
 
+	@Override
+	public int getSpace() {
+		// TODO Auto-generated method stub
+		return space;
+	}
+
 }
