@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import GUI.controller.CharacterSelectionController;
-import engine.components.character.CharacterType;
+import engine.components.character.Personnage;
 import game.StreetFighterGame;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -58,13 +58,12 @@ public class CharacterSelection{
 	
 	public void switch_to_fight_screen()
 	{
-		String chara_J1 = CharacterType.values()[this.index_chara_J1].toString();
-		String chara_J2 = CharacterType.values()[this.index_chara_J2].toString();
+
 		
-		this.game.getPlayers()[0].getCharacter().init(chara_J1, 100, 5, this.game.getEngine(), true);
-		this.game.getPlayers()[1].getCharacter().init(chara_J2, 100, 5, this.game.getEngine(), false);
+		this.game.getPlayers()[0].getCharacter().init(Personnage.values()[this.index_chara_J1], 100, 5, this.game.getEngine(), true);
+		this.game.getPlayers()[1].getCharacter().init(Personnage.values()[this.index_chara_J2], 100, 5, this.game.getEngine(), false);
 		
-		this.game.getEngine().init(1280, 720, 400 ,this.game.getPlayers()[0], this.game.getPlayers()[1]);
+		this.game.getEngine().init(720, 1280, 400 ,this.game.getPlayers()[0], this.game.getPlayers()[1]);
 
 		//FIND RESSOURCE
 		this.game.getPlayers()[0].getCharacter().getCharBox().init(5, 1, 120, 50);
@@ -94,7 +93,7 @@ public class CharacterSelection{
 	
     public void nextCharacter(int joueur)
     {    	
-    	this.index_chara_J1 = (this.index_chara_J1+1)%CharacterType.values().length;
+    	this.index_chara_J1 = (this.index_chara_J1+1)%Personnage.values().length;
     	
     	this.controller.updateImageCharacterDisplay(1,this.index_chara_J1);
     }
@@ -104,7 +103,7 @@ public class CharacterSelection{
     	this.index_chara_J1--;
     	
     	if(this.index_chara_J1<0)
-    		this.index_chara_J1=CharacterType.values().length-1;
+    		this.index_chara_J1=Personnage.values().length-1;
     	
     	this.controller.updateImageCharacterDisplay(1,this.index_chara_J1);
     }

@@ -1,11 +1,12 @@
 package engine.services;
 
+import engine.components.character.Personnage;
 import engine.components.player.Commande;
 
 public interface CharacterService {
 
 	/* Constructors */
-	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight ); // What does they mean by this ?
+	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight ); // What does they mean by this ?
 	
 	/* Observators */
 	public int getPositionX();
@@ -18,6 +19,7 @@ public interface CharacterService {
 	public int getLife();
 	public int getSpeed();
 	public String getName();
+	public Personnage getPersonnage();
 	public boolean isFaceRight();
 	public boolean isDead();
 	

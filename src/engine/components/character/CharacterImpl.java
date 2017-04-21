@@ -14,7 +14,7 @@ import engine.services.TechService;
 public class CharacterImpl implements FightChar{
 
 	public static final int DEPLACEMENT = 10;
-	protected String name;
+	protected Personnage personnage;
 	protected int vie = -1;
 	protected int vitesse = -1;
 	protected EngineService engine;
@@ -31,7 +31,6 @@ public class CharacterImpl implements FightChar{
 		result = prime * result + ((engine == null) ? 0 : engine.hashCode());
 		result = prime * result + (faceRight ? 1231 : 1237);
 		result = prime * result + ((hitbox == null) ? 0 : hitbox.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((techniques == null) ? 0 : techniques.hashCode());
 		result = prime * result + vie;
 		result = prime * result + vitesse;
@@ -39,8 +38,8 @@ public class CharacterImpl implements FightChar{
 	}
 	
 	@Override 
-	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight) {
-		name = nom;
+	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight) {
+		this.personnage = personnage;
 		vie = life;
 		vitesse = speed;
 		this.engine = engine;
@@ -122,7 +121,7 @@ public class CharacterImpl implements FightChar{
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return name;
+		return personnage.name();
 	}
 	@Override
 	public boolean isBlocking() {
@@ -156,8 +155,8 @@ public class CharacterImpl implements FightChar{
 		if(isOutside(tmp)){
 			return;
 		}
-		/*else if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
-			return;*/
+		else if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
+			return;
 		System.out.println("ça passe");
 		hitbox.moveTo(getPositionX() - /*CharacterImpl.DEPLACEMENT*/this.vitesse, getPositionY());
 
@@ -165,11 +164,12 @@ public class CharacterImpl implements FightChar{
 	@Override
 	public void moveRight() {
 		HitboxService tmp = new HitboxImpl();
-		int indice = 0;
+		int indice = getOtherIndice();
 		tmp.init(getPositionX() + this.vitesse, getPositionY(), getHauteur(), getLongueur());
 		if(isOutside(tmp)){
 			return;
-		}
+		}else if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
+			return;
 		hitbox.moveTo(getPositionX() +/* CharacterImpl.DEPLACEMENT*/this.vitesse, getPositionY());
 	}
 	@Override
@@ -205,18 +205,18 @@ public class CharacterImpl implements FightChar{
 	
 	@Override
 	public String toString() {
-		return "CharacterImpl [name=" + name + ", vie=" + vie + ", vitesse=" + vitesse + ", engine=" + engine
+		return "CharacterImpl [name=" + getName() + ", vie=" + vie + ", vitesse=" + vitesse + ", engine=" + engine
 				+ ", hitbox=" + hitbox + ", faceRight=" + faceRight + ", techniques=" + techniques + "]";
 	}
 	
 	protected int getMyIndice(){
-		if(getEngine().getCharacter(0).equals(this))
+		if(getEngine().getCharacter(0).getPersonnage() == this.personnage)
 			return 0;
 		return 1;
 	} 
 	
 	protected int getOtherIndice(){
-		if(getEngine().getCharacter(0).equals(this))
+		if(getEngine().getCharacter(0).getPersonnage() == this.personnage)
 			return 1;
 		return 0;
 	}
@@ -238,6 +238,12 @@ public class CharacterImpl implements FightChar{
 		else if(tmp.getHauteur() <= 0 || tmp.getPositionY() > engine.getHeight())
 			return true;
 		else return false;
+	}
+
+	@Override
+	public Personnage getPersonnage() {
+		// TODO Auto-generated method stub
+		return personnage;
 	}
 
 }

@@ -30,7 +30,7 @@ public class HitboxImpl implements HitboxService{
 	@Override
 	public boolean collidesWith(HitboxService other_hitbox) {
 		return(this.getPositionX() < other_hitbox.getPositionX() + other_hitbox.getLongueur() &&
-				this.getPositionX() + this.getLongueur() > other_hitbox.getLongueur() &&
+				this.getPositionX() + this.getLongueur() > other_hitbox.getPositionX() &&
 				this.getPositionY() < other_hitbox.getPositionY() + other_hitbox.getHauteur() &&
 				this.getPositionY() + this.getHauteur() > other_hitbox.getPositionY());
 	}

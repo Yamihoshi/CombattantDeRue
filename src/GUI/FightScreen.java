@@ -9,7 +9,7 @@ import java.util.Random;
 import GUI.animations.AnimationType;
 import GUI.animations.SpritesManager;
 import GUI.controller.StageController;
-import engine.components.character.CharacterType;
+import engine.components.character.Personnage;
 import engine.components.player.Commande;
 import game.StreetFighterGame;
 import javafx.animation.AnimationTimer;
@@ -70,12 +70,12 @@ public class FightScreen{
 		return this.pane;
 	}
 	
-	public CharacterType randomizeCharacter()
+	public Personnage randomizeCharacter()
 	{
 		Random rand = new Random();
-		int index = rand.nextInt(CharacterType.values().length);
+		int index = rand.nextInt(Personnage.values().length);
 		
-		return CharacterType.values()[index];
+		return Personnage.values()[index];
 	}
 	
 	public void addEventHandler()

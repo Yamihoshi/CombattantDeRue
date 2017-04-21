@@ -5,7 +5,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import engine.components.character.CharacterType;
+import engine.components.character.Personnage;
 import game.StreetFighterGame;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -47,9 +47,9 @@ public class CharacterSelectionController implements Initializable {
     {
     	try{	
 	    	if(joueur == 1)
-	    		character_display_J1.setImage(new Image(getClass().getResource("/Character_Display/"+CharacterType.values()[index_chara]+"_J1.png").toURI().toString()));
+	    		character_display_J1.setImage(new Image(getClass().getResource("/Character_Display/"+Personnage.values()[index_chara]+"_J1.png").toURI().toString()));
 	    	else
-	    		character_display_J2.setImage(new Image(getClass().getResource("/Character_Display/"+CharacterType.values()[index_chara]+"_J2.png").toURI().toString()));
+	    		character_display_J2.setImage(new Image(getClass().getResource("/Character_Display/"+Personnage.values()[index_chara]+"_J2.png").toURI().toString()));
     	}catch(Exception e){};
     }
 

@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 import GUI.animations.AnimationType;
 import GUI.animations.SpritesManager;
-import engine.components.character.CharacterType;
+import engine.components.character.Personnage;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;
 import javafx.concurrent.Task;

@@ -1,6 +1,6 @@
 package engine.components.character;
 
-public enum CharacterType {
+public enum Personnage {
 
 	RANDOM("Random"),
 	CHUN_LI("Chun_Li"),
@@ -8,7 +8,7 @@ public enum CharacterType {
 	
 	private String name = "";
 	
-	CharacterType(String name) {
+	Personnage(String name) {
 		this.name = name;
 	}
 	

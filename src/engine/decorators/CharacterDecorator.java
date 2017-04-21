@@ -1,5 +1,6 @@
 package engine.decorators;
 
+import engine.components.character.Personnage;
 import engine.components.player.Commande;
 import engine.contracts.error.InvariantError;
 import engine.services.CharacterService;
@@ -13,24 +14,14 @@ public class CharacterDecorator implements FightCharService{
 
 	CharacterService character;
 	
-	@Override
-	public int getHauteur() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public int getLongueur() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	public CharacterDecorator(CharacterService character2) {
 		super();
 		this.character = character2;
 	}
 
-	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight) {
+	public void init(Personnage nom, int life, int speed, EngineService engine, boolean faceRight) {
 		character.init(nom, life, speed, engine, faceRight);
 	}
 
@@ -186,6 +177,30 @@ public class CharacterDecorator implements FightCharService{
 	protected int getOtherIndice(){
 		if(getEngine().getCharacter(0) == this)
 			return 1;
+		return 0;
+	}
+
+	public CharacterService getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(CharacterService character) {
+		this.character = character;
+	}
+	
+	public Personnage getPersonnage() {
+		return character.getPersonnage();
+	}
+
+	@Override
+	public int getHauteur() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getLongueur() {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 }

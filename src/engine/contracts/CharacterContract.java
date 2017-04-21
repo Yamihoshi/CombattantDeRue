@@ -1,5 +1,6 @@
 package engine.contracts;
 
+import engine.components.character.Personnage;
 import engine.components.player.Commande;
 import engine.contracts.error.InvariantError;
 import engine.contracts.error.PostconditionError;
@@ -19,12 +20,12 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 	@Override
-	public void init(String nom, int l, int s, EngineService engine, boolean faceRight) {
+	public void init(Personnage personnage, int l, int s, EngineService engine, boolean faceRight) {
 		if(!(l > 0 && s>0)){
 			throw new PreconditionError("Erreur init precondition character");
 		}
 		
-		super.init(nom, l, s, engine, faceRight);
+		super.init(personnage, l, s, engine, faceRight);
 	
 		if(!(getLife() == l && getSpeed() == s && isFaceRight() == faceRight && getEngine().equals(engine)) && getCharBox() != null ){
 			throw new PostconditionError("Erreur post condition error");
@@ -153,5 +154,11 @@ public class CharacterContract extends CharacterDecorator {
 		if(!(isDead() == !(getLife()>0))){
 			throw new InvariantError("Erreur Character not really dead kek");
 		}
+	}
+
+	@Override
+	public Personnage getPersonnage() {
+		// TODO Auto-generated method stub
+		return super.getPersonnage();
 	}
 }

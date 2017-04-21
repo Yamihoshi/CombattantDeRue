@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Properties;
 
 import GUI.Ressource;
-import engine.components.character.CharacterType;
+import engine.components.character.Personnage;
 
 public class AnimationCreator {
 
