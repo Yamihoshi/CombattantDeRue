@@ -17,13 +17,13 @@ import javafx.application.Application;
 
 public class CharacterFabrique {
 
-	   public static void initPerso(Personnage personnage, EngineService engine, int player){
-		boolean faceRight = (player == 0)? true : false;
+	   public static void init(Player player, Personnage personnage, EngineService engine, boolean faceRight){
+		   FightCharService fc = player.getCharacter();
 		   try {
 			Properties p = CharacterFabrique.load("ressource//character//"+personnage.name());
-			engine.getPlayer(player).getCharacter().init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight);
-			int x = 5 + ((faceRight) ? 0 : engine.getSpace());
-			engine.getPlayer(player).getCharacter().getCharBox().init(x, 1, new Integer(p.getProperty("hauteur", "100")), new Integer(p.getProperty("largeur", "100")));
+			fc.init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight);
+			fc.getCharBox().init(1, 1, new Integer(p.getProperty("largeur", "100")), new Integer(p.getProperty("hauteur", "100")));
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

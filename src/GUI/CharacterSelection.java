@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import GUI.controller.CharacterSelectionController;
+import engine.components.character.CharacterFabrique;
 import engine.components.character.Personnage;
 import game.StreetFighterGame;
 import javafx.event.EventHandler;
@@ -60,13 +61,8 @@ public class CharacterSelection{
 	{
 
 		
-		this.game.getPlayers()[0].getCharacter().init(Personnage.values()[this.index_chara_J1], 100, 5, this.game.getEngine(), true);
-		this.game.getPlayers()[1].getCharacter().init(Personnage.values()[this.index_chara_J2], 100, 5, this.game.getEngine(), false);
-		
-
-		//FIND RESSOURCE
-		this.game.getPlayers()[0].getCharacter().getCharBox().init(1, 1, 120, 50);
-		this.game.getPlayers()[1].getCharacter().getCharBox().init(1,  1 , 120, 50);
+		CharacterFabrique.init(this.game.getPlayers()[0], Personnage.values()[this.index_chara_J1], this.game.getEngine(), true);
+		CharacterFabrique.init(this.game.getPlayers()[1], Personnage.values()[this.index_chara_J2], this.game.getEngine(), false);
 
 		this.game.getEngine().init(720, 1280, 1000 ,this.game.getPlayers()[0], this.game.getPlayers()[1]);
 		

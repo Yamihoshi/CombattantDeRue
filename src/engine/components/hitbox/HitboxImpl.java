@@ -23,14 +23,14 @@ public class HitboxImpl implements HitboxService{
 
 	@Override
 	public boolean belongsTo(int x, int y) {
-		return(getPositionX() <= x && getPositionX() + getLongueur() >= x &&
+		return(getPositionX() <= x && getPositionX() + getLargeur() >= x &&
 				getPositionY() <= y && getPositionY() + getHauteur() >= y);
 	}
 
 	@Override
 	public boolean collidesWith(HitboxService other_hitbox) {
 		return(this.getPositionX() < other_hitbox.getPositionX() + other_hitbox.getLargeur() &&
-				this.getPositionX() + this.getLongueur() > other_hitbox.getPositionX() &&
+				this.getPositionX() + this.getLargeur() > other_hitbox.getPositionX() &&
 				this.getPositionY() < other_hitbox.getPositionY() + other_hitbox.getHauteur() &&
 				this.getPositionY() + this.getHauteur() > other_hitbox.getPositionY());
 	}
@@ -107,11 +107,6 @@ public class HitboxImpl implements HitboxService{
 
 	public void setHauteur(int hauteur) {
 		this.hauteur = hauteur;
-	}
-
-
-	public int getLongueur() {
-		return largeur;
 	}
 
 
