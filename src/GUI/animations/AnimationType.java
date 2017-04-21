@@ -2,7 +2,8 @@ package GUI.animations;
 
 public enum AnimationType {
 
-	STAND("stand");
+	STAND("stand"),
+	WALK_FORWARD("walk_forward");
 	
 	private String name = "";
 	

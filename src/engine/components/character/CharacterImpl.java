@@ -138,17 +138,25 @@ public class CharacterImpl implements FightChar{
 	@Override
 	public void moveLeft() {
 		HitboxService tmp = new HitboxImpl();
-		tmp.init(getPositionX() - CharacterImpl.DEPLACEMENT, getPositionY(), getHauteur(), getLongueur());
+		tmp.init(getPositionX() - this.vitesse, getPositionY(), getHauteur(), getLongueur());
 		if(isOutside(tmp)){
 			return;
 		}
 		else if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
 			return;
-		hitbox.moveTo(getPositionX() - CharacterImpl.DEPLACEMENT, getPositionY());
+		hitbox.moveTo(getPositionX() - /*CharacterImpl.DEPLACEMENT*/this.vitesse, getPositionY());
+
 	}
 	@Override
 	public void moveRight() {
-		hitbox.moveTo(getPositionX() + CharacterImpl.DEPLACEMENT, getPositionY());
+		HitboxService tmp = new HitboxImpl();
+		tmp.init(getPositionX() + this.vitesse, getPositionY(), getHauteur(), getLongueur());
+		if(isOutside(tmp)){
+			return;
+		}
+		else if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
+			return;
+		hitbox.moveTo(getPositionX() +/* CharacterImpl.DEPLACEMENT*/this.vitesse, getPositionY());
 	}
 	@Override
 	public void moveUpRight() {

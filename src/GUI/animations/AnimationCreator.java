@@ -25,6 +25,7 @@ public class AnimationCreator {
 		for(AnimationType type : AnimationType.values())
 		{
 			int read_Y = 0;
+			int read_X = 0;
 			try {			
 				// load a properties file
 				System.out.println(Ressource.sprites+chara+"/"+type.toString()+"_axis.txt");
@@ -33,10 +34,11 @@ public class AnimationCreator {
 				// get the property value and print it out
 				
 				read_Y = new Integer(prop.getProperty("Y"));
+				read_X = new Integer(prop.getProperty("X"));
 
-			} catch (Exception ex) {ex.printStackTrace();}
+			} catch (Exception ex) {System.out.println("Property reading error :" + ex.getMessage()+" ["+Ressource.sprites+chara+"/"+type.toString()+"_axis.txt"+"]");}
 			
-			this.animations.put(type,new Animation(type,null,read_Y));
+			this.animations.put(type,new Animation(type,null,read_Y,read_X,false));
 		}
 	}
 	
