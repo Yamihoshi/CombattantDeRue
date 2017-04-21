@@ -34,7 +34,7 @@ public class MainWindow extends Application{
 		 
 		 this.stage.setResizable(false);
 		 
-		 stage.setWidth(1280+5);
+		 stage.setWidth(1280);
 		 stage.setHeight(720+25);
 		 
 		 stage.setTitle("Street Fighter V2 desu");

@@ -18,6 +18,7 @@ public class StreetFighterGame {
 		this.players= new Player[2];
 		this.players[0] = new Player(new CharacterContract(new CharacterImpl()));
 		this.players[1] = new Player(new CharacterContract(new CharacterImpl()));
+
 	}
 	
 	public EngineService getEngine() {

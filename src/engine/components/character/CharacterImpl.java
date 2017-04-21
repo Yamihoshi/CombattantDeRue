@@ -151,7 +151,7 @@ public class CharacterImpl implements FightChar{
 	@Override
 	public void moveLeft() {
 		HitboxService tmp = new HitboxImpl();
-		tmp.init(getPositionX() - this.vitesse, getPositionY(), getHauteur(), getLongueur());
+		tmp.init(getPositionX() - this.vitesse, getPositionY(), getHauteur(), getLargeur());
 		if(isOutside(tmp)){
 			return;
 		}
@@ -165,7 +165,7 @@ public class CharacterImpl implements FightChar{
 	public void moveRight() {
 		HitboxService tmp = new HitboxImpl();
 		int indice = getOtherIndice();
-		tmp.init(getPositionX() + this.vitesse, getPositionY(), getHauteur(), getLongueur());
+		tmp.init(getPositionX() + this.vitesse, getPositionY(), getHauteur(), getLargeur());
 		if(isOutside(tmp)){
 			return;
 		}else if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
@@ -225,12 +225,7 @@ public class CharacterImpl implements FightChar{
 		// TODO Auto-generated method stub
 		return hitbox.getHauteur();
 	}
-	@Override
-	public int getLongueur() {
-		// TODO Auto-generated method stub
-		return hitbox.getLongueur();
-	}
-	
+
 	//TODO ajouter gestion witdh/hauteur du perso
 	public boolean isOutside(HitboxService tmp) {
 		if(tmp.getPositionX() <= 0 || tmp.getPositionX() > engine.getWidth())
@@ -244,6 +239,12 @@ public class CharacterImpl implements FightChar{
 	public Personnage getPersonnage() {
 		// TODO Auto-generated method stub
 		return personnage;
+	}
+
+	@Override
+	public int getLargeur() {
+		// TODO Auto-generated method stub
+		return hitbox.getLargeur();
 	}
 
 }

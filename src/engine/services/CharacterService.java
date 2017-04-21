@@ -12,7 +12,7 @@ public interface CharacterService {
 	public int getPositionX();
 	public int getPositionY();
 	public int getHauteur();
-	public int getLongueur();
+	public int getLargeur();
 	public EngineService getEngine();
 	public HitboxService getCharBox();
 	public void setCharBox(HitboxService hit);
@@ -22,6 +22,7 @@ public interface CharacterService {
 	public Personnage getPersonnage();
 	public boolean isFaceRight();
 	public boolean isDead();
+	
 	
 	/* Operators */
 	public void moveLeft();

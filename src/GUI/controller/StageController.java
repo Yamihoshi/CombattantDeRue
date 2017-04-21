@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import GUI.animations.AnimationType;
 import GUI.animations.SpritesManager;
 import engine.components.character.Personnage;
+import engine.services.HitboxService;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;
 import javafx.concurrent.Task;
@@ -86,9 +87,17 @@ public class StageController implements Initializable {
     	}
     }
     
-    public void updatePosition_J1(int x)
+    public void update(HitboxService hitboxJ1, HitboxService hitboxJ2)
     {
-    	this.character_J1.setLayoutX(x);
-    	this.hitbox_J1.setLayoutX(x);
+    	this.character_J1.setLayoutX(hitboxJ1.getPositionX());
+    	this.hitbox_J1.setLayoutX(hitboxJ1.getPositionX());
+    	this.hitbox_J1.setHeight(hitboxJ1.getHauteur());
+    	this.hitbox_J1.setWidth(hitboxJ1.getLargeur());
+    	
+    	
+    	this.character_J2.setLayoutX(hitboxJ2.getPositionX());
+    	this.hitbox_J2.setLayoutX(hitboxJ2.getPositionX());
+    	this.hitbox_J2.setHeight(hitboxJ2.getHauteur());
+    	this.hitbox_J2.setWidth(hitboxJ2.getLargeur());
     }
 }

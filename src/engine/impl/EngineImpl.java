@@ -26,7 +26,8 @@ public class EngineImpl implements EngineService{
 		space = s;
 		players[0] = j1;
 		players[1] = j2;
-		
+		getCharacter(0).getCharBox().moveTo((int)width/2 - (int)s/2, getCharacter(0).getPositionY());
+		getCharacter(1).getCharBox().moveTo((int)width/2 + (int)s/2, getCharacter(1).getPositionY());
 	}
 
 	@Override
@@ -74,7 +75,6 @@ public class EngineImpl implements EngineService{
 		FightCharService[] charas = new FightCharService[2];
 		charas[0] = this.getCharacter(0);
 		charas[1] = this.getCharacter(1);
-		
 		return charas;
 	}
 

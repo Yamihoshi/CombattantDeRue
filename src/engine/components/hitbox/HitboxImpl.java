@@ -7,7 +7,7 @@ public class HitboxImpl implements HitboxService{
 	private int positionX;
 	private int positionY;
 	private int hauteur;
-	private int longueur;
+	private int largeur;
 	
 	public HitboxImpl() {
 		
@@ -17,7 +17,7 @@ public class HitboxImpl implements HitboxService{
 		positionX =x;
 		positionY = y;
 		hauteur = h;
-		longueur = l;
+		largeur = l;
 	}
 
 
@@ -29,7 +29,7 @@ public class HitboxImpl implements HitboxService{
 
 	@Override
 	public boolean collidesWith(HitboxService other_hitbox) {
-		return(this.getPositionX() < other_hitbox.getPositionX() + other_hitbox.getLongueur() &&
+		return(this.getPositionX() < other_hitbox.getPositionX() + other_hitbox.getLargeur() &&
 				this.getPositionX() + this.getLongueur() > other_hitbox.getPositionX() &&
 				this.getPositionY() < other_hitbox.getPositionY() + other_hitbox.getHauteur() &&
 				this.getPositionY() + this.getHauteur() > other_hitbox.getPositionY());
@@ -45,7 +45,7 @@ public class HitboxImpl implements HitboxService{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + hauteur;
-		result = prime * result + longueur;
+		result = prime * result + largeur;
 		result = prime * result + positionX;
 		result = prime * result + positionY;
 		return result;
@@ -63,7 +63,7 @@ public class HitboxImpl implements HitboxService{
 		HitboxImpl other = (HitboxImpl) obj;
 		if (hauteur != other.hauteur)
 			return false;
-		if (longueur != other.longueur)
+		if (largeur != other.largeur)
 			return false;
 		if (positionX != other.positionX)
 			return false;
@@ -111,12 +111,18 @@ public class HitboxImpl implements HitboxService{
 
 
 	public int getLongueur() {
-		return longueur;
+		return largeur;
 	}
 
 
-	public void setLongueur(int longueur) {
-		this.longueur = longueur;
+
+	@Override
+	public int getLargeur() {
+		return largeur;
+	}
+	@Override
+	public void setLargeur(int largeur) {
+		this.largeur = largeur;	
 	}
 
 

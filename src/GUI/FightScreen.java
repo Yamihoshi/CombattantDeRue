@@ -11,6 +11,7 @@ import GUI.animations.SpritesManager;
 import GUI.controller.StageController;
 import engine.components.character.Personnage;
 import engine.components.player.Commande;
+import engine.services.FightCharService;
 import game.StreetFighterGame;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;
@@ -119,7 +120,8 @@ public class FightScreen{
         	int frameCount = 0;
         	long lasttimeFPS = System.nanoTime();
         	long lasttimeFPS_keys = System.nanoTime();
-        	
+        	FightCharService J1 = game.getEngine().getCharacter(0);
+        	FightCharService J2 = game.getEngine().getCharacter(1);
             @Override
             public void handle(long arg0)
             {
@@ -134,13 +136,11 @@ public class FightScreen{
 	                    
                     if(currentKey==KeyCode.LEFT)
 	                {
-	                	game.getEngine().getCharacter(0).moveLeft();
-	                	controller.updatePosition_J1(game.getEngine().getCharacter(0).getPositionX());
+	                	J1.moveLeft();
 	                }
 	                else if(currentKey==KeyCode.RIGHT)
 	                {
 	    	           	game.getEngine().step(Commande.RIGHT, Commande.NEUTRAL);
-	    	           	controller.updatePosition_J1(game.getEngine().getCharacter(0).getPositionX());
 	    	           	if(sprites_manager.getAnimationPlayed(0)!=AnimationType.WALK_FORWARD)
 	    	           		sprites_manager.playAnimation(0,AnimationType.WALK_FORWARD);
 	                }
@@ -152,6 +152,8 @@ public class FightScreen{
             			}
 	                }
                  }
+	           	controller.update(J1.getCharBox(), J2.getCharBox());
+
             }
         }.start();
 	}

@@ -5,6 +5,14 @@ import engine.services.HitboxService;
 public class HitboxDecorator implements HitboxService{
 	HitboxService hitbox;
 	
+	public int getLargeur() {
+		return hitbox.getLargeur();
+	}
+
+	public void setLargeur(int longueur) {
+		hitbox.setLargeur(longueur);
+	}
+
 	public HitboxDecorator(HitboxService hitbox) {
 		super();
 		this.hitbox = hitbox;
@@ -14,9 +22,7 @@ public class HitboxDecorator implements HitboxService{
 		hitbox.setHauteur(hauteur);
 	}
 
-	public void setLongueur(int longueur) {
-		hitbox.setLongueur(longueur);
-	}
+
 
 	public void init(int x, int y, int h, int l) {
 		hitbox.init(x, y, h, l);
@@ -34,9 +40,6 @@ public class HitboxDecorator implements HitboxService{
 		return hitbox.getHauteur();
 	}
 
-	public int getLongueur() {
-		return hitbox.getLongueur();
-	}
 
 	public boolean belongsTo(int x, int y) {
 		return hitbox.belongsTo(x, y);

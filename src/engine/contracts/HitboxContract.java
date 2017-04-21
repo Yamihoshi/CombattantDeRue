@@ -20,7 +20,7 @@ public class HitboxContract extends HitboxDecorator {
 			new PreconditionError("Error precondition init hitbox");
 		super.init(x, y, h, l);
 		
-		if(!(x == getPositionX() && y == getPositionY() && h == getHauteur() && l == getLongueur())){
+		if(!(x == getPositionX() && y == getPositionY() && h == getHauteur() && l == getLargeur())){
 			new PostconditionError("Error postcondition init hitbox");
 		}
 	}
@@ -43,11 +43,6 @@ public class HitboxContract extends HitboxDecorator {
 		return super.getHauteur();
 	}
 
-	@Override
-	public int getLongueur() {
-		// TODO Auto-generated method stub
-		return super.getLongueur();
-	}
 
 	@Override
 	public boolean belongsTo(int x, int y) {

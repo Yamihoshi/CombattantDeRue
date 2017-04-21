@@ -195,12 +195,12 @@ public class CharacterDecorator implements FightCharService{
 	@Override
 	public int getHauteur() {
 		// TODO Auto-generated method stub
-		return 0;
+		return getCharBox().getHauteur();
 	}
 
 	@Override
-	public int getLongueur() {
+	public int getLargeur() {
 		// TODO Auto-generated method stub
-		return 0;
+		return getCharBox().getLargeur();
 	}
 }

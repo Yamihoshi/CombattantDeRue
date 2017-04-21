@@ -63,12 +63,12 @@ public class CharacterSelection{
 		this.game.getPlayers()[0].getCharacter().init(Personnage.values()[this.index_chara_J1], 100, 5, this.game.getEngine(), true);
 		this.game.getPlayers()[1].getCharacter().init(Personnage.values()[this.index_chara_J2], 100, 5, this.game.getEngine(), false);
 		
-		this.game.getEngine().init(720, 1280, 400 ,this.game.getPlayers()[0], this.game.getPlayers()[1]);
 
 		//FIND RESSOURCE
-		this.game.getPlayers()[0].getCharacter().getCharBox().init(5, 1, 120, 50);
-		this.game.getPlayers()[1].getCharacter().getCharBox().init(150 + game.getEngine().getSpace(),  1 , 120, 50);
+		this.game.getPlayers()[0].getCharacter().getCharBox().init(1, 1, 120, 50);
+		this.game.getPlayers()[1].getCharacter().getCharBox().init(1,  1 , 120, 50);
 
+		this.game.getEngine().init(720, 1280, 1000 ,this.game.getPlayers()[0], this.game.getPlayers()[1]);
 		
 		
     	FightScreen fight;

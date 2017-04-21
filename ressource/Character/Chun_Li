@@ -1,7 +1,7 @@
-nom=Ryu
+nom=Chun Li
 vie=100
-vitesse=7
-hauteur=328
-largeur=507
+vitesse=13
+hauteur=361
+largeur=461
 technique1="Hadoken"
 technique2="Shoryuken"
