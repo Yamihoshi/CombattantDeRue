@@ -2,6 +2,7 @@ package GUI;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,6 +12,7 @@ import GUI.controller.StageController;
 import engine.components.character.CharacterType;
 import engine.components.player.Commande;
 import game.StreetFighterGame;
+import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +31,10 @@ public class FightScreen{
 	private SpritesManager sprites_manager;
 	
 	private StreetFighterGame game;
+	
+	private LinkedList<KeyCode> combo;
+	
+	KeyCode currentKey = null;
 	
 	public FightScreen(StreetFighterGame game) throws IOException
 	{
@@ -51,8 +57,12 @@ public class FightScreen{
     	sprites.add(this.controller.getCharacterOfJ2());
 		
     	this.sprites_manager = new SpritesManager(sprites, this.game.getEngine().getCharacters());
-    	this.sprites_manager.beginAnimation(0);
-    	this.sprites_manager.beginAnimation(1);
+    	this.sprites_manager.playAnimation(0,AnimationType.STAND);
+    	this.sprites_manager.playAnimation(1,AnimationType.STAND);
+    	
+    	this.combo = new LinkedList<KeyCode>();
+    	
+    	launchTimer();
 	}
 	
 	public AnchorPane getPane()
@@ -71,25 +81,78 @@ public class FightScreen{
 	public void addEventHandler()
 	{
 		this.pane.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-
+			
             @Override
             public void handle(KeyEvent event) {
+
             	if(event.getCode()==KeyCode.F2)
             	{
             		controller.toggleHitBox();
+            		event.consume();
             	}
-            	else if(event.getCode()==KeyCode.LEFT)
+            	else
             	{
-            		game.getEngine().getCharacter(0).moveLeft();
-            		controller.updatePosition_J1(game.getEngine().getCharacter(0).getPositionX());
+            		if(currentKey == null)
+            			currentKey = event.getCode();
+            		event.consume();
             	}
-            	else if(event.getCode()==KeyCode.RIGHT)
-            	{
-            		game.getEngine().step(Commande.RIGHT, Commande.NEUTRAL);
-            		controller.updatePosition_J1(game.getEngine().getCharacter(0).getPositionX());
-            	}
-            	
             }
         });
+		
+		this.pane.getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+            @Override
+            public void handle(KeyEvent event) {
+            	
+            	if(currentKey==event.getCode())
+            		currentKey=null;
+            	event.consume();
+            }
+        });
+		
+	}
+	
+	public void launchTimer()
+	{
+		new AnimationTimer()
+        {
+        	int frameCount = 0;
+        	long lasttimeFPS = System.nanoTime();
+        	long lasttimeFPS_keys = System.nanoTime();
+        	
+            @Override
+            public void handle(long arg0)
+            {
+            	frameCount++;
+            	
+            	long currenttimeNano = System.nanoTime();
+            	
+            	if (currenttimeNano > lasttimeFPS + 1000000000 * StageController.frameTime)
+            	{
+            		frameCount = 0;
+                    lasttimeFPS = currenttimeNano;
+	                    
+                    if(currentKey==KeyCode.LEFT)
+	                {
+	                	game.getEngine().getCharacter(0).moveLeft();
+	                	controller.updatePosition_J1(game.getEngine().getCharacter(0).getPositionX());
+	                }
+	                else if(currentKey==KeyCode.RIGHT)
+	                {
+	    	           	game.getEngine().step(Commande.RIGHT, Commande.NEUTRAL);
+	    	           	controller.updatePosition_J1(game.getEngine().getCharacter(0).getPositionX());
+	    	           	if(sprites_manager.getAnimationPlayed(0)!=AnimationType.WALK_FORWARD)
+	    	           		sprites_manager.playAnimation(0,AnimationType.WALK_FORWARD);
+	                }
+	                else if(currentKey==null)
+	                {
+	                	if(sprites_manager.getAnimationPlayed(0)!=AnimationType.STAND)
+            			{
+                			sprites_manager.playAnimation(0,AnimationType.STAND);
+            			}
+	                }
+                 }
+            }
+        }.start();
 	}
 }

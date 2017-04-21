@@ -3,9 +3,7 @@ package GUI.animations;
 import java.util.ArrayList;
 import java.util.List;
 
-import engine.components.character.CharacterType;
 import engine.services.FightCharService;
-import javafx.animation.Timeline;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,23 +28,29 @@ public class SpritesManager {
 		this.currentAnimation[0] = this.loader.getAnimation(0, AnimationType.STAND);
 		this.currentAnimation[1] = this.loader.getAnimation(1, AnimationType.STAND);
 	}
-
-
-	public void beginAnimation(int joueur)
+	
+	public void stopAnimation(int joueur)
 	{
+		this.currentAnimation[joueur].stop();
+	}
+	
+	public void playAnimation(int joueur,AnimationType type)
+	{
+		this.stopAnimation(joueur);
+		this.currentAnimation[joueur] = this.loader.getAnimation(joueur, type);
 		this.currentAnimation[joueur].play();
 		this.aligne(joueur);
 	}
 	
-	public void setAnimation(int joueur,AnimationType type)
-	{
-		this.currentAnimation[joueur] = this.loader.getAnimation(joueur, type);
-	}
-	
 	public void aligne(int joueur)
 	{			
-		System.out.println(this.currentAnimation[joueur].getPosition_Y());
 		this.characterImages.get(joueur).setTranslateY(this.currentAnimation[joueur].getPosition_Y());
+		this.characterImages.get(joueur).setTranslateX(this.currentAnimation[joueur].getPosition_X());
+	}
+	
+	public AnimationType getAnimationPlayed(int joueur)
+	{
+		return this.currentAnimation[joueur].getType();
 	}
 	
 }

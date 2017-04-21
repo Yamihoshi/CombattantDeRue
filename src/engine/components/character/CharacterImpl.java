@@ -137,11 +137,11 @@ public class CharacterImpl implements FightChar{
 	}
 	@Override
 	public void moveLeft() {
-		hitbox.moveTo(getPositionX() - CharacterImpl.DEPLACEMENT, getPositionY());
+		hitbox.moveTo(getPositionX() - /*CharacterImpl.DEPLACEMENT*/this.vitesse, getPositionY());
 	}
 	@Override
 	public void moveRight() {
-		hitbox.moveTo(getPositionX() + CharacterImpl.DEPLACEMENT, getPositionY());
+		hitbox.moveTo(getPositionX() +/* CharacterImpl.DEPLACEMENT*/this.vitesse, getPositionY());
 	}
 	@Override
 	public void moveUpRight() {
