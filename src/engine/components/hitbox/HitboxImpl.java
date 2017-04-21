@@ -9,12 +9,11 @@ public class HitboxImpl implements HitboxService{
 	private int hauteur;
 	private int longueur;
 	
-	public  HitboxImpl() {
+	public HitboxImpl() {
 		
 	}
 	@Override
 	public void init(int x, int y, int h, int l) {
-		System.out.println("my x" +x);
 		positionX =x;
 		positionY = y;
 		hauteur = h;
@@ -119,5 +118,6 @@ public class HitboxImpl implements HitboxService{
 	public void setLongueur(int longueur) {
 		this.longueur = longueur;
 	}
+
 
 }

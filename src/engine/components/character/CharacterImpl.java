@@ -22,7 +22,7 @@ public class CharacterImpl implements FightChar{
 	protected boolean faceRight;
 	
 	protected ArrayList<TechService> techniques;
-
+ 
 	
 	@Override 
 	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight) {
@@ -137,6 +137,13 @@ public class CharacterImpl implements FightChar{
 	}
 	@Override
 	public void moveLeft() {
+		HitboxService tmp = new HitboxImpl();
+		tmp.init(getPositionX() - CharacterImpl.DEPLACEMENT, getPositionY(), getHauteur(), getLongueur());
+		if(isOutside(tmp)){
+			return;
+		}
+		else if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
+			return;
 		hitbox.moveTo(getPositionX() - CharacterImpl.DEPLACEMENT, getPositionY());
 	}
 	@Override
@@ -179,5 +186,35 @@ public class CharacterImpl implements FightChar{
 		return "CharacterImpl [name=" + name + ", vie=" + vie + ", vitesse=" + vitesse + ", engine=" + engine
 				+ ", hitbox=" + hitbox + ", faceRight=" + faceRight + ", techniques=" + techniques + "]";
 	}
-
+	
+	protected int getMyIndice(){
+		if(getEngine().getCharacter(0) == this)
+			return 0;
+		return 1;
+	} 
+	
+	protected int getOtherIndice(){
+		if(getEngine().getCharacter(0) == this)
+			return 1;
+		return 0;
+	}
+	@Override
+	public int getHauteur() {
+		// TODO Auto-generated method stub
+		return hitbox.getHauteur();
+	}
+	@Override
+	public int getLongueur() {
+		// TODO Auto-generated method stub
+		return hitbox.getLongueur();
+	}
+	
+	//TODO ajouter gestion witdh/hauteur du perso
+	public boolean isOutside(HitboxService tmp) {
+		if(tmp.getPositionX() <= 0 || tmp.getPositionX() > engine.getWidth())
+			return true;
+		else if(tmp.getHauteur() <= 0 || tmp.getPositionY() > engine.getHeight())
+			return true;
+		else return false;
+	}
 }

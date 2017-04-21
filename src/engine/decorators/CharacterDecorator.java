@@ -13,9 +13,21 @@ public class CharacterDecorator implements FightCharService{
 
 	CharacterService character;
 	
-	public CharacterDecorator(CharacterService character) {
+	@Override
+	public int getHauteur() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getLongueur() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public CharacterDecorator(CharacterService character2) {
 		super();
-		this.character = character;
+		this.character = character2;
 	}
 
 	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight) {
@@ -163,5 +175,17 @@ public class CharacterDecorator implements FightCharService{
 	public void startTech(TechService tech) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	protected int getMyIndice(){
+		if(getEngine().getCharacter(0) == this)
+			return 0;
+		return 1;
+	}
+	
+	protected int getOtherIndice(){
+		if(getEngine().getCharacter(0) == this)
+			return 1;
+		return 0;
 	}
 }

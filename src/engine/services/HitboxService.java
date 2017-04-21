@@ -19,4 +19,6 @@ public interface HitboxService {
 	/* Operators */
 	public void moveTo(int x, int y);
 
+	//public boolean isOutside();
+
 }

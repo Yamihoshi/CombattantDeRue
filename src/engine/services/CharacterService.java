@@ -10,6 +10,8 @@ public interface CharacterService {
 	/* Observators */
 	public int getPositionX();
 	public int getPositionY();
+	public int getHauteur();
+	public int getLongueur();
 	public EngineService getEngine();
 	public HitboxService getCharBox();
 	public void setCharBox(HitboxService hit);

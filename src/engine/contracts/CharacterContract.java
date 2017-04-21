@@ -30,7 +30,7 @@ public class CharacterContract extends CharacterDecorator {
 			throw new PostconditionError("Erreur post condition error");
 		}
 	}
-
+ 
 	@Override
 	public int getPositionX() {
 		// TODO Auto-generated method stub
@@ -92,7 +92,7 @@ public class CharacterContract extends CharacterDecorator {
 		
 		int other = getOtherIndice();
 		int pre_positionX = getPositionX();
-		
+		 
 		checkInvariant();
 		super.moveLeft();
 		checkInvariant();
@@ -103,17 +103,7 @@ public class CharacterContract extends CharacterDecorator {
 			throw new PostconditionError("Collision with a changement of posX" + getPositionX() + "==" + pre_positionX);
 		}
 	}
-	int getMyIndice(){
-		if(getEngine().getCharacter(0) == this)
-			return 0;
-		return 1;
-	}
-	
-	int getOtherIndice(){
-		if(getEngine().getCharacter(0) == this)
-			return 1;
-		return 0;
-	}
+
 	@Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
