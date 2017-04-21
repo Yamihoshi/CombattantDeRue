@@ -97,7 +97,7 @@ public class CharacterContract extends CharacterDecorator {
 		super.moveLeft();
 		checkInvariant();
 		
-		if((!(getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))
+		if(!(!(getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))
 				|| (getPositionX() == pre_positionX))
 				){
 			throw new PostconditionError("Collision with a changement of posX" + getPositionX() + "==" + pre_positionX);

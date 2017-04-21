@@ -24,6 +24,20 @@ public class CharacterImpl implements FightChar{
 	protected ArrayList<TechService> techniques;
  
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((engine == null) ? 0 : engine.hashCode());
+		result = prime * result + (faceRight ? 1231 : 1237);
+		result = prime * result + ((hitbox == null) ? 0 : hitbox.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((techniques == null) ? 0 : techniques.hashCode());
+		result = prime * result + vie;
+		result = prime * result + vitesse;
+		return result;
+	}
+	
 	@Override 
 	public void init(String nom, int life, int speed, EngineService engine, boolean faceRight) {
 		name = nom;
@@ -142,20 +156,20 @@ public class CharacterImpl implements FightChar{
 		if(isOutside(tmp)){
 			return;
 		}
-		else if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
-			return;
+		/*else if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
+			return;*/
+		System.out.println("ça passe");
 		hitbox.moveTo(getPositionX() - /*CharacterImpl.DEPLACEMENT*/this.vitesse, getPositionY());
 
 	}
 	@Override
 	public void moveRight() {
 		HitboxService tmp = new HitboxImpl();
+		int indice = 0;
 		tmp.init(getPositionX() + this.vitesse, getPositionY(), getHauteur(), getLongueur());
 		if(isOutside(tmp)){
 			return;
 		}
-		else if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
-			return;
 		hitbox.moveTo(getPositionX() +/* CharacterImpl.DEPLACEMENT*/this.vitesse, getPositionY());
 	}
 	@Override
@@ -196,13 +210,13 @@ public class CharacterImpl implements FightChar{
 	}
 	
 	protected int getMyIndice(){
-		if(getEngine().getCharacter(0) == this)
+		if(getEngine().getCharacter(0).equals(this))
 			return 0;
 		return 1;
 	} 
 	
 	protected int getOtherIndice(){
-		if(getEngine().getCharacter(0) == this)
+		if(getEngine().getCharacter(0).equals(this))
 			return 1;
 		return 0;
 	}
@@ -225,4 +239,5 @@ public class CharacterImpl implements FightChar{
 			return true;
 		else return false;
 	}
+
 }

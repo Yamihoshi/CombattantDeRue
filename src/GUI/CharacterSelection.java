@@ -64,11 +64,11 @@ public class CharacterSelection{
 		this.game.getPlayers()[0].getCharacter().init(chara_J1, 100, 5, this.game.getEngine(), true);
 		this.game.getPlayers()[1].getCharacter().init(chara_J2, 100, 5, this.game.getEngine(), false);
 		
-		this.game.getEngine().init(1280, 720, 250 ,this.game.getPlayers()[0], this.game.getPlayers()[1]);
+		this.game.getEngine().init(1280, 720, 400 ,this.game.getPlayers()[0], this.game.getPlayers()[1]);
 
 		//FIND RESSOURCE
 		this.game.getPlayers()[0].getCharacter().getCharBox().init(5, 1, 120, 50);
-		this.game.getPlayers()[1].getCharacter().getCharBox().init(1 + game.getEngine().getSpace(),  1 , 120, 50);
+		this.game.getPlayers()[1].getCharacter().getCharBox().init(150 + game.getEngine().getSpace(),  1 , 120, 50);
 
 		
 		
