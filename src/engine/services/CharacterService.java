@@ -1,6 +1,7 @@
 package engine.services;
 
 import engine.components.character.Personnage;
+import engine.components.character.State;
 import engine.components.player.Commande;
 
 public interface CharacterService {
@@ -13,6 +14,7 @@ public interface CharacterService {
 	public int getPositionY();
 	public int getHauteur();
 	public int getLargeur();
+	public State getState();
 	public EngineService getEngine();
 	public HitboxService getCharBox();
 	public void setCharBox(HitboxService hit);
@@ -25,6 +27,7 @@ public interface CharacterService {
 	
 	
 	/* Operators */
+	public void neutral();
 	public void moveLeft();
 	public void moveRight();
 	public void moveUpRight();

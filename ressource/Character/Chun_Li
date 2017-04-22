@@ -1,7 +1,7 @@
 nom=Chun Li
 vie=100
 vitesse=13
-hauteur=361
-largeur=461
+hauteur=461
+largeur=361
 technique1="Hadoken"
 technique2="Shoryuken"

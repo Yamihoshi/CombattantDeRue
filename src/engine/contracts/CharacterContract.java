@@ -1,6 +1,7 @@
 package engine.contracts;
 
 import engine.components.character.Personnage;
+import engine.components.character.State;
 import engine.components.player.Commande;
 import engine.contracts.error.InvariantError;
 import engine.contracts.error.PostconditionError;
@@ -9,10 +10,14 @@ import engine.decorators.CharacterDecorator;
 import engine.services.CharacterService;
 import engine.services.EngineService;
 import engine.services.HitboxService;
+import engine.services.TechService;
 
 public class CharacterContract extends CharacterDecorator {
 
 
+
+	
+	
 
 	public CharacterContract(CharacterService character) {
 		super(character);
@@ -32,60 +37,7 @@ public class CharacterContract extends CharacterDecorator {
 		}
 	}
  
-	@Override
-	public int getPositionX() {
-		// TODO Auto-generated method stub
-		return super.getPositionX();
-	}
 
-	@Override
-	public int getPositionY() {
-		// TODO Auto-generated method stub
-		return super.getPositionY();
-	}
-
-	@Override
-	public EngineService getEngine() {
-		// TODO Auto-generated method stub
-		return super.getEngine();
-	}
-
-	@Override
-	public HitboxService getCharBox() {
-		// TODO Auto-generated method stub
-		return super.getCharBox();
-	}
-
-	@Override
-	public int getLife() {
-		// TODO Auto-generated method stub
-		return super.getLife();
-	}
-
-	@Override
-	public int getSpeed() {
-		// TODO Auto-generated method stub
-		return super.getSpeed();
-	}
-
-	@Override
-	public boolean isFaceRight() {
-		// TODO Auto-generated method stub
-		return super.isFaceRight();
-	}
-
-
-	@Override
-	public boolean isDead() {
-		// TODO Auto-generated method stub
-		return super.isDead();
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
 
 	@Override
 	public void moveLeft() {
@@ -155,10 +107,207 @@ public class CharacterContract extends CharacterDecorator {
 			throw new InvariantError("Erreur Character not really dead kek");
 		}
 	}
+	@Override
+	public void moveUpRight() {
+		// TODO Auto-generated method stub
+		super.moveUpRight();
+	}
+
+	@Override
+	public void moveUpLeft() {
+		// TODO Auto-generated method stub
+		super.moveUpLeft();
+	}
+
+	@Override
+	public void moveUp() {
+		// TODO Auto-generated method stub
+		super.moveUp();
+	}
+
+	@Override
+	public void moveDown() {
+		// TODO Auto-generated method stub
+		super.moveDown();
+	}
+
+	@Override
+	public void moveDownLeft() {
+		// TODO Auto-generated method stub
+		super.moveDownLeft();
+	}
+
+	@Override
+	public void moveDownRight() {
+		// TODO Auto-generated method stub
+		super.moveDownRight();
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return super.getName();
+	}
+
+	@Override
+	public void setCharBox(HitboxService hit) {
+		// TODO Auto-generated method stub
+		super.setCharBox(hit);
+	}
+
+	@Override
+	public State getState() {
+		// TODO Auto-generated method stub
+		return super.getState();
+	}
+
+	@Override
+	public void neutral() {
+		// TODO Auto-generated method stub
+		super.neutral();
+	}
+
+	@Override
+	public boolean isBlocking() {
+		// TODO Auto-generated method stub
+		return super.isBlocking();
+	}
+
+	@Override
+	public boolean isBlockStunned() {
+		// TODO Auto-generated method stub
+		return super.isBlockStunned();
+	}
+
+	@Override
+	public boolean isHitStunned() {
+		// TODO Auto-generated method stub
+		return super.isHitStunned();
+	}
+
+	@Override
+	public boolean isTeching() {
+		// TODO Auto-generated method stub
+		return super.isTeching();
+	}
+
+	@Override
+	public TechService getTech() {
+		// TODO Auto-generated method stub
+		return super.getTech();
+	}
+
+	@Override
+	public boolean techFrame() {
+		// TODO Auto-generated method stub
+		return super.techFrame();
+	}
+
+	@Override
+	public boolean techHasAlreadyHit() {
+		// TODO Auto-generated method stub
+		return super.techHasAlreadyHit();
+	}
+
+	@Override
+	public void startTech(TechService tech) {
+		// TODO Auto-generated method stub
+		super.startTech(tech);
+	}
+
+	@Override
+	protected int getMyIndice() {
+		// TODO Auto-generated method stub
+		return super.getMyIndice();
+	}
+
+	@Override
+	protected int getOtherIndice() {
+		// TODO Auto-generated method stub
+		return super.getOtherIndice();
+	}
+
+	@Override
+	public CharacterService getCharacter() {
+		// TODO Auto-generated method stub
+		return super.getCharacter();
+	}
+
+	@Override
+	public void setCharacter(CharacterService character) {
+		// TODO Auto-generated method stub
+		super.setCharacter(character);
+	}
+
+	@Override
+	public int getHauteur() {
+		// TODO Auto-generated method stub
+		return super.getHauteur();
+	}
+
+	@Override
+	public int getLargeur() {
+		// TODO Auto-generated method stub
+		return super.getLargeur();
+	}
 
 	@Override
 	public Personnage getPersonnage() {
 		// TODO Auto-generated method stub
 		return super.getPersonnage();
+	}
+	@Override
+	public int getPositionX() {
+		// TODO Auto-generated method stub
+		return super.getPositionX();
+	}
+
+	@Override
+	public int getPositionY() {
+		// TODO Auto-generated method stub
+		return super.getPositionY();
+	}
+
+	@Override
+	public EngineService getEngine() {
+		// TODO Auto-generated method stub
+		return super.getEngine();
+	}
+
+	@Override
+	public HitboxService getCharBox() {
+		// TODO Auto-generated method stub
+		return super.getCharBox();
+	}
+
+	@Override
+	public int getLife() {
+		// TODO Auto-generated method stub
+		return super.getLife();
+	}
+
+	@Override
+	public int getSpeed() {
+		// TODO Auto-generated method stub
+		return super.getSpeed();
+	}
+
+	@Override
+	public boolean isFaceRight() {
+		// TODO Auto-generated method stub
+		return super.isFaceRight();
+	}
+
+
+	@Override
+	public boolean isDead() {
+		// TODO Auto-generated method stub
+		return super.isDead();
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
 	}
 }

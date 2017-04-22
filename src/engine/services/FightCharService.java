@@ -2,8 +2,6 @@ package engine.services;
 
 public interface FightCharService extends CharacterService{
 
-	/* Constructors */
-	public void init();
 	
 	/* Observators */
 	public boolean isBlocking();

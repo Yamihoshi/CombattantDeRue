@@ -1,6 +1,7 @@
 package engine.decorators;
 
 import engine.components.character.Personnage;
+import engine.components.character.State;
 import engine.components.player.Commande;
 import engine.contracts.error.InvariantError;
 import engine.services.CharacterService;
@@ -13,14 +14,14 @@ public class CharacterDecorator implements FightCharService{
 
 
 	CharacterService character;
-	
 
 
 	public CharacterDecorator(CharacterService character2) {
 		super();
 		this.character = character2;
 	}
-
+	
+	@Override
 	public void init(Personnage nom, int life, int speed, EngineService engine, boolean faceRight) {
 		character.init(nom, life, speed, engine, faceRight);
 	}
@@ -114,12 +115,14 @@ public class CharacterDecorator implements FightCharService{
 		character.setCharBox(hit);
 	}
 
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
+
+	public State getState() {
+		return character.getState();
 	}
 
+	public void neutral() {
+		character.neutral();
+	}
 	@Override
 	public boolean isBlocking() {
 		// TODO Auto-generated method stub
@@ -203,4 +206,9 @@ public class CharacterDecorator implements FightCharService{
 		// TODO Auto-generated method stub
 		return getCharBox().getLargeur();
 	}
+
+
+
+
+
 }

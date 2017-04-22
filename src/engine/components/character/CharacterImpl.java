@@ -5,13 +5,12 @@ import java.util.ArrayList;
 import engine.components.hitbox.HitboxImpl;
 import engine.components.player.Commande;
 import engine.contracts.HitboxContract;
-import engine.services.CharacterService;
 import engine.services.EngineService;
-import engine.services.FightChar;
+import engine.services.FightCharService;
 import engine.services.HitboxService;
-import engine.services.TechService;
+import engine.services.TechService; 
 
-public class CharacterImpl implements FightChar{
+public class CharacterImpl implements FightCharService{
 
 	public static final int DEPLACEMENT = 10;
 	protected Personnage personnage;
@@ -20,6 +19,7 @@ public class CharacterImpl implements FightChar{
 	protected EngineService engine;
 	protected HitboxService hitbox;
 	protected boolean faceRight;
+	protected State state_actuel;
 	
 	protected ArrayList<TechService> techniques;
  
@@ -48,22 +48,18 @@ public class CharacterImpl implements FightChar{
 	}
 	@Override
 	public int getPositionX() {
-		// TODO Auto-generated method stub
 		return hitbox.getPositionX();
 	}
 	@Override
 	public int getPositionY() {
-		// TODO Auto-generated method stub
 		return hitbox.getPositionY();
 	}
 	@Override
 	public EngineService getEngine() {
-		// TODO Auto-generated method stub
 		return engine;
 	}
 	@Override
 	public HitboxService getCharBox() {
-		// TODO Auto-generated method stub
 		return hitbox;
 	}
 	@Override
@@ -72,17 +68,14 @@ public class CharacterImpl implements FightChar{
 	}
 	@Override
 	public int getLife() {
-		// TODO Auto-generated method stub
 		return vie;
 	}
 	@Override
 	public int getSpeed() {
-		// TODO Auto-generated method stub
 		return vitesse;
 	}
 	@Override
 	public boolean isFaceRight() {
-		// TODO Auto-generated method stub
 		return faceRight;
 	}
 
@@ -120,7 +113,6 @@ public class CharacterImpl implements FightChar{
 	}
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return personnage.name();
 	}
 	@Override
@@ -128,28 +120,27 @@ public class CharacterImpl implements FightChar{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	@Override
-	public boolean isBlockstunned() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public boolean isHitstunned() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 	@Override
 	public boolean isTeching() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	@Override
-	public TechService tech() {
-		// TODO Auto-generated method stub
-		return null;
+
+	
+	private void gestionStand(){
+		state_actuel = State.STAND;
+
+	}
+	private void gestionJump(){
+		state_actuel = State.JUMP;
+	}
+	private void gestionDown(){
+		state_actuel = State.CROUCH;
 	}
 	@Override
 	public void moveLeft() {
+		gestionStand();
 		HitboxService tmp = new HitboxImpl();
 		tmp.init(getPositionX() - this.vitesse, getPositionY(), getHauteur(), getLargeur());
 		if(isOutside(tmp)){
@@ -163,6 +154,7 @@ public class CharacterImpl implements FightChar{
 	}
 	@Override
 	public void moveRight() {
+		gestionStand();
 		HitboxService tmp = new HitboxImpl();
 		int indice = getOtherIndice();
 		tmp.init(getPositionX() + this.vitesse, getPositionY(), getHauteur(), getLargeur());
@@ -172,35 +164,43 @@ public class CharacterImpl implements FightChar{
 			return;
 		hitbox.moveTo(getPositionX() +/* CharacterImpl.DEPLACEMENT*/this.vitesse, getPositionY());
 	}
+	
+	@Override
+	public void neutral() {
+		gestionStand();
+		
+	}
+
+
 	@Override
 	public void moveUpRight() {
-		// TODO Auto-generated method stub
+		gestionJump();
 		
 	}
 	@Override
 	public void moveUpLeft() {
 		// TODO Auto-generated method stub
+		gestionJump();
+
 		
 	}
 	@Override
 	public void moveUp() {
-		// TODO Auto-generated method stub
-		
+		gestionJump();
 	}
 	@Override
 	public void moveDown() {
-		// TODO Auto-generated method stub
-		
+		gestionDown();
+		/*ADD CHANGEMENT HITBOX*/
 	}
+
 	@Override
 	public void moveDownLeft() {
-		// TODO Auto-generated method stub
-		
+		gestionDown();
 	}
 	@Override
 	public void moveDownRight() {
-		// TODO Auto-generated method stub
-		
+		gestionDown();
 	}
 	
 	@Override
@@ -246,5 +246,51 @@ public class CharacterImpl implements FightChar{
 		// TODO Auto-generated method stub
 		return hitbox.getLargeur();
 	}
+
+	@Override
+	public State getState() {
+		// TODO Auto-generated method stub
+		return state_actuel;
+	}
+
+
+
+	@Override
+	public boolean isBlockStunned() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHitStunned() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public TechService getTech() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean techFrame() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean techHasAlreadyHit() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void startTech(TechService tech) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }

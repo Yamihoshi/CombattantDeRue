@@ -22,7 +22,7 @@ public class CharacterFabrique {
 		   try {
 			Properties p = CharacterFabrique.load("ressource//character//"+personnage.name());
 			fc.init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight);
-			fc.getCharBox().init(1, 1, new Integer(p.getProperty("largeur", "100")), new Integer(p.getProperty("hauteur", "100")));
+			fc.getCharBox().init(1, 1, new Integer(p.getProperty("hauteur", "100")), new Integer(p.getProperty("largeur", "100")));
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

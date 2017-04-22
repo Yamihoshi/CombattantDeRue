@@ -1,7 +1,7 @@
 nom=Ryu
 vie=100
 vitesse=7
-hauteur=328
-largeur=507
+hauteur=507
+largeur=328
 technique1="Hadoken"
 technique2="Shoryuken"
