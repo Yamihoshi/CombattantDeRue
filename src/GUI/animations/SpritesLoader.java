@@ -11,6 +11,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.ObjectProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -44,7 +46,7 @@ public class SpritesLoader {
 			{
 				Timeline timeline = new Timeline();
 				
-				for(int i=0;i<=animation.length();i++)
+				for(int i=0;i<animation.length();i++)
 				{
 					String path = getPathOfSprite(chara[joueur].getName(),animation,i);
 					
@@ -54,13 +56,23 @@ public class SpritesLoader {
 						
 						Image tmp = new Image(getClass().getResource(path).toURI().toString());
 						double duree = i*sprite.getDuration()*StageController.frameTime;
-						KeyFrame frame = new KeyFrame(Duration.seconds(duree), new KeyValue(this.characterImage.get(joueur).imageProperty(), tmp));
-						timeline.getKeyFrames().add(frame);
 						
-						frame =  new KeyFrame(Duration.seconds(duree), new KeyValue(this.characterImage.get(joueur).translateYProperty(), this.characterImage.get(joueur).getTranslateY()+sprite.getTranslate_Y()));
-						timeline.getKeyFrames().add(frame);
-						frame =  new KeyFrame(Duration.seconds(duree), new KeyValue(this.characterImage.get(joueur).translateXProperty(), this.characterImage.get(joueur).getTranslateX()+sprite.getTranslate_X()));
-						timeline.getKeyFrames().add(frame);
+						
+						final int player = joueur;
+						
+						EventHandler<ActionEvent> aligne = new EventHandler<ActionEvent>() {
+							
+				            public void handle(ActionEvent t) {
+				            	characterImage.get(player).setTranslateX(sprite.getTranslate_X());
+				            	characterImage.get(player).setTranslateY(sprite.getTranslate_Y());
+				            }
+				        };
+				        
+				        KeyFrame frame = new KeyFrame(Duration.seconds(duree), aligne, new KeyValue(this.characterImage.get(joueur).imageProperty(), tmp));
+				        
+				        timeline.getKeyFrames().add(frame);
+				        
+						
 					} catch (Exception e) {
 						//e.printStackTrace();
 						break;
@@ -70,7 +82,7 @@ public class SpritesLoader {
 				{
 					Sprite lastSprite = animation.getSprites(animation.length()-1);
 					
-					KeyFrame frame = new KeyFrame(Duration.seconds((timeline.getKeyFrames().size()/3)*lastSprite.getDuration()*StageController.frameTime), new KeyValue(this.characterImage.get(joueur).imageProperty(), null));
+					KeyFrame frame = new KeyFrame(Duration.seconds(timeline.getKeyFrames().size()*lastSprite.getDuration()*StageController.frameTime), new KeyValue(this.characterImage.get(joueur).imageProperty(), null));
 					timeline.getKeyFrames().add(frame);
 				}
 				
