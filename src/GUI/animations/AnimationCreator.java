@@ -9,41 +9,71 @@ import GUI.Ressource;
 import engine.components.character.Personnage;
 
 public class AnimationCreator {
-
-	HashMap<AnimationType,Animation> animations;
 	
-	public AnimationCreator(String chara)
+	public AnimationCreator()
 	{
-		this.animations = new HashMap<AnimationType,Animation>();
-		this.createAnimations(chara);
+		
 	}
 	
-	public void createAnimations(String chara)
+	public static HashMap<AnimationType,Animation> loadAnimations(String chara)
 	{
-		Properties prop = new Properties();
+		HashMap<AnimationType,Animation> animations = new HashMap<>();
 		
+		Properties prop = null;
 		for(AnimationType type : AnimationType.values())
 		{
-			int read_Y = 0;
-			int read_X = 0;
+			if(prop == null)
+				prop = new Properties();
+			
+			prop.clear();
+			
+			Animation animation = new Animation(type,false);
+			
+			int read_Y = Sprite.ref_position_X_left;
+			int read_X = Sprite.ref_position_Y;
+			int read_duration = 4;
+			int animation_length=0;
+			
 			try {			
 				// load a properties file
-				System.out.println(Ressource.sprites+chara+"/"+type.toString()+"_axis.txt");
-				prop.load(getClass().getResourceAsStream(Ressource.sprites+chara+"/"+type.toString()+"_axis.txt"));
-
-				// get the property value and print it out
-				
-				read_Y = new Integer(prop.getProperty("Y"));
-				read_X = new Integer(prop.getProperty("X"));
-
-			} catch (Exception ex) {System.out.println("Property reading error :" + ex.getMessage()+" ["+Ressource.sprites+chara+"/"+type.toString()+"_axis.txt"+"]");}
+				System.out.println(Ressource.sprites+chara+"/"+type.toString()+"_config.txt");
+				prop.load(AnimationCreator.class.getResourceAsStream(Ressource.sprites+chara+"/"+type.toString()+"_config.txt"));
+			} catch (Exception ex) {System.out.println("Property reading error :" + ex.getMessage()+" ["+Ressource.sprites+chara+"/"+type.toString()+"_config.txt"+"]"); prop = null;}
 			
-			this.animations.put(type,new Animation(type,null,read_Y,read_X,false));
+			if(prop!=null)
+			{
+				String s = prop.getProperty("animation_length");
+				
+				if(s!=null && !s.isEmpty())
+				{
+					animation_length = new Integer(s);
+					
+					for(int i=0;i<animation_length;i++)
+					{
+						String sprite_name = "sprite_"+i;
+						
+						System.out.println(sprite_name);
+						
+						String[] values = prop.get(sprite_name).toString().split("#");
+						
+						read_X = new Integer(values[0]);
+						read_Y = new Integer(values[1]);
+						read_duration = new Integer(values[2]);
+						
+						animation.addSprite(new Sprite(read_X, read_Y, read_duration, false));
+					}
+				}
+
+			}
+			
+			animations.put(type,animation);	
 		}
+		
+		return animations;
 	}
 	
-	public HashMap<AnimationType,Animation> getAnimations()
+	public void createAnimation()
 	{
-		return this.animations;
+		/* Code pour générer les .config*/
 	}
 }

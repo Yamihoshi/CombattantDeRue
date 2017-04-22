@@ -12,14 +12,15 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class SpritesLoader {
 
-	private List<ObjectProperty<Image>> characterImage;
+	private List<ImageView> characterImage;
 	private List<HashMap<AnimationType, Animation>> animations;
 	
-	public SpritesLoader(List<ObjectProperty<Image>> characterImage, FightCharService chara[])
+	public SpritesLoader(List<ImageView> characterImage, FightCharService chara[])
 	{			
 		this.characterImage = characterImage;
 		this.animations = new ArrayList<HashMap<AnimationType, Animation>>();
@@ -38,33 +39,45 @@ public class SpritesLoader {
 	{	
 		for(int joueur=0;joueur<chara.length;joueur++)
 		{			
-			HashMap<AnimationType,Animation> hashmapAnimation = new AnimationCreator(chara[joueur].getName()).getAnimations();
+			HashMap<AnimationType,Animation> hashmapAnimation = AnimationCreator.loadAnimations(chara[joueur].getName());
 			for(Animation animation : hashmapAnimation.values())
 			{
 				Timeline timeline = new Timeline();
 				
-				for(int i=0;i<=60;i++)
+				for(int i=0;i<=animation.length();i++)
 				{
 					String path = getPathOfSprite(chara[joueur].getName(),animation,i);
 					
 					try {
-						//System.out.println(getClass().getResource(path).toURI().toString());
+						
+						Sprite sprite = animation.getSprites(i);
+						
 						Image tmp = new Image(getClass().getResource(path).toURI().toString());
-						double duree = i*4*StageController.frameTime;
-						KeyFrame frame = new KeyFrame(Duration.seconds(duree), new KeyValue(this.characterImage.get(joueur), tmp));
+						double duree = i*sprite.getDuration()*StageController.frameTime;
+						KeyFrame frame = new KeyFrame(Duration.seconds(duree), new KeyValue(this.characterImage.get(joueur).imageProperty(), tmp));
+						timeline.getKeyFrames().add(frame);
+						
+						frame =  new KeyFrame(Duration.seconds(duree), new KeyValue(this.characterImage.get(joueur).translateYProperty(), this.characterImage.get(joueur).getTranslateY()+sprite.getTranslate_Y()));
+						timeline.getKeyFrames().add(frame);
+						frame =  new KeyFrame(Duration.seconds(duree), new KeyValue(this.characterImage.get(joueur).translateXProperty(), this.characterImage.get(joueur).getTranslateX()+sprite.getTranslate_X()));
 						timeline.getKeyFrames().add(frame);
 					} catch (Exception e) {
 						//e.printStackTrace();
 						break;
 					}
 				}
-				
-				KeyFrame frame = new KeyFrame(Duration.seconds(timeline.getKeyFrames().size()*4*StageController.frameTime), new KeyValue(this.characterImage.get(joueur), null));
-				timeline.getKeyFrames().add(frame);
+				if(animation.length()>0)
+				{
+					Sprite lastSprite = animation.getSprites(animation.length()-1);
+					
+					KeyFrame frame = new KeyFrame(Duration.seconds((timeline.getKeyFrames().size()/3)*lastSprite.getDuration()*StageController.frameTime), new KeyValue(this.characterImage.get(joueur).imageProperty(), null));
+					timeline.getKeyFrames().add(frame);
+				}
 				
 				timeline.setCycleCount(Timeline.INDEFINITE);
-				
+					
 				animation.setTimeLine(timeline);
+					
 			}
 			
 			this.animations.add(hashmapAnimation);
