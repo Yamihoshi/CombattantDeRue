@@ -136,9 +136,23 @@ public class FightScreen{
 	                    
                     if(currentKey==KeyCode.LEFT)
 	                {
-	                	J1.moveLeft();
+	    	           	game.getEngine().step(Commande.NEUTRAL, Commande.LEFT);
+	    	           	if(sprites_manager.getAnimationPlayed(1)!=AnimationType.WALK_FORWARD)
+	    	           		sprites_manager.playAnimation(1,AnimationType.WALK_FORWARD);
 	                }
 	                else if(currentKey==KeyCode.RIGHT)
+	                {
+	    	           	game.getEngine().step(Commande.NEUTRAL, Commande.RIGHT);
+	    	           	if(sprites_manager.getAnimationPlayed(1)!=AnimationType.WALK_FORWARD)
+	    	           		sprites_manager.playAnimation(1,AnimationType.WALK_FORWARD);
+	                }
+	                else if(currentKey==KeyCode.Q)
+	                {
+	    	           	game.getEngine().step(Commande.LEFT, Commande.NEUTRAL);
+	    	           	if(sprites_manager.getAnimationPlayed(0)!=AnimationType.WALK_FORWARD)
+	    	           		sprites_manager.playAnimation(0,AnimationType.WALK_FORWARD);
+	                }
+	                else if(currentKey==KeyCode.D)
 	                {
 	    	           	game.getEngine().step(Commande.RIGHT, Commande.NEUTRAL);
 	    	           	if(sprites_manager.getAnimationPlayed(0)!=AnimationType.WALK_FORWARD)
@@ -146,6 +160,7 @@ public class FightScreen{
 	                }
 	                else if(currentKey==null)
 	                {
+	                	game.getEngine().step(Commande.NEUTRAL, Commande.NEUTRAL);
 	                	if(sprites_manager.getAnimationPlayed(0)!=AnimationType.STAND)
             			{
                 			sprites_manager.playAnimation(0,AnimationType.STAND);

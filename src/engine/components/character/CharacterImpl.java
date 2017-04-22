@@ -104,7 +104,17 @@ public class CharacterImpl implements FightCharService{
 				break;
 			case DOWNLEFT:
 				break;
-		}
+			case DOWNRIGHT:
+				break;
+			case GUARD:
+				break;
+			case UPLEFT:
+				break;
+			case UPRIGHT:
+				break;
+			default:
+				break;
+			}
 		
 	}
 	@Override
@@ -130,8 +140,8 @@ public class CharacterImpl implements FightCharService{
 	
 	private void gestionStand(){
 		state_actuel = State.STAND;
-
 	}
+	
 	private void gestionJump(){
 		state_actuel = State.JUMP;
 	}
@@ -228,7 +238,7 @@ public class CharacterImpl implements FightCharService{
 
 	//TODO ajouter gestion witdh/hauteur du perso
 	public boolean isOutside(HitboxService tmp) {
-		if(tmp.getPositionX() <= 0 || tmp.getPositionX() > engine.getWidth())
+		if(tmp.getPositionX() <= 0 || tmp.getPositionX() + tmp.getLargeur() > engine.getWidth())
 			return true;
 		else if(tmp.getHauteur() <= 0 || tmp.getPositionY() > engine.getHeight())
 			return true;
