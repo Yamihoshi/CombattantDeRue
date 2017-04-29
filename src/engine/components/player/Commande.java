@@ -13,8 +13,10 @@ public enum Commande {
 	DOWNRIGHT,
 	DOWNLEFT,
 	
-	ATTACK,
 	GUARD,
+	CROUCH,
+	NEUTRAL,
+	JUMP,
 	
-	NEUTRAL
+	PUNCH
 }

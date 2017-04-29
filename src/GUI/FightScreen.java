@@ -35,7 +35,9 @@ public class FightScreen{
 	
 	private LinkedList<KeyCode> combo;
 	
-	KeyCode currentKey = null;
+	private KeyCode[] currentKey;
+	private KeyBinder keyBinder;
+	private AnimationBinder animationBinder;
 	
 	public FightScreen(StreetFighterGame game) throws IOException
 	{
@@ -46,6 +48,10 @@ public class FightScreen{
 		this.controller = loader.<StageController>getController();  
 		
 		this.game = game;
+		
+		this.currentKey = new KeyCode[2];
+		this.keyBinder = new KeyBinder();
+		this.animationBinder = new AnimationBinder();
 		
 		/*if(chara_J1==CharacterType.RANDOM)
 			chara_J1 = this.randomizeCharacter();
@@ -93,8 +99,9 @@ public class FightScreen{
             	}
             	else
             	{
-            		if(currentKey == null)
-            			currentKey = event.getCode();
+            		for(int i=0;i<currentKey.length;i++)
+            			if(currentKey[i] == null && keyBinder.isKeyOfPlayer(i,event.getCode()))
+            				currentKey[i] = event.getCode();
             		event.consume();
             	}
             }
@@ -105,8 +112,9 @@ public class FightScreen{
             @Override
             public void handle(KeyEvent event) {
             	
-            	if(currentKey==event.getCode())
-            		currentKey=null;
+        		for(int i=0;i<currentKey.length;i++)
+        			if(currentKey[i] == event.getCode()  && keyBinder.isKeyOfPlayer(i,event.getCode()))
+        				currentKey[i] = null;
             	event.consume();
             }
         });
@@ -133,42 +141,20 @@ public class FightScreen{
             	{
             		frameCount = 0;
                     lasttimeFPS = currenttimeNano;
-	                    
-                    if(currentKey==KeyCode.LEFT)
-	                {
-	    	           	game.getEngine().step(Commande.NEUTRAL, Commande.LEFT);
-	    	           	if(sprites_manager.getAnimationPlayed(1)!=AnimationType.WALK_FORWARD)
-	    	           		sprites_manager.playAnimation(1,AnimationType.WALK_FORWARD);
-	                }
-	                else if(currentKey==KeyCode.RIGHT)
-	                {
-	    	           	game.getEngine().step(Commande.NEUTRAL, Commande.RIGHT);
-	    	           	if(sprites_manager.getAnimationPlayed(1)!=AnimationType.WALK_FORWARD)
-	    	           		sprites_manager.playAnimation(1,AnimationType.WALK_FORWARD);
-	                }
-	                else if(currentKey==KeyCode.Q)
-	                {
-	    	           	game.getEngine().step(Commande.LEFT, Commande.NEUTRAL);
-	    	           	if(sprites_manager.getAnimationPlayed(0)!=AnimationType.WALK_FORWARD)
-	    	           		sprites_manager.playAnimation(0,AnimationType.WALK_FORWARD);
-	                }
-	                else if(currentKey==KeyCode.D)
-	                {
-	    	           	game.getEngine().step(Commande.RIGHT, Commande.NEUTRAL);
-	    	           	if(sprites_manager.getAnimationPlayed(0)!=AnimationType.WALK_FORWARD)
-	    	           		sprites_manager.playAnimation(0,AnimationType.WALK_FORWARD);
-	                }
-	                else if(currentKey==null)
-	                {
-	                	game.getEngine().step(Commande.NEUTRAL, Commande.NEUTRAL);
-	                	if(sprites_manager.getAnimationPlayed(0)!=AnimationType.STAND)
-            			{
-                			sprites_manager.playAnimation(0,AnimationType.STAND);
-            			}
-	                }
+                    
+                    Commande[] commandes = new Commande[2];
+                    commandes[0] = keyBinder.getAction(0, currentKey[0]);
+                    commandes[1] = keyBinder.getAction(1, currentKey[1]);
+                    
+                    for(int i=0;i<commandes.length;i++)
+                    {
+	    	           	if(sprites_manager.getAnimationPlayed(i)!=animationBinder.getAnimation(commandes[i]))
+	    	           		sprites_manager.playAnimation(i,animationBinder.getAnimation(commandes[i]));
+                    }
+                    
+                    game.getEngine().step(commandes[0], commandes[1]);
+                    controller.update(J1.getCharBox(), J2.getCharBox());
                  }
-	           	controller.update(J1.getCharBox(), J2.getCharBox());
-
             }
         }.start();
 	}

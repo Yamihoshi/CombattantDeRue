@@ -88,7 +88,7 @@ public class CharacterImpl implements FightCharService{
 	@Override
 	public void step(Commande c) {
 		switch(c){
-			case ATTACK:
+			case PUNCH:
 				break;
 			case DOWN:
 				break;
