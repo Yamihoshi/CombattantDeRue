@@ -91,7 +91,7 @@ public class CharacterImpl implements FightCharService{
 	public void step(Commande c) {
 		blocking = false;
 		switch(c){
-			case ATTACK:
+			case PUNCH:
 				break;
 			case DOWN:
 				break;
