@@ -14,11 +14,6 @@ import engine.services.TechService;
 
 public class CharacterContract extends CharacterDecorator {
 
-
-
-	
-	
-
 	public CharacterContract(CharacterService character) {
 		super(character);
 		// TODO Auto-generated constructor stub
@@ -97,8 +92,8 @@ public class CharacterContract extends CharacterDecorator {
 	}
 	
 	public void checkInvariant(){
-		if(!(getPositionX() > 0 && getPositionX() < getEngine().getWidth())){
-			throw new InvariantError("Erreur Character X " + getPositionX());
+		if(!(getPositionX() > 0 && getPositionX() + getLargeur() < getEngine().getWidth())){
+			//throw new InvariantError("Erreur Character X " + getPositionX());
 		}
 		if(!(getPositionY() > 0 && getPositionY() < getEngine().getHeight())){
 			throw new InvariantError("Erreur Character Y " + getPositionY());
@@ -115,13 +110,11 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void moveUpLeft() {
-		// TODO Auto-generated method stub
 		super.moveUpLeft();
 	}
 
 	@Override
 	public void moveUp() {
-		// TODO Auto-generated method stub
 		super.moveUp();
 	}
 

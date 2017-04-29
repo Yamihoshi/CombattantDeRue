@@ -16,10 +16,12 @@ public class CharacterImpl implements FightCharService{
 	protected Personnage personnage;
 	protected int vie = -1;
 	protected int vitesse = -1;
+	protected boolean blocking;
 	protected EngineService engine;
 	protected HitboxService hitbox;
 	protected boolean faceRight;
 	protected State state_actuel;
+	protected int frame;
 	
 	protected ArrayList<TechService> techniques;
  
@@ -87,6 +89,7 @@ public class CharacterImpl implements FightCharService{
 	}
 	@Override
 	public void step(Commande c) {
+		blocking = false;
 		switch(c){
 			case ATTACK:
 				break;
@@ -107,6 +110,7 @@ public class CharacterImpl implements FightCharService{
 			case DOWNRIGHT:
 				break;
 			case GUARD:
+				blocking = true;
 				break;
 			case UPLEFT:
 				break;
@@ -117,6 +121,7 @@ public class CharacterImpl implements FightCharService{
 			}
 		
 	}
+	
 	@Override
 	public boolean isDead() {
 		return vie <= 0;
@@ -127,8 +132,7 @@ public class CharacterImpl implements FightCharService{
 	}
 	@Override
 	public boolean isBlocking() {
-		// TODO Auto-generated method stub
-		return false;
+		return blocking;
 	}
 
 	@Override
@@ -151,15 +155,22 @@ public class CharacterImpl implements FightCharService{
 	@Override
 	public void moveLeft() {
 		gestionStand();
+		int new_x = getPositionX() - this.vitesse;
 		HitboxService tmp = new HitboxImpl();
-		tmp.init(getPositionX() - this.vitesse, getPositionY(), getHauteur(), getLargeur());
-		if(isOutside(tmp)){
-			return;
+		tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
+		if(isOutsideLeft(tmp)){
+			new_x = 1;
+			tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
+		}else if(isOutsideRight(tmp)){
+			new_x = engine.getWidth();
+			tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
 		}
-		else if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
+		
+
+		if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
 			return;
-		System.out.println("ça passe");
-		hitbox.moveTo(getPositionX() - /*CharacterImpl.DEPLACEMENT*/this.vitesse, getPositionY());
+		System.out.println("Movement enclenché");
+		hitbox.moveTo(new_x, getPositionY());
 
 	}
 	@Override
@@ -167,12 +178,24 @@ public class CharacterImpl implements FightCharService{
 		gestionStand();
 		HitboxService tmp = new HitboxImpl();
 		int indice = getOtherIndice();
-		tmp.init(getPositionX() + this.vitesse, getPositionY(), getHauteur(), getLargeur());
-		if(isOutside(tmp)){
+		int new_x = getPositionX() + this.vitesse;
+		tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
+		if(isOutsideLeft(tmp)){
+			new_x = 1;
+			tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
+			System.out.println("Try to go out backward..");
+		}else if(isOutsideRight(tmp)){
+			new_x = engine.getWidth();
+			tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
+			System.out.println("Try to go out forward..");
+
+		}
+		if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox())){
+			System.out.println("Collides with..");
 			return;
-		}else if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
-			return;
-		hitbox.moveTo(getPositionX() +/* CharacterImpl.DEPLACEMENT*/this.vitesse, getPositionY());
+		}
+			
+		hitbox.moveTo(new_x, getPositionY());
 	}
 	
 	@Override
@@ -237,13 +260,14 @@ public class CharacterImpl implements FightCharService{
 	}
 
 	//TODO ajouter gestion witdh/hauteur du perso
-	public boolean isOutside(HitboxService tmp) {
-		if(tmp.getPositionX() <= 0 || tmp.getPositionX() + tmp.getLargeur() > engine.getWidth())
-			return true;
-		else if(tmp.getHauteur() <= 0 || tmp.getPositionY() > engine.getHeight())
-			return true;
-		else return false;
+	public boolean isOutsideLeft(HitboxService tmp) {
+		return tmp.getPositionX() <= 0;
 	}
+	
+	public boolean isOutsideRight(HitboxService tmp){
+		return tmp.getPositionX() + tmp.getLargeur() > engine.getWidth();
+	}
+
 
 	@Override
 	public Personnage getPersonnage() {

@@ -1,7 +1,15 @@
 nom=Chun Li
-vie=100
+vie=1000
 vitesse=13
 hauteur=461
 largeur=361
-technique1="Hadoken"
-technique2="Shoryuken"
+
+
+
+[Attack]
+punch_dommage=20
+punch_hit_stun=
+punch_block_stun=
+punch_hit_frame= 
+punch_stun_frame=
+punch_recovery_frame=
