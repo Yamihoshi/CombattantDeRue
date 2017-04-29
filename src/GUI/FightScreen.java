@@ -39,6 +39,8 @@ public class FightScreen{
 	private KeyBinder keyBinder;
 	private AnimationBinder animationBinder;
 	
+	private boolean framePerFrame;
+	
 	public FightScreen(StreetFighterGame game) throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/stage.fxml"));
@@ -52,6 +54,7 @@ public class FightScreen{
 		this.currentKey = new KeyCode[2];
 		this.keyBinder = new KeyBinder();
 		this.animationBinder = new AnimationBinder();
+		this.framePerFrame = false;
 		
 		/*if(chara_J1==CharacterType.RANDOM)
 			chara_J1 = this.randomizeCharacter();
@@ -97,12 +100,17 @@ public class FightScreen{
             		controller.toggleHitBox();
             		event.consume();
             	}
+            	else if(event.getCode()==KeyCode.F3)
+            	{
+            		toggleFramePerFrame();
+            		event.consume();
+            	}
             	else
             	{
             		for(int i=0;i<currentKey.length;i++)
             			if(currentKey[i] == null && keyBinder.isKeyOfPlayer(i,event.getCode()))
             				currentKey[i] = event.getCode();
-            		event.consume();
+            		//event.consume();
             	}
             }
         });
@@ -115,10 +123,15 @@ public class FightScreen{
         		for(int i=0;i<currentKey.length;i++)
         			if(currentKey[i] == event.getCode()  && keyBinder.isKeyOfPlayer(i,event.getCode()))
         				currentKey[i] = null;
-            	event.consume();
+            	//event.consume();
             }
         });
 		
+	}
+	
+	public void toggleFramePerFrame()
+	{
+		this.framePerFrame=!this.framePerFrame;
 	}
 	
 	public void launchTimer()
@@ -130,6 +143,9 @@ public class FightScreen{
         	long lasttimeFPS_keys = System.nanoTime();
         	FightCharService J1 = game.getEngine().getCharacter(0);
         	FightCharService J2 = game.getEngine().getCharacter(1);
+        	
+        	double timePerFrame = 1000000000 * StageController.frameTime;
+        	
             @Override
             public void handle(long arg0)
             {
@@ -137,7 +153,12 @@ public class FightScreen{
             	
             	long currenttimeNano = System.nanoTime();
             	
-            	if (currenttimeNano > lasttimeFPS + 1000000000 * StageController.frameTime)
+            	if(framePerFrame==true)
+            		timePerFrame = 1000000000;
+            	else
+            		timePerFrame = 1000000000 * StageController.frameTime;
+            	
+            	if (currenttimeNano > lasttimeFPS + timePerFrame)
             	{
             		frameCount = 0;
                     lasttimeFPS = currenttimeNano;
