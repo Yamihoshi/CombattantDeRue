@@ -1,0 +1,6 @@
+animation_length=1
+loop=false
+
+sprite_i=X#Y#duration
+
+sprite_0=211#327#4

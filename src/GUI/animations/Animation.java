@@ -61,7 +61,6 @@ public class Animation {
 		return getImage(this.currentSprite);
 	}
 	
-	
 	public Sprite getCurrentSprite()
 	{
 		return getSprite(this.currentSprite);
@@ -70,5 +69,15 @@ public class Animation {
 	public void step()
 	{
 		this.currentSprite = (this.currentSprite+1)%this.sprites.size();
+	}
+	
+	public void setLoop(boolean loop)
+	{
+		this.loop=loop;
+	}
+	
+	public boolean isLooped()
+	{
+		return this.loop;
 	}
 }

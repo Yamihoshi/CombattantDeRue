@@ -149,7 +149,7 @@ public class FightScreen{
             	else
             		timePerFrame = 1000000000 * StageController.frameTime;
             	
-            	if(currenttimeNano > lasttimeFPS_animation + timeSpriteJ1*timePerFrame)
+            	if(sprites_manager.getAnimationPlayed(0).isLooped() &&  currenttimeNano > lasttimeFPS_animation + timeSpriteJ1*timePerFrame)
             	{
             		lasttimeFPS_animation = currenttimeNano;
             		sprites_manager.stepAnimation(0);
@@ -169,8 +169,11 @@ public class FightScreen{
                     
                     for(int i=0;i<commandes.length;i++)
                     {
-	    	           	if(sprites_manager.getAnimationPlayed(i)!=animationBinder.getAnimation(commandes[i]))
+	    	           	if(sprites_manager.getAnimationPlayed(i).getType()!=animationBinder.getAnimation(commandes[i]))
+	    	           	{
+	    	           		lasttimeFPS_animation = currenttimeNano;
 	    	           		sprites_manager.playAnimation(i,animationBinder.getAnimation(commandes[i]));
+	    	           	}
                     }
                     
                     game.getEngine().step(commandes[0], commandes[1]);

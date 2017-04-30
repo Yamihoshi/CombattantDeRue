@@ -41,6 +41,7 @@ public class SpritesLoader {
 			int read_X = Sprite.ref_position_Y;
 			int read_duration = 4;
 			int animation_length=0;
+			boolean read_loop = true;
 			
 			try {			
 				// load a properties file
@@ -50,6 +51,8 @@ public class SpritesLoader {
 			
 			if(prop!=null)
 			{
+				read_loop = new Boolean(prop.getProperty("loop"));
+				
 				String s = prop.getProperty("animation_length");
 				
 				if(s!=null && !s.isEmpty())

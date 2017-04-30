@@ -1,4 +1,5 @@
 animation_length=21
+loop=true
 
 sprite_i=X#Y#duration
 

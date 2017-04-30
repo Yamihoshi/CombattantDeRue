@@ -4,7 +4,9 @@ public enum AnimationType {
 
 	STAND("stand"),
 	WALK_FORWARD("walk_forward"),
-	GUARD("guard");
+	GUARD("guard"),
+	CROUCH("crouch"),
+	PUNCH("punch");
 	
 	private String name = "";
 	

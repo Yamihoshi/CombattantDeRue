@@ -23,9 +23,9 @@ public class AnimationBinder {
 		this.linker.put(Commande.NEUTRAL, AnimationType.STAND);
 		this.linker.put(Commande.LEFT, AnimationType.WALK_FORWARD);
 		this.linker.put(Commande.RIGHT, AnimationType.WALK_FORWARD);
-		this.linker.put(Commande.PUNCH, AnimationType.STAND);
+		this.linker.put(Commande.PUNCH, AnimationType.PUNCH);
 		this.linker.put(Commande.GUARD, AnimationType.GUARD);
-		this.linker.put(Commande.CROUCH, AnimationType.GUARD);
+		this.linker.put(Commande.CROUCH, AnimationType.CROUCH);
 	}
 	
 	public AnimationType getAnimation(Commande cmd)

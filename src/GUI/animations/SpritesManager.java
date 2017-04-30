@@ -25,9 +25,9 @@ public class SpritesManager {
 		this.currentAnimation[joueur] = this.loader.getAnimation(joueur, type);
 	}
 	
-	public AnimationType getAnimationPlayed(int joueur)
+	public Animation getAnimationPlayed(int joueur)
 	{
-		return this.currentAnimation[joueur].getType();
+		return this.currentAnimation[joueur];
 	}
 	
 	public void stepAnimation(int joueur)

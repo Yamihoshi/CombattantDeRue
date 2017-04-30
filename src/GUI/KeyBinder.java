@@ -26,6 +26,7 @@ public class KeyBinder {
 		bind.put(KeyCode.D, Commande.RIGHT);
 		bind.put(KeyCode.X, Commande.PUNCH);
 		bind.put(KeyCode.E, Commande.GUARD);
+		bind.put(KeyCode.S, Commande.CROUCH);
 		
 		return bind;
 	}
