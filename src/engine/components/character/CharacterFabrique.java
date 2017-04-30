@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 import GUI.MainWindow;
+import engine.components.hitbox.HitboxImpl;
+import engine.components.player.Commande;
 import engine.components.player.Player;
 import engine.contracts.CharacterContract;
 import engine.contracts.EngineContract;
@@ -13,6 +15,7 @@ import engine.impl.EngineImpl;
 import engine.services.CharacterService;
 import engine.services.EngineService;
 import engine.services.FightCharService;
+import engine.services.TechService;
 import javafx.application.Application;
 
 public class CharacterFabrique {
@@ -23,7 +26,9 @@ public class CharacterFabrique {
 			Properties p = CharacterFabrique.load("ressource//character//"+personnage.name());
 			fc.init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight);
 			fc.getCharBox().init(1, 1, new Integer(p.getProperty("hauteur", "100")), new Integer(p.getProperty("largeur", "100")));
-			
+			TechService punch = new Technique();
+			punch.init(new Integer(p.getProperty("punch_damage")), new Integer(p.getProperty("punch_hit_stun")), new Integer(p.getProperty("punch_block_stun")), new Integer(p.getProperty("punch_hit_frame")), new Integer(p.getProperty("punch_start_up_frame")), new Integer(p.getProperty("punch_recovery_frame")), null);
+			fc.getTech().put(Commande.PUNCH, punch);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

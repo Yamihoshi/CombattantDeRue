@@ -7,9 +7,11 @@ largeur=361
 
 
 [Attack]
-punch_dommage=20
-punch_hit_stun=
-punch_block_stun=
-punch_hit_frame= 
-punch_stun_frame=
-punch_recovery_frame=
+punch_damage=20
+punch_hit_stun=4
+punch_block_stun=5
+punch_hit_frame=6
+punch_start_up_frame=7
+punch_recovery_frame=3
+punch_height=450
+punch_width=25

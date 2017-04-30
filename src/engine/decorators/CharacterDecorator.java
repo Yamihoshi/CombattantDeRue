@@ -1,5 +1,7 @@
 package engine.decorators;
 
+import java.util.HashMap;
+
 import engine.components.character.Personnage;
 import engine.components.character.State;
 import engine.components.player.Commande;
@@ -13,10 +15,50 @@ import engine.services.TechService;
 public class CharacterDecorator implements FightCharService{
 
 
-	CharacterService character;
+	FightCharService character;
 
 
-	public CharacterDecorator(CharacterService character2) {
+	public void endTechnique() {
+		character.endTechnique();
+	}
+
+	public void takeAttack(int damage, int hstun, int bstun) {
+		character.takeAttack(damage, hstun, bstun);
+	}
+
+	public boolean isBlocking() {
+		return character.isBlocking();
+	}
+
+	public boolean isBlockStunned() {
+		return character.isBlockStunned();
+	}
+
+	public boolean isHitStunned() {
+		return character.isHitStunned();
+	}
+
+	public boolean isTeching() {
+		return character.isTeching();
+	}
+
+	public HashMap<Commande, TechService> getTech() {
+		return character.getTech();
+	}
+
+	public boolean techFrame() {
+		return character.techFrame();
+	}
+
+	public boolean techHasAlreadyHit() {
+		return character.techHasAlreadyHit();
+	}
+
+	public void startTech(TechService tech) {
+		character.startTech(tech);
+	}
+
+	public CharacterDecorator(FightCharService character2) {
 		super();
 		this.character = character2;
 	}
@@ -123,53 +165,6 @@ public class CharacterDecorator implements FightCharService{
 	public void neutral() {
 		character.neutral();
 	}
-	@Override
-	public boolean isBlocking() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isBlockStunned() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isHitStunned() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isTeching() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public TechService getTech() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean techFrame() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean techHasAlreadyHit() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void startTech(TechService tech) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	protected int getMyIndice(){
 		if(getEngine().getCharacter(0) == this)
@@ -187,7 +182,7 @@ public class CharacterDecorator implements FightCharService{
 		return character;
 	}
 
-	public void setCharacter(CharacterService character) {
+	public void setCharacter(FightCharService character) {
 		this.character = character;
 	}
 	

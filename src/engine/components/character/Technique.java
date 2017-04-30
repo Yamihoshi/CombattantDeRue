@@ -1,11 +1,11 @@
 package engine.components.character;
 
+import engine.services.FightCharService;
 import engine.services.HitboxService;
 import engine.services.TechService;
 
 public class Technique implements TechService {
 
-	private String name;
 	private int damage;
 	private int hstun;
 	private int bstun;
@@ -13,11 +13,12 @@ public class Technique implements TechService {
 	private int rframe;
 	private int hframe;
 	private HitboxService hitbox;
+	private int frame_actuel;
+	private boolean already_touch;
 
 	@Override
-	public void init(String name, int damage, int hstun, int bstun, int sframe, int hframe, int rframe,
+	public void init(int damage, int hstun, int bstun, int sframe, int hframe, int rframe,
 			HitboxService hitbox) {
-		this.name = name;
 		this.damage = damage;
 		this.hstun = hstun;
 		this.bstun = bstun;
@@ -28,38 +29,27 @@ public class Technique implements TechService {
 	}
 
 	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return name;
-	}
-
-	@Override
 	public int getDamage() {
-		// TODO Auto-generated method stub
 		return damage;
 	}
 
 	@Override
 	public int getHit_stun() {
-		// TODO Auto-generated method stub
 		return hstun;
 	}
 
 	@Override
 	public int getBlock_stun() {
-		// TODO Auto-generated method stub
 		return bstun;
 	}
 
 	@Override
 	public int getStart_up_frame() {
-		// TODO Auto-generated method stub
 		return sframe;
 	}
 
 	@Override
 	public int getHit_frame() {
-		// TODO Auto-generated method stub
 		return hframe;
 	}
 
@@ -73,6 +63,29 @@ public class Technique implements TechService {
 	public HitboxService getHitbox() {
 		// TODO Auto-generated method stub
 		return hitbox;
+	}
+
+	@Override
+	public void step(FightCharService me, FightCharService other) {
+		frame_actuel++;
+		if(frame_actuel < getStart_up_frame()){
+			
+		}else if(frame_actuel < getHit_frame()){
+			if(already_touch && hitbox.collidesWith(other.getCharBox())){
+				already_touch = true;
+				other.takeAttack(damage, hstun, bstun);
+			}
+		}else if(frame_actuel < getRecovery_Frame()){
+			//waiting
+		}else{
+			me.endTechnique();
+		}
+	}
+
+	@Override
+	public void launchTechnique() {
+		this.frame_actuel = 0;
+		this.already_touch = false;
 	}
 
 }

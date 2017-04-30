@@ -9,12 +9,13 @@ import engine.contracts.error.PreconditionError;
 import engine.decorators.CharacterDecorator;
 import engine.services.CharacterService;
 import engine.services.EngineService;
+import engine.services.FightCharService;
 import engine.services.HitboxService;
 import engine.services.TechService;
 
 public class CharacterContract extends CharacterDecorator {
 
-	public CharacterContract(CharacterService character) {
+	public CharacterContract(FightCharService character) {
 		super(character);
 		// TODO Auto-generated constructor stub
 	}
@@ -104,7 +105,6 @@ public class CharacterContract extends CharacterDecorator {
 	}
 	@Override
 	public void moveUpRight() {
-		// TODO Auto-generated method stub
 		super.moveUpRight();
 	}
 
@@ -184,11 +184,7 @@ public class CharacterContract extends CharacterDecorator {
 		return super.isTeching();
 	}
 
-	@Override
-	public TechService getTech() {
-		// TODO Auto-generated method stub
-		return super.getTech();
-	}
+
 
 	@Override
 	public boolean techFrame() {
@@ -227,7 +223,7 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 	@Override
-	public void setCharacter(CharacterService character) {
+	public void setCharacter(FightCharService character) {
 		// TODO Auto-generated method stub
 		super.setCharacter(character);
 	}
