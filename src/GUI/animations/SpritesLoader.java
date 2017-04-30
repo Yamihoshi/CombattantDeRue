@@ -78,7 +78,9 @@ public class SpritesLoader {
 						} catch (URISyntaxException e) {e.printStackTrace();}
 						
 						animation.addSprite(new Sprite(read_X, read_Y, read_duration, img,false));
-					}
+					}	
+					
+					animation.setLoop(read_loop);
 				}
 
 			}

@@ -169,10 +169,17 @@ public class FightScreen{
                     
                     for(int i=0;i<commandes.length;i++)
                     {
-	    	           	if(sprites_manager.getAnimationPlayed(i).getType()!=animationBinder.getAnimation(commandes[i]))
+                    	FightCharService chara = game.getEngine().getCharacter(i);
+                    	
+	    	           	if(!chara.isBlockStunned()
+	    	           	&& ! chara.isHitStunned()
+	    	           	&& ! chara.isTeching()
+	    	           	&& sprites_manager.getAnimationPlayed(i).getType()!=animationBinder.getAnimation(commandes[i]))
 	    	           	{
 	    	           		lasttimeFPS_animation = currenttimeNano;
 	    	           		sprites_manager.playAnimation(i,animationBinder.getAnimation(commandes[i]));
+	    	           		Sprite sprite = sprites_manager.getCurrentSprite(0);
+	                		controller.updateSprite_J1(sprite);
 	    	           	}
                     }
                     
