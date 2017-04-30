@@ -18,5 +18,6 @@ public enum Commande {
 	NEUTRAL,
 	JUMP,
 	
-	PUNCH
+	PUNCH,
+	KICK
 }

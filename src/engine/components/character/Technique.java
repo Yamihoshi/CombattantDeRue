@@ -70,12 +70,12 @@ public class Technique implements TechService {
 		frame_actuel++;
 		if(frame_actuel < getStart_up_frame()){
 			
-		}else if(frame_actuel < getHit_frame()){
-			if(already_touch && hitbox.collidesWith(other.getCharBox())){
+		}else if(frame_actuel < getStart_up_frame() + getHit_frame()){
+			/*if(!already_touch && hitbox.collidesWith(other.getCharBox())){
 				already_touch = true;
 				other.takeAttack(damage, hstun, bstun);
-			}
-		}else if(frame_actuel < getRecovery_Frame()){
+			}*/
+		}else if(frame_actuel < getStart_up_frame() + getHit_frame() + getRecovery_Frame()){
 			//waiting
 		}else{
 			me.endTechnique();
