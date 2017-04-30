@@ -4,18 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.animation.Timeline;
+import javafx.scene.image.Image;
 
 public class Animation {
 	
 	private AnimationType type;
 	private List<Sprite> sprites;
-	private Timeline timeline;
 	private boolean loop;
+	private int currentSprite;
 	
 	public Animation(AnimationType type,boolean reversed)
 	{
 		this.type = type;
 		this.sprites = new ArrayList<Sprite>();
+		this.currentSprite = 0;
+		this.loop=true;
 	}
 	
 	public AnimationType getType()
@@ -26,26 +29,6 @@ public class Animation {
 	public String toString()
 	{
 		return this.type.toString();
-	}
-	
-	public Timeline getTimeLine()
-	{
-		return this.timeline;
-	}
-	
-	public void setTimeLine(Timeline timeline)
-	{
-		this.timeline = timeline;
-	}
-	
-	public void play()
-	{
-		this.timeline.play();
-	}
-	
-	public void stop()
-	{
-		this.timeline.stop();
 	}
 	
 	public void addSprite(Sprite sprt)
@@ -63,8 +46,29 @@ public class Animation {
 		return this.sprites;
 	}
 	
-	public Sprite getSprites(int i)
+	public Sprite getSprite(int i)
 	{
 		return this.sprites.get(i);
+	}
+	
+	public Image getImage(int i)
+	{
+		return this.sprites.get(i).getImage();
+	}
+	
+	public Image getCurrentImage()
+	{
+		return getImage(this.currentSprite);
+	}
+	
+	
+	public Sprite getCurrentSprite()
+	{
+		return getSprite(this.currentSprite);
+	}
+	
+	public void step()
+	{
+		this.currentSprite = (this.currentSprite+1)%this.sprites.size();
 	}
 }

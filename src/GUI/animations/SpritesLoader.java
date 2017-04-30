@@ -1,8 +1,10 @@
 package GUI.animations;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 
 import engine.services.FightCharService;
 import GUI.Ressource;
@@ -19,17 +21,78 @@ import javafx.util.Duration;
 
 public class SpritesLoader {
 
-	private List<ImageView> characterImage;
 	private List<HashMap<AnimationType, Animation>> animations;
 	
-	public SpritesLoader(List<ImageView> characterImage, FightCharService chara[])
+	public static HashMap<AnimationType,Animation> loadAnimations(String chara)
+	{
+		HashMap<AnimationType,Animation> animations = new HashMap<>();
+		
+		Properties prop = null;
+		for(AnimationType type : AnimationType.values())
+		{
+			if(prop == null)
+				prop = new Properties();
+			
+			prop.clear();
+			
+			Animation animation = new Animation(type,false);
+			
+			int read_Y = Sprite.ref_position_X_left;
+			int read_X = Sprite.ref_position_Y;
+			int read_duration = 4;
+			int animation_length=0;
+			
+			try {			
+				// load a properties file
+				System.out.println(Ressource.sprites+chara+"/"+type.toString()+"_config.txt");
+				prop.load(SpritesLoader.class.getResourceAsStream(Ressource.sprites+chara+"/"+type.toString()+"_config.txt"));
+			} catch (Exception ex) {System.out.println("Property reading error :" + ex.getMessage()+" ["+Ressource.sprites+chara+"/"+type.toString()+"_config.txt"+"]"); prop = null;}
+			
+			if(prop!=null)
+			{
+				String s = prop.getProperty("animation_length");
+				
+				if(s!=null && !s.isEmpty())
+				{
+					animation_length = new Integer(s);
+					
+					for(int i=0;i<animation_length;i++)
+					{
+						String sprite_name = "sprite_"+i;
+						
+						System.out.println(sprite_name);
+						
+						String[] values = prop.get(sprite_name).toString().split("#");
+						
+						read_X = new Integer(values[0]);
+						read_Y = new Integer(values[1]);
+						read_duration = new Integer(values[2]);
+						
+						String path = getPathOfSprite(chara,animation,i);
+						Image img = null;
+						try {
+							img = new Image(SpritesLoader.class.getResource(path).toURI().toString());
+						} catch (URISyntaxException e) {e.printStackTrace();}
+						
+						animation.addSprite(new Sprite(read_X, read_Y, read_duration, img,false));
+					}
+				}
+
+			}
+			
+			animations.put(type,animation);	
+		}
+		
+		return animations;
+	}
+	
+	public SpritesLoader(FightCharService chara[])
 	{			
-		this.characterImage = characterImage;
 		this.animations = new ArrayList<HashMap<AnimationType, Animation>>();
 		this.initAnimations(chara);	
 	}
 	
-	private String getPathOfSprite(String chara,Animation animation,int frame)
+	private static String getPathOfSprite(String chara,Animation animation,int frame)
 	{
 		String path = Ressource.sprites+chara+"/";
 		path += chara+"_"+animation.toString()+"_"+frame+".png";
@@ -40,58 +103,8 @@ public class SpritesLoader {
 	public void initAnimations(FightCharService chara[])
 	{	
 		for(int joueur=0;joueur<chara.length;joueur++)
-		{			
-			HashMap<AnimationType,Animation> hashmapAnimation = AnimationCreator.loadAnimations(chara[joueur].getName());
-			for(Animation animation : hashmapAnimation.values())
-			{
-				Timeline timeline = new Timeline();
-				
-				for(int i=0;i<animation.length();i++)
-				{
-					String path = getPathOfSprite(chara[joueur].getName(),animation,i);
-					
-					try {
-						
-						Sprite sprite = animation.getSprites(i);
-						
-						Image tmp = new Image(getClass().getResource(path).toURI().toString());
-						double duree = i*sprite.getDuration()*StageController.frameTime;
-						
-						
-						final int player = joueur;
-						
-						EventHandler<ActionEvent> aligne = new EventHandler<ActionEvent>() {
-							
-				            public void handle(ActionEvent t) {
-				            	characterImage.get(player).setTranslateX(sprite.getTranslate_X());
-				            	characterImage.get(player).setTranslateY(sprite.getTranslate_Y());
-				            }
-				        };
-				        
-				        KeyFrame frame = new KeyFrame(Duration.seconds(duree), aligne, new KeyValue(this.characterImage.get(joueur).imageProperty(), tmp));
-				        
-				        timeline.getKeyFrames().add(frame);
-				        
-						
-					} catch (Exception e) {
-						//e.printStackTrace();
-						break;
-					}
-				}
-				if(animation.length()>0)
-				{
-					Sprite lastSprite = animation.getSprites(animation.length()-1);
-					
-					KeyFrame frame = new KeyFrame(Duration.seconds(timeline.getKeyFrames().size()*lastSprite.getDuration()*StageController.frameTime), new KeyValue(this.characterImage.get(joueur).imageProperty(), null));
-					timeline.getKeyFrames().add(frame);
-				}
-				
-				timeline.setCycleCount(Timeline.INDEFINITE);
-					
-				animation.setTimeLine(timeline);
-					
-			}
-			
+		{
+			HashMap<AnimationType,Animation> hashmapAnimation = SpritesLoader.loadAnimations(chara[joueur].getName());			
 			this.animations.add(hashmapAnimation);
 		}
 	}

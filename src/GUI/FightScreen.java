@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import GUI.animations.AnimationType;
+import GUI.animations.Sprite;
 import GUI.animations.SpritesManager;
 import GUI.controller.StageController;
 import engine.components.character.Personnage;
@@ -56,17 +57,7 @@ public class FightScreen{
 		this.animationBinder = new AnimationBinder();
 		this.framePerFrame = false;
 		
-		/*if(chara_J1==CharacterType.RANDOM)
-			chara_J1 = this.randomizeCharacter();
-		
-		if(chara_J2==CharacterType.RANDOM)
-			chara_J2 = this.randomizeCharacter();*/
-    	
-    	List<ImageView> sprites = new ArrayList<ImageView>(); 
-    	sprites.add(this.controller.getCharacterOfJ1());
-    	sprites.add(this.controller.getCharacterOfJ2());
-		
-    	this.sprites_manager = new SpritesManager(sprites, this.game.getEngine().getCharacters());
+    	this.sprites_manager = new SpritesManager(this.game.getEngine().getCharacters());
     	this.sprites_manager.playAnimation(0,AnimationType.STAND);
     	this.sprites_manager.playAnimation(1,AnimationType.STAND);
     	
@@ -141,6 +132,8 @@ public class FightScreen{
         	int frameCount = 0;
         	long lasttimeFPS = System.nanoTime();
         	long lasttimeFPS_keys = System.nanoTime();
+        	long lasttimeFPS_animation = System.nanoTime();
+        	int timeSpriteJ1 = sprites_manager.getCurrentSprite(0).getDuration();
         	FightCharService J1 = game.getEngine().getCharacter(0);
         	FightCharService J2 = game.getEngine().getCharacter(1);
         	
@@ -158,6 +151,14 @@ public class FightScreen{
             	else
             		timePerFrame = 1000000000 * StageController.frameTime;
             	
+            	if(currenttimeNano > lasttimeFPS_animation + timeSpriteJ1*timePerFrame)
+            	{
+            		lasttimeFPS_animation = currenttimeNano;
+            		sprites_manager.stepAnimation(0);
+            		Sprite sprite = sprites_manager.getCurrentSprite(0);
+            		controller.updateSprite_J1(sprite);
+            	}
+            	
             	if (currenttimeNano > lasttimeFPS + timePerFrame)
             	{
             		frameCount = 0;
@@ -174,7 +175,7 @@ public class FightScreen{
                     }
                     
                     game.getEngine().step(commandes[0], commandes[1]);
-                    controller.update(J1.getCharBox(), J2.getCharBox());
+                    controller.updatePosition(J1.getCharBox(), J2.getCharBox());
                  }
             }
         }.start();

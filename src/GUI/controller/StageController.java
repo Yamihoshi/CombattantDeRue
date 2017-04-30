@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import GUI.animations.AnimationType;
+import GUI.animations.Sprite;
 import GUI.animations.SpritesManager;
 import engine.components.character.Personnage;
 import engine.services.HitboxService;
@@ -87,7 +88,19 @@ public class StageController implements Initializable {
     	}
     }
     
-    public void update(HitboxService hitboxJ1, HitboxService hitboxJ2)
+    public void updateSprite_J1(Sprite sprite)
+    {
+    	this.character_J1.setImage(sprite.getImage());
+    	this.character_J1.setTranslateX(sprite.getTranslate_X());
+    	this.character_J1.setTranslateY(sprite.getTranslate_Y());
+    }
+    
+    public void updateSprite_J2(Sprite sprite)
+    {
+    	this.character_J2.setImage(sprite.getImage());
+    }
+    
+    public void updatePosition(HitboxService hitboxJ1, HitboxService hitboxJ2)
     {
     	this.character_J1.setLayoutX(hitboxJ1.getPositionX());
     	this.hitbox_J1.setLayoutX(hitboxJ1.getPositionX());
