@@ -154,12 +154,16 @@ public class FightScreen{
             		lasttimeFPS_animation = currenttimeNano;
             		sprites_manager.stepAnimation(0);
             		Sprite sprite = sprites_manager.getCurrentSprite(0);
+            		timeSpriteJ1 = sprite.getDuration();
             		controller.updateSprite_J1(sprite);
             	}
             	
             	if (currenttimeNano > lasttimeFPS + timePerFrame)
             	{
             		frameCount = (frameCount+1)%61;
+            		if(frameCount==0)
+            			frameCount=1;
+            		
             		controller.setFrame(frameCount);
                     lasttimeFPS = currenttimeNano;
                     
@@ -180,6 +184,7 @@ public class FightScreen{
 	    	           		sprites_manager.playAnimation(i,animationBinder.getAnimation(commandes[i]));
 	    	           		Sprite sprite = sprites_manager.getCurrentSprite(0);
 	                		controller.updateSprite_J1(sprite);
+	                		timeSpriteJ1 = sprites_manager.getCurrentSprite(0).getDuration();
 	    	           	}
                     }
                     
