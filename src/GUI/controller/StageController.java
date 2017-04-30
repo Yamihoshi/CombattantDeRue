@@ -18,10 +18,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.CacheHint;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -43,6 +45,9 @@ public class StageController implements Initializable {
 	
 	@FXML 
     private Rectangle hitbox_J2;
+	
+	@FXML 
+    private Text frame_count;
 	
 	private boolean showHitbox;
   	
@@ -112,5 +117,10 @@ public class StageController implements Initializable {
     	this.hitbox_J2.setLayoutX(hitboxJ2.getPositionX());
     	this.hitbox_J2.setHeight(hitboxJ2.getHauteur());
     	this.hitbox_J2.setWidth(hitboxJ2.getLargeur());
+    }
+    
+    public void setFrame(int frame)
+    {
+    	this.frame_count.setText(frame+"");
     }
 }

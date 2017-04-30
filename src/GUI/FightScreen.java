@@ -129,7 +129,7 @@ public class FightScreen{
 	{
 		new AnimationTimer()
         {
-        	int frameCount = 0;
+        	int frameCount = 1;
         	long lasttimeFPS = System.nanoTime();
         	long lasttimeFPS_keys = System.nanoTime();
         	long lasttimeFPS_animation = System.nanoTime();
@@ -141,9 +141,7 @@ public class FightScreen{
         	
             @Override
             public void handle(long arg0)
-            {
-            	frameCount++;
-            	
+            {            	
             	long currenttimeNano = System.nanoTime();
             	
             	if(framePerFrame==true)
@@ -161,7 +159,8 @@ public class FightScreen{
             	
             	if (currenttimeNano > lasttimeFPS + timePerFrame)
             	{
-            		frameCount = 0;
+            		frameCount = (frameCount+1)%61;
+            		controller.setFrame(frameCount);
                     lasttimeFPS = currenttimeNano;
                     
                     Commande[] commandes = new Commande[2];
