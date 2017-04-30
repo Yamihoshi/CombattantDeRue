@@ -23,6 +23,7 @@ public class SpritesManager {
 	public void playAnimation(int joueur,AnimationType type)
 	{
 		this.currentAnimation[joueur] = this.loader.getAnimation(joueur, type);
+		this.currentAnimation[joueur].restart();
 	}
 	
 	public Animation getAnimationPlayed(int joueur)

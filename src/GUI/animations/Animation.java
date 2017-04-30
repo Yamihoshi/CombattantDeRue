@@ -80,4 +80,8 @@ public class Animation {
 	{
 		return this.loop;
 	}
+	public void restart()
+	{
+		this.currentSprite = 0;
+	}
 }

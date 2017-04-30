@@ -37,6 +37,7 @@ public class FightScreen{
 	private LinkedList<KeyCode> combo;
 	
 	private KeyCode[] currentKey;
+	private int[] nbTimeKeyPressed;
 	private KeyBinder keyBinder;
 	private AnimationBinder animationBinder;
 	
@@ -53,6 +54,7 @@ public class FightScreen{
 		this.game = game;
 		
 		this.currentKey = new KeyCode[2];
+		this.nbTimeKeyPressed = new int[2];
 		this.keyBinder = new KeyBinder();
 		this.animationBinder = new AnimationBinder();
 		this.framePerFrame = false;
@@ -99,8 +101,17 @@ public class FightScreen{
             	else
             	{
             		for(int i=0;i<currentKey.length;i++)
-            			if(currentKey[i] == null && keyBinder.isKeyOfPlayer(i,event.getCode()))
-            				currentKey[i] = event.getCode();
+            		{
+            			if(keyBinder.isKeyOfPlayer(i,event.getCode()))
+            			{
+            				nbTimeKeyPressed[i]++;
+            				
+                			if(currentKey[i] == null)
+                			{
+                				currentKey[i] = event.getCode();
+                			}
+            			}
+            		}
             		//event.consume();
             	}
             }
@@ -113,7 +124,10 @@ public class FightScreen{
             	
         		for(int i=0;i<currentKey.length;i++)
         			if(currentKey[i] == event.getCode()  && keyBinder.isKeyOfPlayer(i,event.getCode()))
+        			{
+        				nbTimeKeyPressed[i]=0;
         				currentKey[i] = null;
+        			}
             	//event.consume();
             }
         });
@@ -163,7 +177,10 @@ public class FightScreen{
                     commandes[1] = keyBinder.getAction(1, currentKey[1]);
                     
                     for(int i=0;i<commandes.length;i++)
-                    {
+                    {                    	
+                    	if(commandes[i]==Commande.PUNCH && nbTimeKeyPressed[i]>1)
+                    		commandes[i]=Commande.NEUTRAL;
+                    	
                     	FightCharService chara = game.getEngine().getCharacter(i);
                     	
 	    	           	if(!chara.isBlockStunned()
@@ -180,7 +197,7 @@ public class FightScreen{
                     }
                     
                 	if((sprites_manager.getAnimationPlayed(0).isLooped()||game.getEngine().getCharacter(0).isTeching()) &&  currenttimeNano > lasttimeFPS_animation + timeSpriteJ1*timePerFrame)
-                	{
+                	{               		
                 		lasttimeFPS_animation = currenttimeNano;
                 		sprites_manager.stepAnimation(0);
                 		Sprite sprite = sprites_manager.getCurrentSprite(0);
