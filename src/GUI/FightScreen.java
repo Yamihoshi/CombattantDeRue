@@ -149,7 +149,7 @@ public class FightScreen{
             	else
             		timePerFrame = 1000000000 * StageController.frameTime;
             	
-            	if(sprites_manager.getAnimationPlayed(0).isLooped() &&  currenttimeNano > lasttimeFPS_animation + timeSpriteJ1*timePerFrame)
+            	if((sprites_manager.getAnimationPlayed(0).isLooped()||game.getEngine().getCharacter(0).isTeching()) &&  currenttimeNano > lasttimeFPS_animation + timeSpriteJ1*timePerFrame)
             	{
             		lasttimeFPS_animation = currenttimeNano;
             		sprites_manager.stepAnimation(0);
