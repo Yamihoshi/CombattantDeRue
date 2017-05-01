@@ -146,12 +146,14 @@ public class FightScreen{
         	int frameCount = 1;
         	long lasttimeFPS = System.nanoTime();
         	long lasttimeFPS_keys = System.nanoTime();
-        	long lasttimeFPS_animation = System.nanoTime();
-        	int timeSpriteJ1 = sprites_manager.getCurrentSprite(0).getDuration();
+        	int[] animation_frame = new int[2];
+        	int[] frameAnimationCount = new int[2];
         	FightCharService J1 = game.getEngine().getCharacter(0);
         	FightCharService J2 = game.getEngine().getCharacter(1);
         	
         	double timePerFrame = 1000000000 * StageController.frameTime;
+        	
+        	long firstRun = System.nanoTime();
         	
             @Override
             public void handle(long arg0)
@@ -163,9 +165,16 @@ public class FightScreen{
             	else
             		timePerFrame = 1000000000 * StageController.frameTime;
             	
-            	if (currenttimeNano > lasttimeFPS + timePerFrame)
+            	if (currenttimeNano >= lasttimeFPS + timePerFrame)
             	{
             		frameCount = (frameCount+1)%61;
+            		
+            		if(frameCount==60)
+            		{
+            			System.out.println((currenttimeNano-firstRun)/1000000000.0);
+            			firstRun = System.nanoTime();
+            		}
+            		
             		if(frameCount==0)
             			frameCount=1;
             		
@@ -177,7 +186,10 @@ public class FightScreen{
                     commandes[1] = keyBinder.getAction(1, currentKey[1]);
                     
                     for(int i=0;i<commandes.length;i++)
-                    {                    	
+                    {    
+                    	animation_frame[i] = sprites_manager.getCurrentSprite(0).getDuration();
+                    	frameAnimationCount[i]++;
+                    	
                     	if(commandes[i]==Commande.PUNCH && nbTimeKeyPressed[i]>1)
                     		commandes[i]=Commande.NEUTRAL;
                     	
@@ -188,26 +200,26 @@ public class FightScreen{
 	    	           	&& ! chara.isTeching()
 	    	           	&& sprites_manager.getAnimationPlayed(i).getType()!=animationBinder.getAnimation(commandes[i]))
 	    	           	{
-	    	           		lasttimeFPS_animation = currenttimeNano;
 	    	           		sprites_manager.playAnimation(i,animationBinder.getAnimation(commandes[i]));
 	    	           		Sprite sprite = sprites_manager.getCurrentSprite(0);
 	                		controller.updateSprite_J1(sprite);
-	                		timeSpriteJ1 = sprites_manager.getCurrentSprite(0).getDuration();
+	                		frameAnimationCount[i]=0;
 	    	           	}
                     }
                     
-                	if((sprites_manager.getAnimationPlayed(0).isLooped()||game.getEngine().getCharacter(0).isTeching()) &&  currenttimeNano > lasttimeFPS_animation + timeSpriteJ1*timePerFrame)
-                	{               		
-                		lasttimeFPS_animation = currenttimeNano;
-                		sprites_manager.stepAnimation(0);
+                    if((sprites_manager.getAnimationPlayed(0).isLooped()||game.getEngine().getCharacter(0).isTeching()) && frameAnimationCount[0]==animation_frame[0])
+                    {
+                    	frameAnimationCount[0]=0;
+                    	sprites_manager.stepAnimation(0);
                 		Sprite sprite = sprites_manager.getCurrentSprite(0);
-                		timeSpriteJ1 = sprite.getDuration();
                 		controller.updateSprite_J1(sprite);
-                	}
-                    
+                    }
+                                        
                     game.getEngine().step(commandes[0], commandes[1]);
                     controller.updatePosition(J1.getCharBox(), J2.getCharBox());
-                 }
+                    
+
+                 }            	
             }
         }.start();
 	}
