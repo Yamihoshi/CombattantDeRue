@@ -12,6 +12,7 @@ import engine.services.EngineService;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
 import engine.services.TechService;
+import game.StreetFighterGame;
 
 
 public class CharacterFabrique {
@@ -21,8 +22,8 @@ public class CharacterFabrique {
 		   try {
 			Properties p = CharacterFabrique.load("ressource//character//"+personnage.name());
 			fc.init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight);
-			int hauteur = new Integer(p.getProperty("hauteur", "100"));
-			fc.getCharBox().init(1, 544, hauteur, new Integer(p.getProperty("largeur", "100")));
+			int hauteur = new Integer(p.getProperty("hauteur"));
+			fc.getCharBox().init(1, StreetFighterGame.HEIGHT - hauteur, hauteur, new Integer(p.getProperty("largeur")));
 			initTechnique(fc, p);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -44,7 +45,6 @@ public class CharacterFabrique {
 					new Integer(p.getProperty("punch_width")), new Integer(p.getProperty("punch_height")));
 			fc.getTech().put(Commande.PUNCH, punch);
 
-			System.out.println(p);
 			
 			kick.init(new Integer(p.getProperty("light_kick_damage")),
 					new Integer(p.getProperty("light_kick_hit_stun")),

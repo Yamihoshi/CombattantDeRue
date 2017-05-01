@@ -1,8 +1,8 @@
 nom=Chun Li
 vie=1000
 vitesse=13
-hauteur=350
-largeur=305
+hauteur=292
+largeur=185
 
 
 [CROUCH]
@@ -18,7 +18,7 @@ punch_recovery_frame=16
 punch_debut_y=350
 punch_height=64
 punch_width=174
-punch_debut_x=280
+punch_debut_x=200
 
 
 [Attack - LIGHT-KICK]

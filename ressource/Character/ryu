@@ -15,3 +15,16 @@ punch_debut_y=224
 punch_height=64
 punch_width=174
 punch_debut_x=251
+
+
+[Attack - LIGHT-KICK]
+light_kick_start_up_frame=3
+light_kick_hit_frame=2
+light_kick_recovery_frame=12
+light_kick_hit_stun=4
+light_kick_block_stun=5
+light_kick_debut_y=350
+light_kick_height=64
+light_kick_width=174
+light_kick_debut_x=280
+light_kick_damage=20
