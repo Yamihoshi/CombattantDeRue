@@ -12,6 +12,8 @@ public interface HitboxService {
 	public int getLargeur();
 	public void setHauteur(int hauteur);
 	public void setLargeur(int longueur);
+	public void setPositionX(int x);
+	public void setPositionY(int y);
 	public boolean belongsTo(int x, int y);
 	public boolean collidesWith(HitboxService other_hitbox);
 	public boolean equalsTo(HitboxService other_hitbox);

@@ -64,7 +64,7 @@ public class CharacterSelection{
 		CharacterFabrique.init(this.game.getPlayers()[0], Personnage.values()[this.index_chara_J1], this.game.getEngine(), true);
 		CharacterFabrique.init(this.game.getPlayers()[1], Personnage.values()[this.index_chara_J2], this.game.getEngine(), false);
 
-		this.game.getEngine().init(720, 1280, 1000 ,this.game.getPlayers()[0], this.game.getPlayers()[1]);
+		this.game.getEngine().init(StreetFighterGame.HEIGHT, StreetFighterGame.WIDTH, 1000 ,this.game.getPlayers()[0], this.game.getPlayers()[1]);
 		
 		
     	FightScreen fight;

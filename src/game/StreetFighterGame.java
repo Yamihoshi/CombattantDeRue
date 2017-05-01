@@ -9,6 +9,8 @@ import engine.services.EngineService;
 
 public class StreetFighterGame {
 
+	public static final int HEIGHT = 720;
+	public static final int WIDTH = 2000;
 	private EngineService engine;
 	private Player[] players;
 	

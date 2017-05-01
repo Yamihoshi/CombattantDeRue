@@ -4,8 +4,8 @@ package engine.services;
 public interface TechService {
 
 	/* Constructors */
-	public void init(int damage, int hstun, int bstun, int sframe, int hframe, int rframe, HitboxService hitbox);
-	
+	public void init(int damage, int hstun, int bstun, int sframe, int hframe, int rframe, int debut_x, int debut_y,
+			int width, int height);	
 	/* Observators */
 	public int getDamage();
 	public int getHit_stun();
@@ -14,8 +14,11 @@ public interface TechService {
 	public int getHit_frame();
 	public int getRecovery_Frame();
 	public HitboxService getHitbox();
-
 	/* Operators */
 	public void step(FightCharService me, FightCharService other);
 	public void launchTechnique();
+	public boolean isInStartUp();
+	public boolean isInHit();
+	public boolean isInRecovery();
+	HitboxService getHitbox(FightCharService cs);
 }

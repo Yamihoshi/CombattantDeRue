@@ -202,6 +202,12 @@ public class CharacterDecorator implements FightCharService{
 		return getCharBox().getLargeur();
 	}
 
+	@Override
+	public TechService getCurrentTechnique() {
+		// TODO Auto-generated method stub
+		return character.getCurrentTechnique();
+	}
+
 
 
 
