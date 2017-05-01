@@ -15,8 +15,7 @@ public interface FightCharService extends CharacterService{
 	public boolean isTeching();
 	public HashMap<Commande, TechService> getTech();
 	public TechService getCurrentTechnique(); //require isTeching
-	public boolean techFrame(); // What does it do ?
-	public boolean techHasAlreadyHit();
+
 	
 	/* Operators */
 	public void startTech(TechService tech);

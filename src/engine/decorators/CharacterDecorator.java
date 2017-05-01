@@ -46,14 +46,6 @@ public class CharacterDecorator implements FightCharService{
 		return character.getTech();
 	}
 
-	public boolean techFrame() {
-		return character.techFrame();
-	}
-
-	public boolean techHasAlreadyHit() {
-		return character.techHasAlreadyHit();
-	}
-
 	public void startTech(TechService tech) {
 		character.startTech(tech);
 	}

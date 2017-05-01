@@ -5,6 +5,8 @@ hauteur=461
 largeur=361
 
 
+[CROUCH]
+crouch_height=300
 
 [Attack]
 punch_damage=20

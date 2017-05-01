@@ -25,35 +25,10 @@ public class CharacterImpl implements FightCharService{
 	protected TechService current_technique;
 	protected HashMap<Commande, TechService> techniques;
 	
-	@Override
-	public void startTech(TechService tech) {
-		if(isTeching()){
-			tech.step(this, getOtherPlayer());
-		}else{
-			state_actuel = State.TEACHING;
-			tech.launchTechnique();
-			tech.step(this, getOtherPlayer());
-			current_technique = tech;
-		}
-	}
-	
-	@Override
-	public void endTechnique() {
-		state_actuel = State.WAITING;
-	}
-	@Override
-	public void takeAttack(int damage, int hstun, int bstun) {
-		state_actuel = State.WAITING;
-		if(isBlocking()){
-			block_frame_stun = bstun;
-		}else{
-			frame_stun = hstun;
-		}
-		this.vie -= damage;
-	}
-	
+
 	@Override
 	public void step(Commande c) {
+		state_actuel = State.WAITING;
 		if(isTeching()){
 			current_technique.step(this, getOtherPlayer());
 			return;
@@ -235,42 +210,6 @@ public class CharacterImpl implements FightCharService{
 		return tmp.getPositionX() + tmp.getLargeur() > engine.getWidth();
 	}
 
-
-
-
-	@Override
-	public boolean isBlockStunned() {
-		return block_frame_stun > 0;
-	}
-
-	@Override
-	public boolean isHitStunned() {
-		return frame_stun > 0;
-	}
-
-	@Override
-	public HashMap<Commande, TechService> getTech() {
-		return this.techniques;
-	}
-
-	@Override
-	public boolean techFrame() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean techHasAlreadyHit() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public TechService getCurrentTechnique() {
-		return current_technique;
-	}
-
-
 	@Override 
 	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight) {
 		this.personnage = personnage;
@@ -290,16 +229,7 @@ public class CharacterImpl implements FightCharService{
 	public String getName() {
 		return personnage.name();
 	}
-	@Override
-	public boolean isBlocking() {
-		return state_actuel == State.BLOCKING;
-	}
 
-	@Override
-	public boolean isTeching() {
-		// TODO Auto-generated method stub
-		return state_actuel == State.TEACHING;
-	}
 
 	@Override
 	public int getPositionX() {
@@ -369,8 +299,68 @@ public class CharacterImpl implements FightCharService{
 		return result;
 	}
 
+	/*
+	 * FightChar
+	 * @see engine.services.FightCharService#startTech(engine.services.TechService)
+	 */
+	
+	
+	@Override
+	public void startTech(TechService tech) {
+		if(isTeching()){
+			tech.step(this, getOtherPlayer());
+		}else{
+			state_actuel = State.TEACHING;
+			tech.launchTechnique();
+			tech.step(this, getOtherPlayer());
+			current_technique = tech;
+		}
+	}
+	
+	@Override
+	public void endTechnique() {
+		state_actuel = State.WAITING;
+	}
+	@Override
+	public void takeAttack(int damage, int hstun, int bstun) {
+		state_actuel = State.WAITING;
+		if(isBlocking()){
+			block_frame_stun = bstun;
+		}else{
+			frame_stun = hstun;
+		}
+		this.vie -= damage;
+	}	
+
+	@Override
+	public boolean isBlockStunned() {
+		return block_frame_stun > 0;
+	}
+
+	@Override
+	public boolean isHitStunned() {
+		return frame_stun > 0;
+	}
+
+	@Override
+	public HashMap<Commande, TechService> getTech() {
+		return this.techniques;
+	}
 
 	
+	@Override
+	public TechService getCurrentTechnique() {
+		return current_technique;
+	}
 
+	@Override
+	public boolean isBlocking() {
+		return state_actuel == State.BLOCKING;
+	}
+
+	@Override
+	public boolean isTeching() {
+		return state_actuel == State.TEACHING;
+	}
 
 }

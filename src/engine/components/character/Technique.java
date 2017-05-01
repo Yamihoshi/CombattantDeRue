@@ -68,7 +68,6 @@ public class Technique implements TechService {
 	@Override
 	public void step(FightCharService me, FightCharService other) {
 		frame_actuel++;
-		System.out.println(frame_actuel);
 		if(isInStartUp()){
 			System.out.println("En StartUp");
 		}else if(isInHit()){
