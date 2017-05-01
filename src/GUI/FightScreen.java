@@ -199,8 +199,8 @@ public class FightScreen{
 
                     	commandes[i] = keyBinder.getAction(i, currentKey[i]);
                     	
-                    	if(commandes[i]==Commande.PUNCH && nbTimeKeyPressed[i]>1)
-                        		commandes[i]=Commande.NEUTRAL;
+                    	/*if(commandes[i]==Commande.PUNCH && nbTimeKeyPressed[i]>1)
+                        		commandes[i]=Commande.NEUTRAL;*/
                     	
 	    	           	if(!chara.isBlockStunned()
 	    	           	&& ! chara.isHitStunned()
