@@ -157,7 +157,7 @@ public class FightScreen{
         	
             @Override
             public void handle(long arg0)
-            {            	
+            {                	
             	long currenttimeNano = System.nanoTime();
             	
             	if(framePerFrame==true)
@@ -165,8 +165,10 @@ public class FightScreen{
             	else
             		timePerFrame = 1000000000 * StageController.frameTime;
             	
-            	if (currenttimeNano >= lasttimeFPS + timePerFrame)
-            	{
+            	if (true/*currenttimeNano - lasttimeFPS >= timePerFrame*/)
+            	{            		
+            		lasttimeFPS = currenttimeNano;
+            		
             		frameCount = (frameCount+1)%61;
             		
             		if(frameCount==60)
@@ -179,7 +181,7 @@ public class FightScreen{
             			frameCount=1;
             		
             		controller.setFrame(frameCount);
-                    lasttimeFPS = currenttimeNano;
+                    
                     
                     Commande[] commandes = new Commande[2];
                     commandes[0] = keyBinder.getAction(0, currentKey[0]);
@@ -216,9 +218,9 @@ public class FightScreen{
                     }
                                         
                     game.getEngine().step(commandes[0], commandes[1]);
-                    //controller.updatePosition(J1.getTech().get(Commande.PUNCH).getHitbox(J1), J2.getCharBox());
+                    controller.updatePosition(J1.getTech().get(Commande.PUNCH).getHitbox(J1), J2.getCharBox());
                     controller.updateHitbox(J1, J2);
-                 }            	             
+                 }          	             
             }
         }.start();
 	}
