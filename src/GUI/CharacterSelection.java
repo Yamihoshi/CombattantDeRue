@@ -49,10 +49,13 @@ public class CharacterSelection{
             	if(event.getCode()==KeyCode.ENTER)
             		switch_to_fight_screen();
             	else if(event.getCode()==KeyCode.LEFT)
-            		previousCharacter(1);
+            		previousCharacter(2);
             	else if (event.getCode()==KeyCode.RIGHT)
+            		nextCharacter(2);
+            	else if (event.getCode()==KeyCode.Q)
+            		previousCharacter(1);
+            	else if (event.getCode()==KeyCode.D)
             		nextCharacter(1);
-            	
             }
         });
 	}
@@ -89,19 +92,40 @@ public class CharacterSelection{
 	
     public void nextCharacter(int joueur)
     {    	
-    	this.index_chara_J1 = (this.index_chara_J1+1)%Personnage.values().length;
-    	
-    	this.controller.updateImageCharacterDisplay(1,this.index_chara_J1);
+    	if(joueur==1)
+    	{
+	    	this.index_chara_J1 = (this.index_chara_J1+1)%Personnage.values().length;
+	    	
+	    	this.controller.updateImageCharacterDisplay(1,this.index_chara_J1);
+    	}
+    	else
+    	{
+	    	this.index_chara_J2 = (this.index_chara_J2+1)%Personnage.values().length;
+	    	
+	    	this.controller.updateImageCharacterDisplay(2,this.index_chara_J2);
+    	}
     }
     
     public void previousCharacter(int joueur)
     {
-    	this.index_chara_J1--;
-    	
-    	if(this.index_chara_J1<0)
-    		this.index_chara_J1=Personnage.values().length-1;
-    	
-    	this.controller.updateImageCharacterDisplay(1,this.index_chara_J1);
+    	if(joueur==1)
+    	{
+	    	this.index_chara_J1--;
+	    	
+	    	if(this.index_chara_J1<0)
+	    		this.index_chara_J1=Personnage.values().length-1;
+	    	
+	    	this.controller.updateImageCharacterDisplay(1,this.index_chara_J1);
+    	}
+    	else
+    	{
+	    	this.index_chara_J2--;
+	    	
+	    	if(this.index_chara_J2<0)
+	    		this.index_chara_J2=Personnage.values().length-1;
+	    	
+	    	this.controller.updateImageCharacterDisplay(2,this.index_chara_J2);
+    	}
     }
 	
 	

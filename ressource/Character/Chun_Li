@@ -12,9 +12,9 @@ crouch_height=300
 punch_damage=20
 punch_hit_stun=4
 punch_block_stun=5
-punch_hit_frame=2
+punch_hit_frame=6
 punch_start_up_frame=3
-punch_recovery_frame=16
+punch_recovery_frame=12
 punch_debut_y=350
 punch_height=64
 punch_width=174
@@ -23,9 +23,9 @@ punch_debut_x=200
 
 [Attack - LIGHT-KICK]
 light_kick_damage=20
-light_kick_start_up_frame=3
-light_kick_hit_frame=2
-light_kick_recovery_frame=12
+light_kick_start_up_frame=2
+light_kick_hit_frame=4
+light_kick_recovery_frame=11
 light_kick_hit_stun=4
 light_kick_block_stun=5
 light_kick_debut_y=350

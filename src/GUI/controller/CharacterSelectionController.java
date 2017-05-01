@@ -47,9 +47,9 @@ public class CharacterSelectionController implements Initializable {
     {
     	try{	
 	    	if(joueur == 1)
-	    		character_display_J1.setImage(new Image(getClass().getResource("/Character_Display/"+Personnage.values()[index_chara]+"_J1.png").toURI().toString()));
+	    		character_display_J1.setImage(new Image(getClass().getResource("/Character_Display/"+Personnage.values()[index_chara]+".png").toURI().toString()));
 	    	else
-	    		character_display_J2.setImage(new Image(getClass().getResource("/Character_Display/"+Personnage.values()[index_chara]+"_J2.png").toURI().toString()));
+	    		character_display_J2.setImage(new Image(getClass().getResource("/Character_Display/"+Personnage.values()[index_chara]+".png").toURI().toString()));
     	}catch(Exception e){};
     }
 

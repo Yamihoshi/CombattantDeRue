@@ -13,7 +13,7 @@
    <children>
       <ImageView fx:id="character_display_J2" fitHeight="400.0" fitWidth="750.0" layoutX="872.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Character_Display/Chun_Li_J2.png" />
+            <Image url="@Character_Display/Chun_Li.png" />
          </image>
          <viewport>
             <Rectangle2D />
@@ -21,7 +21,7 @@
       </ImageView>
       <ImageView fx:id="character_display_J1" fitHeight="400.0" fitWidth="750.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Character_Display/Chun_Li_J1.png" />
+            <Image url="@Character_Display/Chun_Li.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="100.0" fitWidth="713.0" layoutX="291.0" pickOnBounds="true" preserveRatio="true">
