@@ -5,6 +5,7 @@ import engine.contracts.HitboxContract;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
 import engine.services.TechService;
+import game.StreetFighterGame;
 
 public class Technique implements TechService {
 
@@ -51,7 +52,6 @@ public class Technique implements TechService {
 
 	@Override
 	public int getRecovery_Frame() {
-		// TODO Auto-generated method stub
 		return rframe;
 	}
 
@@ -62,7 +62,7 @@ public class Technique implements TechService {
 	@Override
 	public HitboxService getHitbox(FightCharService cs) {
 		HitboxImpl imp = new HitboxImpl();
-		imp.init(cs.getPositionX() + this.debut_x, debut_y, this.saveHeight, this.saveWidth);
+		imp.init(cs.getPositionX() + this.debut_x, StreetFighterGame.HEIGHT - debut_y, this.saveHeight, this.saveWidth);
 		return imp;
 	}
 	@Override
@@ -73,7 +73,7 @@ public class Technique implements TechService {
 		}else if(isInHit()){
 			//TODO Ajouter sens hitbox selon side
 			System.out.println("HitFrame");
-			hitbox.setPositionX(this.debut_x + me.getPositionX());
+			hitbox.setPositionX(this.debut_x + me.getPositionX() + me.getLargeur());
 			if(!already_touch && hitbox.collidesWith(other.getCharBox())){
 				already_touch = true;
 				other.takeAttack(damage, hstun, bstun);

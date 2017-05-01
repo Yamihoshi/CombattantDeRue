@@ -54,6 +54,9 @@ public class CharacterImpl implements FightCharService{
 				case PUNCH:
 					startTech(techniques.get(Commande.PUNCH));
 					break;
+				case KICK:
+					startTech(techniques.get(Commande.KICK));
+					break;
 				case DOWN:
 					break;
 				case UP:

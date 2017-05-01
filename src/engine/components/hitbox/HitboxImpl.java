@@ -109,8 +109,6 @@ public class HitboxImpl implements HitboxService{
 		this.hauteur = hauteur;
 	}
 
-
-
 	@Override
 	public int getLargeur() {
 		return largeur;

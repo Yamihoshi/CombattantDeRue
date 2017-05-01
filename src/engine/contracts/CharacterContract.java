@@ -174,13 +174,11 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public boolean isHitStunned() {
-		// TODO Auto-generated method stub
 		return super.isHitStunned();
 	}
 
 	@Override
 	public boolean isTeching() {
-		// TODO Auto-generated method stub
 		return super.isTeching();
 	}
 
@@ -188,25 +186,21 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void startTech(TechService tech) {
-		// TODO Auto-generated method stub
 		super.startTech(tech);
 	}
 
 	@Override
 	protected int getMyIndice() {
-		// TODO Auto-generated method stub
 		return super.getMyIndice();
 	}
 
 	@Override
 	protected int getOtherIndice() {
-		// TODO Auto-generated method stub
 		return super.getOtherIndice();
 	}
 
 	@Override
 	public CharacterService getCharacter() {
-		// TODO Auto-generated method stub
 		return super.getCharacter();
 	}
 

@@ -124,6 +124,7 @@ public class StageController implements Initializable {
     	HitboxService hitboxJ1 = fc1.getCharBox(), hitboxJ2 = fc2.getCharBox();
     	
     	this.hitbox_J1.setLayoutX(hitboxJ1.getPositionX());
+    	this.hitbox_J1.setLayoutY(hitboxJ1.getPositionY());
     	this.hitbox_J1.setHeight(hitboxJ1.getHauteur());
     	this.hitbox_J1.setWidth(hitboxJ1.getLargeur());
     	
@@ -131,10 +132,11 @@ public class StageController implements Initializable {
     		hitbox_attack_J1.setVisible(true);
     		HitboxService attack = fc1.getCurrentTechnique().getHitbox(fc1);
     		this.hitbox_attack_J1.setLayoutX(attack.getPositionX());
+    		this.hitbox_attack_J1.setLayoutX(attack.getPositionX());
         	this.hitbox_attack_J1.setHeight(attack.getHauteur());
         	this.hitbox_attack_J1.setWidth(attack.getLargeur());
     	}else{
-    		hitbox_attack_J1.setVisible(false);
+    	//	hitbox_attack_J1.setVisible(false);
     	}
     	
     	this.hitbox_J2.setLayoutX(hitboxJ2.getPositionX());

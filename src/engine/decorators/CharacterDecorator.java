@@ -184,24 +184,17 @@ public class CharacterDecorator implements FightCharService{
 
 	@Override
 	public int getHauteur() {
-		// TODO Auto-generated method stub
 		return getCharBox().getHauteur();
 	}
 
 	@Override
 	public int getLargeur() {
-		// TODO Auto-generated method stub
 		return getCharBox().getLargeur();
 	}
 
 	@Override
 	public TechService getCurrentTechnique() {
-		// TODO Auto-generated method stub
 		return character.getCurrentTechnique();
 	}
-
-
-
-
 
 }
