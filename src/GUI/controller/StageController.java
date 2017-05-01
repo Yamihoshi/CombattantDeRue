@@ -10,6 +10,7 @@ import GUI.animations.AnimationType;
 import GUI.animations.Sprite;
 import GUI.animations.SpritesManager;
 import engine.components.character.Personnage;
+import engine.services.FightCharService;
 import engine.services.HitboxService;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;
@@ -47,6 +48,9 @@ public class StageController implements Initializable {
     private Rectangle hitbox_J2;
 	
 	@FXML 
+    private Rectangle hitbox_attack_J1;
+	
+	@FXML 
     private Text frame_count;
 	
 	private boolean showHitbox;
@@ -79,6 +83,7 @@ public class StageController implements Initializable {
     	
     	hitbox_J1.setVisible(showHitbox);
     	hitbox_J2.setVisible(showHitbox);
+    	hitbox_attack_J1.setVisible(showHitbox);
     }
     
     public void setHitbox(boolean hit)
@@ -108,17 +113,34 @@ public class StageController implements Initializable {
     public void updatePosition(HitboxService hitboxJ1, HitboxService hitboxJ2)
     {
     	this.character_J1.setLayoutX(hitboxJ1.getPositionX());
+    	
+    	
+    	
+    	this.character_J2.setLayoutX(hitboxJ2.getPositionX());
+
+    }
+    
+    public void updateHitbox(FightCharService fc1, FightCharService fc2){
+    	HitboxService hitboxJ1 = fc1.getCharBox(), hitboxJ2 = fc2.getCharBox();
+    	
     	this.hitbox_J1.setLayoutX(hitboxJ1.getPositionX());
     	this.hitbox_J1.setHeight(hitboxJ1.getHauteur());
     	this.hitbox_J1.setWidth(hitboxJ1.getLargeur());
     	
+    	if(fc1.isTeching()){
+    		hitbox_attack_J1.setVisible(true);
+    		HitboxService attack = fc1.getCurrentTechnique().getHitbox(fc1);
+    		this.hitbox_attack_J1.setLayoutX(attack.getPositionX());
+        	this.hitbox_attack_J1.setHeight(attack.getHauteur());
+        	this.hitbox_attack_J1.setWidth(attack.getLargeur());
+    	}else{
+    		hitbox_attack_J1.setVisible(false);
+    	}
     	
-    	this.character_J2.setLayoutX(hitboxJ2.getPositionX());
     	this.hitbox_J2.setLayoutX(hitboxJ2.getPositionX());
     	this.hitbox_J2.setHeight(hitboxJ2.getHauteur());
     	this.hitbox_J2.setWidth(hitboxJ2.getLargeur());
     }
-    
     public void setFrame(int frame)
     {
     	this.frame_count.setText(frame+"");

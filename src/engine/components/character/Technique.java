@@ -1,5 +1,7 @@
 package engine.components.character;
 
+import engine.components.hitbox.HitboxImpl;
+import engine.contracts.HitboxContract;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
 import engine.services.TechService;
@@ -12,21 +14,15 @@ public class Technique implements TechService {
 	private int sframe;
 	private int rframe;
 	private int hframe;
+	private int saveWidth;
+	private int saveHeight;
+	private int debut_x;
+	private int debut_y;
 	private HitboxService hitbox;
 	private int frame_actuel;
 	private boolean already_touch;
 
-	@Override
-	public void init(int damage, int hstun, int bstun, int sframe, int hframe, int rframe,
-			HitboxService hitbox) {
-		this.damage = damage;
-		this.hstun = hstun;
-		this.bstun = bstun;
-		this.sframe = sframe;
-		this.hframe = hframe;
-		this.rframe = rframe;
-		this.hitbox = hitbox;
-	}
+
 
 	@Override
 	public int getDamage() {
@@ -61,31 +57,74 @@ public class Technique implements TechService {
 
 	@Override
 	public HitboxService getHitbox() {
-		// TODO Auto-generated method stub
 		return hitbox;
 	}
-
+	@Override
+	public HitboxService getHitbox(FightCharService cs) {
+		HitboxImpl imp = new HitboxImpl();
+		imp.init(cs.getPositionX() + this.debut_x, debut_y, this.saveHeight, this.saveWidth);
+		return imp;
+	}
 	@Override
 	public void step(FightCharService me, FightCharService other) {
 		frame_actuel++;
-		if(frame_actuel < getStart_up_frame()){
-			
-		}else if(frame_actuel < getStart_up_frame() + getHit_frame()){
-			/*if(!already_touch && hitbox.collidesWith(other.getCharBox())){
+		System.out.println(frame_actuel);
+		if(isInStartUp()){
+			System.out.println("En StartUp");
+		}else if(isInHit()){
+			//TODO Ajouter sens hitbox selon side
+			System.out.println("HitFrame");
+			hitbox.setPositionX(this.debut_x + me.getPositionX());
+			if(!already_touch && hitbox.collidesWith(other.getCharBox())){
 				already_touch = true;
 				other.takeAttack(damage, hstun, bstun);
-			}*/
+				System.out.println("Touché");
+			}
 		}else if(frame_actuel < getStart_up_frame() + getHit_frame() + getRecovery_Frame()){
 			//waiting
 		}else{
 			me.endTechnique();
 		}
+
 	}
 
 	@Override
 	public void launchTechnique() {
 		this.frame_actuel = 0;
 		this.already_touch = false;
+	}
+
+	@Override
+	public void init(int damage, int hstun, int bstun, int sframe, int hframe, int rframe, int debut_x, int debut_y,
+			int width, int height) {
+		this.damage = damage;
+		this.hstun = hstun;
+		this.bstun = bstun;
+		this.sframe = sframe;
+		this.hframe = hframe;
+		this.rframe = rframe;
+		this.saveHeight = height;
+		this.saveWidth = width;
+		this.debut_x = debut_x;
+		this.debut_y = debut_y;
+		this.hitbox = new HitboxContract(new HitboxImpl());
+		hitbox.init(debut_x, debut_y, saveHeight, saveWidth);
+		
+	}
+
+	@Override
+	public boolean isInStartUp() {
+		return frame_actuel <= getStart_up_frame();
+	}
+
+	@Override
+	public boolean isInHit() {
+		return frame_actuel <= getStart_up_frame() + getHit_frame();
+	}
+
+	@Override
+	public boolean isInRecovery() {
+		return frame_actuel <= getStart_up_frame() + getHit_frame() + getRecovery_Frame();
 	}
 
 }

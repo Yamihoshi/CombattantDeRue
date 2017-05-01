@@ -32,7 +32,6 @@ public class EngineImpl implements EngineService{
 
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
 		return height;
 	}
 

@@ -264,6 +264,11 @@ public class CharacterImpl implements FightCharService{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public TechService getCurrentTechnique() {
+		return current_technique;
+	}
 
 
 	@Override 
@@ -363,6 +368,7 @@ public class CharacterImpl implements FightCharService{
 		result = prime * result + vitesse;
 		return result;
 	}
+
 
 	
 

@@ -5,6 +5,14 @@ import engine.services.HitboxService;
 public class HitboxDecorator implements HitboxService{
 	HitboxService hitbox;
 	
+	public void setPositionX(int x) {
+		hitbox.setPositionX(x);
+	}
+
+	public void setPositionY(int y) {
+		hitbox.setPositionY(y);
+	}
+
 	public int getLargeur() {
 		return hitbox.getLargeur();
 	}
