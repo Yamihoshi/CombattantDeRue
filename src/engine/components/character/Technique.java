@@ -68,6 +68,7 @@ public class Technique implements TechService {
 	@Override
 	public void step(FightCharService me, FightCharService other) {
 		frame_actuel++;
+		System.out.println(frame_actuel);
 		if(isInStartUp()){
 			System.out.println("En StartUp");
 		}else if(isInHit()){
@@ -84,6 +85,7 @@ public class Technique implements TechService {
 		}else{
 			me.endTechnique();
 		}
+
 	}
 
 	@Override
@@ -112,17 +114,17 @@ public class Technique implements TechService {
 
 	@Override
 	public boolean isInStartUp() {
-		return frame_actuel < getStart_up_frame();
+		return frame_actuel <= getStart_up_frame();
 	}
 
 	@Override
 	public boolean isInHit() {
-		return frame_actuel < getStart_up_frame() + getHit_frame();
+		return frame_actuel <= getStart_up_frame() + getHit_frame();
 	}
 
 	@Override
 	public boolean isInRecovery() {
-		return frame_actuel < getStart_up_frame() + getHit_frame() + getRecovery_Frame();
+		return frame_actuel <= getStart_up_frame() + getHit_frame() + getRecovery_Frame();
 	}
 
 }

@@ -29,8 +29,9 @@ public class CharacterFabrique {
 			fc.getCharBox().init(1, 1, new Integer(p.getProperty("hauteur", "100")), new Integer(p.getProperty("largeur", "100")));
 			TechService punch = new Technique();
 			HitboxService punch_hitbox = new HitboxImpl();
-			punch.init(new Integer(p.getProperty("punch_damage")), new Integer(p.getProperty("punch_hit_stun")), new Integer(p.getProperty("punch_block_stun")), new Integer(p.getProperty("punch_hit_frame")), 
-					new Integer(p.getProperty("punch_start_up_frame")), new Integer(p.getProperty("punch_recovery_frame")), 
+			punch.init(new Integer(p.getProperty("punch_damage")), new Integer(p.getProperty("punch_hit_stun")),
+					new Integer(p.getProperty("punch_block_stun")), new Integer(p.getProperty("punch_start_up_frame")), 
+					new Integer(p.getProperty("punch_hit_frame")), new Integer(p.getProperty("punch_recovery_frame")), 
 					new Integer(p.getProperty("punch_debut_x")), new Integer(p.getProperty("punch_debut_y")), 
 					new Integer(p.getProperty("punch_width")), new Integer(p.getProperty("punch_height")));
 			fc.getTech().put(Commande.PUNCH, punch);
