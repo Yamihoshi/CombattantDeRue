@@ -28,7 +28,7 @@ public class CharacterImpl implements FightCharService{
 
 	@Override
 	public void step(Commande c) {
-		state_actuel = State.WAITING;
+	//	state_actuel = State.WAITING;
 		if(isTeching()){
 			current_technique.step(this, getOtherPlayer());
 			return;
@@ -45,8 +45,11 @@ public class CharacterImpl implements FightCharService{
 			}
 		}else if(isHitStunned()){
 			this.frame_stun--;
+		}else if(c == Commande.GUARD){
+			state_actuel = State.BLOCKING;
 		}
 		else{
+			state_actuel = State.WAITING;
 			switch(c){
 				case PUNCH:
 					startTech(techniques.get(Commande.PUNCH));
@@ -66,9 +69,6 @@ public class CharacterImpl implements FightCharService{
 				case DOWNLEFT:
 					break;
 				case DOWNRIGHT:
-					break;
-				case GUARD:
-					state_actuel = State.BLOCKING;
 					break;
 				case UPLEFT:
 					break;

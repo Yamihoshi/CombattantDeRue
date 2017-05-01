@@ -187,18 +187,6 @@ public class CharacterContract extends CharacterDecorator {
 
 
 	@Override
-	public boolean techFrame() {
-		// TODO Auto-generated method stub
-		return super.techFrame();
-	}
-
-	@Override
-	public boolean techHasAlreadyHit() {
-		// TODO Auto-generated method stub
-		return super.techHasAlreadyHit();
-	}
-
-	@Override
 	public void startTech(TechService tech) {
 		// TODO Auto-generated method stub
 		super.startTech(tech);
