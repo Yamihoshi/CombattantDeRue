@@ -184,18 +184,23 @@ public class FightScreen{
                     
                     
                     Commande[] commandes = new Commande[2];
-                    commandes[0] = keyBinder.getAction(0, currentKey[0]);
-                    commandes[1] = keyBinder.getAction(1, currentKey[1]);
                     
                     for(int i=0;i<commandes.length;i++)
                     {    
                     	animation_frame[i] = sprites_manager.getCurrentSprite(0).getDuration();
                     	frameAnimationCount[i]++;
                     	
-                    	if(commandes[i]==Commande.PUNCH && nbTimeKeyPressed[i]>1)
-                    		commandes[i]=Commande.NEUTRAL;
-                    	
                     	FightCharService chara = game.getEngine().getCharacter(i);
+                    	
+                    	if(chara.isTeching())
+                    	{
+                    		currentKey[i]=null;
+                    	}
+
+                    	commandes[i] = keyBinder.getAction(i, currentKey[i]);
+                    	
+                    	if(commandes[i]==Commande.PUNCH && nbTimeKeyPressed[i]>1)
+                        		commandes[i]=Commande.NEUTRAL;
                     	
 	    	           	if(!chara.isBlockStunned()
 	    	           	&& ! chara.isHitStunned()
@@ -216,7 +221,7 @@ public class FightScreen{
                 		Sprite sprite = sprites_manager.getCurrentSprite(0);
                 		controller.updateSprite_J1(sprite);
                     }
-                                        
+                    
                     game.getEngine().step(commandes[0], commandes[1]);
                     controller.updatePosition(J1.getTech().get(Commande.PUNCH).getHitbox(J1), J2.getCharBox());
                     controller.updateHitbox(J1, J2);
