@@ -38,6 +38,10 @@ public class KeyBinder {
 		
 		bind.put(KeyCode.LEFT, Commande.LEFT);
 		bind.put(KeyCode.RIGHT, Commande.RIGHT);
+		bind.put(KeyCode.NUMPAD0, Commande.GUARD);
+		bind.put(KeyCode.NUMPAD1, Commande.PUNCH);
+		bind.put(KeyCode.NUMPAD2, Commande.KICK);
+		bind.put(KeyCode.DOWN, Commande.CROUCH);
 		
 		return bind;
 	}
