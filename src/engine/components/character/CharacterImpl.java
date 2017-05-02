@@ -110,13 +110,11 @@ public class CharacterImpl implements FightCharService{
 			new_x = engine.getWidth();
 			tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
 		}
-		
-
 		if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
 			return;
 		hitbox.moveTo(new_x, getPositionY());
-
 	}
+	
 	@Override
 	public void moveRight() {
 		gestionStand();
