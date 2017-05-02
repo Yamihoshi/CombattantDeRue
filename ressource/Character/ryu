@@ -1,8 +1,8 @@
 nom=Ryu
 vie=100
 vitesse=7
-hauteur=507
-largeur=328
+hauteur=330
+largeur=213
 
 [Attack]
 punch_damage=20
