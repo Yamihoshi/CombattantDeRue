@@ -129,14 +129,15 @@ public class StageController implements Initializable {
     	this.hitbox_J1.setWidth(hitboxJ1.getLargeur());
     	
     	if(fc1.isTeching() && fc1.getCurrentTechnique().isInHit()){
-    		hitbox_attack_J1.setVisible(true);
     		HitboxService attack = fc1.getCurrentTechnique().getHitbox();
     		this.hitbox_attack_J1.setLayoutX(attack.getPositionX());
     		this.hitbox_attack_J1.setLayoutY(attack.getPositionY());
         	this.hitbox_attack_J1.setHeight(attack.getHauteur());
         	this.hitbox_attack_J1.setWidth(attack.getLargeur());
+    		hitbox_attack_J1.setVisible(true);
+
     	}else{
-    		//hitbox_attack_J1.setVisible(false);
+    		hitbox_attack_J1.setVisible(false);
     	}
     	
     	this.hitbox_J2.setLayoutX(hitboxJ2.getPositionX());

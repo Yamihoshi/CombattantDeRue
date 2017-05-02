@@ -112,7 +112,6 @@ public class CharacterImpl implements FightCharService{
 
 		if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
 			return;
-		System.out.println("Movement enclenché");
 		hitbox.moveTo(new_x, getPositionY());
 
 	}

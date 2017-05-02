@@ -59,27 +59,29 @@ public class Technique implements TechService {
 	public HitboxService getHitbox() {
 		return hitbox;
 	}
-	@Override
-	public HitboxService getHitbox(FightCharService cs) {
-		HitboxImpl imp = new HitboxImpl();
-		imp.init(cs.getPositionX() + this.debut_x, StreetFighterGame.HEIGHT - debut_y, this.saveHeight, this.saveWidth);
-		return imp;
-	}
+
 	@Override
 	public void step(FightCharService me, FightCharService other) {
 		frame_actuel++;
+		System.out.println(frame_actuel);
 		if(isInStartUp()){
 			System.out.println("En StartUp");
 		}else if(isInHit()){
 			//TODO Ajouter sens hitbox selon side
 			System.out.println("HitFrame");
-			hitbox.setPositionX(this.debut_x + me.getPositionX() + me.getLargeur());
+			if(me.isFaceRight())
+				hitbox.setPositionX(this.debut_x + me.getPositionX());
+			else{
+				hitbox.setPositionX(-(this.debut_x + this.saveWidth) + me.getPositionX());
+			}
+			hitbox.setPositionY(this.debut_y + me.getPositionY());
+			
 			if(!already_touch && hitbox.collidesWith(other.getCharBox())){
 				already_touch = true;
 				other.takeAttack(damage, hstun, bstun);
-				System.out.println("Touché");
+				System.out.println("Touché !!!!!!");
 			}
-		}else if(frame_actuel < getStart_up_frame() + getHit_frame() + getRecovery_Frame()){
+		}else if(isInRecovery()){
 			//waiting
 		}else{
 			me.endTechnique();
