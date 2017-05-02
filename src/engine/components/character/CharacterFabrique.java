@@ -8,6 +8,7 @@ import java.util.Properties;
 import engine.components.hitbox.HitboxImpl;
 import engine.components.player.Commande;
 import engine.components.player.Player;
+import engine.contracts.TechniqueContract;
 import engine.services.EngineService;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
@@ -35,8 +36,8 @@ public class CharacterFabrique {
 	   }
 	   
 	   public static void initTechnique(FightCharService fc, Properties p){
-			TechService punch = new Technique();
-			TechService kick = new Technique();
+			TechService punch = new TechniqueContract(new Technique());
+			TechService kick = new TechniqueContract(new Technique());
 
 			punch.init(new Integer(p.getProperty("punch_damage")), new Integer(p.getProperty("punch_hit_stun")),
 					new Integer(p.getProperty("punch_block_stun")), new Integer(p.getProperty("punch_start_up_frame")), 

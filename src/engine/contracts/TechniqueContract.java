@@ -7,8 +7,8 @@ import engine.services.TechService;
 
 public class TechniqueContract extends TechniqueDecorator {
 
-	public TechniqueContract() {
-		super();
+	public TechniqueContract(TechService t) {
+		super(t);
 	}
 
 	@Override

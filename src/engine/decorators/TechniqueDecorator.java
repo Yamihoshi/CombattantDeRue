@@ -7,6 +7,10 @@ import engine.services.TechService;
 public class TechniqueDecorator implements TechService{
 	private TechService technique;
 
+	public TechniqueDecorator(TechService t) {
+		technique = t;
+	}
+
 	public void init(int damage, int hstun, int bstun, int sframe, int hframe, int rframe, int debut_x, int debut_y,
 			int width, int height) {
 		technique.init(damage, hstun, bstun, sframe, hframe, rframe, debut_x, debut_y, width, height);
