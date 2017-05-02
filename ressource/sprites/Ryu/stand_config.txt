@@ -1,0 +1,14 @@
+animation_length=8
+loop=true
+
+sprite_i=X#Y#duration
+
+sprite_0=154#459#3
+sprite_1=158#459#3
+sprite_2=154#455#3
+sprite_3=157#444#3
+sprite_4=163#439#3
+sprite_5=156#435#4
+sprite_6=155#445#4
+sprite_7=157#454#4
+sprite_8=159#458#4

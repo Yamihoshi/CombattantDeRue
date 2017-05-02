@@ -34,8 +34,6 @@ public class FightScreen{
 	
 	private StreetFighterGame game;
 	
-	private LinkedList<KeyCode> combo;
-	
 	private KeyCode[] currentKey;
 	private int[] nbTimeKeyPressed;
 	private KeyBinder keyBinder;
@@ -62,8 +60,6 @@ public class FightScreen{
     	this.sprites_manager = new SpritesManager(this.game.getEngine().getCharacters());
     	this.sprites_manager.playAnimation(0,AnimationType.STAND);
     	this.sprites_manager.playAnimation(1,AnimationType.STAND);
-    	
-    	this.combo = new LinkedList<KeyCode>();
     	
     	launchTimer();
 	}
@@ -187,7 +183,7 @@ public class FightScreen{
                     
                     for(int i=0;i<commandes.length;i++)
                     {    
-                    	animation_frame[i] = sprites_manager.getCurrentSprite(0).getDuration();
+                    	animation_frame[i] = sprites_manager.getCurrentSprite(i).getDuration();
                     	frameAnimationCount[i]++;
                     	
                     	FightCharService chara = game.getEngine().getCharacter(i);
@@ -208,18 +204,19 @@ public class FightScreen{
 	    	           	&& sprites_manager.getAnimationPlayed(i).getType()!=animationBinder.getAnimation(commandes[i]))
 	    	           	{
 	    	           		sprites_manager.playAnimation(i,animationBinder.getAnimation(commandes[i]));
-	    	           		Sprite sprite = sprites_manager.getCurrentSprite(0);
-	                		controller.updateSprite_J1(sprite);
+	    	           		Sprite sprite = sprites_manager.getCurrentSprite(i);
+	                		controller.updateSprite(i,sprite);
 	                		frameAnimationCount[i]=0;
 	    	           	}
                     }
                     
-                    if((sprites_manager.getAnimationPlayed(0).isLooped()||game.getEngine().getCharacter(0).isTeching()) && frameAnimationCount[0]==animation_frame[0])
+                    for(int i=0;i<game.getPlayers().length;i++)
+                    if((sprites_manager.getAnimationPlayed(i).isLooped()||game.getEngine().getCharacter(i).isTeching()) && frameAnimationCount[i]==animation_frame[i])
                     {
-                    	frameAnimationCount[0]=0;
-                    	sprites_manager.stepAnimation(0);
-                		Sprite sprite = sprites_manager.getCurrentSprite(0);
-                		controller.updateSprite_J1(sprite);
+                    	frameAnimationCount[i]=i;
+                    	sprites_manager.stepAnimation(i);
+                		Sprite sprite = sprites_manager.getCurrentSprite(i);
+                		controller.updateSprite(i,sprite);
                     }
                     
                     game.getEngine().step(commandes[0], commandes[1]);

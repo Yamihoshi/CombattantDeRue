@@ -98,6 +98,14 @@ public class StageController implements Initializable {
     	}
     }
     
+    public void updateSprite(int joueur,Sprite sprite)
+    {
+    	if(joueur==0)
+    		this.updateSprite_J1(sprite);
+    	else
+    		this.updateSprite_J2(sprite);
+    }
+    
     public void updateSprite_J1(Sprite sprite)
     {
     	this.character_J1.setImage(sprite.getImage());
@@ -108,6 +116,8 @@ public class StageController implements Initializable {
     public void updateSprite_J2(Sprite sprite)
     {
     	this.character_J2.setImage(sprite.getImage());
+    	this.character_J2.setTranslateX(sprite.getTranslate_X());
+    	this.character_J2.setTranslateY(sprite.getTranslate_Y());
     }
     
     public void updatePosition(HitboxService hitboxJ1, HitboxService hitboxJ2)
