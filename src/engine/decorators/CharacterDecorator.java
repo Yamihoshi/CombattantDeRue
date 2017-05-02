@@ -7,6 +7,7 @@ import engine.components.character.State;
 import engine.components.player.Commande;
 import engine.contracts.error.InvariantError;
 import engine.services.CharacterService;
+import engine.services.ComboService;
 import engine.services.EngineService;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
@@ -17,6 +18,23 @@ public class CharacterDecorator implements FightCharService{
 
 	FightCharService character;
 
+
+	public ComboService getComboService() {
+		return character.getComboService();
+	}
+
+	public boolean isCombo() {
+		return character.isCombo();
+	}
+
+	public int getCombo() {
+		return character.getCombo();
+	}
+
+
+	public void stepCombo(boolean hit) {
+		character.stepCombo(hit);
+	}
 
 	public void endTechnique() {
 		character.endTechnique();

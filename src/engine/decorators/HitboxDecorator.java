@@ -64,4 +64,10 @@ public class HitboxDecorator implements HitboxService{
 	public void moveTo(int x, int y) {
 		hitbox.moveTo(x, y);
 	}
+
+	@Override
+	public void resize(int w, int h) {
+		// TODO Auto-generated method stub
+		
+	}
 }

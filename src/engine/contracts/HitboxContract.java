@@ -1,5 +1,6 @@
 package engine.contracts;
 
+import engine.contracts.error.InvariantError;
 import engine.contracts.error.PostconditionError;
 import engine.contracts.error.PreconditionError;
 import engine.decorators.HitboxDecorator;
@@ -9,11 +10,88 @@ public class HitboxContract extends HitboxDecorator {
 
 	public HitboxContract(HitboxService hitbox) {
 		super(hitbox);
-		// TODO Auto-generated constructor stub
 	}
-	public void checkInvariant(){
-		
+	
+	@Override
+	public void resize(int w, int h) {
+		if(!(w > 0 && h > 0))
+			new PreconditionError("Mauvaise width/hauteur");
+		checkInvariant();
+		super.resize(w, h);
+		checkInvariant();
+		if(!(getHauteur() == h)){
+			new PostconditionError("hauteur non set");
+		}
+		if(!(getLargeur() == w)){
+			new PostconditionError("Largeur non set");
+		}
 	}
+
+    public void checkInvariant() {
+	// inv: getWidth() > 0
+	if (!(getPositionX() > 0))
+	    throw new InvariantError("X négative");
+	// inv: getWidth() > 0
+	if (!(getPositionY() > 0))
+	    throw new InvariantError("Y négative");
+	if(!(getLargeur() > 0))
+	    throw new InvariantError("Largeur négative");
+	if(!(getHauteur() > 0))
+	    throw new InvariantError("Hauteur négative");
+}
+	@Override
+	public void setPositionX(int x) {
+		if(x < 0){
+			new PreconditionError("Position négative");
+		}
+		checkInvariant();
+		super.setPositionX(x);
+		checkInvariant();
+		if(!(getPositionX() == x)){
+			new PostconditionError("Set non effectué");
+		}
+	}
+	@Override
+	public void setPositionY(int y) {
+		if(y < 0){
+			new PreconditionError("Position négative");
+		}
+		checkInvariant();
+		super.setPositionY(y);
+		checkInvariant();
+		if(!(getPositionY() == y)){
+			new PostconditionError("Set non effectué");
+		}
+	}
+	@Override
+	public int getLargeur() {
+		return super.getLargeur();
+	}
+	@Override
+	public void setLargeur(int largeur) {
+		if(getLargeur() < 0){
+			new PreconditionError("largeur négative");
+		}
+		checkInvariant();
+		super.setLargeur(largeur);
+		checkInvariant();
+		if(!(getLargeur() == largeur)){
+			new PostconditionError("Set non effectué");
+		}
+	}
+	@Override
+	public void setHauteur(int hauteur) {
+		if(hauteur < 0){
+			new PreconditionError("hauteur négative");
+		}
+		checkInvariant();
+		super.setHauteur(hauteur);
+		checkInvariant();
+		if(!(getHauteur() == hauteur)){
+			new PostconditionError("Set non effectué");
+		}
+	}
+
 	@Override
 	public void init(int x, int y, int h, int l) {
 		if(!(x > 0 && y > 0 && h > 0 && l>0))
@@ -27,26 +105,22 @@ public class HitboxContract extends HitboxDecorator {
 
 	@Override
 	public int getPositionX() {
-		// TODO Auto-generated method stub
 		return super.getPositionX();
 	}
 
 	@Override
 	public int getPositionY() {
-		// TODO Auto-generated method stub
 		return super.getPositionY();
 	}
 
 	@Override
 	public int getHauteur() {
-		// TODO Auto-generated method stub
 		return super.getHauteur();
 	}
 
 
 	@Override
 	public boolean belongsTo(int x, int y) {
-		// TODO Auto-generated method stub
 		return super.belongsTo(x, y);
 	}
 
@@ -76,13 +150,11 @@ public class HitboxContract extends HitboxDecorator {
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
 		return super.hashCode();
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return super.toString();
 	}
 

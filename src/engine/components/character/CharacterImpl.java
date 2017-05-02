@@ -4,7 +4,9 @@ import java.util.HashMap;
 
 import engine.components.hitbox.HitboxImpl;
 import engine.components.player.Commande;
+import engine.contracts.ComboContract;
 import engine.contracts.HitboxContract;
+import engine.services.ComboService;
 import engine.services.EngineService;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
@@ -24,14 +26,13 @@ public class CharacterImpl implements FightCharService{
 	protected State state_actuel;
 	protected TechService current_technique;
 	protected HashMap<Commande, TechService> techniques;
-	
+	protected ComboService compteurCombo;
 
 	@Override
 	public void step(Commande c) {
 	//	state_actuel = State.WAITING;
 		if(isTeching()){
 			current_technique.step(this, getOtherPlayer());
-			return;
 		}else if(isBlockStunned()){
 			this.block_frame_stun--;
 			switch (c) {
@@ -81,6 +82,7 @@ public class CharacterImpl implements FightCharService{
 					break;
 				}
 		}
+		this.compteurCombo.step(false);
 	}
 	
 
@@ -154,7 +156,6 @@ public class CharacterImpl implements FightCharService{
 	}
 	@Override
 	public void moveUpLeft() {
-		// TODO Auto-generated method stub
 		gestionJump();
 
 		
@@ -221,7 +222,9 @@ public class CharacterImpl implements FightCharService{
 		this.faceRight = faceRight;
 		this.hitbox = new HitboxContract(new HitboxImpl());
 		this.techniques = new HashMap<>();
-	}
+		this.compteurCombo = (ComboService) new ComboContract(new ComboIpml());
+		this.compteurCombo.init();
+	} 
 	
 	@Override
 	public boolean isDead() {
@@ -332,6 +335,7 @@ public class CharacterImpl implements FightCharService{
 			frame_stun = hstun;
 		}
 		this.vie -= damage;
+		this.compteurCombo.reset();
 	}	
 
 	@Override
@@ -363,6 +367,26 @@ public class CharacterImpl implements FightCharService{
 	@Override
 	public boolean isTeching() {
 		return state_actuel == State.TEACHING;
+	}
+
+	@Override
+	public ComboService getComboService() {
+		return compteurCombo;
+	}
+
+	@Override
+	public boolean isCombo() {
+		return getComboService().getCombo() > 0;
+	}
+
+	@Override
+	public int getCombo() {
+		return getComboService().getCombo();
+	}
+
+	@Override
+	public void stepCombo(boolean hit) {
+		getComboService().step(hit);
 	}
 
 }

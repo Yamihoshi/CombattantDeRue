@@ -25,6 +25,9 @@ public interface CharacterService {
 	public boolean isFaceRight();
 	public boolean isDead();
 	
+
+
+	
 	
 	/* Operators */
 	public void neutral();
@@ -38,4 +41,5 @@ public interface CharacterService {
 	public void moveDownRight();
 	public void switchSide();
 	public void step(Commande c);
+
 }

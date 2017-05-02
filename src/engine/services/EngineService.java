@@ -17,5 +17,6 @@ public interface EngineService {
 	public boolean isGameOver();
 	
 	/* Operators */
+	
 	public void step(Commande c1,Commande c2);
 }
