@@ -102,7 +102,7 @@ public class FightScreen{
             			{
             				nbTimeKeyPressed[i]++;
             				
-                			if(currentKey[i] == null)
+                			if(currentKey[i] == null && nbTimeKeyPressed[i]<=1)
                 			{
                 				currentKey[i] = event.getCode();
                 			}
@@ -119,7 +119,7 @@ public class FightScreen{
             public void handle(KeyEvent event) {
             	
         		for(int i=0;i<currentKey.length;i++)
-        			if(currentKey[i] == event.getCode()  && keyBinder.isKeyOfPlayer(i,event.getCode()))
+        			if((currentKey[i]==null || currentKey[i] == event.getCode())  && keyBinder.isKeyOfPlayer(i,event.getCode()))
         			{
         				nbTimeKeyPressed[i]=0;
         				currentKey[i] = null;
@@ -161,7 +161,7 @@ public class FightScreen{
             	else
             		timePerFrame = 1000000000 * StageController.frameTime;
             	
-            	if (true/*currenttimeNano - lasttimeFPS >= timePerFrame*/)
+            	if ((framePerFrame && currenttimeNano - lasttimeFPS >= timePerFrame) || !framePerFrame)
             	{            		
             		lasttimeFPS = currenttimeNano;
             		
@@ -207,16 +207,25 @@ public class FightScreen{
 	    	           		Sprite sprite = sprites_manager.getCurrentSprite(i);
 	                		controller.updateSprite(i,sprite);
 	                		frameAnimationCount[i]=0;
+	                		controller.updateSpriteAlignement(i,sprites_manager.getAnimationPlayed(i).getTranslate_X(),sprites_manager.getAnimationPlayed(i).getTranslate_Y());
 	    	           	}
                     }
                     
                     for(int i=0;i<game.getPlayers().length;i++)
-                    if((sprites_manager.getAnimationPlayed(i).isLooped()||game.getEngine().getCharacter(i).isTeching()) && frameAnimationCount[i]==animation_frame[i])
                     {
-                    	frameAnimationCount[i]=i;
-                    	sprites_manager.stepAnimation(i);
-                		Sprite sprite = sprites_manager.getCurrentSprite(i);
-                		controller.updateSprite(i,sprite);
+                    	FightCharService chara = game.getEngine().getCharacter(i);
+                    	
+                    	if(chara.isBlockStunned() || chara.isHitStunned())
+                    	{
+                    		
+                    	}
+                    	else if((sprites_manager.getAnimationPlayed(i).isLooped()||game.getEngine().getCharacter(i).isTeching()) && frameAnimationCount[i]==animation_frame[i])
+	                    {
+	                    	frameAnimationCount[i]=0;
+	                    	sprites_manager.stepAnimation(i);
+	                		Sprite sprite = sprites_manager.getCurrentSprite(i);
+	                		controller.updateSprite(i,sprite);
+	                    }
                     }
                     
                     game.getEngine().step(commandes[0], commandes[1]);

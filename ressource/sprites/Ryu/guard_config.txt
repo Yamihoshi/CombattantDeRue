@@ -1,6 +1,9 @@
 animation_length=1
 loop=false
 
-sprite_i=X#Y#duration
+X_axis=224
+Y_axis=343
 
-sprite_0=163#415#2
+sprite_i=duration
+
+sprite_0=2

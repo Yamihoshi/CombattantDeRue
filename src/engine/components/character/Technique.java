@@ -114,17 +114,17 @@ public class Technique implements TechService {
 
 	@Override
 	public boolean isInStartUp() {
-		return frame_actuel <= getStart_up_frame();
+		return frame_actuel < getStart_up_frame();
 	}
 
 	@Override
 	public boolean isInHit() {
-		return frame_actuel <= getStart_up_frame() + getHit_frame();
+		return frame_actuel < getStart_up_frame() + getHit_frame();
 	}
 
 	@Override
 	public boolean isInRecovery() {
-		return frame_actuel <= getStart_up_frame() + getHit_frame() + getRecovery_Frame();
+		return frame_actuel < getStart_up_frame() + getHit_frame() + getRecovery_Frame();
 	}
 
 }

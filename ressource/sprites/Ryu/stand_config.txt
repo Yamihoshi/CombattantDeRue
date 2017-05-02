@@ -1,14 +1,17 @@
 animation_length=8
 loop=true
 
-sprite_i=X#Y#duration
+X_axis=224
+Y_axis=343
 
-sprite_0=154#459#3
-sprite_1=158#459#3
-sprite_2=154#455#3
-sprite_3=157#444#3
-sprite_4=163#439#3
-sprite_5=156#435#4
-sprite_6=155#445#4
-sprite_7=157#454#4
-sprite_8=159#458#4
+sprite_i=duration
+
+sprite_0=3
+sprite_1=3
+sprite_2=3
+sprite_3=3
+sprite_4=3
+sprite_5=4
+sprite_6=4
+sprite_7=4
+sprite_8=4

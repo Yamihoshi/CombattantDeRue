@@ -106,18 +106,28 @@ public class StageController implements Initializable {
     		this.updateSprite_J2(sprite);
     }
     
+    public void updateSpriteAlignement(int joueur,int posX,int posY)
+    {
+    	if(joueur==0)
+    	{
+    		this.character_J1.setTranslateX(posX);
+    		this.character_J1.setTranslateY(posY);
+    	}
+    	else
+    	{
+    		this.character_J2.setTranslateX(posX);
+    		this.character_J2.setTranslateY(posY);
+    	}
+    }
+    
     public void updateSprite_J1(Sprite sprite)
     {
     	this.character_J1.setImage(sprite.getImage());
-    	this.character_J1.setTranslateX(sprite.getTranslate_X());
-    	this.character_J1.setTranslateY(sprite.getTranslate_Y());
     }
     
     public void updateSprite_J2(Sprite sprite)
     {
     	this.character_J2.setImage(sprite.getImage());
-    	this.character_J2.setTranslateX(sprite.getTranslate_X());
-    	this.character_J2.setTranslateY(sprite.getTranslate_Y());
     }
     
     public void updatePosition(HitboxService hitboxJ1, HitboxService hitboxJ2)

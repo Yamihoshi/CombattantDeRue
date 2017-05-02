@@ -8,17 +8,36 @@ import javafx.scene.image.Image;
 
 public class Animation {
 	
+	public static final int ref_position_Y = (int) (Sprite.ratio*186);
+	public static final int ref_position_X_left = (int) (Sprite.ratio*430);
+	
 	private AnimationType type;
 	private List<Sprite> sprites;
 	private boolean loop;
 	private int currentSprite;
+	private int translate_X;
+	private int translate_Y;
+	private boolean mirror;
 	
-	public Animation(AnimationType type,boolean reversed)
+	public Animation(AnimationType type,boolean mirror)
 	{
 		this.type = type;
 		this.sprites = new ArrayList<Sprite>();
 		this.currentSprite = 0;
 		this.loop=true;
+		this.mirror = mirror;
+	}
+	
+	public void setPosition(int posX, int posY)
+	{
+		this.translate_X = (int) (Sprite.ratio*posX);
+		this.translate_Y = (int) (Sprite.ratio*posY);
+		
+		this.translate_Y = ref_position_Y - translate_Y;
+		if(!mirror)
+			this.translate_X = ref_position_X_left - translate_X;
+		else
+			this.translate_X = translate_X - ref_position_X_left;
 	}
 	
 	public AnimationType getType()
@@ -83,5 +102,26 @@ public class Animation {
 	public void restart()
 	{
 		this.currentSprite = 0;
+	}
+
+	public int getTranslate_X() {
+		return translate_X;
+	}
+
+	public void setTranslate_X(int translateX) {
+		this.translate_X = translateX;
+	}
+
+	public int getTranslate_Y() {
+		return translate_Y;
+	}
+
+	public void setTranslate_Y(int translateY) {
+		this.translate_Y = translateY;
+	}
+	
+	public void setMirror(boolean mirror)
+	{
+		this.mirror=mirror;
 	}
 }
