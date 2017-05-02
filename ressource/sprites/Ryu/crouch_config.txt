@@ -1,8 +1,8 @@
 animation_length=1
 loop=false
 
-X_axis=224
-Y_axis=343
+X_axis=170
+Y_axis=301
 
 sprite_i=duration
 
