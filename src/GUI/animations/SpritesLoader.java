@@ -54,7 +54,6 @@ public class SpritesLoader {
 				read_loop = new Boolean(prop.getProperty("loop"));
 				
 				String s = prop.getProperty("animation_length");
-				
 				read_X = new Integer(prop.getProperty("X_axis"));
 				read_Y = new Integer(prop.getProperty("Y_axis"));
 				
@@ -78,7 +77,10 @@ public class SpritesLoader {
 						Image img = null;
 						try {
 							img = new Image(SpritesLoader.class.getResource(path).toURI().toString());
-						} catch (URISyntaxException e) {e.printStackTrace();}
+						} catch (URISyntaxException e) {
+							e.printStackTrace();
+							System.out.println(path);
+					}
 						
 						animation.addSprite(new Sprite(read_duration, img));
 					}	

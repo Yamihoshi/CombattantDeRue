@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 public class Sprite {
 
-	public static final double ratio = 1.0/*65.0/100.0*/;
+	public static final double ratio = 65.0/100.0;
 	
 	private int duration;
 	

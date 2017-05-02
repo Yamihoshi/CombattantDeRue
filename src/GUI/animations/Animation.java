@@ -8,8 +8,8 @@ import javafx.scene.image.Image;
 
 public class Animation {
 	
-	public static final int ref_position_Y = (int) (Sprite.ratio*186);
-	public static final int ref_position_X_left = (int) (Sprite.ratio*430);
+	public static final int ref_position_Y = (int) (Sprite.ratio*430);
+	public static final int ref_position_X_left = (int) (Sprite.ratio*186);
 	
 	private AnimationType type;
 	private List<Sprite> sprites;
