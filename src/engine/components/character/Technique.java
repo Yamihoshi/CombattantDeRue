@@ -63,9 +63,7 @@ public class Technique implements TechService {
 	@Override
 	public void step(FightCharService me, FightCharService other) {
 		frame_actuel++;
-		System.out.println(frame_actuel);
 		if(isInStartUp()){
-			System.out.println("En StartUp");
 		}else if(isInHit()){
 			//TODO Ajouter sens hitbox selon side
 			System.out.println("HitFrame");
@@ -79,7 +77,8 @@ public class Technique implements TechService {
 			if(!already_touch && hitbox.collidesWith(other.getCharBox())){
 				already_touch = true;
 				other.takeAttack(damage, hstun, bstun);
-				System.out.println("Touché !!!!!!");
+				me.stepCombo(true);
+				System.out.println("Touché !!!!!! Combo en cours " + me.getCombo());
 			}
 		}else if(isInRecovery()){
 			//waiting

@@ -117,6 +117,11 @@ public class HitboxImpl implements HitboxService{
 	public void setLargeur(int largeur) {
 		this.largeur = largeur;	
 	}
+	@Override
+	public void resize(int w, int h) {
+		this.largeur = w;
+		this.hauteur = h;
+	}
 
 
 }
