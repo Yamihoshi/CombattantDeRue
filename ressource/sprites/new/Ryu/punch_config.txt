@@ -1,0 +1,17 @@
+animation_length=9
+loop=false
+
+X_axis=155
+Y_axis=427
+
+sprite_i=duration
+
+sprite_0=1
+sprite_1=2
+sprite_2=1
+sprite_3=2
+sprite_4=4
+sprite_5=3
+sprite_6=3
+sprite_7=3
+sprite_8=3

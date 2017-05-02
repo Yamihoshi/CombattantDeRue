@@ -27,10 +27,8 @@ public class CharacterFabrique {
 			fc.getCharBox().init(1, StreetFighterGame.HEIGHT - hauteur, hauteur, new Integer(p.getProperty("largeur")));
 			initTechnique(fc, p);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	   }
