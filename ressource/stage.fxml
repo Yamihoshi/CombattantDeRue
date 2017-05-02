@@ -73,7 +73,7 @@
       </ImageView>
       <Rectangle fx:id="hitbox_J1" arcHeight="5.0" arcWidth="5.0" fill="#00ff33" height="448.0" layoutX="88.0" layoutY="250.0" opacity="0.5" stroke="BLACK" strokeType="OUTSIDE" width="200.0" />
       <Rectangle fx:id="hitbox_J2" arcHeight="5.0" arcWidth="5.0" fill="#00ff33" height="448.0" layoutX="999.0" layoutY="250.0" opacity="0.5" stroke="BLACK" strokeType="OUTSIDE" width="200.0" />
-      <Text fx:id="frame_count" fill="#19a420" layoutX="14.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+      <Text id="frame_count" fx:id="frame_count" fill="#19a420" layoutX="14.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
          <font>
             <Font name="Arial Bold" size="64.0" />
          </font>

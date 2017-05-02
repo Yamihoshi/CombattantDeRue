@@ -59,7 +59,7 @@ public class MainWindow extends Application{
 		 
 		 scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 	            public void handle(KeyEvent ke) {
-	               System.out.println("Key Pressed: " + ke.getCode());
+	               //System.out.println("Key Pressed: " + ke.getCode());
 	                try {
 	                	switch_to_Character_Selection();
 					} catch (Exception e) {

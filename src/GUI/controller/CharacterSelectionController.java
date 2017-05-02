@@ -17,6 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class CharacterSelectionController implements Initializable {
 
@@ -30,12 +31,12 @@ public class CharacterSelectionController implements Initializable {
     private ImageView character_display_J2; 
     
     @FXML
-    private Label font;
+    private Text font;
     
     @Override  
     public void initialize(URL location, ResourceBundle resources) {  
     	
-    		/*InputStream fontStream = getClass().getResourceAsStream("/fonts/SSF4.ttf");
+    		/*InputStream fontStream = getClass().getResourceAsStream("/fonts/SSF4_ABUKET.ttf");
     		Font bgFont = Font.loadFont(fontStream, 36);
     		font.setFont(bgFont);*/
     		

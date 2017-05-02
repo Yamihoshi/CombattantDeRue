@@ -45,7 +45,7 @@ public class SpritesLoader {
 			
 			try {			
 				// load a properties file
-				System.out.println(Ressource.sprites+chara+"/"+type.toString()+"_config.txt");
+				//System.out.println(Ressource.sprites+chara+"/"+type.toString()+"_config.txt");
 				prop.load(SpritesLoader.class.getResourceAsStream(Ressource.sprites+chara+"/"+type.toString()+"_config.txt"));
 			} catch (Exception ex) {System.out.println("Property reading error :" + ex.getMessage()+" ["+Ressource.sprites+chara+"/"+type.toString()+"_config.txt"+"]"); prop = null;}
 			
@@ -63,7 +63,7 @@ public class SpritesLoader {
 					{
 						String sprite_name = "sprite_"+i;
 						
-						System.out.println(sprite_name);
+						//System.out.println(sprite_name);
 						
 						String[] values = prop.get(sprite_name).toString().split("#");
 						

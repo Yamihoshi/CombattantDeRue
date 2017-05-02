@@ -1,3 +1,7 @@
+/*@font-face {
+	src: url("/fonts/SSF4_ABUKET.ttf");
+}*/
+
 #title_screen{
   -fx-background-image: url("img/Street_Fighter_logo.png");
   -fx-background-repeat: stretch;   
@@ -6,6 +10,7 @@
 }
 
 #character_selection{
+  -fx-background-image: url("img/VS.png");
   -fx-background-color: black;
   -fx-background-repeat: stretch;   
   -fx-background-size: 1280 720;
@@ -20,3 +25,8 @@
   -fx-background-size: 1280 720;
   -fx-background-position: center center;
 }
+/*
+#character_name_J1, #frame_count
+{
+	-fx-font-family: "SSF4 ABUKET";
+}*/
