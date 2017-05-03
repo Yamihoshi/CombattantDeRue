@@ -11,6 +11,7 @@ import engine.components.hitbox.HitboxImpl;
 import engine.components.hitbox.HitboxState;
 import engine.components.player.Commande;
 import engine.components.player.Player;
+import engine.contracts.HitboxContract;
 import engine.contracts.TechniqueContract;
 import engine.services.EngineService;
 import engine.services.FightCharService;
@@ -77,7 +78,7 @@ public class CharacterFabrique {
 	   }
 	   
 	   public static HitboxService createHitbox(AtomicInteger x, int y, int hauteur, int largeur){
-			HitboxService hitbox = new HitboxImpl();
+			HitboxService hitbox = new HitboxContract(new HitboxImpl());
 			hitbox.init(x, y, hauteur, largeur);
 			return hitbox;
 	   }

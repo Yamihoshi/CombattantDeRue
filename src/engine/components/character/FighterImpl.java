@@ -49,7 +49,7 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 		}else if(isHitStunned()){
 			this.frame_stun--;
 		}else if(c == Commande.GUARD){
-			state_actuel = State.BLOCKING;
+			state_actuel = State.GUARDING;
 		}
 		else{
 			state_actuel = State.WAITING;
@@ -115,13 +115,14 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 	}
 	@Override
 	public void takeAttack(int damage, int hstun, int bstun) {
-		state_actuel = State.WAITING;
 		if(isBlocking()){
 			block_frame_stun = bstun;
 		}else{
 			frame_stun = hstun;
+			this.vie -= damage;
 		}
-		this.vie -= damage;
+		state_actuel = State.WAITING;
+		System.err.println(block_frame_stun + frame_stun);
 		this.compteurCombo.reset();
 	}	
 
@@ -148,7 +149,7 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 
 	@Override
 	public boolean isBlocking() {
-		return state_actuel == State.BLOCKING;
+		return state_actuel == State.GUARDING;
 	}
 
 	@Override
