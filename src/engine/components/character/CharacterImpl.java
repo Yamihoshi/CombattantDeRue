@@ -4,88 +4,27 @@ import java.util.HashMap;
 
 import engine.components.hitbox.HitboxImpl;
 import engine.components.player.Commande;
-import engine.contracts.ComboContract;
 import engine.contracts.HitboxContract;
-import engine.services.ComboService;
+import engine.services.CharacterService;
 import engine.services.EngineService;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
-import engine.services.TechService; 
 
-public class CharacterImpl implements FightCharService{
-
-	public static final int DEPLACEMENT = 10;
+public class CharacterImpl implements CharacterService{
+	public  static int id = 0;
+	
+	
 	protected Personnage personnage;
 	protected int vie = -1;
 	protected int vitesse = -1;
-	protected int frame_stun = 0;
-	protected int block_frame_stun = 0;
+	protected int x;
+	protected int y;
 	protected EngineService engine;
 	protected HitboxService hitbox;
 	protected boolean faceRight;
 	protected State state_actuel;
-	protected TechService current_technique;
-	protected HashMap<Commande, TechService> techniques;
-	protected ComboService compteurCombo;
-
-	@Override
-	public void step(Commande c) {
-	//	state_actuel = State.WAITING;
-		if(isTeching()){
-			current_technique.step(this, getOtherPlayer());
-		}else if(isBlockStunned()){
-			this.block_frame_stun--;
-			switch (c) {
-			case NEUTRAL:
-				
-				break;
-			case DOWN:
-				break;
-			default:
-				break;
-			}
-		}else if(isHitStunned()){
-			this.frame_stun--;
-		}else if(c == Commande.GUARD){
-			state_actuel = State.BLOCKING;
-		}
-		else{
-			state_actuel = State.WAITING;
-			switch(c){
-				case PUNCH:
-					startTech(techniques.get(Commande.PUNCH));
-					break;
-				case KICK:
-					startTech(techniques.get(Commande.KICK));
-					break;
-				case DOWN:
-					break;
-				case UP:
-					break;
-				case NEUTRAL:
-					break;
-				case LEFT:
-					moveLeft();
-					break;
-				case RIGHT:
-					moveRight();
-					break;
-				case DOWNLEFT:
-					break;
-				case DOWNRIGHT:
-					break;
-				case UPLEFT:
-					break;
-				case UPRIGHT:
-					break;
-				default:
-					break;
-				}
-		}
-		this.compteurCombo.step(false);
-	}
-	
-
+	protected HashMap<Commande, HitboxService> liste_hitbox;
+	protected int myId;
 	
 	private void gestionStand(){
 		//state_actuel = State.STAND;
@@ -122,31 +61,23 @@ public class CharacterImpl implements FightCharService{
 		int indice = getOtherIndice();
 		int new_x = getPositionX() + this.vitesse;
 		tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
-		if(isOutsideLeft(tmp)){
-			new_x = 1;
-			tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
-			System.out.println("Try to go out backward..");
-		}else if(isOutsideRight(tmp)){
-			new_x = engine.getWidth();
+		if(isOutsideRight(tmp)){
+			new_x = engine.getWidth() - getLargeur();
 			tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
 			System.out.println("Try to go out forward..");
-
 		}
-		if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox())){
-			System.out.println("Collides with..");
+		if(tmp.collidesWith(getOtherPlayer().getCharBox())){
 			return;
 		}
 			
 		hitbox.moveTo(new_x, getPositionY());
 	}
-	
+
 	@Override
 	public void neutral() {
 		gestionStand();
 		
 	}
-
-
 	@Override
 	public void moveUpRight() {
 		gestionJump();
@@ -167,7 +98,6 @@ public class CharacterImpl implements FightCharService{
 		gestionDown();
 		/*ADD CHANGEMENT HITBOX*/
 	}
-
 	@Override
 	public void moveDownLeft() {
 		gestionDown();
@@ -180,19 +110,15 @@ public class CharacterImpl implements FightCharService{
 	@Override
 	public String toString() {
 		return "CharacterImpl [name=" + getName() + ", vie=" + vie + ", vitesse=" + vitesse + ", engine=" + engine
-				+ ", hitbox=" + hitbox + ", faceRight=" + faceRight + ", techniques=" + techniques + "]";
+				+ ", hitbox=" + hitbox + ", faceRight=" + faceRight + "]";
 	}
 	
 	protected int getMyIndice(){
-		if(getEngine().getCharacter(0).getPersonnage() == this.personnage)
-			return 0;
-		return 1;
+		return getEngine().getMyIndice(myId);
 	} 
 	
 	protected int getOtherIndice(){
-		if(getEngine().getCharacter(0).getPersonnage() == this.personnage)
-			return 1;
-		return 0;
+		return getEngine().getOtherIndice(myId);
 	}
 	protected FightCharService getOtherPlayer(){
 		return engine.getCharacter(getOtherIndice());
@@ -213,16 +139,16 @@ public class CharacterImpl implements FightCharService{
 
 	@Override 
 	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight) {
+		this.myId = ++id;
 		this.personnage = personnage;
 		vie = life;
 		vitesse = speed;
 		this.engine = engine;
 		this.faceRight = faceRight;
 		this.hitbox = new HitboxContract(new HitboxImpl());
-		this.techniques = new HashMap<>();
-		this.compteurCombo = (ComboService) new ComboContract(new ComboIpml());
-		this.compteurCombo.init();
-	} 
+	}
+	
+
 	
 	@Override
 	public boolean isDead() {
@@ -296,95 +222,20 @@ public class CharacterImpl implements FightCharService{
 		result = prime * result + ((engine == null) ? 0 : engine.hashCode());
 		result = prime * result + (faceRight ? 1231 : 1237);
 		result = prime * result + ((hitbox == null) ? 0 : hitbox.hashCode());
-		result = prime * result + ((techniques == null) ? 0 : techniques.hashCode());
 		result = prime * result + vie;
 		result = prime * result + vitesse;
 		return result;
 	}
 
-	/*
-	 * FightChar
-	 * @see engine.services.FightCharService#startTech(engine.services.TechService)
-	 */
-	
-	
 	@Override
-	public void startTech(TechService tech) {
-		if(isTeching()){
-			tech.step(this, getOtherPlayer());
-		}else{
-			state_actuel = State.TEACHING;
-			tech.launchTechnique();
-			tech.step(this, getOtherPlayer());
-			current_technique = tech;
-		}
-	}
-	
-	@Override
-	public void endTechnique() {
-		state_actuel = State.WAITING;
-	}
-	@Override
-	public void takeAttack(int damage, int hstun, int bstun) {
-		state_actuel = State.WAITING;
-		if(isBlocking()){
-			block_frame_stun = bstun;
-		}else{
-			frame_stun = hstun;
-		}
-		this.vie -= damage;
-		this.compteurCombo.reset();
-	}	
-
-	@Override
-	public boolean isBlockStunned() {
-		return block_frame_stun > 0;
+	public void step(Commande c) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public boolean isHitStunned() {
-		return frame_stun > 0;
-	}
-
-	@Override
-	public HashMap<Commande, TechService> getTech() {
-		return this.techniques;
-	}
-
-	
-	@Override
-	public TechService getCurrentTechnique() {
-		return current_technique;
-	}
-
-	@Override
-	public boolean isBlocking() {
-		return state_actuel == State.BLOCKING;
-	}
-
-	@Override
-	public boolean isTeching() {
-		return state_actuel == State.TEACHING;
-	}
-
-	@Override
-	public ComboService getComboService() {
-		return compteurCombo;
-	}
-
-	@Override
-	public boolean isCombo() {
-		return getComboService().getCombo() > 0;
-	}
-
-	@Override
-	public int getCombo() {
-		return getComboService().getCombo();
-	}
-
-	@Override
-	public void stepCombo(boolean hit) {
-		getComboService().step(hit);
+	public int getId() {
+		return myId;
 	}
 
 }

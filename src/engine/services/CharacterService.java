@@ -24,9 +24,7 @@ public interface CharacterService {
 	public Personnage getPersonnage();
 	public boolean isFaceRight();
 	public boolean isDead();
-	
-
-
+	public int getId();
 	
 	
 	/* Operators */

@@ -161,6 +161,7 @@ public class StageController implements Initializable {
     	}
     	
     	this.hitbox_J2.setLayoutX(hitboxJ2.getPositionX());
+    	this.hitbox_J2.setLayoutY(hitboxJ2.getPositionY());
     	this.hitbox_J2.setHeight(hitboxJ2.getHauteur());
     	this.hitbox_J2.setWidth(hitboxJ2.getLargeur());
     }

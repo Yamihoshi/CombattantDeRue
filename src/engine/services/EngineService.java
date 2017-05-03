@@ -15,8 +15,11 @@ public interface EngineService {
 	public FightCharService[] getCharacters();
 	public Player getPlayer(int n);
 	public boolean isGameOver();
-	
+	public int getOtherIndice(int myId);
+	public int getMyIndice(int myId);
+
 	/* Operators */
 	
 	public void step(Commande c1,Commande c2);
+
 }

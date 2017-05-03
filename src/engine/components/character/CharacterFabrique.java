@@ -53,6 +53,7 @@ public class CharacterFabrique {
 					new Integer(p.getProperty("light_kick_width")), new Integer(p.getProperty("light_kick_height")));
 			fc.getTech().put(Commande.KICK, kick);
 	   }
+	   
 	   /**
 	    * Charge la liste des propriétés contenu dans le fichier spécifié
 	    *

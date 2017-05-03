@@ -7,9 +7,21 @@ import engine.contracts.error.PreconditionError;
 import engine.decorators.EngineDecorator;
 import engine.services.EngineService;
 import engine.services.FightCharService;
-import engine.components.character.CharacterImpl;
+import engine.components.character.FighterImpl;
 
 public class EngineContract extends EngineDecorator{
+
+	@Override
+	public int getOtherIndice(int myId) {
+		// TODO Auto-generated method stub
+		return super.getOtherIndice(myId);
+	}
+
+	@Override
+	public int getMyIndice(int myId) {
+		// TODO Auto-generated method stub
+		return super.getMyIndice(myId);
+	}
 
 	public EngineContract(EngineService delegate) {
 		super(delegate);

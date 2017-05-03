@@ -39,7 +39,7 @@ public class CharacterContract extends CharacterDecorator {
 	public void moveLeft() {
 		// TODO Auto-generated method stub
 		
-		int other = getOtherIndice();
+		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
 		 
 		checkInvariant();
@@ -56,7 +56,7 @@ public class CharacterContract extends CharacterDecorator {
 	@Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
-		int other = getOtherIndice();
+		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
 		
 		checkInvariant();
@@ -189,26 +189,6 @@ public class CharacterContract extends CharacterDecorator {
 		super.startTech(tech);
 	}
 
-	@Override
-	protected int getMyIndice() {
-		return super.getMyIndice();
-	}
-
-	@Override
-	protected int getOtherIndice() {
-		return super.getOtherIndice();
-	}
-
-	@Override
-	public CharacterService getCharacter() {
-		return super.getCharacter();
-	}
-
-	@Override
-	public void setCharacter(FightCharService character) {
-		// TODO Auto-generated method stub
-		super.setCharacter(character);
-	}
 
 	@Override
 	public int getHauteur() {

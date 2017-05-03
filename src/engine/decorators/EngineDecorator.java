@@ -7,8 +7,18 @@ import engine.services.FightCharService;
 
 public class EngineDecorator implements EngineService{
 
+
+
 	private final EngineService delegate;
 	
+	public int getOtherIndice(int myId) {
+		return delegate.getOtherIndice(myId);
+	}
+
+	public int getMyIndice(int myId) {
+		return delegate.getMyIndice(myId);
+	}
+
 	public FightCharService[] getCharacters() {
 		return delegate.getCharacters();
 	}

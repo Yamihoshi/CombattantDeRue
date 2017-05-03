@@ -27,7 +27,7 @@ public class EngineImpl implements EngineService{
 		players[0] = j1;
 		players[1] = j2;
 		getCharacter(0).getCharBox().moveTo((int)width/2 - (int)s/2, getCharacter(0).getPositionY());
-		getCharacter(1).getCharBox().moveTo((int)width/2 + (int)s/2, getCharacter(1).getPositionY());
+		getCharacter(1).getCharBox().moveTo((int)width/2 + 20 + (int)s/2, getCharacter(1).getPositionY());
 	}
 
 	@Override
@@ -37,19 +37,16 @@ public class EngineImpl implements EngineService{
 
 	@Override
 	public int getWidth() {
-		// TODO Auto-generated method stub
 		return width;
 	}
 
 	@Override
 	public FightCharService getCharacter(int n) {
-		// TODO Auto-generated method stub
 		return players[n].getCharacter();
 	}
 
 	@Override
 	public Player getPlayer(int n) {
-		// TODO Auto-generated method stub
 		return players[n];
 	}
 
@@ -70,7 +67,6 @@ public class EngineImpl implements EngineService{
 
 	@Override
 	public FightCharService[] getCharacters() {
-		// TODO Auto-generated method stub
 		FightCharService[] charas = new FightCharService[2];
 		charas[0] = this.getCharacter(0);
 		charas[1] = this.getCharacter(1);
@@ -79,8 +75,22 @@ public class EngineImpl implements EngineService{
 
 	@Override
 	public int getSpace() {
-		// TODO Auto-generated method stub
 		return space;
 	}
+
+	@Override
+	public int getOtherIndice(int myId){
+		if(this.getCharacter(0).getId() == myId)
+			return 1;
+		return 0;
+	}
+	 
+	@Override
+	public int getMyIndice(int myId){
+		if(this.getCharacter(0).getId() == myId)
+			return 0;
+		return 1;
+	}
+
 
 }

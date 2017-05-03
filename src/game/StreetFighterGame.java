@@ -1,6 +1,6 @@
 package game;
 
-import engine.components.character.CharacterImpl;
+import engine.components.character.FighterImpl;
 import engine.components.player.Player;
 import engine.contracts.CharacterContract;
 import engine.contracts.EngineContract;
@@ -18,8 +18,8 @@ public class StreetFighterGame {
 	{
 		this.engine = new EngineContract(new EngineImpl());
 		this.players= new Player[2];
-		this.players[0] = new Player(new CharacterContract(new CharacterImpl()));
-		this.players[1] = new Player(new CharacterContract(new CharacterImpl()));
+		this.players[0] = new Player(new CharacterContract(new FighterImpl()));
+		this.players[1] = new Player(new CharacterContract(new FighterImpl()));
 	}
 	
 	public EngineService getEngine() {
