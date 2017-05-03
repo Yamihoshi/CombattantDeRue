@@ -2,6 +2,7 @@ package engine.contracts;
 
 import engine.components.player.Commande;
 import engine.components.player.Player;
+import engine.contracts.error.InvariantError;
 import engine.contracts.error.PostconditionError;
 import engine.contracts.error.PreconditionError;
 import engine.decorators.EngineDecorator;
@@ -13,19 +14,16 @@ public class EngineContract extends EngineDecorator{
 
 	@Override
 	public int getOtherIndice(int myId) {
-		// TODO Auto-generated method stub
 		return super.getOtherIndice(myId);
 	}
 
 	@Override
 	public int getMyIndice(int myId) {
-		// TODO Auto-generated method stub
 		return super.getMyIndice(myId);
 	}
 
 	public EngineContract(EngineService delegate) {
 		super(delegate);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -50,8 +48,12 @@ public class EngineContract extends EngineDecorator{
 		}
 	}
 	
-	public boolean checkInvariant(){
-		return true;
+	public void checkInvariant(){
+		if(isGameOver()){
+			if(!(getCharacter(0).isDead() || getCharacter(1).isDead())){
+				new InvariantError("Personne morte");
+			}
+		}
 	}
 	@Override
 	public int getHeight() {
@@ -67,6 +69,7 @@ public class EngineContract extends EngineDecorator{
 
 	@Override
 	public FightCharService getCharacter(int i) {
+		
 		if(!(i == 0 || i == 1)){
 			new PreconditionError("Entier i =/= 0 | 1 ");
 			return null;
@@ -95,8 +98,9 @@ public class EngineContract extends EngineDecorator{
 
 	@Override
 	public void step(Commande c1, Commande c2) {
-		// TODO Auto-generated method stub
+		checkInvariant();
 		super.step(c1, c2);
+		checkInvariant();
 	}
 
 	@Override
@@ -132,13 +136,11 @@ public class EngineContract extends EngineDecorator{
 
 	@Override
 	public int getSpace() {
-		// TODO Auto-generated method stub
 		return super.getSpace();
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return super.toString();
 	}
 

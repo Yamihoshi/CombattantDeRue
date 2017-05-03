@@ -26,7 +26,7 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight) {
 		super.init(personnage, life, speed, engine, faceRight);
 		this.techniques = new HashMap<>();
-		this.compteurCombo = (ComboService) new ComboContract(new ComboIpml());
+		this.compteurCombo = new ComboContract(new ComboIpml());
 		this.compteurCombo.init();
 	}
 	
@@ -113,6 +113,7 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 	public void endTechnique() {
 		state_actuel = State.WAITING;
 	}
+	
 	@Override
 	public void takeAttack(int damage, int hstun, int bstun) {
 		state_actuel = State.WAITING;
