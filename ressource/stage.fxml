@@ -80,5 +80,25 @@
       </Text>
       <Rectangle fx:id="hitbox_attack_J1" arcHeight="5.0" arcWidth="5.0" fill="#ff21219c" height="60.0" layoutX="209.0" layoutY="330.0" stroke="BLACK" strokeType="INSIDE" width="160.0" />
       <Rectangle fx:id="hitbox_attack_J2" arcHeight="5.0" arcWidth="5.0" fill="#ff21219c" height="60.0" layoutX="209.0" layoutY="330.0" stroke="BLACK" strokeType="INSIDE" width="160.0" />
+      <ImageView fx:id="combo_img_J1" fitHeight="30.0" fitWidth="148.0" layoutX="20.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/Combo.png" />
+         </image>
+      </ImageView>
+      <Text id="frame_count" fx:id="combo_count_J1" fill="#d6092b" layoutX="170.0" layoutY="158.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" text="0">
+         <font>
+            <Font name="Segoe Script" size="45.0" />
+         </font>
+      </Text>
+      <Text id="frame_count" fx:id="combo_count_J2" fill="#d6092b" layoutX="1200.0" layoutY="157.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" text="0">
+         <font>
+            <Font name="Segoe Script" size="45.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="combo_img_J2" fitHeight="30.0" fitWidth="148.0" layoutX="1050.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/Combo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

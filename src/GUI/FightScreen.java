@@ -288,6 +288,8 @@ public class FightScreen{
                     controller.updateHitbox(J1, J2);
                     /*-------------*/
                     
+                   controller.updateCombo(game.getEngine().getCharacter(0).getCombo(),game.getEngine().getCharacter(1).getCombo());
+                    
                     for(int i=0;i<game.getPlayers().length;i++)
                     {
                     	FightCharService chara = game.getEngine().getCharacter(i);

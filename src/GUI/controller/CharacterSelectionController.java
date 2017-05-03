@@ -40,8 +40,8 @@ public class CharacterSelectionController implements Initializable {
     		Font bgFont = Font.loadFont(fontStream, 36);
     		font.setFont(bgFont);*/
     		
-    	updateImageCharacterDisplay(1,1);
-    	updateImageCharacterDisplay(2,2);    	
+    	updateImageCharacterDisplay(1,0);
+    	updateImageCharacterDisplay(2,1);    	
     }
     
     public void updateImageCharacterDisplay(int joueur,int index_chara)

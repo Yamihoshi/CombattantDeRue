@@ -23,8 +23,8 @@ public class CharacterSelection{
 	
 	private CharacterSelectionController controller;
 	
-    private int index_chara_J1 = 1;
-    private int index_chara_J2 = 2;
+    private int index_chara_J1 = 0;
+    private int index_chara_J2 = 1;
     
     private StreetFighterGame game;
 	

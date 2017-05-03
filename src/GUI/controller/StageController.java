@@ -64,6 +64,18 @@ public class StageController implements Initializable {
 	@FXML 
     private ProgressBar life_bar_J2;
 	
+	@FXML 
+    private Text combo_count_J1;
+	
+	@FXML 
+    private ImageView combo_img_J1;
+	
+	@FXML 
+    private Text combo_count_J2;
+	
+	@FXML 
+    private ImageView combo_img_J2;
+	
 	private boolean showHitbox;
   	public static int SPACE = 70;
     @Override  
@@ -228,5 +240,34 @@ public class StageController implements Initializable {
 		else
 			if(val!=life_bar_J2.getProgress())
 				life_bar_J2.setProgress(val);
+	}
+	
+	public void updateCombo(int val1, int val2)
+	{
+		this.combo_count_J1.setText(val1+"");
+		this.combo_count_J2.setText(val2+"");
+		
+		if(val1<=0)
+		{
+			this.combo_count_J1.setVisible(false);
+			this.combo_img_J1.setVisible(false);
+		}
+		else
+		{
+			this.combo_count_J1.setVisible(true);
+			this.combo_img_J1.setVisible(true);
+		}
+		
+		if(val2<=0)
+		{
+			this.combo_count_J2.setVisible(false);
+			this.combo_img_J2.setVisible(false);
+		}
+		else
+		{
+			this.combo_count_J2.setVisible(true);
+			this.combo_img_J2.setVisible(true);
+		}
+		
 	}
 }
