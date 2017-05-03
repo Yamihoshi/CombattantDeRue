@@ -41,6 +41,7 @@ public class FightScreen{
 	private int[] nbTimeKeyPressed;
 	private KeyBinder keyBinder;
 	private AnimationBinder animationBinder;
+	private KeyCode[] code = new KeyCode[2];
 	
 	private boolean framePerFrame;
 	
@@ -215,8 +216,6 @@ public class FightScreen{
             		controller.setFrame(frameCount);     
             		
             		/*-----------------------------*/
-                    
-            		KeyCode[] code = new KeyCode[2];
             		
                     for(int i=0;i<commandes.length;i++)
                     {    
@@ -265,7 +264,7 @@ public class FightScreen{
                     				commandes[i]=Commande.DOWNRIGHT;
                     		}
                     		else if(commandes[i]==Commande.DOWNLEFT ||commandes[i]==Commande.DOWNRIGHT)
-                    		{
+                    		{   
                     			if(cmd==Commande.LEFT)
                     				commandes[i]=Commande.DOWNLEFT;
                     			else if(cmd==Commande.RIGHT)
@@ -275,7 +274,10 @@ public class FightScreen{
                     		}
                     	}
                     	
-                    	 // System.out.println(commandes[i]);
+            			if(!currentKey.get(i).contains(code[i]))
+            				commandes[i]=Commande.NEUTRAL;
+                    	
+                    	 System.out.println(commandes[i]);
                     }
                     
                   
