@@ -70,7 +70,7 @@ public class Technique implements TechService {
 			if(me.isFaceRight())
 				hitbox.setPositionX(this.debut_x + me.getPositionX());
 			else{
-				hitbox.setPositionX(-(this.debut_x + this.saveWidth) + me.getPositionX());
+				hitbox.setPositionX(me.getPositionX() - this.saveWidth);
 			}
 			hitbox.setPositionY(this.debut_y + me.getPositionY());
 			
