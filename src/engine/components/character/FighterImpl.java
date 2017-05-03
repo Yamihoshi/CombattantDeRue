@@ -76,8 +76,10 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 					moveRight();
 					break;
 				case DOWNLEFT:
+					moveDownLeft();
 					break;
 				case DOWNRIGHT:
+					moveDownRight();
 					break;
 				case UPLEFT:
 					break;
