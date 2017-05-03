@@ -4,7 +4,7 @@ loop=false
 X_axis=193
 Y_axis=431
 
-X_axis_reversed=193
+X_axis_reversed=237
 
 sprite_i=duration
 
