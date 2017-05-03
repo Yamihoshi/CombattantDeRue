@@ -4,6 +4,8 @@ loop=true
 X_axis=258
 Y_axis=477
 
+X_axis_reversed=278
+
 sprite_i=duration
 
 sprite_0=1

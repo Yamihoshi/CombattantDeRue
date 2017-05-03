@@ -66,7 +66,7 @@
             <Image url="@sprites/Chun_Li/Chun_Li_stand_0.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="character_J2" layoutX="893.0" layoutY="260.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="character_J2" layoutX="893.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@sprites/Chun_Li/Chun_Li_stand_0.png" />
          </image>

@@ -35,10 +35,11 @@ public class SpritesLoader {
 			
 			prop.clear();
 			
-			Animation animation = new Animation(type,false);
+			Animation animation = new Animation(type);
 			
-			int read_Y = Animation.ref_position_X_left;
-			int read_X = Animation.ref_position_Y;
+			int read_Y = Animation.ref_position_Y;
+			int read_X = Animation.ref_position_X_left;
+			int read_X_reversed = Animation.ref_position_X_left;
 			int read_duration = 4;
 			int animation_length=0;
 			boolean read_loop = true;
@@ -55,6 +56,7 @@ public class SpritesLoader {
 				
 				String s = prop.getProperty("animation_length");
 				read_X = new Integer(prop.getProperty("X_axis"));
+				read_X_reversed = new Integer(prop.getProperty("X_axis_reversed"));
 				read_Y = new Integer(prop.getProperty("Y_axis"));
 				
 				if(s!=null && !s.isEmpty())
@@ -85,7 +87,7 @@ public class SpritesLoader {
 						animation.addSprite(new Sprite(read_duration, img));
 					}	
 					
-					animation.setPosition(read_X, read_Y);
+					animation.setPosition(read_X, read_X_reversed,read_Y);
 					animation.setLoop(read_loop);
 				}
 

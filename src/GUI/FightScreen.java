@@ -41,6 +41,8 @@ public class FightScreen{
 	
 	private boolean framePerFrame;
 	
+	private boolean[] faceRight;
+	
 	public FightScreen(StreetFighterGame game) throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/stage.fxml"));
@@ -162,7 +164,7 @@ public class FightScreen{
             		timePerFrame = 1000000000 * StageController.frameTime;
             	
             	if ((framePerFrame && currenttimeNano - lasttimeFPS >= timePerFrame) || !framePerFrame)
-            	{            		
+            	{   
             		lasttimeFPS = currenttimeNano;
             		
             		frameCount = (frameCount+1)%61;
@@ -176,8 +178,7 @@ public class FightScreen{
             		if(frameCount==0)
             			frameCount=1;
             		
-            		controller.setFrame(frameCount);
-                    
+            		controller.setFrame(frameCount);            		
                     
                     Commande[] commandes = new Commande[2];
                     
@@ -187,6 +188,9 @@ public class FightScreen{
                     	frameAnimationCount[i]++;
                     	
                     	FightCharService chara = game.getEngine().getCharacter(i);
+                        
+                    	if(!chara.isFaceRight())
+                    		controller.flip(i);
                     	
                     	if(chara.isTeching())
                     	{
@@ -207,7 +211,11 @@ public class FightScreen{
 	    	           		Sprite sprite = sprites_manager.getCurrentSprite(i);
 	                		controller.updateSprite(i,sprite);
 	                		frameAnimationCount[i]=0;
-	                		controller.updateSpriteAlignement(i,sprites_manager.getAnimationPlayed(i).getTranslate_X(),sprites_manager.getAnimationPlayed(i).getTranslate_Y());
+	                		if(chara.isFaceRight())
+	                			controller.updateSpriteAlignement(i,sprites_manager.getAnimationPlayed(i).getTranslate_X(),sprites_manager.getAnimationPlayed(i).getTranslate_Y());
+	                		else
+	                			controller.updateSpriteAlignement(i,sprites_manager.getAnimationPlayed(i).getTranslate_X_reversed(),sprites_manager.getAnimationPlayed(i).getTranslate_Y());
+
 	    	           	}
                     }
                     
