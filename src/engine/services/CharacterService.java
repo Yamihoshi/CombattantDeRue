@@ -28,6 +28,8 @@ public interface CharacterService {
 	public boolean isDead();
 	public int getId();
 	public void bindHitbox(HitboxService hitbox, HitboxState state);
+	public void bindJump(JumpService jumpService);
+
 	
 	
 	/* Operators */

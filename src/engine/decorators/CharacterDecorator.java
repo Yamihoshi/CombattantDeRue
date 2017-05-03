@@ -12,6 +12,7 @@ import engine.services.ComboService;
 import engine.services.EngineService;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
+import engine.services.JumpService;
 import engine.services.TechService;
 
 public class CharacterDecorator implements FightCharService{
@@ -192,6 +193,11 @@ public class CharacterDecorator implements FightCharService{
 
 	public int getMaxLife() {
 		return character.getMaxLife();
+	}
+
+	@Override
+	public void bindJump(JumpService jumpService) {
+		character.bindJump(jumpService);
 	}
 	
 }

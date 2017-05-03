@@ -6,16 +6,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 import engine.components.hitbox.HitboxImpl;
 import engine.components.hitbox.HitboxState;
 import engine.components.player.Commande;
-import engine.contracts.HitboxContract;
 import engine.services.CharacterService;
 import engine.services.EngineService;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
+import engine.services.JumpService;
 
 public class CharacterImpl implements CharacterService{
 	public  static int id = 0;
-	
-	
 	protected Personnage personnage;
 	protected int vie = -1;
 	protected int vitesse = -1;
@@ -29,13 +27,17 @@ public class CharacterImpl implements CharacterService{
 	protected HitboxState hitboxState = HitboxState.STANDING;
 	private int maxLife;
 	private int ecart;
+	protected JumpService jump;
+	public static boolean jumping = false;
 	
 	private void gestionStand(){
 		changeHitbox(HitboxState.STANDING);
 	}
-	
+	public boolean isJumping(){
+		return jumping;
+	}
 	private void gestionJump(){
-		//state_actuel = State.JUMP;
+		jumping = true;
 	}
 	private void gestionDown(){
 		changeHitbox(HitboxState.CROUCHING);
@@ -73,7 +75,7 @@ public class CharacterImpl implements CharacterService{
 		if(tmp.collidesWith(getOtherPlayer().getCharBox())){
 			return;
 		}
-			
+		
 		getCharBox().moveTo(new_x, getPositionY());
 	}
 
@@ -93,6 +95,7 @@ public class CharacterImpl implements CharacterService{
 	@Override
 	public void moveUp() {
 		gestionJump();
+		jump.launch();
 	}
 	@Override
 	public void moveDown() {
@@ -130,8 +133,7 @@ public class CharacterImpl implements CharacterService{
 		}
 		if(tmp.collidesWith(getOtherPlayer().getCharBox())){
 			return;
-		}
-			
+		}	
 		getCharBox().moveTo(new_x, getPositionY());
 	}
 	
@@ -283,5 +285,10 @@ public class CharacterImpl implements CharacterService{
 	@Override
 	public int getEcart() {
 		return ecart;
+	}
+
+	@Override
+	public void bindJump(JumpService jumpService) {
+		jump = jumpService;
 	}
 }

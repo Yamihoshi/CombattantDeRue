@@ -33,6 +33,7 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 	
 	@Override
 	public void step(Commande c) {
+		System.out.println(c);
 	//	state_actuel = State.WAITING;
 		if(isTeching()){
 			current_technique.step(this, getOtherPlayer());
@@ -51,6 +52,9 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 			this.frame_stun--;
 		}else if(c == Commande.GUARD){
 			state_actuel = State.GUARDING;
+		}else if(isJumping()){
+			System.out.println("je rentre dans mon jump");
+			jump.step(getCharBox(), getOtherPlayer().getCharBox());
 		}
 		else{
 			state_actuel = State.WAITING;
@@ -65,6 +69,7 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 					moveDown();
 					break;
 				case UP:
+					moveUp();
 					break;
 				case NEUTRAL:
 					neutral();
@@ -123,7 +128,10 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 			block_frame_stun = bstun;
 		}else{
 			frame_stun = hstun;
+			System.out.println("my vie before " + vie);
+
 			this.vie -= damage;
+			System.out.println("and after" +  vie);
 		}
 		state_actuel = State.WAITING;
 		System.err.println(block_frame_stun + frame_stun);

@@ -16,6 +16,7 @@ import engine.contracts.TechniqueContract;
 import engine.services.EngineService;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
+import engine.services.JumpService;
 import engine.services.TechService;
 import game.StreetFighterGame;
 
@@ -26,9 +27,10 @@ public class CharacterFabrique {
 		   FightCharService fc = player.getCharacter();
 		   try {
 			Properties p = CharacterFabrique.load("ressource"+Ressource.character+personnage.toString());
-			fc.init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight, new Integer(p.getProperty("ecart", "1")));
+			fc.init(personnage, new Integer(p.getProperty("vie", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight, new Integer(p.getProperty("ecart", "1")));
 			initHitbox(fc, p);
 			initTechnique(fc, p);
+			initJump(fc, p);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -69,12 +71,16 @@ public class CharacterFabrique {
 			int hauteur_crouching = new Integer(p.getProperty("crouching_height"));
 			int largeur_crouching =  new Integer(p.getProperty("crouching_width"));
 			y = StreetFighterGame.HEIGHT - hauteur_crouching;
-			System.out.println(y);
-			fc.bindHitbox(createHitbox(x, y, hauteur_crouching, largeur_crouching), HitboxState.CROUCHING);
-
-			
-			
-			
+			fc.bindHitbox(createHitbox(x, y, hauteur_crouching, largeur_crouching), HitboxState.CROUCHING);	
+	   }
+	   
+	   public static void initJump(FightCharService fc, Properties p){
+		   JumpService jumpService = new Jump();
+		   jumpService.init(new Integer(p.getProperty("start_up")), new Integer(p.getProperty("move_up")), 
+							   new Integer(p.getProperty("on_air")), new Integer(p.getProperty("move_down")), 
+							   new Integer(p.getProperty("landing")), new Integer(p.getProperty("vitesse_x")),
+							   new Integer(p.getProperty("vitesse_y")));
+		   fc.bindJump(jumpService);
 	   }
 	   
 	   public static HitboxService createHitbox(AtomicInteger x, int y, int hauteur, int largeur){
@@ -82,6 +88,7 @@ public class CharacterFabrique {
 			hitbox.init(x, y, hauteur, largeur);
 			return hitbox;
 	   }
+	   
 	   /**
 	    * Charge la liste des propriétés contenu dans le fichier spécifié
 	    *
