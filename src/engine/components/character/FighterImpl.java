@@ -41,7 +41,7 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 			case NEUTRAL:
 				
 				break;
-			case CROUCH:
+			case DOWN:
 				break;
 			default:
 				break;
@@ -60,7 +60,7 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 				case KICK:
 					startTech(techniques.get(Commande.KICK));
 					break;
-				case CROUCH:
+				case DOWN:
 					moveDown();
 					break;
 				case UP:
@@ -102,7 +102,7 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 		if(isTeching()){
 			tech.step(this, getOtherPlayer());
 		}else{
-			state_actuel = State.TEACHING;
+			state_actuel = State.TECHING;
 			tech.launchTechnique();
 			tech.step(this, getOtherPlayer());
 			current_technique = tech;
@@ -153,7 +153,7 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 
 	@Override
 	public boolean isTeching() {
-		return state_actuel == State.TEACHING;
+		return state_actuel == State.TECHING;
 	}
 
 	@Override

@@ -7,7 +7,9 @@ public enum AnimationType {
 	GUARD("guard"),
 	CROUCH("crouch"),
 	PUNCH("punch"),
-	KICK("kick");
+	KICK("kick"),
+	START_JUMP("start_jump"),
+	VERTICAL_JUMP_UP("vertical_jump_up");
 	
 	private String name = "";
 	

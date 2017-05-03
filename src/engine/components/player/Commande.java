@@ -14,9 +14,7 @@ public enum Commande {
 	DOWNLEFT,
 	
 	GUARD,
-	CROUCH,
 	NEUTRAL,
-	JUMP,
 	
 	PUNCH,
 	KICK

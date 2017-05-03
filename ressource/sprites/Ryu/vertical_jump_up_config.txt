@@ -1,8 +1,8 @@
-animation_length=8
+animation_length=7
 loop=true
 
-X_axis=163
-Y_axis=459
+X_axis=84
+Y_axis=520
 
 sprite_i=duration
 
@@ -11,7 +11,5 @@ sprite_1=3
 sprite_2=3
 sprite_3=3
 sprite_4=3
-sprite_5=4
-sprite_6=4
-sprite_7=4
-sprite_8=4
+sprite_5=3
+sprite_6=3

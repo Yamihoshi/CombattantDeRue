@@ -26,8 +26,9 @@ public class KeyBinder {
 		bind.put(KeyCode.D, Commande.RIGHT);
 		bind.put(KeyCode.X, Commande.PUNCH);
 		bind.put(KeyCode.E, Commande.GUARD);
-		bind.put(KeyCode.S, Commande.CROUCH);
+		bind.put(KeyCode.S, Commande.DOWN);
 		bind.put(KeyCode.W, Commande.KICK);
+		bind.put(KeyCode.A, Commande.UP);
 		
 		return bind;
 	}
@@ -38,10 +39,11 @@ public class KeyBinder {
 		
 		bind.put(KeyCode.LEFT, Commande.LEFT);
 		bind.put(KeyCode.RIGHT, Commande.RIGHT);
+		bind.put(KeyCode.UP, Commande.UP);
 		bind.put(KeyCode.NUMPAD0, Commande.GUARD);
 		bind.put(KeyCode.NUMPAD1, Commande.PUNCH);
 		bind.put(KeyCode.NUMPAD2, Commande.KICK);
-		bind.put(KeyCode.DOWN, Commande.CROUCH);
+		bind.put(KeyCode.DOWN, Commande.DOWN);
 		
 		return bind;
 	}

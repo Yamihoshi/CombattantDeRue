@@ -36,7 +36,8 @@ public class FightScreen{
 	
 	private StreetFighterGame game;
 	
-	private KeyCode[] currentKey;
+	private List<LinkedList<KeyCode>> currentKey;
+	private List<LinkedList<KeyCode>> releasedNeededKey;
 	private int[] nbTimeKeyPressed;
 	private KeyBinder keyBinder;
 	private AnimationBinder animationBinder;
@@ -55,7 +56,14 @@ public class FightScreen{
 		
 		this.game = game;
 		
-		this.currentKey = new KeyCode[2];
+		this.currentKey = new ArrayList<LinkedList<KeyCode>>();
+		this.currentKey.add(new LinkedList<KeyCode>());
+		this.currentKey.add(new LinkedList<KeyCode>());
+		
+		this.releasedNeededKey = new ArrayList<LinkedList<KeyCode>>();
+		this.releasedNeededKey.add(new LinkedList<KeyCode>());
+		this.releasedNeededKey.add(new LinkedList<KeyCode>());
+		
 		this.nbTimeKeyPressed = new int[2];
 		this.keyBinder = new KeyBinder();
 		this.animationBinder = new AnimationBinder();
@@ -114,15 +122,14 @@ public class FightScreen{
             	}
             	else
             	{
-            		for(int i=0;i<currentKey.length;i++)
+            		for(int i=0;i<currentKey.size();i++)
             		{
             			if(keyBinder.isKeyOfPlayer(i,event.getCode()))
-            			{
-            				nbTimeKeyPressed[i]++;
-            				
-                			if(currentKey[i] == null && nbTimeKeyPressed[i]<=1)
+            			{            				
+                			if(!currentKey.get(i).contains(event.getCode()))
                 			{
-                				currentKey[i] = event.getCode();
+                				currentKey.get(i).addLast(event.getCode());
+                				//releasedKey.get(i).remove(event.getCode());
                 			}
             			}
             		}
@@ -136,12 +143,21 @@ public class FightScreen{
             @Override
             public void handle(KeyEvent event) {
             	
-        		for(int i=0;i<currentKey.length;i++)
-        			if((currentKey[i]==null || currentKey[i] == event.getCode())  && keyBinder.isKeyOfPlayer(i,event.getCode()))
-        			{
-        				nbTimeKeyPressed[i]=0;
-        				currentKey[i] = null;
+        		for(int i=0;i<currentKey.size();i++)
+        		{
+        			if(keyBinder.isKeyOfPlayer(i,event.getCode()))
+        			{            				
+            			if(currentKey.get(i).contains(event.getCode()))
+            			{
+            				currentKey.get(i).remove(event.getCode());
+            			}
+            			
+            			if(releasedNeededKey.get(i).contains(event.getCode()))
+            			{
+            				releasedNeededKey.get(i).remove(event.getCode());
+            			}
         			}
+        		}
             	//event.consume();
             }
         });
@@ -164,6 +180,7 @@ public class FightScreen{
         	int[] frameAnimationCount = new int[2];
         	FightCharService J1 = game.getEngine().getCharacter(0);
         	FightCharService J2 = game.getEngine().getCharacter(1);
+        	Commande[] commandes = new Commande[2];
         	
         	double timePerFrame = 1000000000 * StageController.frameTime;
         	
@@ -199,30 +216,69 @@ public class FightScreen{
             		
             		/*-----------------------------*/
                     
-                    Commande[] commandes = new Commande[2];
-                    
+            		KeyCode[] code = new KeyCode[2];
+            		
                     for(int i=0;i<commandes.length;i++)
                     {    
                     	animation_frame[i] = sprites_manager.getCurrentSprite(i).getDuration();
                     	frameAnimationCount[i]++;
                     	
                     	FightCharService chara = game.getEngine().getCharacter(i);
-                        
-                    	if(!chara.isFaceRight())
-                    		controller.flip(i);
                     	
                     	//System.out.println("[LIFE OF "+chara.getName()+"] ="+chara.getLife());
                     	
-                    	if(chara.isTeching())
+                    	/*if(chara.isTeching())
                     	{
-                    		currentKey[i]=null;
-                    	}
-
-                    	commandes[i] = keyBinder.getAction(i, currentKey[i]);
+                    		commandes[i] = Commande.NEUTRAL;
+                    	}*/
                     	
-                    	/*if(commandes[i]==Commande.PUNCH && nbTimeKeyPressed[i]>1)
-                        		commandes[i]=Commande.NEUTRAL;*/
+                    	/*if(currentKey.get(i).isEmpty())
+                    		commandes[i] = keyBinder.getAction(i,null);*/
+                    	
+                    	@SuppressWarnings("unchecked")
+						LinkedList<KeyCode> keys = (LinkedList<KeyCode>) currentKey.get(i).clone();
+                    	
+                    	if(commandes[i]==null || keys.isEmpty())
+                    		commandes[i]=Commande.NEUTRAL;
+                    	
+                    	while(!keys.isEmpty())
+                    	{                    		
+                    		//System.out.println(keys);
+                    		
+                    		KeyCode k = keys.removeFirst();
+                    		
+                    		Commande cmd = keyBinder.getAction(i,k);
+                    		
+                    		if(releasedNeededKey.get(i).contains(k))
+                    			commandes[i]=Commande.NEUTRAL;
+                    		else if(commandes[i]==Commande.NEUTRAL)
+	                    		{
+	                    			code[i]=k;
+	                    			commandes[i]=cmd;
+	                    			//currentKey.get(i).removeFirst();
+	                    		}
+                    		else if(commandes[i]==Commande.DOWN)
+                    		{                    			
+                    			if(cmd==Commande.LEFT)
+                    				commandes[i]=Commande.DOWNLEFT;
+                    			else if(cmd==Commande.RIGHT)
+                    				commandes[i]=Commande.DOWNRIGHT;
+                    		}
+                    		else if(commandes[i]==Commande.DOWNLEFT ||commandes[i]==Commande.DOWNRIGHT)
+                    		{
+                    			if(cmd==Commande.LEFT)
+                    				commandes[i]=Commande.DOWNLEFT;
+                    			else if(cmd==Commande.RIGHT)
+                    				commandes[i]=Commande.DOWNRIGHT;
+                    			else
+                    				commandes[i]=Commande.DOWN;
+                    		}
+                    	}
+                    	
+                    	 // System.out.println(commandes[i]);
                     }
+                    
+                  
                     
                     /* STEP ENGINE*/
                     game.getEngine().step(commandes[0], commandes[1]);
@@ -244,16 +300,22 @@ public class FightScreen{
 	    	           		}
 	    	           		else if (chara.isHitStunned())
 	    	           		{
-	    	           			
+	    	           			//Anim hit
 	    	           		}
 	    	           		else if (chara.isTeching())
-	    	           		{
+	    	           		{	    	           			
 	    	           			if(sprites_manager.getAnimationPlayed(i).getType()==AnimationType.STAND)
+	    	           			{
 	    	           				new_animation = animationBinder.getAnimation(commandes[i]);
+	    	           				if(!releasedNeededKey.contains(code[i]))
+	    	           					releasedNeededKey.get(i).add(code[i]);
+	    	           			}
 	    	           		}
 	    	           		else
 	    	           		{
 	    	           			new_animation = animationBinder.getAnimation(commandes[i]);
+	                        	if(!chara.isFaceRight())
+	                        		controller.flip(i);
 	    	           		}
 	    	           		
     	           			if(sprites_manager.getAnimationPlayed(i).getType()!=new_animation)
@@ -274,7 +336,11 @@ public class FightScreen{
                     	
                     	
 	    	           	/* UPDATE SPRITE */
-                    	if(chara.isBlockStunned() || chara.isHitStunned())
+                    	if(chara.isBlockStunned())
+                    	{
+                    		
+                    	}
+                    	else if(chara.isHitStunned())
                     	{
                     		
                     	}

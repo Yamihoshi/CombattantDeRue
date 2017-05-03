@@ -1,0 +1,7 @@
+animation_length=1
+loop=false
+
+X_axis=154
+Y_axis=414
+
+sprite_0=3

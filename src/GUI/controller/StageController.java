@@ -159,7 +159,7 @@ public class StageController implements Initializable {
     	
     	this.hitbox_J1.setLayoutX(hitboxJ1.getPositionX().get());
     	this.hitbox_J1.setLayoutY(hitboxJ1.getPositionY());
-    	System.out.println(hitboxJ1.getPositionY());
+    	//System.out.println(hitboxJ1.getPositionY());
     	this.hitbox_J1.setHeight(hitboxJ1.getHauteur());
     	this.hitbox_J1.setWidth(hitboxJ1.getLargeur());
     	
