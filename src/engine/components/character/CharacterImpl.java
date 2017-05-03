@@ -1,8 +1,10 @@
 package engine.components.character;
 
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import engine.components.hitbox.HitboxImpl;
+import engine.components.hitbox.HitboxState;
 import engine.components.player.Commande;
 import engine.contracts.HitboxContract;
 import engine.services.CharacterService;
@@ -23,8 +25,9 @@ public class CharacterImpl implements CharacterService{
 	protected HitboxService hitbox;
 	protected boolean faceRight;
 	protected State state_actuel;
-	protected HashMap<Commande, HitboxService> liste_hitbox;
+	protected HashMap<HitboxState, HitboxService> liste_hitbox;
 	protected int myId;
+	protected HitboxState hitboxState = HitboxState.STANDING;
 	
 	private void gestionStand(){
 		//state_actuel = State.STAND;
@@ -39,19 +42,20 @@ public class CharacterImpl implements CharacterService{
 	@Override
 	public void moveLeft() {
 		gestionStand();
-		int new_x = getPositionX() - this.vitesse;
+		AtomicInteger new_x = new AtomicInteger(getPositionX() - this.vitesse);
 		HitboxService tmp = new HitboxImpl();
-		tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
+		tmp.init(new_x, getReferencePositionY(), getHauteur(), getLargeur());
+		
 		if(isOutsideLeft(tmp)){
-			new_x = 1;
-			tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
+			new_x.set(1);
+			//tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
 		}else if(isOutsideRight(tmp)){
-			new_x = engine.getWidth();
-			tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
+			new_x.set(engine.getWidth());
+			//tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
 		}
 		if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
 			return;
-		hitbox.moveTo(new_x, getPositionY());
+		hitbox.moveTo(new_x.get(), getPositionY());
 	}
 	
 	@Override
@@ -59,18 +63,18 @@ public class CharacterImpl implements CharacterService{
 		gestionStand();
 		HitboxService tmp = new HitboxImpl();
 		int indice = getOtherIndice();
-		int new_x = getPositionX() + this.vitesse;
-		tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
+		AtomicInteger new_x = new AtomicInteger(getPositionX() + this.vitesse);
+		tmp.init(new_x, getReferencePositionY(), getHauteur(), getLargeur());
 		if(isOutsideRight(tmp)){
-			new_x = engine.getWidth() - getLargeur();
-			tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
+			new_x.set(engine.getWidth() - getLargeur());
+		//	tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
 			System.out.println("Try to go out forward..");
 		}
 		if(tmp.collidesWith(getOtherPlayer().getCharBox())){
 			return;
 		}
 			
-		hitbox.moveTo(new_x, getPositionY());
+		hitbox.moveTo(new_x, getReferencePositionY());
 	}
 
 	@Override
@@ -130,11 +134,11 @@ public class CharacterImpl implements CharacterService{
 
 	//TODO ajouter gestion witdh/hauteur du perso
 	public boolean isOutsideLeft(HitboxService tmp) {
-		return tmp.getPositionX() <= 0;
+		return tmp.getPositionX().get() <= 0;
 	}
 	
 	public boolean isOutsideRight(HitboxService tmp){
-		return tmp.getPositionX() + tmp.getLargeur() > engine.getWidth();
+		return tmp.getPositionX().get() + tmp.getLargeur() > engine.getWidth();
 	}
 
 	@Override 
@@ -146,6 +150,7 @@ public class CharacterImpl implements CharacterService{
 		this.engine = engine;
 		this.faceRight = faceRight;
 		this.hitbox = new HitboxContract(new HitboxImpl());
+		this.liste_hitbox = new HashMap<>();
 	}
 	
 
@@ -162,11 +167,17 @@ public class CharacterImpl implements CharacterService{
 
 	@Override
 	public int getPositionX() {
-		return hitbox.getPositionX();
+		return getCharBox().getPositionX().get();
 	}
 	@Override
 	public int getPositionY() {
-		return hitbox.getPositionY();
+		return getCharBox().getPositionY().get();
+	}
+	public AtomicInteger getReferencePositionX(){
+		return getCharBox().getPositionX();
+	}
+	public AtomicInteger getReferencePositionY(){
+		return getCharBox().getPositionY();
 	}
 	@Override
 	public EngineService getEngine() {
@@ -174,7 +185,7 @@ public class CharacterImpl implements CharacterService{
 	}
 	@Override
 	public HitboxService getCharBox() {
-		return hitbox;
+		return liste_hitbox.get(hitboxState);
 	}
 	@Override
 	public void setCharBox(HitboxService hit) {
@@ -236,6 +247,12 @@ public class CharacterImpl implements CharacterService{
 	@Override
 	public int getId() {
 		return myId;
+	}
+
+	@Override
+	public void bindHitbox(HitboxService hitbox, HitboxState state) {
+		this.liste_hitbox.put(state, hitbox);
+		
 	}
 
 }

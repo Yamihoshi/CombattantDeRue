@@ -4,8 +4,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import engine.components.hitbox.HitboxImpl;
+import engine.components.hitbox.HitboxState;
 import engine.components.player.Commande;
 import engine.components.player.Player;
 import engine.contracts.TechniqueContract;
@@ -24,7 +26,11 @@ public class CharacterFabrique {
 			Properties p = CharacterFabrique.load("ressource//character//"+personnage.name());
 			fc.init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight);
 			int hauteur = new Integer(p.getProperty("hauteur"));
-			fc.getCharBox().init(1, StreetFighterGame.HEIGHT - hauteur, hauteur, new Integer(p.getProperty("largeur")));
+			AtomicInteger x = new AtomicInteger(1), y = new AtomicInteger(StreetFighterGame.HEIGHT - hauteur);
+			HitboxService hb = new HitboxImpl();
+			
+			hb.init(x, y, hauteur, new Integer(p.getProperty("largeur")));
+			fc.bindHitbox(hb, HitboxState.STANDING);
 			initTechnique(fc, p);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
