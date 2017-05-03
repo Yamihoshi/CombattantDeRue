@@ -159,11 +159,11 @@ public class StageController implements Initializable {
     	int J1x = hitboxJ1.getPositionX().get(), J2x = hitboxJ2.getPositionX().get();
     	int J1width = hitboxJ1.getLargeur();
     	int J2width = hitboxJ2.getLargeur();
-    	if(!fc1.isFaceRight()){
+    	/*if(!fc1.isFaceRight()){
     		J1x=fc1.getEcart();
     	}else{
     		J2x+= fc2.getEcart();
-    	}
+    	}*/
     	this.hitbox_J1.setLayoutX(J1x);
     	this.hitbox_J1.setLayoutY(hitboxJ1.getPositionY());
     	this.hitbox_J1.setHeight(hitboxJ1.getHauteur());
