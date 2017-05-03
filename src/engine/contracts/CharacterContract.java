@@ -21,12 +21,12 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 	@Override
-	public void init(Personnage personnage, int l, int s, EngineService engine, boolean faceRight) {
+	public void init(Personnage personnage, int l, int s, EngineService engine, boolean faceRight, int ecart) {
 		if(!(l > 0 && s>0)){
 			throw new PreconditionError("Erreur init precondition character");
 		}
 		
-		super.init(personnage, l, s, engine, faceRight);
+		super.init(personnage, l, s, engine, faceRight, ecart);
 	
 		if(!(getLife() == l && getSpeed() == s && isFaceRight() == faceRight && getEngine().equals(engine)) && getCharBox() != null ){
 			throw new PostconditionError("Erreur post condition error");

@@ -26,7 +26,7 @@ public class CharacterFabrique {
 		   FightCharService fc = player.getCharacter();
 		   try {
 			Properties p = CharacterFabrique.load("ressource"+Ressource.character+personnage.toString());
-			fc.init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight);
+			fc.init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight, new Integer(p.getProperty("ecart", "1")));
 			initHitbox(fc, p);
 			initTechnique(fc, p);
 		} catch (FileNotFoundException e) {

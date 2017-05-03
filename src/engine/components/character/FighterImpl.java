@@ -23,8 +23,9 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 
 	
 	@Override 
-	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight) {
-		super.init(personnage, life, speed, engine, faceRight);
+	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight, int ecart) {
+		super.init(personnage, life, speed, engine, faceRight, ecart);
+		System.out.println(getEcart());
 		this.techniques = new HashMap<>();
 		this.compteurCombo = (ComboService) new ComboContract(new ComboIpml());
 		this.compteurCombo.init();

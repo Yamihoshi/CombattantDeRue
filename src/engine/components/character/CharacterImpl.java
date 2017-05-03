@@ -28,6 +28,7 @@ public class CharacterImpl implements CharacterService{
 	protected int myId;
 	protected HitboxState hitboxState = HitboxState.STANDING;
 	private int maxLife;
+	private int ecart;
 	
 	private void gestionStand(){
 		changeHitbox(HitboxState.STANDING);
@@ -142,7 +143,7 @@ public class CharacterImpl implements CharacterService{
 	}
 
 	@Override 
-	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight) {
+	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight, int ecart) {
 		this.myId = ++id;
 		this.personnage = personnage;
 		vie = life;
@@ -151,6 +152,7 @@ public class CharacterImpl implements CharacterService{
 		this.faceRight = faceRight;
 		this.liste_hitbox = new HashMap<>();
 		this.maxLife = life;
+		this.ecart = ecart;
 	}
 	
 
@@ -253,5 +255,10 @@ public class CharacterImpl implements CharacterService{
 	}
 	public void changeHitbox(HitboxState state){
 		hitboxState = state;
+	}
+
+	@Override
+	public int getEcart() {
+		return ecart;
 	}
 }
