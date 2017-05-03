@@ -79,5 +79,6 @@
          </font>
       </Text>
       <Rectangle fx:id="hitbox_attack_J1" arcHeight="5.0" arcWidth="5.0" fill="#ff21219c" height="60.0" layoutX="209.0" layoutY="330.0" stroke="BLACK" strokeType="INSIDE" width="160.0" />
+      <Rectangle fx:id="hitbox_attack_J2" arcHeight="5.0" arcWidth="5.0" fill="#ff21219c" height="60.0" layoutX="209.0" layoutY="330.0" stroke="BLACK" strokeType="INSIDE" width="160.0" />
    </children>
 </AnchorPane>

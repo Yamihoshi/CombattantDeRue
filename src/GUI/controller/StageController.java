@@ -52,6 +52,9 @@ public class StageController implements Initializable {
     private Rectangle hitbox_attack_J1;
 	
 	@FXML 
+    private Rectangle hitbox_attack_J2;
+	
+	@FXML 
     private Text frame_count;
 	
 	private boolean showHitbox;
@@ -168,6 +171,18 @@ public class StageController implements Initializable {
     	this.hitbox_J2.setLayoutY(hitboxJ2.getPositionY());
     	this.hitbox_J2.setHeight(hitboxJ2.getHauteur());
     	this.hitbox_J2.setWidth(hitboxJ2.getLargeur());
+    	
+    	if(fc2.isTeching() && fc2.getCurrentTechnique().isInHit()){
+    		HitboxService attack = fc2.getCurrentTechnique().getHitbox();
+    		this.hitbox_attack_J2.setLayoutX(attack.getPositionX());
+    		this.hitbox_attack_J2.setLayoutY(attack.getPositionY());
+        	this.hitbox_attack_J2.setHeight(attack.getHauteur());
+        	this.hitbox_attack_J2.setWidth(attack.getLargeur());
+    		hitbox_attack_J2.setVisible(true);
+
+    	}else{
+    		hitbox_attack_J2.setVisible(false);
+    	}
     }
     public void setFrame(int frame)
     {
