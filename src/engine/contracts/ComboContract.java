@@ -1,5 +1,6 @@
 package engine.contracts;
 
+import engine.contracts.error.ContractError;
 import engine.contracts.error.InvariantError;
 import engine.contracts.error.PostconditionError;
 import engine.decorators.ComboDecorator;
@@ -18,7 +19,11 @@ public class ComboContract extends ComboDecorator {
 
 	@Override
 	public void addCombo() {
+		int combo = getCombo();
 		super.addCombo();
+		if(!(getCombo() == combo +1)){
+			new PostconditionError("Erreur combo");
+		}
 	}
 
 	@Override
@@ -50,7 +55,7 @@ public class ComboContract extends ComboDecorator {
 	}
 
 	public void checkInvariant(){
-		if(!(getCombo() > 0)){
+		if(!(getCombo() >= 0)){
 			new InvariantError("Erreur Combo");
 		}
 	}

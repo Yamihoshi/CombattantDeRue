@@ -1,5 +1,6 @@
 package engine.contracts;
 
+import engine.contracts.error.ContractError;
 import engine.decorators.TechniqueDecorator;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
@@ -14,8 +15,13 @@ public class TechniqueContract extends TechniqueDecorator {
 	@Override
 	public void init(int damage, int hstun, int bstun, int sframe, int hframe, int rframe, int debut_x, int debut_y,
 			int width, int height) {
-		// TODO Auto-generated method stub
+		if(!(damage > 0 && hstun > 0 && bstun >0 && sframe >0 && hframe > 0 && rframe>0 && width>0 && height>0))
+			 new ContractError("Erreur init technique");
 		super.init(damage, hstun, bstun, sframe, hframe, rframe, debut_x, debut_y, width, height);
+		if(!(damage == getDamage() && hstun == getHit_stun() && sframe == getStart_up_frame() && hframe == getHit_frame()
+				&& rframe == getRecovery_Frame())){
+			 new ContractError("Erreur init technique");
+		}
 	}
 
 	@Override

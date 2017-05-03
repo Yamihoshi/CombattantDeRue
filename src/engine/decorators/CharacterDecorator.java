@@ -19,6 +19,10 @@ public class CharacterDecorator implements FightCharService{
 
 	private FightCharService character;
 
+	public int getEcart() {
+		return character.getEcart();
+	}
+
 	public void bindHitbox(HitboxService hitbox, HitboxState state) {
 		character.bindHitbox(hitbox, state);
 	}
@@ -27,8 +31,8 @@ public class CharacterDecorator implements FightCharService{
 		return character.isBlocking();
 	}
 
-	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight) {
-		character.init(personnage, life, speed, engine, faceRight);
+	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight, int ecart) {
+		character.init(personnage, life, speed, engine, faceRight, ecart);
 	}
 
 	public boolean isBlockStunned() {

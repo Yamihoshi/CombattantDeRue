@@ -28,6 +28,7 @@ public class CharacterImpl implements CharacterService{
 	protected int myId;
 	protected HitboxState hitboxState = HitboxState.STANDING;
 	private int maxLife;
+	private int ecart;
 	
 	private void gestionStand(){
 		changeHitbox(HitboxState.STANDING);
@@ -45,15 +46,12 @@ public class CharacterImpl implements CharacterService{
 		AtomicInteger new_x = new AtomicInteger(getPositionX() - this.vitesse);
 		int y = getPositionY();
 		HitboxService tmp = new HitboxImpl();
-		
 		tmp.init(new_x, y, getHauteur(), getLargeur());
 		
 		if(isOutsideLeft(tmp)){
 			new_x.set(1);
-			//tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
 		}else if(isOutsideRight(tmp)){
 			new_x.set(engine.getWidth());
-			//tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
 		}
 		if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
 			return;
@@ -67,11 +65,9 @@ public class CharacterImpl implements CharacterService{
 		int indice = getOtherIndice();
 		AtomicInteger new_x = new AtomicInteger(getPositionX() + this.vitesse);
 		int y = getPositionY();
-
 		tmp.init(new_x, y, getHauteur(), getLargeur());
 		if(isOutsideRight(tmp)){
 			new_x.set(engine.getWidth() - getLargeur());
-		//	tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
 			System.out.println("Try to go out forward..");
 		}
 		if(tmp.collidesWith(getOtherPlayer().getCharBox())){
@@ -105,10 +101,38 @@ public class CharacterImpl implements CharacterService{
 	@Override
 	public void moveDownLeft() {
 		gestionDown();
+		AtomicInteger new_x = new AtomicInteger(getPositionX() - this.vitesse/2);
+		int y = getPositionY();
+		HitboxService tmp = new HitboxImpl();
+		
+		tmp.init(new_x, y, getHauteur(), getLargeur());
+		
+		if(isOutsideLeft(tmp)){
+			new_x.set(1);
+		}else if(isOutsideRight(tmp)){
+			new_x.set(engine.getWidth());
+		}
+		if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
+			return;
+		getCharBox().moveTo(new_x.get(), getPositionY());
 	}
 	@Override
 	public void moveDownRight() {
 		gestionDown();
+		HitboxService tmp = new HitboxImpl();
+		int indice = getOtherIndice();
+		AtomicInteger new_x = new AtomicInteger(getPositionX() + this.vitesse);
+		int y = getPositionY();
+		tmp.init(new_x, y, getHauteur(), getLargeur());
+		if(isOutsideRight(tmp)){
+			new_x.set(engine.getWidth() - getLargeur());
+			System.out.println("Try to go out forward..");
+		}
+		if(tmp.collidesWith(getOtherPlayer().getCharBox())){
+			return;
+		}
+			
+		getCharBox().moveTo(new_x, getPositionY());
 	}
 	
 	@Override
@@ -142,7 +166,7 @@ public class CharacterImpl implements CharacterService{
 	}
 
 	@Override 
-	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight) {
+	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight, int ecart) {
 		this.myId = ++id;
 		this.personnage = personnage;
 		vie = life;
@@ -151,6 +175,7 @@ public class CharacterImpl implements CharacterService{
 		this.faceRight = faceRight;
 		this.liste_hitbox = new HashMap<>();
 		this.maxLife = life;
+		this.ecart = ecart;
 	}
 	
 
@@ -161,7 +186,7 @@ public class CharacterImpl implements CharacterService{
 	}
 	@Override
 	public String getName() {
-		return personnage.name();
+		return personnage.toString();
 	}
 
 
@@ -253,5 +278,10 @@ public class CharacterImpl implements CharacterService{
 	}
 	public void changeHitbox(HitboxState state){
 		hitboxState = state;
+	}
+
+	@Override
+	public int getEcart() {
+		return ecart;
 	}
 }

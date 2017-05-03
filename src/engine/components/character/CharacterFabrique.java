@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import GUI.Ressource;
 import engine.components.hitbox.HitboxImpl;
 import engine.components.hitbox.HitboxState;
 import engine.components.player.Commande;
 import engine.components.player.Player;
+import engine.contracts.HitboxContract;
 import engine.contracts.TechniqueContract;
 import engine.services.EngineService;
 import engine.services.FightCharService;
@@ -23,8 +25,8 @@ public class CharacterFabrique {
 	   public static void init(Player player, Personnage personnage, EngineService engine, boolean faceRight){
 		   FightCharService fc = player.getCharacter();
 		   try {
-			Properties p = CharacterFabrique.load("ressource//character//"+personnage.name());
-			fc.init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight);
+			Properties p = CharacterFabrique.load("ressource"+Ressource.character+personnage.toString());
+			fc.init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight, new Integer(p.getProperty("ecart", "1")));
 			initHitbox(fc, p);
 			initTechnique(fc, p);
 		} catch (FileNotFoundException e) {
@@ -76,7 +78,7 @@ public class CharacterFabrique {
 	   }
 	   
 	   public static HitboxService createHitbox(AtomicInteger x, int y, int hauteur, int largeur){
-			HitboxService hitbox = new HitboxImpl();
+			HitboxService hitbox = new HitboxContract(new HitboxImpl());
 			hitbox.init(x, y, hauteur, largeur);
 			return hitbox;
 	   }
