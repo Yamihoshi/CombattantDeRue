@@ -27,25 +27,26 @@ public class CharacterImpl implements CharacterService{
 	protected HashMap<HitboxState, HitboxService> liste_hitbox;
 	protected int myId;
 	protected HitboxState hitboxState = HitboxState.STANDING;
+	private int maxLife;
 	
 	private void gestionStand(){
-		//state_actuel = State.STAND;
+		changeHitbox(HitboxState.STANDING);
 	}
 	
 	private void gestionJump(){
 		//state_actuel = State.JUMP;
 	}
 	private void gestionDown(){
-		//state_actuel = State.CROUCH;
+		changeHitbox(HitboxState.CROUCHING);
 	}
 	@Override
 	public void moveLeft() {
 		gestionStand();
 		AtomicInteger new_x = new AtomicInteger(getPositionX() - this.vitesse);
-		AtomicInteger new_y = new AtomicInteger(getPositionY());
+		int y = getPositionY();
 		HitboxService tmp = new HitboxImpl();
 		
-		tmp.init(new_x, new_y, getHauteur(), getLargeur());
+		tmp.init(new_x, y, getHauteur(), getLargeur());
 		
 		if(isOutsideLeft(tmp)){
 			new_x.set(1);
@@ -65,9 +66,9 @@ public class CharacterImpl implements CharacterService{
 		HitboxService tmp = new HitboxImpl();
 		int indice = getOtherIndice();
 		AtomicInteger new_x = new AtomicInteger(getPositionX() + this.vitesse);
-		AtomicInteger new_y = new AtomicInteger(getPositionY());
+		int y = getPositionY();
 
-		tmp.init(new_x, new_y, getHauteur(), getLargeur());
+		tmp.init(new_x, y, getHauteur(), getLargeur());
 		if(isOutsideRight(tmp)){
 			new_x.set(engine.getWidth() - getLargeur());
 		//	tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
@@ -77,13 +78,12 @@ public class CharacterImpl implements CharacterService{
 			return;
 		}
 			
-		getCharBox().moveTo(new_x, getReferencePositionY());
+		getCharBox().moveTo(new_x, getPositionY());
 	}
 
 	@Override
 	public void neutral() {
 		gestionStand();
-		
 	}
 	@Override
 	public void moveUpRight() {
@@ -93,8 +93,6 @@ public class CharacterImpl implements CharacterService{
 	@Override
 	public void moveUpLeft() {
 		gestionJump();
-
-		
 	}
 	@Override
 	public void moveUp() {
@@ -103,7 +101,6 @@ public class CharacterImpl implements CharacterService{
 	@Override
 	public void moveDown() {
 		gestionDown();
-		/*ADD CHANGEMENT HITBOX*/
 	}
 	@Override
 	public void moveDownLeft() {
@@ -153,6 +150,7 @@ public class CharacterImpl implements CharacterService{
 		this.engine = engine;
 		this.faceRight = faceRight;
 		this.liste_hitbox = new HashMap<>();
+		this.maxLife = life;
 	}
 	
 
@@ -173,14 +171,12 @@ public class CharacterImpl implements CharacterService{
 	}
 	@Override
 	public int getPositionY() {
-		return getCharBox().getPositionY().get();
+		return getCharBox().getPositionY();
 	}
 	public AtomicInteger getReferencePositionX(){
 		return getCharBox().getPositionX();
 	}
-	public AtomicInteger getReferencePositionY(){
-		return getCharBox().getPositionY();
-	}
+
 	@Override
 	public EngineService getEngine() {
 		return engine;
@@ -246,13 +242,16 @@ public class CharacterImpl implements CharacterService{
 	public int getId() {
 		return myId;
 	}
-
+	
+	@Override
 	public int getMaxLife() {
-		return 100;
+		return maxLife;
 	}
 	
 	public void bindHitbox(HitboxService hitbox, HitboxState state) {
 		this.liste_hitbox.put(state, hitbox);
 	}
-
+	public void changeHitbox(HitboxState state){
+		hitboxState = state;
+	}
 }

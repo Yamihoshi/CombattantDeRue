@@ -7,7 +7,7 @@ import engine.services.HitboxService;
 public class HitboxImpl implements HitboxService{
 
 	private AtomicInteger positionX;
-	private AtomicInteger positionY;
+	private int positionY;
 	private int hauteur;
 	private int largeur;
 	
@@ -15,7 +15,7 @@ public class HitboxImpl implements HitboxService{
 		
 	}
 	@Override
-	public void init(AtomicInteger x, AtomicInteger y, int h, int l) {
+	public void init(AtomicInteger x, int y, int h, int l) {
 		positionX = x;
 		positionY = y;
 		hauteur = h;
@@ -26,15 +26,15 @@ public class HitboxImpl implements HitboxService{
 	@Override
 	public boolean belongsTo(int x, int y) {
 		return(getPositionX().get() <= x && getPositionX().get() + getLargeur() >= x &&
-				getPositionY().get() <= y && getPositionY().get() + getHauteur() >= y);
+				getPositionY() <= y && getPositionY() + getHauteur() >= y);
 	}
 
 	@Override
 	public boolean collidesWith(HitboxService other_hitbox) {
 		return(this.getPositionX().get() < other_hitbox.getPositionX().get()  + other_hitbox.getLargeur() &&
 				this.getPositionX().get()  + this.getLargeur() > other_hitbox.getPositionX().get()  &&
-				this.getPositionY().get()  < other_hitbox.getPositionY().get()  + other_hitbox.getHauteur() &&
-				this.getPositionY().get()  + this.getHauteur() > other_hitbox.getPositionY().get() );
+				this.getPositionY() < other_hitbox.getPositionY()  + other_hitbox.getHauteur() &&
+				this.getPositionY()  + this.getHauteur() > other_hitbox.getPositionY());
 	}
 
 	@Override
@@ -75,9 +75,9 @@ public class HitboxImpl implements HitboxService{
 
 
 	@Override
-	public void moveTo(AtomicInteger x, AtomicInteger y) {
+	public void moveTo(AtomicInteger x, int y) {
 		this.positionX.set(x.get());
-		this.positionY.set(y.get());
+		this.positionY = y;
 	}
 
 
@@ -91,15 +91,9 @@ public class HitboxImpl implements HitboxService{
 	}
 
 
-	public AtomicInteger getPositionY() {
+	public int getPositionY() {
 		return positionY;
 	}
-
-
-	public void setPositionY(AtomicInteger positionY) {
-		setPositionY(positionY.get());
-	}
-
 
 	public int getHauteur() {
 		return hauteur;
@@ -126,7 +120,7 @@ public class HitboxImpl implements HitboxService{
 	@Override
 	public void moveTo(int new_x, int positionY) {
 		this.positionX.set(new_x);
-		this.positionY.set(positionY);
+		this.positionY = positionY;
 	}
 	@Override
 	public void setPositionX(int x) {
@@ -134,7 +128,7 @@ public class HitboxImpl implements HitboxService{
 	}
 	@Override
 	public void setPositionY(int y) {
-		this.positionY.set(y);
+		this.positionY = y;
 	}
 
 

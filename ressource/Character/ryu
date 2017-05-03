@@ -1,8 +1,16 @@
 nom=Ryu
 vie=100
 vitesse=7
-hauteur=330
-largeur=213
+
+
+[STANDING]
+standing_height=300
+standing_width=185
+
+[CROUCH]
+crouching_height=200
+crouching_width=213
+
 
 [Attack - punch]
 punch_damage=150
@@ -19,12 +27,12 @@ punch_debut_x=150
 
 [Attack - LIGHT-KICK]
 light_kick_start_up_frame=3
-light_kick_hit_frame=2
+light_kick_hit_frame=25
 light_kick_recovery_frame=12
 light_kick_hit_stun=4
 light_kick_block_stun=5
-light_kick_debut_y=150
+light_kick_debut_y=90
 light_kick_height=54
-light_kick_width=120
+light_kick_width=60
 light_kick_debut_x=150
 light_kick_damage=20

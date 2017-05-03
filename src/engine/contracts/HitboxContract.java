@@ -34,7 +34,7 @@ public class HitboxContract extends HitboxDecorator {
 	if (!(getPositionX().get() > 0))
 	    throw new InvariantError("X négative");
 	// inv: getWidth() > 0
-	if (!(getPositionY().get() > 0))
+	if (!(getPositionY() > 0))
 	    throw new InvariantError("Y négative");
 	if(!(getLargeur() > 0))
 	    throw new InvariantError("Largeur négative");
@@ -54,14 +54,14 @@ public class HitboxContract extends HitboxDecorator {
 		}
 	}
 	@Override
-	public void setPositionY(AtomicInteger y) {
-		if(y.get() < 0){
+	public void setPositionY(int y) {
+		if(y < 0){
 			new PreconditionError("Position négative");
 		}
 		checkInvariant();
 		super.setPositionY(y);
 		checkInvariant();
-		if(!(getPositionY().get() == y.get())){
+		if(!(getPositionY() == y)){
 			new PostconditionError("Set non effectué");
 		}
 	}
@@ -95,12 +95,12 @@ public class HitboxContract extends HitboxDecorator {
 	}
 
 	@Override
-	public void init(AtomicInteger x, AtomicInteger y, int h, int l) {
-		if(!(x.get() > 0 && y.get() > 0 && h > 0 && l>0))
+	public void init(AtomicInteger x, int y, int h, int l) {
+		if(!(x.get() > 0 && y > 0 && h > 0 && l>0))
 			new PreconditionError("Error precondition init hitbox");
 		super.init(x, y, h, l);
 		
-		if(!(x.get() == getPositionX().get() && y.get() == getPositionY().get() && h == getHauteur() && l == getLargeur())){
+		if(!(x.get() == getPositionX().get() && y == getPositionY() && h == getHauteur() && l == getLargeur())){
 			new PostconditionError("Error postcondition init hitbox");
 		}
 	}
@@ -111,7 +111,7 @@ public class HitboxContract extends HitboxDecorator {
 	}
 
 	@Override
-	public AtomicInteger getPositionY() {
+	public int getPositionY() {
 		return super.getPositionY();
 	}
 
@@ -139,13 +139,13 @@ public class HitboxContract extends HitboxDecorator {
 	}
 
 	@Override
-	public void moveTo(AtomicInteger x, AtomicInteger y) {
+	public void moveTo(AtomicInteger x, int y) {
 		// TODO Auto-generated method stub
 		checkInvariant();
 		super.moveTo(x, y);
 		checkInvariant();
 
-		if(!(getPositionX().get() == x.get() && getPositionY().get() == y.get())){
+		if(!(getPositionX().get() == x.get() && getPositionY() == y)){
 			new PostconditionError("Erreur MoveTo changement");
 		}
 	}

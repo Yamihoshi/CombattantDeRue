@@ -108,7 +108,7 @@ public class Technique implements TechService {
 		this.debut_x = debut_x;
 		this.debut_y = debut_y;
 		this.hitbox = new HitboxContract(new HitboxImpl());
-		hitbox.init(new AtomicInteger(debut_x), new AtomicInteger(debut_y), saveHeight, saveWidth);
+		hitbox.init(new AtomicInteger(debut_x), debut_y, saveHeight, saveWidth);
 		
 	}
 

@@ -27,9 +27,6 @@ public class HitboxDecorator implements HitboxService{
 		hitbox.setPositionX(x);
 	}
 
-	public void setPositionY(AtomicInteger y) {
-		hitbox.setPositionY(y);
-	}
 
 	public int getLargeur() {
 		return hitbox.getLargeur();
@@ -48,7 +45,7 @@ public class HitboxDecorator implements HitboxService{
 		hitbox.setHauteur(hauteur);
 	}
 
-	public void init(AtomicInteger x, AtomicInteger y, int h, int l) {
+	public void init(AtomicInteger x, int y, int h, int l) {
 		hitbox.init(x, y, h, l);
 	}
 
@@ -56,7 +53,7 @@ public class HitboxDecorator implements HitboxService{
 		return hitbox.getPositionX();
 	}
 
-	public AtomicInteger getPositionY() {
+	public int getPositionY() {
 		return hitbox.getPositionY();
 	}
 
@@ -76,7 +73,7 @@ public class HitboxDecorator implements HitboxService{
 		return hitbox.equalsTo(other_hitbox);
 	}
 
-	public void moveTo(AtomicInteger x, AtomicInteger y) {
+	public void moveTo(AtomicInteger x, int y) {
 		hitbox.moveTo(x, y);
 	}
 

@@ -1,12 +1,15 @@
 nom=Chun Li
 vie=1000
 vitesse=13
-hauteur=292
-largeur=185
 
+
+[STANDING]
+standing_height=292
+standing_width=185
 
 [CROUCH]
-crouch_height=300
+crouching_height=251
+crouching_width=185
 
 [Attack - PUNCH]
 punch_damage=20

@@ -25,12 +25,7 @@ public class CharacterFabrique {
 		   try {
 			Properties p = CharacterFabrique.load("ressource//character//"+personnage.name());
 			fc.init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight);
-			int hauteur = new Integer(p.getProperty("hauteur"));
-			AtomicInteger x = new AtomicInteger(1), y = new AtomicInteger(StreetFighterGame.HEIGHT - hauteur);
-			HitboxService hb = new HitboxImpl();
-			
-			hb.init(x, y, hauteur, new Integer(p.getProperty("largeur")));
-			fc.bindHitbox(hb, HitboxState.STANDING);
+			initHitbox(fc, p);
 			initTechnique(fc, p);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -60,6 +55,31 @@ public class CharacterFabrique {
 			fc.getTech().put(Commande.KICK, kick);
 	   }
 	   
+	   public static void initHitbox(FightCharService fc, Properties p){
+			int hauteur_standing = new Integer(p.getProperty("standing_height"));
+			int largeur_standing =  new Integer(p.getProperty("standing_width"));
+			AtomicInteger x = new AtomicInteger(1);
+			int y = StreetFighterGame.HEIGHT - hauteur_standing;
+			fc.bindHitbox(createHitbox(x, y, hauteur_standing, largeur_standing), HitboxState.STANDING);
+			
+			
+			
+			int hauteur_crouching = new Integer(p.getProperty("crouching_height"));
+			int largeur_crouching =  new Integer(p.getProperty("crouching_width"));
+			y = StreetFighterGame.HEIGHT - hauteur_crouching;
+			System.out.println(y);
+			fc.bindHitbox(createHitbox(x, y, hauteur_crouching, largeur_crouching), HitboxState.CROUCHING);
+
+			
+			
+			
+	   }
+	   
+	   public static HitboxService createHitbox(AtomicInteger x, int y, int hauteur, int largeur){
+			HitboxService hitbox = new HitboxImpl();
+			hitbox.init(x, y, hauteur, largeur);
+			return hitbox;
+	   }
 	   /**
 	    * Charge la liste des propriétés contenu dans le fichier spécifié
 	    *

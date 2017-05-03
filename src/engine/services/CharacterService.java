@@ -19,13 +19,13 @@ public interface CharacterService {
 	public EngineService getEngine();
 	public HitboxService getCharBox();
 	public int getLife();
+	public int getMaxLife();
 	public int getSpeed();
 	public String getName();
 	public Personnage getPersonnage();
 	public boolean isFaceRight();
 	public boolean isDead();
 	public int getId();
-	public int getMaxLife();
 	public void bindHitbox(HitboxService hitbox, HitboxState state);
 	
 	

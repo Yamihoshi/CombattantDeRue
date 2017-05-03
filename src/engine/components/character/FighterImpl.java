@@ -3,6 +3,7 @@ package engine.components.character;
 import java.util.HashMap;
 
 import engine.components.hitbox.HitboxImpl;
+import engine.components.hitbox.HitboxState;
 import engine.components.player.Commande;
 import engine.contracts.ComboContract;
 import engine.contracts.HitboxContract;
@@ -40,7 +41,7 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 			case NEUTRAL:
 				
 				break;
-			case DOWN:
+			case CROUCH:
 				break;
 			default:
 				break;
@@ -59,11 +60,13 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 				case KICK:
 					startTech(techniques.get(Commande.KICK));
 					break;
-				case DOWN:
+				case CROUCH:
+					moveDown();
 					break;
 				case UP:
 					break;
 				case NEUTRAL:
+					neutral();
 					break;
 				case LEFT:
 					moveLeft();
