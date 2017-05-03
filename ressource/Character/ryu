@@ -4,12 +4,12 @@ vitesse=7
 
 
 [STANDING]
-standing_height=300
+standing_height=298
 standing_width=185
 
 [CROUCH]
-crouching_height=200
-crouching_width=213
+crouching_height=220
+crouching_width=200
 
 
 [Attack - punch]

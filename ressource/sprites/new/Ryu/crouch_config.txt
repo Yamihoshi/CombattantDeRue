@@ -2,8 +2,7 @@ animation_length=1
 loop=false
 
 X_axis=170
-Y_axis=301
-
+Y_axis=415
 X_axis_reversed=424
 
 sprite_i=duration

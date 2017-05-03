@@ -147,9 +147,9 @@ public class StageController implements Initializable {
     public void updatePosition(HitboxService hitboxJ1, HitboxService hitboxJ2)
     {
     	this.character_J1.setLayoutX(hitboxJ1.getPositionX().get());
-    	this.character_J1.setLayoutY(hitboxJ1.getPositionY() - this.character_J1.getTranslateY());
+    	this.character_J1.setLayoutY(hitboxJ1.getPositionY());
     	
-    	this.character_J2.setLayoutY(hitboxJ2.getPositionY() - this.character_J2.getTranslateY());
+    	this.character_J2.setLayoutY(hitboxJ2.getPositionY() );
     	this.character_J2.setLayoutX(hitboxJ2.getPositionX().get());
 
     }
