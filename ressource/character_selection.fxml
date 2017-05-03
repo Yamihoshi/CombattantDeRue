@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="character_selection" fx:id="root" prefHeight="720.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.CharacterSelectionController">
    <children>
-      <ImageView fx:id="character_display_J2" fitHeight="400.0" fitWidth="750.0" layoutX="872.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="character_display_J2" layoutX="750.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" scaleX="0.7" scaleY="0.7">
          <image>
             <Image url="@Character_Display/Chun_Li.png" />
          </image>
@@ -20,7 +16,7 @@
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <ImageView fx:id="character_display_J1" fitHeight="400.0" fitWidth="750.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="character_display_J1" layoutX="-34.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" scaleX="0.7" scaleY="0.7">
          <image>
             <Image url="@Character_Display/Chun_Li.png" />
          </image>
@@ -30,37 +26,7 @@
             <Image url="@img/select_character_A.png" />
          </image>
       </ImageView>
-      <Text  id="character_name_J1" fx:id="font" fill="#19a420" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chun Li">
+      <Text id="character_name_J1" fx:id="font" fill="#19a420" layoutX="212.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chun Li">
       </Text>
-      <GridPane layoutX="334.0" layoutY="121.0" prefHeight="421.0" prefWidth="593.0" AnchorPane.leftAnchor="334.0" AnchorPane.topAnchor="121.0">
-        <columnConstraints>
-          <ColumnConstraints maxWidth="122.0" minWidth="105.0" prefWidth="110.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="102.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="508.0" minWidth="0.0" prefWidth="318.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="508.0" minWidth="10.0" prefWidth="64.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="101.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="212.0" minHeight="0.0" prefHeight="198.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="317.0" minHeight="10.0" prefHeight="122.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-               <image>
-                  <Image url="@Portraits/Chun_Li.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Portraits/Random.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-               <image>
-                  <Image url="@Portraits/Ryu.jpg" />
-               </image>
-            </ImageView>
-         </children>
-      </GridPane>
    </children>
 </AnchorPane>

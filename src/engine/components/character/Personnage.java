@@ -2,7 +2,7 @@ package engine.components.character;
 
 public enum Personnage {
 
-	RANDOM("Random"),
+	/*RANDOM("Random"),*/
 	CHUN_LI("Chun_Li"),
 	RYU("Ryu");
 	

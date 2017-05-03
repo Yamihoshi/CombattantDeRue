@@ -8,6 +8,7 @@ public enum AnimationType {
 	CROUCH("crouch"),
 	PUNCH("punch"),
 	KICK("kick"),
+	HIT("hit"),
 	START_JUMP("start_jump"),
 	VERTICAL_JUMP_UP("vertical_jump_up");
 	

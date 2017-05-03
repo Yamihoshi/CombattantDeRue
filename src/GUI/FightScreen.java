@@ -277,7 +277,7 @@ public class FightScreen{
             			if(!currentKey.get(i).contains(code[i]))
             				commandes[i]=Commande.NEUTRAL;
                     	
-                    	 System.out.println(commandes[i]);
+                    	 //System.out.println(commandes[i]);
                     }
                     
                   
@@ -298,11 +298,13 @@ public class FightScreen{
 	    	           	{
 	    	           		if(chara.isBlockStunned())
 	    	           		{
-	    	           			
+	    	           			System.out.println("Block Stunned");	
 	    	           		}
 	    	           		else if (chara.isHitStunned())
 	    	           		{
 	    	           			//Anim hit
+	    	           			System.out.println("Hit Stunned");
+	    	           			new_animation=AnimationType.HIT;
 	    	           		}
 	    	           		else if (chara.isTeching())
 	    	           		{	    	           			
@@ -322,7 +324,7 @@ public class FightScreen{
 	    	           		
     	           			if(sprites_manager.getAnimationPlayed(i).getType()!=new_animation)
 	    	           		{
-		    	           		sprites_manager.playAnimation(i,animationBinder.getAnimation(commandes[i]));
+		    	           		sprites_manager.playAnimation(i,new_animation);
 		    	           		Sprite sprite = sprites_manager.getCurrentSprite(i);
 		                		controller.updateSprite(i,sprite);
 		                		frameAnimationCount[i]=0;
