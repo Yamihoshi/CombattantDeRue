@@ -65,7 +65,7 @@ public class StageController implements Initializable {
     private ProgressBar life_bar_J2;
 	
 	private boolean showHitbox;
-  	
+  	public static int SPACE = 70;
     @Override  
     public void initialize(URL location, ResourceBundle resources) {  
         
@@ -156,10 +156,16 @@ public class StageController implements Initializable {
     
     public void updateHitbox(FightCharService fc1, FightCharService fc2){
     	HitboxService hitboxJ1 = fc1.getCharBox(), hitboxJ2 = fc2.getCharBox();
-    	
-    	this.hitbox_J1.setLayoutX(hitboxJ1.getPositionX().get());
+    	int J1x = hitboxJ1.getPositionX().get(), J2x = hitboxJ2.getPositionX().get();
+    	int J1width = hitboxJ1.getLargeur();
+    	int J2width = hitboxJ2.getLargeur();
+    	if(!fc1.isFaceRight()){
+    		J1x=fc1.getEcart();
+    	}else{
+    		J2x+= fc2.getEcart();
+    	}
+    	this.hitbox_J1.setLayoutX(J1x);
     	this.hitbox_J1.setLayoutY(hitboxJ1.getPositionY());
-    	System.out.println(hitboxJ1.getPositionY());
     	this.hitbox_J1.setHeight(hitboxJ1.getHauteur());
     	this.hitbox_J1.setWidth(hitboxJ1.getLargeur());
     	
@@ -175,7 +181,7 @@ public class StageController implements Initializable {
     		hitbox_attack_J1.setVisible(false);
     	}
     	
-    	this.hitbox_J2.setLayoutX(hitboxJ2.getPositionX().get());
+    	this.hitbox_J2.setLayoutX(J2x);
     	this.hitbox_J2.setLayoutY(hitboxJ2.getPositionY());
     	this.hitbox_J2.setHeight(hitboxJ2.getHauteur());
     	this.hitbox_J2.setWidth(hitboxJ2.getLargeur());

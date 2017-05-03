@@ -8,13 +8,14 @@ import engine.components.player.Commande;
 public interface CharacterService {
 
 	/* Constructors */
-	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight ); // What does they mean by this ?
+	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight, int ecart ); // What does they mean by this ?
 	
 	/* Observators */
 	public int getPositionX();
 	public int getPositionY();
 	public int getHauteur();
 	public int getLargeur();
+	public int getEcart();
 	public State getState();
 	public EngineService getEngine();
 	public HitboxService getCharBox();

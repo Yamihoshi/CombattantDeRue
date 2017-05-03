@@ -1,11 +1,11 @@
 nom=Ryu
 vie=100
 vitesse=7
-
+ecart=65
 
 [STANDING]
 standing_height=298
-standing_width=185
+standing_width=165
 
 [CROUCH]
 crouching_height=220

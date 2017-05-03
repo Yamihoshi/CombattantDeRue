@@ -1,6 +1,7 @@
 nom=Chun Li
 vie=1000
 vitesse=13
+ecart=50
 
 
 [STANDING]
