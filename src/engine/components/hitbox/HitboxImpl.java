@@ -1,11 +1,13 @@
 package engine.components.hitbox;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import engine.services.HitboxService;
 
 public class HitboxImpl implements HitboxService{
 
-	private int positionX;
-	private int positionY;
+	private AtomicInteger positionX;
+	private AtomicInteger positionY;
 	private int hauteur;
 	private int largeur;
 	
@@ -13,7 +15,7 @@ public class HitboxImpl implements HitboxService{
 		
 	}
 	@Override
-	public void init(int x, int y, int h, int l) {
+	public void init(AtomicInteger x, AtomicInteger y, int h, int l) {
 		positionX =x;
 		positionY = y;
 		hauteur = h;
@@ -23,16 +25,16 @@ public class HitboxImpl implements HitboxService{
 
 	@Override
 	public boolean belongsTo(int x, int y) {
-		return(getPositionX() <= x && getPositionX() + getLargeur() >= x &&
-				getPositionY() <= y && getPositionY() + getHauteur() >= y);
+		return(getPositionX().get() <= x && getPositionX().get() + getLargeur() >= x &&
+				getPositionY().get() <= y && getPositionY().get() + getHauteur() >= y);
 	}
 
 	@Override
 	public boolean collidesWith(HitboxService other_hitbox) {
-		return(this.getPositionX() < other_hitbox.getPositionX() + other_hitbox.getLargeur() &&
-				this.getPositionX() + this.getLargeur() > other_hitbox.getPositionX() &&
-				this.getPositionY() < other_hitbox.getPositionY() + other_hitbox.getHauteur() &&
-				this.getPositionY() + this.getHauteur() > other_hitbox.getPositionY());
+		return(this.getPositionX().get() < other_hitbox.getPositionX().get()  + other_hitbox.getLargeur() &&
+				this.getPositionX().get()  + this.getLargeur() > other_hitbox.getPositionX().get()  &&
+				this.getPositionY().get()  < other_hitbox.getPositionY().get()  + other_hitbox.getHauteur() &&
+				this.getPositionY().get()  + this.getHauteur() > other_hitbox.getPositionY().get() );
 	}
 
 	@Override
@@ -46,8 +48,7 @@ public class HitboxImpl implements HitboxService{
 		int result = 1;
 		result = prime * result + hauteur;
 		result = prime * result + largeur;
-		result = prime * result + positionX;
-		result = prime * result + positionY;
+
 		return result;
 	}
 
@@ -74,29 +75,29 @@ public class HitboxImpl implements HitboxService{
 
 
 	@Override
-	public void moveTo(int x, int y) {
-		this.positionX = x;
-		this.positionY = y;
+	public void moveTo(AtomicInteger x, AtomicInteger y) {
+		this.positionX.set(x.get());
+		this.positionY.set(y.get());
 	}
 
 
-	public int getPositionX() {
+	public AtomicInteger getPositionX() {
 		return positionX;
 	}
 
 
-	public void setPositionX(int positionX) {
-		this.positionX = positionX;
+	public void setPositionX(AtomicInteger positionX) {
+		setPositionX(positionX.get());
 	}
 
 
-	public int getPositionY() {
+	public AtomicInteger getPositionY() {
 		return positionY;
 	}
 
 
-	public void setPositionY(int positionY) {
-		this.positionY = positionY;
+	public void setPositionY(AtomicInteger positionY) {
+		setPositionY(positionY.get());
 	}
 
 
@@ -121,6 +122,19 @@ public class HitboxImpl implements HitboxService{
 	public void resize(int w, int h) {
 		this.largeur = w;
 		this.hauteur = h;
+	}
+	@Override
+	public void moveTo(int new_x, int positionY) {
+		this.positionX.set(new_x);
+		this.positionY.set(positionY);
+	}
+	@Override
+	public void setPositionX(int x) {
+		this.positionX.set(x);
+	}
+	@Override
+	public void setPositionY(int y) {
+		this.positionY.set(y);
 	}
 
 

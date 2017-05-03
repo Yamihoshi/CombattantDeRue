@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import engine.components.character.Personnage;
 import engine.components.character.State;
+import engine.components.hitbox.HitboxState;
 import engine.components.player.Commande;
 import engine.contracts.error.InvariantError;
 import engine.services.CharacterService;
@@ -17,6 +18,10 @@ public class CharacterDecorator implements FightCharService{
 
 
 	private FightCharService character;
+
+	public void bindHitbox(HitboxService hitbox, HitboxState state) {
+		character.bindHitbox(hitbox, state);
+	}
 
 	public boolean isBlocking() {
 		return character.isBlocking();

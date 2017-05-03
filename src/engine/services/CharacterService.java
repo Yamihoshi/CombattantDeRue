@@ -2,6 +2,7 @@ package engine.services;
 
 import engine.components.character.Personnage;
 import engine.components.character.State;
+import engine.components.hitbox.HitboxState;
 import engine.components.player.Commande;
 
 public interface CharacterService {
@@ -26,6 +27,7 @@ public interface CharacterService {
 	public boolean isDead();
 	public int getId();
 	public int getMaxLife();
+	public void bindHitbox(HitboxService hitbox, HitboxState state);
 	
 	
 	/* Operators */

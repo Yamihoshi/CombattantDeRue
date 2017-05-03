@@ -1,5 +1,7 @@
 package engine.decorators;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import engine.services.HitboxService;
 
 public class HitboxDecorator implements HitboxService{
@@ -10,6 +12,22 @@ public class HitboxDecorator implements HitboxService{
 	}
 
 	public void setPositionY(int y) {
+		hitbox.setPositionY(y);
+	}
+
+	public void moveTo(int new_x, int positionY) {
+		hitbox.moveTo(new_x, positionY);
+	}
+
+	public void resize(int w, int h) {
+		hitbox.resize(w, h);
+	}
+
+	public void setPositionX(AtomicInteger x) {
+		hitbox.setPositionX(x);
+	}
+
+	public void setPositionY(AtomicInteger y) {
 		hitbox.setPositionY(y);
 	}
 
@@ -30,24 +48,21 @@ public class HitboxDecorator implements HitboxService{
 		hitbox.setHauteur(hauteur);
 	}
 
-
-
-	public void init(int x, int y, int h, int l) {
+	public void init(AtomicInteger x, AtomicInteger y, int h, int l) {
 		hitbox.init(x, y, h, l);
 	}
 
-	public int getPositionX() {
+	public AtomicInteger getPositionX() {
 		return hitbox.getPositionX();
 	}
 
-	public int getPositionY() {
+	public AtomicInteger getPositionY() {
 		return hitbox.getPositionY();
 	}
 
 	public int getHauteur() {
 		return hitbox.getHauteur();
 	}
-
 
 	public boolean belongsTo(int x, int y) {
 		return hitbox.belongsTo(x, y);
@@ -61,13 +76,9 @@ public class HitboxDecorator implements HitboxService{
 		return hitbox.equalsTo(other_hitbox);
 	}
 
-	public void moveTo(int x, int y) {
+	public void moveTo(AtomicInteger x, AtomicInteger y) {
 		hitbox.moveTo(x, y);
 	}
 
-	@Override
-	public void resize(int w, int h) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

@@ -1,5 +1,7 @@
 package engine.contracts;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import engine.contracts.error.InvariantError;
 import engine.contracts.error.PostconditionError;
 import engine.contracts.error.PreconditionError;
@@ -29,10 +31,10 @@ public class HitboxContract extends HitboxDecorator {
 
     public void checkInvariant() {
 	// inv: getWidth() > 0
-	if (!(getPositionX() > 0))
+	if (!(getPositionX().get() > 0))
 	    throw new InvariantError("X négative");
 	// inv: getWidth() > 0
-	if (!(getPositionY() > 0))
+	if (!(getPositionY().get() > 0))
 	    throw new InvariantError("Y négative");
 	if(!(getLargeur() > 0))
 	    throw new InvariantError("Largeur négative");
@@ -40,26 +42,26 @@ public class HitboxContract extends HitboxDecorator {
 	    throw new InvariantError("Hauteur négative");
 }
 	@Override
-	public void setPositionX(int x) {
-		if(x < 0){
+	public void setPositionX(AtomicInteger x) {
+		if(x.get() < 0){
 			new PreconditionError("Position négative");
 		}
 		checkInvariant();
 		super.setPositionX(x);
 		checkInvariant();
-		if(!(getPositionX() == x)){
+		if(!(getPositionX().get() == x.get())){
 			new PostconditionError("Set non effectué");
 		}
 	}
 	@Override
-	public void setPositionY(int y) {
-		if(y < 0){
+	public void setPositionY(AtomicInteger y) {
+		if(y.get() < 0){
 			new PreconditionError("Position négative");
 		}
 		checkInvariant();
 		super.setPositionY(y);
 		checkInvariant();
-		if(!(getPositionY() == y)){
+		if(!(getPositionY().get() == y.get())){
 			new PostconditionError("Set non effectué");
 		}
 	}
@@ -93,23 +95,23 @@ public class HitboxContract extends HitboxDecorator {
 	}
 
 	@Override
-	public void init(int x, int y, int h, int l) {
-		if(!(x > 0 && y > 0 && h > 0 && l>0))
+	public void init(AtomicInteger x, AtomicInteger y, int h, int l) {
+		if(!(x.get() > 0 && y.get() > 0 && h > 0 && l>0))
 			new PreconditionError("Error precondition init hitbox");
 		super.init(x, y, h, l);
 		
-		if(!(x == getPositionX() && y == getPositionY() && h == getHauteur() && l == getLargeur())){
+		if(!(x.get() == getPositionX().get() && y.get() == getPositionY().get() && h == getHauteur() && l == getLargeur())){
 			new PostconditionError("Error postcondition init hitbox");
 		}
 	}
 
 	@Override
-	public int getPositionX() {
+	public AtomicInteger getPositionX() {
 		return super.getPositionX();
 	}
 
 	@Override
-	public int getPositionY() {
+	public AtomicInteger getPositionY() {
 		return super.getPositionY();
 	}
 
@@ -137,13 +139,13 @@ public class HitboxContract extends HitboxDecorator {
 	}
 
 	@Override
-	public void moveTo(int x, int y) {
+	public void moveTo(AtomicInteger x, AtomicInteger y) {
 		// TODO Auto-generated method stub
 		checkInvariant();
 		super.moveTo(x, y);
 		checkInvariant();
 
-		if(!(getPositionX() == x && getPositionY() == y)){
+		if(!(getPositionX().get() == x.get() && getPositionY().get() == y.get())){
 			new PostconditionError("Erreur MoveTo changement");
 		}
 	}
