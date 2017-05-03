@@ -23,8 +23,8 @@ vitesse_y=12
 
 [Attack - PUNCH]
 punch_damage=20
-punch_hit_stun=4
-punch_block_stun=5
+punch_hit_stun=30
+punch_block_stun=15
 punch_hit_frame=6
 punch_start_up_frame=3
 punch_recovery_frame=12
@@ -39,8 +39,8 @@ light_kick_damage=20
 light_kick_start_up_frame=2
 light_kick_hit_frame=4
 light_kick_recovery_frame=11
-light_kick_hit_stun=4
-light_kick_block_stun=5
+light_kick_hit_stun=30
+light_kick_block_stun=15
 light_kick_debut_y=50
 light_kick_height=44
 light_kick_width=115

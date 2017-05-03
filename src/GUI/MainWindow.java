@@ -80,8 +80,8 @@ public class MainWindow extends Application{
 	 
 	 public void switch_to_Character_Selection() throws Exception
 	 {
-		 if(mediaPlayer!=null)
-			 mediaPlayer.stop();
+		 /*if(mediaPlayer!=null)
+			 mediaPlayer.stop();*/
 		 
 		 CharacterSelection selection = new CharacterSelection(this.game);
 		 
