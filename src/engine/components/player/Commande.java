@@ -17,5 +17,6 @@ public enum Commande {
 	NEUTRAL,
 	
 	PUNCH,
-	KICK
+	KICK,
+	SUPER_PUNCH;
 }

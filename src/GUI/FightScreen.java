@@ -385,7 +385,7 @@ public class FightScreen{
 				frameAnimationCount[winner]++;
 				animation_frame[winner]=sprites_manager.getCurrentSprite(winner).getDuration()*3;
 				
-				System.out.println(frameAnimationCount[winner]+" "+animation_frame[winner]);
+				//System.out.println(frameAnimationCount[winner]+" "+animation_frame[winner]);
 				
 				if(sprites_manager.getAnimationPlayed(winner).getCurrentIndex()==sprites_manager.getAnimationPlayed(winner).getLength()-1)
 				{

@@ -10,7 +10,8 @@ public enum AnimationType {
 	KICK("kick"),
 	START_JUMP("stand"),
 	VERTICAL_JUMP_UP("stand"),
-	HIT("hit");
+	HIT("hit"),
+	SUPER_PUNCH("punch");
 
 	
 	private String name = "";
