@@ -19,6 +19,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.CacheHint;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -56,6 +57,12 @@ public class StageController implements Initializable {
 	
 	@FXML 
     private Text frame_count;
+	
+	@FXML 
+    private ProgressBar life_bar_J1;
+	
+	@FXML 
+    private ProgressBar life_bar_J2;
 	
 	private boolean showHitbox;
   	
@@ -199,5 +206,10 @@ public class StageController implements Initializable {
     	{
     		this.character_J2.setRotate(180);
     	}
+	}
+	
+	public void setLifeBarValue(int joueur,int val)
+	{
+		life_bar_J1.setProgress(val);
 	}
 }

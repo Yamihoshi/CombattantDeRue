@@ -18,11 +18,13 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class FightScreen{
 
@@ -96,6 +98,20 @@ public class FightScreen{
             		toggleFramePerFrame();
             		event.consume();
             	}
+            	else if(event.getCode()==KeyCode.BACK_SPACE)
+            	{
+            		try {
+            			CharacterSelection screen = new CharacterSelection(game);
+            			Scene scene = new Scene(screen.getPane());
+                    	
+                    	Stage stage = (Stage) pane.getScene().getWindow();
+                    	
+                    	screen.addEventHandler();
+                    	stage.setScene(scene);
+            		} catch (IOException e) {
+            			e.printStackTrace();
+            		}
+            	}
             	else
             	{
             		for(int i=0;i<currentKey.length;i++)
@@ -165,20 +181,23 @@ public class FightScreen{
             	
             	if ((framePerFrame && currenttimeNano - lasttimeFPS >= timePerFrame) || !framePerFrame)
             	{   
+            		/* Gestion des Frames */
             		lasttimeFPS = currenttimeNano;
             		
             		frameCount = (frameCount+1)%61;
             		
             		if(frameCount==60)
             		{
-            			System.out.println((currenttimeNano-firstRun)/1000000000.0);
+            			//System.out.println((currenttimeNano-firstRun)/1000000000.0);
             			firstRun = System.nanoTime();
             		}
             		
             		if(frameCount==0)
             			frameCount=1;
             		
-            		controller.setFrame(frameCount);            		
+            		controller.setFrame(frameCount);     
+            		
+            		/*-----------------------------*/
                     
                     Commande[] commandes = new Commande[2];
                     
@@ -191,6 +210,9 @@ public class FightScreen{
                         
                     	if(!chara.isFaceRight())
                     		controller.flip(i);
+                    	
+                    	controller.setLifeBarValue(i,chara.getLife());
+                    	System.out.println("[LIFE OF "+chara.getName()+"] ="+chara.getLife());
                     	
                     	if(chara.isTeching())
                     	{
@@ -239,6 +261,12 @@ public class FightScreen{
                     game.getEngine().step(commandes[0], commandes[1]);
                     controller.updatePosition(J1.getCharBox(), J2.getCharBox());
                     controller.updateHitbox(J1, J2);
+                    
+                    if(game.getEngine().isGameOver())
+                    {
+                    	System.out.println("Terminé");
+                    	this.stop();
+                    }
                  }          	             
             }
         }.start();
