@@ -4,17 +4,17 @@ vitesse=7
 hauteur=330
 largeur=213
 
-[Attack]
+[Attack - punch]
 punch_damage=150
 punch_hit_stun=4
 punch_block_stun=5
 punch_hit_frame=2
 punch_start_up_frame=3
 punch_recovery_frame=16
-punch_debut_y=224
-punch_height=64
-punch_width=174
-punch_debut_x=251
+punch_debut_y=50
+punch_height=40
+punch_width=150
+punch_debut_x=150
 
 
 [Attack - LIGHT-KICK]
@@ -23,8 +23,8 @@ light_kick_hit_frame=2
 light_kick_recovery_frame=12
 light_kick_hit_stun=4
 light_kick_block_stun=5
-light_kick_debut_y=350
-light_kick_height=64
-light_kick_width=174
-light_kick_debut_x=280
+light_kick_debut_y=150
+light_kick_height=54
+light_kick_width=120
+light_kick_debut_x=150
 light_kick_damage=20

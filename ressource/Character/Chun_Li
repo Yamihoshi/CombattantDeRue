@@ -30,5 +30,5 @@ light_kick_hit_stun=4
 light_kick_block_stun=5
 light_kick_debut_y=50
 light_kick_height=44
-light_kick_width=110
+light_kick_width=115
 light_kick_debut_x=180

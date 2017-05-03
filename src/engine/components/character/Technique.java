@@ -65,8 +65,6 @@ public class Technique implements TechService {
 		frame_actuel++;
 		if(isInStartUp()){
 		}else if(isInHit()){
-			//TODO Ajouter sens hitbox selon side
-			System.out.println("HitFrame");
 			if(me.isFaceRight())
 				hitbox.setPositionX(this.debut_x + me.getPositionX());
 			else{
