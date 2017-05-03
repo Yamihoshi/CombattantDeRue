@@ -25,6 +25,7 @@ public interface CharacterService {
 	public boolean isFaceRight();
 	public boolean isDead();
 	public int getId();
+	public int getMaxLife();
 	
 	
 	/* Operators */

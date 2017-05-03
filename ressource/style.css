@@ -25,6 +25,17 @@
   -fx-background-size: 1280 720;
   -fx-background-position: center center;
 }
+
+.progress-bar > .track {
+  -fx-text-box-border: black;
+  -fx-control-inner-background: transparent;
+}
+
+.progress-bar
+{
+	-fx-accent: "#64d829";
+}
+
 /*
 #character_name_J1, #frame_count
 {

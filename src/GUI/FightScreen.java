@@ -211,8 +211,7 @@ public class FightScreen{
                     	if(!chara.isFaceRight())
                     		controller.flip(i);
                     	
-                    	controller.setLifeBarValue(i,chara.getLife());
-                    	System.out.println("[LIFE OF "+chara.getName()+"] ="+chara.getLife());
+                    	//System.out.println("[LIFE OF "+chara.getName()+"] ="+chara.getLife());
                     	
                     	if(chara.isTeching())
                     	{
@@ -259,6 +258,14 @@ public class FightScreen{
                     }
                     
                     game.getEngine().step(commandes[0], commandes[1]);
+                    
+                    for(int i=0;i<game.getPlayers().length;i++)
+                    {
+                    	FightCharService chara = game.getEngine().getCharacter(i);
+                    	
+                    	controller.setLifeBarValue(i,(double)chara.getLife()/chara.getMaxLife());
+                    }
+                    
                     controller.updatePosition(J1.getCharBox(), J2.getCharBox());
                     controller.updateHitbox(J1, J2);
                     

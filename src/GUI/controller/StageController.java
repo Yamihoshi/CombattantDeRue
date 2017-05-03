@@ -208,8 +208,15 @@ public class StageController implements Initializable {
     	}
 	}
 	
-	public void setLifeBarValue(int joueur,int val)
+	public void setLifeBarValue(int joueur,double val)
 	{
-		life_bar_J1.setProgress(val);
+		if(joueur==0)
+		{
+			if(val!=life_bar_J1.getProgress())
+				life_bar_J1.setProgress(val);
+		}
+		else
+			if(val!=life_bar_J2.getProgress())
+				life_bar_J2.setProgress(val);
 	}
 }

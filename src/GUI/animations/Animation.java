@@ -111,7 +111,7 @@ public class Animation {
 		
 		int val = (int) (this.getImage(0).getWidth() - 361*Sprite.ratio) + this.translate_X;
 		
-		System.out.println(type + " "+val);
+		//System.out.println(type + " "+val);
 		
 		return - val;
 	}

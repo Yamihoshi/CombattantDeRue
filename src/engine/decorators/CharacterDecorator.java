@@ -182,5 +182,9 @@ public class CharacterDecorator implements FightCharService{
 		super();
 		this.character = character2;
 	}
+
+	public int getMaxLife() {
+		return character.getMaxLife();
+	}
 	
 }

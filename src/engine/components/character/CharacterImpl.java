@@ -238,4 +238,9 @@ public class CharacterImpl implements CharacterService{
 		return myId;
 	}
 
+	@Override
+	public int getMaxLife() {
+		return 100;
+	}
+
 }
