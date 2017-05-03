@@ -268,12 +268,7 @@ public class FightScreen{
                     	
             			if(!currentKey.get(i).contains(code[i]))
             				commandes[i]=Commande.NEUTRAL;
-                    	
-<<<<<<< HEAD
-=======
-                    	 //System.out.println(commandes[i]);
->>>>>>> origin/master
-                    }
+                    	}
                     
                   
                     
