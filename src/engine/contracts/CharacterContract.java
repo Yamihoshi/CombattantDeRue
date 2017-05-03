@@ -142,11 +142,7 @@ public class CharacterContract extends CharacterDecorator {
 		return super.getName();
 	}
 
-	@Override
-	public void setCharBox(HitboxService hit) {
-		// TODO Auto-generated method stub
-		super.setCharBox(hit);
-	}
+
 
 	@Override
 	public State getState() {

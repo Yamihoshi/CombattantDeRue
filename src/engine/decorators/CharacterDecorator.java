@@ -95,9 +95,7 @@ public class CharacterDecorator implements FightCharService{
 		character.startTech(tech);
 	}
 
-	public void setCharBox(HitboxService hit) {
-		character.setCharBox(hit);
-	}
+
 
 	public void endTechnique() {
 		character.endTechnique();

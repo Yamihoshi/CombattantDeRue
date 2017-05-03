@@ -16,7 +16,7 @@ public class HitboxImpl implements HitboxService{
 	}
 	@Override
 	public void init(AtomicInteger x, AtomicInteger y, int h, int l) {
-		positionX =x;
+		positionX = x;
 		positionY = y;
 		hauteur = h;
 		largeur = l;

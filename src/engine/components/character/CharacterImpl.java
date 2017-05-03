@@ -22,7 +22,6 @@ public class CharacterImpl implements CharacterService{
 	protected int x;
 	protected int y;
 	protected EngineService engine;
-	protected HitboxService hitbox;
 	protected boolean faceRight;
 	protected State state_actuel;
 	protected HashMap<HitboxState, HitboxService> liste_hitbox;
@@ -43,8 +42,10 @@ public class CharacterImpl implements CharacterService{
 	public void moveLeft() {
 		gestionStand();
 		AtomicInteger new_x = new AtomicInteger(getPositionX() - this.vitesse);
+		AtomicInteger new_y = new AtomicInteger(getPositionY());
 		HitboxService tmp = new HitboxImpl();
-		tmp.init(new_x, getReferencePositionY(), getHauteur(), getLargeur());
+		
+		tmp.init(new_x, new_y, getHauteur(), getLargeur());
 		
 		if(isOutsideLeft(tmp)){
 			new_x.set(1);
@@ -55,7 +56,7 @@ public class CharacterImpl implements CharacterService{
 		}
 		if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
 			return;
-		hitbox.moveTo(new_x.get(), getPositionY());
+		getCharBox().moveTo(new_x.get(), getPositionY());
 	}
 	
 	@Override
@@ -64,7 +65,9 @@ public class CharacterImpl implements CharacterService{
 		HitboxService tmp = new HitboxImpl();
 		int indice = getOtherIndice();
 		AtomicInteger new_x = new AtomicInteger(getPositionX() + this.vitesse);
-		tmp.init(new_x, getReferencePositionY(), getHauteur(), getLargeur());
+		AtomicInteger new_y = new AtomicInteger(getPositionY());
+
+		tmp.init(new_x, new_y, getHauteur(), getLargeur());
 		if(isOutsideRight(tmp)){
 			new_x.set(engine.getWidth() - getLargeur());
 		//	tmp.init(new_x, getPositionY(), getHauteur(), getLargeur());
@@ -74,7 +77,7 @@ public class CharacterImpl implements CharacterService{
 			return;
 		}
 			
-		hitbox.moveTo(new_x, getReferencePositionY());
+		getCharBox().moveTo(new_x, getReferencePositionY());
 	}
 
 	@Override
@@ -114,7 +117,7 @@ public class CharacterImpl implements CharacterService{
 	@Override
 	public String toString() {
 		return "CharacterImpl [name=" + getName() + ", vie=" + vie + ", vitesse=" + vitesse + ", engine=" + engine
-				+ ", hitbox=" + hitbox + ", faceRight=" + faceRight + "]";
+				+ ", hitbox=" + getCharBox() + ", faceRight=" + faceRight + "]";
 	}
 	
 	protected int getMyIndice(){
@@ -129,7 +132,7 @@ public class CharacterImpl implements CharacterService{
 	}
 	@Override
 	public int getHauteur() {
-		return hitbox.getHauteur();
+		return getCharBox().getHauteur();
 	}
 
 	//TODO ajouter gestion witdh/hauteur du perso
@@ -149,7 +152,6 @@ public class CharacterImpl implements CharacterService{
 		vitesse = speed;
 		this.engine = engine;
 		this.faceRight = faceRight;
-		this.hitbox = new HitboxContract(new HitboxImpl());
 		this.liste_hitbox = new HashMap<>();
 	}
 	
@@ -187,10 +189,7 @@ public class CharacterImpl implements CharacterService{
 	public HitboxService getCharBox() {
 		return liste_hitbox.get(hitboxState);
 	}
-	@Override
-	public void setCharBox(HitboxService hit) {
-		this.hitbox = hit;		
-	}
+
 	@Override
 	public int getLife() {
 		return vie;
@@ -211,7 +210,7 @@ public class CharacterImpl implements CharacterService{
 
 	@Override
 	public int getLargeur() {
-		return hitbox.getLargeur();
+		return getCharBox().getLargeur();
 	}
 
 	@Override
@@ -232,7 +231,6 @@ public class CharacterImpl implements CharacterService{
 		int result = 1;
 		result = prime * result + ((engine == null) ? 0 : engine.hashCode());
 		result = prime * result + (faceRight ? 1231 : 1237);
-		result = prime * result + ((hitbox == null) ? 0 : hitbox.hashCode());
 		result = prime * result + vie;
 		result = prime * result + vitesse;
 		return result;

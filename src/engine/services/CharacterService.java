@@ -18,7 +18,6 @@ public interface CharacterService {
 	public State getState();
 	public EngineService getEngine();
 	public HitboxService getCharBox();
-	public void setCharBox(HitboxService hit);
 	public int getLife();
 	public int getSpeed();
 	public String getName();
