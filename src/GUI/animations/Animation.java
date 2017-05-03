@@ -17,7 +17,6 @@ public class Animation {
 	private int currentSprite;
 	private int translate_X;
 	private int translate_Y;
-	private int translate_X_reversed;
 	
 	public Animation(AnimationType type)
 	{
@@ -27,16 +26,14 @@ public class Animation {
 		this.loop=true;
 	}
 	
-	public void setPosition(int posX, int posX_reversed, int posY)
+	public void setPosition(int posX,int posY)
 	{
 		this.translate_X = (int) (Sprite.ratio*posX);
-		this.translate_X_reversed = (int) (Sprite.ratio*posX_reversed);
 		this.translate_Y = (int) (Sprite.ratio*posY);
 		
 		this.translate_Y = ref_position_Y - translate_Y;
 		
 		this.translate_X = ref_position_X_left - translate_X;
-		this.translate_X_reversed = ref_position_X_left - translate_X_reversed;
 	}
 	
 	public AnimationType getType()
@@ -126,5 +123,15 @@ public class Animation {
 
 	public void setTranslate_Y(int translateY) {
 		this.translate_Y = translateY;
+	}
+	
+	public int getCurrentIndex()
+	{
+		return this.currentSprite;
+	}
+	
+	public int getLength()
+	{
+		return this.sprites.size();
 	}
 }

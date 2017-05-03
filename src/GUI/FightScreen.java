@@ -222,28 +222,58 @@ public class FightScreen{
                     	
                     	/*if(commandes[i]==Commande.PUNCH && nbTimeKeyPressed[i]>1)
                         		commandes[i]=Commande.NEUTRAL;*/
-                    	
-	    	           	if(!chara.isBlockStunned()
-	    	           	&& ! chara.isHitStunned()
-	    	           	&& ! chara.isTeching()
-	    	           	&& sprites_manager.getAnimationPlayed(i).getType()!=animationBinder.getAnimation(commandes[i]))
-	    	           	{
-	    	           		sprites_manager.playAnimation(i,animationBinder.getAnimation(commandes[i]));
-	    	           		Sprite sprite = sprites_manager.getCurrentSprite(i);
-	                		controller.updateSprite(i,sprite);
-	                		frameAnimationCount[i]=0;
-	                		if(chara.isFaceRight())
-	                			controller.updateSpriteAlignement(i,sprites_manager.getAnimationPlayed(i).getTranslate_X(),sprites_manager.getAnimationPlayed(i).getTranslate_Y());
-	                		else
-	                			controller.updateSpriteAlignement(i,sprites_manager.getAnimationPlayed(i).getTranslate_X_reversed(),sprites_manager.getAnimationPlayed(i).getTranslate_Y());
-
-	    	           	}
                     }
+                    
+                    /* STEP ENGINE*/
+                    game.getEngine().step(commandes[0], commandes[1]);
+                    controller.updatePosition(J1.getCharBox(), J2.getCharBox());
+                    controller.updateHitbox(J1, J2);
+                    /*-------------*/
                     
                     for(int i=0;i<game.getPlayers().length;i++)
                     {
                     	FightCharService chara = game.getEngine().getCharacter(i);
+                    	AnimationType new_animation = sprites_manager.getAnimationPlayed(i).getType();
                     	
+                    	/* UPDATE ANIMATION */
+	    	           	if(!game.getEngine().isGameOver())
+	    	           	{
+	    	           		if(chara.isBlockStunned())
+	    	           		{
+	    	           			
+	    	           		}
+	    	           		else if (chara.isHitStunned())
+	    	           		{
+	    	           			
+	    	           		}
+	    	           		else if (chara.isTeching())
+	    	           		{
+	    	           			if(sprites_manager.getAnimationPlayed(i).getType()==AnimationType.STAND)
+	    	           				new_animation = animationBinder.getAnimation(commandes[i]);
+	    	           		}
+	    	           		else
+	    	           		{
+	    	           			new_animation = animationBinder.getAnimation(commandes[i]);
+	    	           		}
+	    	           		
+    	           			if(sprites_manager.getAnimationPlayed(i).getType()!=new_animation)
+	    	           		{
+		    	           		sprites_manager.playAnimation(i,animationBinder.getAnimation(commandes[i]));
+		    	           		Sprite sprite = sprites_manager.getCurrentSprite(i);
+		                		controller.updateSprite(i,sprite);
+		                		frameAnimationCount[i]=0;
+		                		if(chara.isFaceRight())
+		                			controller.updateSpriteAlignement(i,sprites_manager.getAnimationPlayed(i).getTranslate_X(),sprites_manager.getAnimationPlayed(i).getTranslate_Y());
+		                		else
+		                			controller.updateSpriteAlignement(i,sprites_manager.getAnimationPlayed(i).getTranslate_X_reversed(),sprites_manager.getAnimationPlayed(i).getTranslate_Y());
+
+	    	           		}
+	    	           			
+	    	           	}
+                    	/*---------------------*/
+                    	
+                    	
+	    	           	/* UPDATE SPRITE */
                     	if(chara.isBlockStunned() || chara.isHitStunned())
                     	{
                     		
@@ -255,27 +285,64 @@ public class FightScreen{
 	                		Sprite sprite = sprites_manager.getCurrentSprite(i);
 	                		controller.updateSprite(i,sprite);
 	                    }
-                    }
-                    
-                    game.getEngine().step(commandes[0], commandes[1]);
-                    
-                    for(int i=0;i<game.getPlayers().length;i++)
-                    {
-                    	FightCharService chara = game.getEngine().getCharacter(i);
+                    	/*--------------------------*/
                     	
                     	controller.setLifeBarValue(i,(double)chara.getLife()/chara.getMaxLife());
                     }
                     
-                    controller.updatePosition(J1.getCharBox(), J2.getCharBox());
-                    controller.updateHitbox(J1, J2);
-                    
-                    if(game.getEngine().isGameOver())
+            		if(game.getEngine().isGameOver())
                     {
                     	System.out.println("Terminé");
+                    	int winner = 0;
+                    	for(int i=1;i<game.getPlayers().length;i++)
+                    		if(game.getEngine().getCharacter(i).getLife()>game.getEngine().getCharacter(winner).getLife())
+                    			winner = i;
+                    	
+                    	launchGameOverTimer(winner);
                     	this.stop();
                     }
+                    
                  }          	             
             }
         }.start();
+	}
+
+	public void launchGameOverTimer(int winner) {
+
+		System.out.println("WINNER IS J"+(winner+1));
+		
+		new AnimationTimer()
+        {
+
+			int[] animation_frame = new int[2];
+        	int[] frameAnimationCount = new int[2];
+			
+			@Override
+			public void handle(long now) {
+			
+				frameAnimationCount[winner]++;
+				animation_frame[winner]=sprites_manager.getCurrentSprite(winner).getDuration()*3;
+				
+				System.out.println(frameAnimationCount[winner]+" "+animation_frame[winner]);
+				
+				if(sprites_manager.getAnimationPlayed(winner).getCurrentIndex()==sprites_manager.getAnimationPlayed(winner).getLength()-1)
+				{
+					
+				}
+				else if(frameAnimationCount[winner]==animation_frame[winner])
+                {
+                	frameAnimationCount[winner]=0;
+                	sprites_manager.stepAnimation(winner);
+            		Sprite sprite = sprites_manager.getCurrentSprite(winner);
+            		controller.updateSprite(winner,sprite);
+                }
+			}
+        
+        }.start();
+		
+		/* Play winner/Looser animation ? */
+		
+		/*Attendre 10s ->retour écran perso */
+		
 	}
 }
