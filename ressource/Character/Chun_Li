@@ -12,6 +12,15 @@ standing_width=185
 crouching_height=251
 crouching_width=185
 
+[JUMP]
+start_up=3
+move_up=9
+on_air=9
+move_down=8
+landing=5
+vitesse_x=5
+vitesse_y=12
+
 [Attack - PUNCH]
 punch_damage=20
 punch_hit_stun=30

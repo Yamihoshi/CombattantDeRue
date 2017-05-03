@@ -10,6 +10,7 @@ import GUI.animations.AnimationType;
 import GUI.animations.Sprite;
 import GUI.animations.SpritesManager;
 import GUI.controller.StageController;
+import engine.components.character.CharacterImpl;
 import engine.components.character.Personnage;
 import engine.components.player.Commande;
 import engine.services.FightCharService;
@@ -187,7 +188,7 @@ public class FightScreen{
         	
         	long firstRun = System.nanoTime();
         	
-            @Override
+			@Override
             public void handle(long arg0)
             {                	
             	long currenttimeNano = System.nanoTime();
@@ -206,7 +207,6 @@ public class FightScreen{
             		
             		if(frameCount==60)
             		{
-            			//System.out.println((currenttimeNano-firstRun)/1000000000.0);
             			firstRun = System.nanoTime();
             		}
             		
@@ -224,15 +224,7 @@ public class FightScreen{
                     	
                     	FightCharService chara = game.getEngine().getCharacter(i);
                     	
-                    	//System.out.println("[LIFE OF "+chara.getName()+"] ="+chara.getLife());
-                    	
-                    	/*if(chara.isTeching())
-                    	{
-                    		commandes[i] = Commande.NEUTRAL;
-                    	}*/
-                    	
-                    	/*if(currentKey.get(i).isEmpty())
-                    		commandes[i] = keyBinder.getAction(i,null);*/
+
                     	
                     	@SuppressWarnings("unchecked")
 						LinkedList<KeyCode> keys = (LinkedList<KeyCode>) currentKey.get(i).clone();
@@ -276,9 +268,7 @@ public class FightScreen{
                     	
             			if(!currentKey.get(i).contains(code[i]))
             				commandes[i]=Commande.NEUTRAL;
-                    	
-                    	 //System.out.println(commandes[i]);
-                    }
+                    	}
                     
                   
                     

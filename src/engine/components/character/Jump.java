@@ -1,5 +1,9 @@
 package engine.components.character;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+import engine.components.hitbox.HitboxImpl;
+import engine.contracts.HitboxContract;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
 import engine.services.JumpService;
@@ -51,20 +55,30 @@ public class Jump implements JumpService{
 	@Override
 	public void launch() {
 		frameRestante = 0;
+		vitesseX = 0;
+		
 	}
 
 	@Override
-	public void step(HitboxService me, HitboxService other) {
+	public void step(HitboxService me, HitboxService other_hitbox) {
+		HitboxService tmp = new HitboxImpl();
+		tmp.init(new AtomicInteger(me.getPositionX().get()), me.getPositionY(), me.getHauteur(), me.getLargeur());
+		System.out.println("je passe");
 		if(isStartUp()){
 			
 		}else if(isMoveUp()){
-			
+			me.moveTo(tmp.getPositionX().get() + vitesseX, tmp.getPositionY() - vitesseY);
 		}else if(isOnAir()){
-		
-		}else if(isMoveDown()){
 			
+		}else if(isMoveDown()){
+			tmp.moveTo(tmp.getPositionX().get() + vitesseX, tmp.getPositionY() - vitesseY);
+			if(!tmp.collidesWith(other_hitbox)){
+				me.moveTo(tmp.getPositionX().get() + vitesseX, tmp.getPositionY() - vitesseY);
+			}
 		}else if(isLanding()){
 			
+		}else{
+			CharacterImpl.jumping = false;
 		}
 		frameRestante++;
 	}
