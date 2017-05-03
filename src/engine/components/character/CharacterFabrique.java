@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import GUI.Ressource;
 import engine.components.hitbox.HitboxImpl;
 import engine.components.hitbox.HitboxState;
 import engine.components.player.Commande;
@@ -23,7 +24,7 @@ public class CharacterFabrique {
 	   public static void init(Player player, Personnage personnage, EngineService engine, boolean faceRight){
 		   FightCharService fc = player.getCharacter();
 		   try {
-			Properties p = CharacterFabrique.load("ressource//character//"+personnage.name());
+			Properties p = CharacterFabrique.load("ressource"+Ressource.character+personnage.toString());
 			fc.init(personnage, new Integer(p.getProperty("life", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight);
 			initHitbox(fc, p);
 			initTechnique(fc, p);

@@ -161,7 +161,7 @@ public class CharacterImpl implements CharacterService{
 	}
 	@Override
 	public String getName() {
-		return personnage.name();
+		return personnage.toString();
 	}
 
 

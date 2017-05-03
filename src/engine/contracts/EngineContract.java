@@ -89,25 +89,21 @@ public class EngineContract extends EngineDecorator{
 
 	@Override
 	public boolean isGameOver() {
-		// TODO Auto-generated method stub
 		return super.isGameOver();
 	}
 
 	@Override
 	public void step(Commande c1, Commande c2) {
-		// TODO Auto-generated method stub
 		super.step(c1, c2);
 	}
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
 		return super.clone();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
 		return super.equals(obj);
 	}
 

@@ -28,6 +28,7 @@ public class SpritesLoader {
 		HashMap<AnimationType,Animation> animations = new HashMap<>();
 		
 		Properties prop = null;
+		System.out.println(chara);
 		for(AnimationType type : AnimationType.values())
 		{
 			if(prop == null)
