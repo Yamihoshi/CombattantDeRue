@@ -21,8 +21,8 @@ public class Technique implements TechService {
 	private int saveHeight;
 	private int debut_x;
 	private int debut_y;
-	private HitboxService hitbox;
-	private int frame_actuel;
+	protected HitboxService hitbox;
+	protected int frame_actuel;
 	private boolean already_touch;
 
 

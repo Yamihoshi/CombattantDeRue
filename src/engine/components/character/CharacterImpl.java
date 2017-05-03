@@ -121,7 +121,7 @@ public class CharacterImpl implements CharacterService{
 		gestionDown();
 		HitboxService tmp = new HitboxImpl();
 		int indice = getOtherIndice();
-		AtomicInteger new_x = new AtomicInteger(getPositionX() + this.vitesse);
+		AtomicInteger new_x = new AtomicInteger(getPositionX() + this.vitesse/2);
 		int y = getPositionY();
 		tmp.init(new_x, y, getHauteur(), getLargeur());
 		if(isOutsideRight(tmp)){
