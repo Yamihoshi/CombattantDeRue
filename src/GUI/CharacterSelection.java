@@ -1,8 +1,6 @@
 package GUI;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-
 import GUI.controller.CharacterSelectionController;
 import engine.components.character.CharacterFabrique;
 import engine.components.character.Personnage;
@@ -13,8 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
+
 import javafx.stage.Stage;
 
 public class CharacterSelection{

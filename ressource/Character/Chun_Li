@@ -14,9 +14,9 @@ crouching_width=185
 
 [JUMP]
 start_up=3
-move_up=9
+move_up=6
 on_air=9
-move_down=8
+move_down=6
 landing=5
 vitesse_x=5
 vitesse_y=12

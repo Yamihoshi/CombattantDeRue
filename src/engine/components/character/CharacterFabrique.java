@@ -79,7 +79,7 @@ public class CharacterFabrique {
 		   jumpService.init(new Integer(p.getProperty("start_up")), new Integer(p.getProperty("move_up")), 
 							   new Integer(p.getProperty("on_air")), new Integer(p.getProperty("move_down")), 
 							   new Integer(p.getProperty("landing")), new Integer(p.getProperty("vitesse_x")),
-							   new Integer(p.getProperty("vitesse_y")));
+							   new Integer(p.getProperty("vitesse_y")), fc);
 		   fc.bindJump(jumpService);
 	   }
 	   

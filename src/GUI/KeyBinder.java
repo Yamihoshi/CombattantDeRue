@@ -28,7 +28,7 @@ public class KeyBinder {
 		bind.put(KeyCode.E, Commande.GUARD);
 		bind.put(KeyCode.S, Commande.DOWN);
 		bind.put(KeyCode.W, Commande.KICK);
-		bind.put(KeyCode.A, Commande.UP);
+		bind.put(KeyCode.Z, Commande.UP);
 		bind.put(KeyCode.R, Commande.SUPER_PUNCH);
 		
 		return bind;

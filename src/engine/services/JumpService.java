@@ -13,8 +13,8 @@ public interface JumpService {
 	public boolean isOnAir();
 	public boolean isMoveDown();
 	public boolean isLanding();
-	public void step(HitboxService me, HitboxService other);
+	public void step(CharacterService other);
 	public void launch();
 	
-	public void init(int startUp, int moveUp, int onAir, int moveDown, int landing, int vitesse_x, int vitesse_y);
+	public void init(int startUp, int moveUp, int onAir, int moveDown, int landing, int vitesse_x, int vitesse_y, CharacterService joueur);
 }

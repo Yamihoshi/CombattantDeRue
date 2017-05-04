@@ -25,7 +25,6 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 	@Override 
 	public void init(Personnage personnage, int life, int speed, EngineService engine, boolean faceRight, int ecart) {
 		super.init(personnage, life, speed, engine, faceRight, ecart);
-		System.out.println(getEcart());
 		this.techniques = new HashMap<>();
 		this.compteurCombo = new ComboContract(new ComboIpml());
 		this.compteurCombo.init();
@@ -33,7 +32,6 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 	
 	@Override
 	public void step(Commande c) {
-		System.out.println(c);
 	//	state_actuel = State.WAITING;
 		if(isTeching()){
 			current_technique.step(this, getOtherPlayer());
@@ -53,8 +51,7 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 		}else if(c == Commande.GUARD){
 			state_actuel = State.GUARDING;
 		}else if(isJumping()){
-			System.out.println("je rentre dans mon jump");
-			jump.step(getCharBox(), getOtherPlayer().getCharBox());
+			jump.step(getOtherPlayer());
 		}
 		else{
 			state_actuel = State.WAITING;

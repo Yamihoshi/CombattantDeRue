@@ -28,17 +28,9 @@ public class CharacterImpl implements CharacterService{
 	private int maxLife;
 	private int ecart;
 	protected JumpService jump;
-	public static boolean jumping = false;
+	public  boolean jumping = false;
 	
-	private void gestionStand(){
-		changeHitbox(HitboxState.STANDING);
-	}
-	public boolean isJumping(){
-		return jumping;
-	}
-	private void gestionJump(){
-		jumping = true;
-	}
+
 	private void gestionDown(){
 		changeHitbox(HitboxState.CROUCHING);
 	}
@@ -290,5 +282,19 @@ public class CharacterImpl implements CharacterService{
 	@Override
 	public void bindJump(JumpService jumpService) {
 		jump = jumpService;
+	}
+	@Override
+	public void switchJump() {
+		jumping = !jumping;		
+	}
+	
+	private void gestionStand(){
+		changeHitbox(HitboxState.STANDING);
+	}
+	public boolean isJumping(){
+		return jumping;
+	}
+	private void gestionJump(){
+		//jumping = true;
 	}
 }

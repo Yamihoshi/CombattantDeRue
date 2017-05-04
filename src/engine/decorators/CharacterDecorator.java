@@ -17,8 +17,15 @@ import engine.services.TechService;
 
 public class CharacterDecorator implements FightCharService{
 
-
 	private FightCharService character;
+
+	public boolean isJumping() {
+		return character.isJumping();
+	}
+
+	public void switchJump() {
+		character.switchJump();
+	}
 
 	public int getEcart() {
 		return character.getEcart();
