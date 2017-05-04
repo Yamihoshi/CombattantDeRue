@@ -62,7 +62,7 @@ public class CharacterContract extends CharacterDecorator {
 		checkInvariant();
 		super.moveRight();
 		
-		if((!(getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))
+		if(!(!(getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))
 				|| (getPositionX() == pre_positionX))
 				){
 			new PostconditionError("Collision with a deplacement of posX on a right deplacement");
@@ -102,6 +102,9 @@ public class CharacterContract extends CharacterDecorator {
 		if(!(isDead() == !(getLife()>0))){
 			throw new InvariantError("Erreur Character not really dead kek");
 		}
+		
+		if(!(!isTeching() || this.getCurrentTechnique()!=null))
+			throw new InvariantError("Erreur in getCurrentTechniquement != null but was not in Teching State");
 	}
 	@Override
 	public void moveUpRight() {
@@ -121,19 +124,46 @@ public class CharacterContract extends CharacterDecorator {
 	@Override
 	public void moveDown() {
 		// TODO Auto-generated method stub
+		
 		super.moveDown();
 	}
 
 	@Override
 	public void moveDownLeft() {
 		// TODO Auto-generated method stub
+		
+		int other = getEngine().getOtherIndice(getId());
+		int pre_positionX = getPositionX();
+		
+		checkInvariant();
 		super.moveDownLeft();
+		
+		if(!(!(getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))
+				|| (getPositionX() == pre_positionX))
+				){
+			new PostconditionError("Collision with a deplacement of posX on a right deplacement");
+		}
+		
+		checkInvariant();
 	}
 
 	@Override
 	public void moveDownRight() {
 		// TODO Auto-generated method stub
+
+		int other = getEngine().getOtherIndice(getId());
+		int pre_positionX = getPositionX();
+		
+		checkInvariant();
 		super.moveDownRight();
+		
+		if(!(!(getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))
+				|| (getPositionX() == pre_positionX))
+				){
+			new PostconditionError("Collision with a deplacement of posX on a right deplacement");
+		}
+		
+		checkInvariant();
 	}
 
 	@Override
@@ -177,14 +207,63 @@ public class CharacterContract extends CharacterDecorator {
 	public boolean isTeching() {
 		return super.isTeching();
 	}
+	
+	@Override
+	public TechService getCurrentTechnique()
+	{
+		return super.getCurrentTechnique();
+	}
 
 
 
 	@Override
 	public void startTech(TechService tech) {
+		
+		checkInvariant();
+		
+		if(!(super.isTeching()))
+				throw new PreconditionError("Trying to Start Technique but was not in Teching State");
+		
 		super.startTech(tech);
+		
+		if(!(this.getCurrentTechnique()!=null))
+			throw new PostconditionError("Technique started but NULL currentTechnique");
+		if(!(this.isTeching()))
+			throw new PostconditionError("Technique started but not in Teching State");
+		
+		checkInvariant();
 	}
 
+	public void endTechnique() {
+		
+		checkInvariant();
+		
+		if(!(super.isTeching()))
+				throw new PreconditionError("Trying to End Technique but was not in Teching State");
+		
+		super.endTechnique();
+		
+		checkInvariant();
+	}
+
+	public void takeAttack(int damage, int hstun, int bstun) {
+		
+		checkInvariant();
+		
+		if(!(damage>0))
+			throw new PreconditionError("Taking attack of 0 damage");
+		if(!(hstun>0))
+			throw new PreconditionError("0 Hit Stun = impossible");
+		if(!(bstun>0))
+			throw new PreconditionError("0 Block Stun = impossible");
+		if(!(!this.isDead()))
+			throw new PreconditionError("Taking damage but was already DEAD");
+		
+		super.takeAttack(damage, hstun, bstun);
+		
+		checkInvariant();
+	}
+	
 
 	@Override
 	public int getHauteur() {
@@ -251,7 +330,25 @@ public class CharacterContract extends CharacterDecorator {
 		// TODO Auto-generated method stub
 		return super.isDead();
 	}
-
+	
+	@Override
+	public void stepCombo(boolean hit)
+	{
+		checkInvariant();
+		
+		int pre_combo = this.getCombo();
+		
+		super.stepCombo(hit);
+		
+		if(!(!(hit && super.getComboService().comboPossible()) || this.getCombo()==pre_combo+1 ))
+			throw new PostconditionError("Hitted + combo possible but combo was not incremented");
+		
+		if(!(!(hit && !super.getComboService().comboPossible()) || this.getCombo()==pre_combo+1 ))
+			throw new PostconditionError("Hitted + combo not possible but combo was incremented");
+		
+		checkInvariant();
+	}
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
