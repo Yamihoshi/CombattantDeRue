@@ -30,6 +30,7 @@ public class AnimationBinder {
 		this.linker.put(Commande.DOWNRIGHT, AnimationType.CROUCH);
 		this.linker.put(Commande.UP, AnimationType.START_JUMP);
 		this.linker.put(Commande.KICK, AnimationType.KICK);
+		this.linker.put(Commande.SUPER_PUNCH, AnimationType.PUNCH);
 	}
 	
 	public AnimationType getAnimation(Commande cmd)
