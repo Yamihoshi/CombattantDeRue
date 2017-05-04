@@ -80,15 +80,15 @@ public class TechniqueContract extends TechniqueDecorator {
 		
 		checkInvariant();
 		
-		//int pre_frame = this.getFrame();
+		int pre_frame = this.getFrame();
 		
-		/*if(!(this.getFrame()<this.getStart_up_frame()+this.getHit_frame()+this.getRecovery_Frame()))
-			throw new PreconditionError("");*/
+		if(!(this.getFrame()<this.getStart_up_frame()+this.getHit_frame()+this.getRecovery_Frame()))
+			throw new PreconditionError("");
 		
 		super.step(me, other);
 		
-		/*if(!(this.getFrame()==pre_frame+1))
-			throw new PostconditionError("Frame Tech not incremented");*/
+		if(!(this.getFrame()==pre_frame+1))
+			throw new PostconditionError("Frame Tech not incremented");
 		
 		checkInvariant();
 	}
@@ -101,8 +101,8 @@ public class TechniqueContract extends TechniqueDecorator {
 		
 		super.launchTechnique();
 		
-		/*if(!(this.getFrame()==0))
-			throw new PostconditionError("Launching Technique, frame no set on 0");*/
+		if(!(this.getFrame()==0))
+			throw new PostconditionError("Launching Technique, frame no set on 0");
 		
 		checkInvariant();
 	}

@@ -110,10 +110,10 @@ public class CharacterContract extends CharacterDecorator {
 		if(!(!isTeching() || this.getCurrentTechnique()!=null))
 			throw new InvariantError("Erreur in getCurrentTechniquement != null but was not in Teching State");
 		
-		if(!(isTeching() && isBlocking() == false))
+		if(!(!isTeching() || !isBlocking()))
 			throw new InvariantError("Blocking while performing a Technique");
 		
-		if(!(isBlocking() && (isHitStunned() || isBlockStunned())))
+		if(!(!isBlocking() || !(isHitStunned() || isBlockStunned())))
 			throw new InvariantError("Blocking while being stunned");
 		
 	}
