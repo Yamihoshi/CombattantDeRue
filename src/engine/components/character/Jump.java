@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import engine.components.hitbox.HitboxImpl;
 import engine.contracts.HitboxContract;
+import engine.services.CharacterService;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
 import engine.services.JumpService;
@@ -19,7 +20,7 @@ public class Jump implements JumpService{
 	private int vitesseX;
 	private int vitesseY;
 	private int frameRestante;
-	
+	private CharacterService me;
 	
 	@Override
 	public int getFrameStartUp() {
@@ -56,29 +57,29 @@ public class Jump implements JumpService{
 	public void launch() {
 		frameRestante = 0;
 		vitesseX = 0;
-		
+		me.switchJump();
 	}
 
 	@Override
-	public void step(HitboxService me, HitboxService other_hitbox) {
+	public void step(CharacterService otherPlayer) {
 		HitboxService tmp = new HitboxImpl();
-		tmp.init(new AtomicInteger(me.getPositionX().get()), me.getPositionY(), me.getHauteur(), me.getLargeur());
+		HitboxService other =  otherPlayer.getCharBox();
+		tmp.init(new AtomicInteger(me.getCharBox().getPositionX().get()), me.getPositionY(), me.getHauteur(), me.getLargeur());
 		System.out.println("je passe");
 		if(isStartUp()){
 			
 		}else if(isMoveUp()){
-			me.moveTo(tmp.getPositionX().get() + vitesseX, tmp.getPositionY() - vitesseY);
+			me.getCharBox().moveTo(tmp.getPositionX().get() + vitesseX, tmp.getPositionY() - vitesseY);
 		}else if(isOnAir()){
 			
 		}else if(isMoveDown()){
-			tmp.moveTo(tmp.getPositionX().get() + vitesseX, tmp.getPositionY() - vitesseY);
-			if(!tmp.collidesWith(other_hitbox)){
-				me.moveTo(tmp.getPositionX().get() + vitesseX, tmp.getPositionY() - vitesseY);
-			}
+			System.out.println("Jumping..");
+			me.getCharBox().moveTo(tmp.getPositionX().get() + vitesseX, tmp.getPositionY() + vitesseY);
+		//	me.getCharBox().moveTo(tmp.getPositionX().get() - vitesseX, tmp.getPositionY() + vitesseY);
 		}else if(isLanding()){
 			
 		}else{
-			CharacterImpl.jumping = false;
+			me.switchJump();
 		}
 		frameRestante++;
 	}
@@ -112,7 +113,7 @@ public class Jump implements JumpService{
 
 
 	@Override
-	public void init(int startUp, int moveUp, int onAir, int moveDown, int landing, int vitesse_x, int vitesse_y) {
+	public void init(int startUp, int moveUp, int onAir, int moveDown, int landing, int vitesse_x, int vitesse_y, CharacterService joueur) {
 		this.startUp = startUp;
 		this.moveUp = moveUp;
 		this.onAir = onAir;
@@ -121,6 +122,7 @@ public class Jump implements JumpService{
 		this.vitesseX = vitesse_x;
 		this.vitesseY = vitesse_y;
 		this.frameRestante = frameRestante;
+		this.me = joueur;
 	}
 
 
