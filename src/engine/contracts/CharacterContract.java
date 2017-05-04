@@ -31,6 +31,12 @@ public class CharacterContract extends CharacterDecorator {
 		if(!(getLife() == l && getSpeed() == s && isFaceRight() == faceRight && getEngine().equals(engine)) && getCharBox() != null ){
 			throw new PostconditionError("Erreur post condition error");
 		}
+		
+		if(!(this.getTech()!=null))
+			throw new PostconditionError("Technique not initialized");
+		
+		if(!(this.getComboService()!=null))
+			throw new PostconditionError("ComboService not initialized");
 	}
  
 
@@ -103,6 +109,13 @@ public class CharacterContract extends CharacterDecorator {
 		
 		if(!(!isTeching() || this.getCurrentTechnique()!=null))
 			throw new InvariantError("Erreur in getCurrentTechniquement != null but was not in Teching State");
+		
+		if(!(isTeching() && isBlocking() == false))
+			throw new InvariantError("Blocking while performing a Technique");
+		
+		if(!(isBlocking() && (isHitStunned() || isBlockStunned())))
+			throw new InvariantError("Blocking while being stunned");
+		
 	}
 	@Override
 	public void moveUpRight() {
