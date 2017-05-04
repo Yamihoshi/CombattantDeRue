@@ -206,5 +206,10 @@ public class CharacterDecorator implements FightCharService{
 	public void bindJump(JumpService jumpService) {
 		character.bindJump(jumpService);
 	}
+
+	@Override
+	public HitboxState getHitboxState() {
+		return character.getHitboxState();
+	}
 	
 }

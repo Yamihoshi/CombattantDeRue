@@ -2,6 +2,7 @@ package engine.contracts;
 
 import engine.components.character.Personnage;
 import engine.components.character.State;
+import engine.components.hitbox.HitboxState;
 import engine.components.player.Commande;
 import engine.contracts.error.InvariantError;
 import engine.contracts.error.PostconditionError;
@@ -37,10 +38,13 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void moveLeft() {
-		
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
 		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
-		 
+		boolean faceRight = isFaceRight();
+		int pre_position_y = getPositionY();
 		checkInvariant();
 		super.moveLeft();
 		checkInvariant();
@@ -50,12 +54,44 @@ public class CharacterContract extends CharacterDecorator {
 				){
 			throw new PostconditionError("Collision with a changement of posX" + getPositionX() + "==" + pre_positionX);
 		}
-	}
+		
+		if(!(faceRight == isFaceRight())){
+			throw new PostconditionError("No more faceRight");
+		}
+		if(!(pre_position_y == getPositionY())){
+			throw new PostconditionError("Y changing..");
+		}
+		
+		if((pre_positionX <= getSpeed() && !getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))){
+			if(!(getPositionX() == 1)){
+				throw new PostconditionError("x not equals to 1..");
+			}
+		}
+		
+		if(getHitboxState() != HitboxState.STANDING){
+			throw new PostconditionError("not standing");
+		}
 
+		
+		
+	}
 	@Override
 	public void moveRight() {
+		
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
 		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
+		boolean faceRight = isFaceRight();
+		int pre_position_y = getPositionY();
+		int life = getLife();
+		int combo = getCombo();
+		
+		if(isTeching()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
+		
 		
 		checkInvariant();
 		super.moveRight();
@@ -66,7 +102,27 @@ public class CharacterContract extends CharacterDecorator {
 			new PostconditionError("Collision with a deplacement of posX on a right deplacement");
 		}
 		
+		if((pre_positionX > getSpeed() && !getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))){
+			if(!(getPositionX() == getEngine().getWidth() - getLargeur())){
+				throw new PostconditionError("x not equals to a width engine - width..");
+			}
+		}
+		
 		checkInvariant();
+		
+		
+		if(!(faceRight == isFaceRight() && life == getLife() && combo == getCombo())){
+			throw new PostconditionError("No more faceRight or life..");
+		}
+		if(!(pre_position_y == getPositionY())){
+			throw new PostconditionError("Y changing..");
+		}
+		
+		if(getHitboxState() != HitboxState.STANDING){
+			throw new PostconditionError("not standing");
+		}
+
+		
 	}
 
 	@Override
@@ -106,24 +162,46 @@ public class CharacterContract extends CharacterDecorator {
 	}
 	@Override
 	public void moveUpRight() {
+		
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
+		
+		
 		super.moveUpRight();
 	}
 
 	@Override
 	public void moveUpLeft() {
+		
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
+		
 		super.moveUpLeft();
 	}
 
 	@Override
 	public void moveUp() {
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
+		
 		super.moveUp();
 	}
 
 	@Override
 	public void moveDown() {
-		// TODO Auto-generated method stub
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
 		
 		super.moveDown();
+		
+		if(getHitboxState() != HitboxState.CROUCHING){
+			throw new PostconditionError("not standing");
+		}
+
 	}
 
 	@Override
@@ -131,6 +209,10 @@ public class CharacterContract extends CharacterDecorator {
 		
 		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
+		
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PreconditionError("Actuellement en teching..");
+		}
 		
 		checkInvariant();
 		super.moveDownLeft();
@@ -142,6 +224,10 @@ public class CharacterContract extends CharacterDecorator {
 		}
 		
 		checkInvariant();
+		
+		if(getHitboxState() != HitboxState.CROUCHING){
+			throw new PostconditionError("not standing");
+		}
 	}
 
 	@Override
@@ -149,6 +235,10 @@ public class CharacterContract extends CharacterDecorator {
 
 		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
+		
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PreconditionError("Actuellement en teching..");
+		}
 		
 		checkInvariant();
 		super.moveDownRight();
@@ -160,6 +250,11 @@ public class CharacterContract extends CharacterDecorator {
 		}
 		
 		checkInvariant();
+		
+		
+		if(getHitboxState() != HitboxState.CROUCHING){
+			throw new PostconditionError("not standing");
+		}
 	}
 
 	@Override
@@ -347,7 +442,6 @@ public class CharacterContract extends CharacterDecorator {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return super.toString();
 	}
 }

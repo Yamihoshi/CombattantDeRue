@@ -1,3 +1,6 @@
+
+
+	
 <project name="Street Fighter" default="compile" basedir=".">
     <description>
        Projet CPS : Street Fighter

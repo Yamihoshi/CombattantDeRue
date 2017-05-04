@@ -44,8 +44,6 @@ public class CharacterImpl implements CharacterService{
 		
 		if(isOutsideLeft(tmp)){
 			new_x.set(1);
-		}else if(isOutsideRight(tmp)){
-			new_x.set(engine.getWidth());
 		}
 		if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
 			return;
@@ -62,7 +60,6 @@ public class CharacterImpl implements CharacterService{
 		tmp.init(new_x, y, getHauteur(), getLargeur());
 		if(isOutsideRight(tmp)){
 			new_x.set(engine.getWidth() - getLargeur());
-			System.out.println("Try to go out forward..");
 		}
 		if(tmp.collidesWith(getOtherPlayer().getCharBox())){
 			return;
@@ -296,5 +293,9 @@ public class CharacterImpl implements CharacterService{
 	}
 	private void gestionJump(){
 		//jumping = true;
+	}
+	@Override
+	public HitboxState getHitboxState() {
+		return hitboxState;
 	}
 }
