@@ -37,7 +37,6 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void moveLeft() {
-		// TODO Auto-generated method stub
 		
 		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
@@ -55,7 +54,6 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void moveRight() {
-		// TODO Auto-generated method stub
 		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
 		
@@ -130,7 +128,6 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void moveDownLeft() {
-		// TODO Auto-generated method stub
 		
 		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
@@ -149,7 +146,6 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void moveDownRight() {
-		// TODO Auto-generated method stub
 
 		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();

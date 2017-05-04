@@ -78,7 +78,7 @@ public class Technique implements TechService {
 				already_touch = true;
 				other.takeAttack(damage, hstun, bstun);
 				me.stepCombo(true);
-				System.out.println("Touché !!!!!! Combo en cours " + me.getCombo());
+				//System.out.println("Touché !!!!!! Combo en cours " + me.getCombo());
 			}
 		}else if(isInRecovery()){
 			//waiting
@@ -125,6 +125,11 @@ public class Technique implements TechService {
 	@Override
 	public boolean isInRecovery() {
 		return frame_actuel < getStart_up_frame() + getHit_frame() + getRecovery_Frame();
+	}
+
+	@Override
+	public int getFrame() {
+		return frame_actuel;
 	}
 
 }

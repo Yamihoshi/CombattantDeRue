@@ -63,4 +63,9 @@ public class TechniqueDecorator implements TechService{
 	public boolean isInRecovery() {
 		return technique.isInRecovery();
 	}
+
+	@Override
+	public int getFrame() {
+		return technique.getFrame();
+	}
 }

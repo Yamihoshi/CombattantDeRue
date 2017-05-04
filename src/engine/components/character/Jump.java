@@ -65,7 +65,6 @@ public class Jump implements JumpService{
 		HitboxService tmp = new HitboxImpl();
 		HitboxService other =  otherPlayer.getCharBox();
 		tmp.init(new AtomicInteger(me.getCharBox().getPositionX().get()), me.getPositionY(), me.getHauteur(), me.getLargeur());
-		System.out.println("je passe");
 		if(isStartUp()){
 			
 		}else if(isMoveUp()){
@@ -73,7 +72,6 @@ public class Jump implements JumpService{
 		}else if(isOnAir()){
 			
 		}else if(isMoveDown()){
-			System.out.println("Jumping..");
 			me.getCharBox().moveTo(tmp.getPositionX().get() + vitesseX, tmp.getPositionY() + vitesseY);
 		//	me.getCharBox().moveTo(tmp.getPositionX().get() - vitesseX, tmp.getPositionY() + vitesseY);
 		}else if(isLanding()){
