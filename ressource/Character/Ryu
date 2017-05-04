@@ -34,6 +34,19 @@ punch_width=150
 punch_debut_x=150
 
 
+[Attack - punch]
+super_punch_damage=150
+super_punch_hit_stun=4
+super_punch_block_stun=5
+super_punch_hit_frame=9
+super_punch_start_up_frame=4
+super_punch_recovery_frame=9
+super_punch_debut_y=50
+super_punch_height=40
+super_punch_width=150
+super_punch_debut_x=150
+
+
 [Attack - LIGHT-KICK]
 light_kick_start_up_frame=7
 light_kick_hit_frame=7

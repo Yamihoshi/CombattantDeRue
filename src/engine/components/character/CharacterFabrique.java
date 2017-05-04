@@ -41,6 +41,7 @@ public class CharacterFabrique {
 	   public static void initTechnique(FightCharService fc, Properties p){
 			TechService punch = new TechniqueContract(new Technique());
 			TechService kick = new TechniqueContract(new Technique());
+			TechService superpunch = new TechniqueContract(new Technique());
 
 			punch.init(new Integer(p.getProperty("punch_damage")), new Integer(p.getProperty("punch_hit_stun")),
 					new Integer(p.getProperty("punch_block_stun")), new Integer(p.getProperty("punch_start_up_frame")), 
@@ -57,6 +58,15 @@ public class CharacterFabrique {
 					new Integer(p.getProperty("light_kick_debut_x")), new Integer(p.getProperty("light_kick_debut_y")), 
 					new Integer(p.getProperty("light_kick_width")), new Integer(p.getProperty("light_kick_height")));
 			fc.getTech().put(Commande.KICK, kick);
+			
+			
+			superpunch.init(new Integer(p.getProperty("super_punch_damage")), new Integer(p.getProperty("super_punch_hit_stun")),
+					new Integer(p.getProperty("super_punch_block_stun")), new Integer(p.getProperty("super_punch_start_up_frame")), 
+					new Integer(p.getProperty("super_punch_hit_frame")), new Integer(p.getProperty("super_punch_recovery_frame")), 
+					new Integer(p.getProperty("super_punch_debut_x")), new Integer(p.getProperty("super_punch_debut_y")), 
+					new Integer(p.getProperty("super_punch_width")), new Integer(p.getProperty("super_punch_height")));
+			fc.getTech().put(Commande.SUPER_PUNCH, superpunch);
+			
 	   }
 	   
 	   public static void initHitbox(FightCharService fc, Properties p){

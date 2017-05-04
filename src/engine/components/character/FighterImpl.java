@@ -62,6 +62,9 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 				case KICK:
 					startTech(techniques.get(Commande.KICK));
 					break;
+				case SUPER_PUNCH:
+					startTech(techniques.get(Commande.SUPER_PUNCH));
+					break;
 				case DOWN:
 					moveDown();
 					break;

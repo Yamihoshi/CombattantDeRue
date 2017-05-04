@@ -75,6 +75,8 @@ public class TechniqueContract extends TechniqueDecorator {
 		checkInvariant();
 		
 		int pre_frame = this.getFrame();
+		int otherLife = other.getLife();
+		
 		
 		if(!(this.getFrame()<this.getStart_up_frame()+this.getHit_frame()+this.getRecovery_Frame()))
 			throw new PreconditionError("");
@@ -83,6 +85,11 @@ public class TechniqueContract extends TechniqueDecorator {
 		
 		if(!(this.getFrame()==pre_frame+1))
 			throw new PostconditionError("Frame Tech not incremented");
+		
+		if((isInRecovery() || isInStartUp()) && !(otherLife == other.getLife()) 
+				){
+			throw new PostconditionError("Life decreased in start up..");
+		}
 		
 		checkInvariant();
 	}
