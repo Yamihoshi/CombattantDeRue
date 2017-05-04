@@ -48,6 +48,8 @@ public class FightScreen{
 	
 	private boolean[] faceRight;
 	
+	private AnimationTimer timer;
+	
 	public FightScreen(StreetFighterGame game) throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/stage.fxml"));
@@ -111,6 +113,7 @@ public class FightScreen{
             	else if(event.getCode()==KeyCode.BACK_SPACE)
             	{
             		try {
+            			timer.stop();
             			CharacterSelection screen = new CharacterSelection(game);
             			Scene scene = new Scene(screen.getPane());
                     	
@@ -173,7 +176,7 @@ public class FightScreen{
 	
 	public void launchTimer()
 	{
-		new AnimationTimer()
+		this.timer=new AnimationTimer()
         {
         	int frameCount = 1;
         	long lasttimeFPS = System.nanoTime();
@@ -191,6 +194,7 @@ public class FightScreen{
 			@Override
             public void handle(long arg0)
             {                	
+				
             	long currenttimeNano = System.nanoTime();
             	
             	if(framePerFrame==true)
@@ -366,14 +370,16 @@ public class FightScreen{
                     
                  }          	             
             }
-        }.start();
+        };
+        
+        timer.start();
 	}
 
 	public void launchGameOverTimer(int winner) {
 
 		System.out.println("WINNER IS J"+(winner+1));
 		
-		new AnimationTimer()
+		this.timer=new AnimationTimer()
         {
 
 			int[] animation_frame = new int[2];
@@ -399,7 +405,9 @@ public class FightScreen{
                 }
 			}
         
-        }.start();
+        };
+		
+		this.timer.start();
 		
 		/* Play winner/Looser animation ? */
 		
