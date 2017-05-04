@@ -352,6 +352,9 @@ public class CharacterContract extends CharacterDecorator {
 
 	public void takeAttack(int damage, int hstun, int bstun) {
 		
+		boolean blocking = isBlocking();
+		int life = getLife();
+	
 		checkInvariant();
 		
 		if(!(damage>0))
@@ -364,8 +367,34 @@ public class CharacterContract extends CharacterDecorator {
 			throw new PreconditionError("Taking damage but was already DEAD");
 		
 		super.takeAttack(damage, hstun, bstun);
-		
 		checkInvariant();
+		
+		if(isBlocking()){
+			throw new PostconditionError("Impossible de bloquer..");
+		}
+		if(!(getCombo() == 0)){
+			throw new PostconditionError("Combo non remis à 0");
+		}
+		if(blocking){
+			if(!isBlockStunned()){
+				throw new PostconditionError("Non blockStun..");
+			}
+			
+			if(!(life == getLife())){
+				throw new PostconditionError("Life decrease but attack blocked");
+			}
+		}
+		if(!blocking){
+			if(!isHitStunned()){
+				throw new PostconditionError("Non hitStun");
+			}
+			if(!(life == getLife() + damage)){
+				throw new PostconditionError("Life no decreased...");
+			}
+		}
+		
+		
+	
 	}
 	
 

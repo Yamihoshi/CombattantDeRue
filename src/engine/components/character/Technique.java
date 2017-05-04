@@ -35,6 +35,7 @@ public class Technique implements TechService {
 	@Override
 	public int getHit_stun() {
 		return hstun;
+		
 	}
 
 	@Override

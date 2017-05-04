@@ -41,31 +41,26 @@ public class TechniqueContract extends TechniqueDecorator {
 
 	@Override
 	public int getHit_stun() {
-		// TODO Auto-generated method stub
 		return super.getHit_stun();
 	}
 
 	@Override
 	public int getBlock_stun() {
-		// TODO Auto-generated method stub
 		return super.getBlock_stun();
 	}
 
 	@Override
 	public int getStart_up_frame() {
-		// TODO Auto-generated method stub
 		return super.getStart_up_frame();
 	}
 
 	@Override
 	public int getHit_frame() {
-		// TODO Auto-generated method stub
 		return super.getHit_frame();
 	}
 
 	@Override
 	public int getRecovery_Frame() {
-		// TODO Auto-generated method stub
 		return super.getRecovery_Frame();
 	}
 
@@ -76,7 +71,6 @@ public class TechniqueContract extends TechniqueDecorator {
 
 	@Override
 	public void step(FightCharService me, FightCharService other) {
-		// TODO Auto-generated method stub
 		
 		checkInvariant();
 		
@@ -95,7 +89,6 @@ public class TechniqueContract extends TechniqueDecorator {
 
 	@Override
 	public void launchTechnique() {
-		// TODO Auto-generated method stub
 		
 		checkInvariant();
 		
@@ -109,19 +102,16 @@ public class TechniqueContract extends TechniqueDecorator {
 
 	@Override
 	public boolean isInStartUp() {
-		// TODO Auto-generated method stub
 		return super.isInStartUp();
 	}
 
 	@Override
 	public boolean isInHit() {
-		// TODO Auto-generated method stub
 		return super.isInHit();
 	}
 
 	@Override
 	public boolean isInRecovery() {
-		// TODO Auto-generated method stub
 		return super.isInRecovery();
 	}
 
