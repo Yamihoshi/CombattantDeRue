@@ -19,6 +19,14 @@ public class CharacterDecorator implements FightCharService{
 
 	private FightCharService character;
 
+	public int getHit_stun() {
+		return character.getHit_stun();
+	}
+
+	public int getBlock_stun() {
+		return character.getBlock_stun();
+	}
+
 	public boolean isJumping() {
 		return character.isJumping();
 	}

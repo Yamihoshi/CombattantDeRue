@@ -65,7 +65,6 @@ public class Technique implements TechService {
 
 	@Override
 	public void step(FightCharService me, FightCharService other) {
-		frame_actuel++;
 		if(isInStartUp()){
 		}else if(isInHit()){
 			if(me.isFaceRight())
@@ -86,6 +85,7 @@ public class Technique implements TechService {
 		}else{
 			me.endTechnique();
 		}
+		frame_actuel++;
 
 	}
 
@@ -125,12 +125,18 @@ public class Technique implements TechService {
 
 	@Override
 	public boolean isInRecovery() {
-		return frame_actuel < getStart_up_frame() + getHit_frame() + getRecovery_Frame();
+		return frame_actuel < getStart_up_frame() + getHit_frame() + getRecovery_Frame() &&!isInHit();
 	}
 
 	@Override
 	public int getFrame() {
 		return frame_actuel;
+	}
+
+	@Override
+	public boolean hasTouched() {
+		// TODO Auto-generated method stub
+		return already_touch;
 	}
 
 }

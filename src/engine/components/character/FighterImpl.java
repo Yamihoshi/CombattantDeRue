@@ -189,4 +189,16 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 		getComboService().step(hit);
 	}
 
+	@Override
+	public int getHit_stun() {
+		// TODO Auto-generated method stub
+		return frame_stun;
+	}
+
+	@Override
+	public int getBlock_stun() {
+		// TODO Auto-generated method stub
+		return block_frame_stun;
+	}
+
 }

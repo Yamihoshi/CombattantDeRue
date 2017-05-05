@@ -2,6 +2,7 @@ package engine.contracts;
 
 import engine.components.player.Commande;
 import engine.components.player.Player;
+import engine.contracts.error.ContractError;
 import engine.contracts.error.InvariantError;
 import engine.contracts.error.PostconditionError;
 import engine.contracts.error.PreconditionError;
@@ -51,28 +52,39 @@ public class EngineContract extends EngineDecorator{
 	public void checkInvariant(){
 		if(isGameOver()){
 			if(!(getCharacter(0).isDead() || getCharacter(1).isDead())){
-				new InvariantError("Personne morte");
+				throw new InvariantError("Personne morte");
+			}
+		}
+		
+		if(getCharacter(0).isFaceRight() == getCharacter(1).isFaceRight()){
+			throw new ContractError("2 char in the same direction");
+		}
+		
+		if(getCharacter(0).getPositionX() > getCharacter(1).getPositionX()){
+			if(getCharacter(0).isFaceRight()){
+				throw new ContractError("Erreur invariant faceRight");
+			}
+		}
+		if(getCharacter(0).getPositionX() < getCharacter(1).getPositionX()){
+			if(!getCharacter(0).isFaceRight()){
+				throw new ContractError("Erreur invariant faceRight");
 			}
 		}
 	}
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
 		return super.getHeight();
 	}
 
 	@Override
 	public int getWidth() {
-		// TODO Auto-generated method stub
 		return super.getWidth();
 	}
 
 	@Override
 	public FightCharService getCharacter(int i) {
-		
 		if(!(i == 0 || i == 1)){
-			new PreconditionError("Entier i =/= 0 | 1 ");
-			return null;
+			throw new PreconditionError("Entier i =/= 0 | 1 ");
 		}
 		else{
 			return super.getCharacter(i);
@@ -82,8 +94,7 @@ public class EngineContract extends EngineDecorator{
 	@Override
 	public Player getPlayer(int n) {
 		if(!(n == 0 || n == 1)){
-			new PreconditionError("Entier i =/= 0 | 1 ");
-			return null;
+			throw new PreconditionError("Entier i =/= 0 | 1 ");
 		}
 		else{
 			return super.getPlayer(n);
@@ -114,20 +125,17 @@ public class EngineContract extends EngineDecorator{
 
 	@Override
 	protected void finalize() throws Throwable {
-		// TODO Auto-generated method stub
 		super.finalize();
 	}
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
 		return super.hashCode();
 	}
 	
 	 
 	@Override
 	public FightCharService[] getCharacters() {
-		// TODO Auto-generated method stub
 		return super.getCharacters();
 	}
 

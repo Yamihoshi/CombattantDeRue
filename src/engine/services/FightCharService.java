@@ -15,7 +15,8 @@ public interface FightCharService extends CharacterService{
 	public boolean isTeching();
 	public HashMap<Commande, TechService> getTech();
 	public TechService getCurrentTechnique(); //require isTeching
-	
+	public int getHit_stun();
+	public int getBlock_stun();
 	/* COMBO */
 	public ComboService getComboService();
 	public boolean isCombo();

@@ -19,11 +19,15 @@ public class ComboContract extends ComboDecorator {
 
 	@Override
 	public void addCombo() {
+		checkInvariant();
+
 		int combo = getCombo();
 		super.addCombo();
 		if(!(getCombo() == combo +1)){
 			new PostconditionError("Erreur combo");
 		}
+		checkInvariant();
+
 	}
 
 	@Override
@@ -33,9 +37,12 @@ public class ComboContract extends ComboDecorator {
 
 	@Override
 	public void reset() {
+		checkInvariant();
 		super.reset();
 		if(!(getCombo() == 0))
 			new PostconditionError("Combo non réinitialisé");
+		checkInvariant();
+
 	}
 
 	@Override
@@ -46,11 +53,13 @@ public class ComboContract extends ComboDecorator {
 
 	@Override
 	public void removeFrame() {
+		checkInvariant();
 		int frame = getFrameRestante();
 		super.removeFrame();
 		if(!(frame - 1 == getFrameRestante())){
 			new PostconditionError("Erreur de frame");
 		}
+		checkInvariant();
 		
 	}
 

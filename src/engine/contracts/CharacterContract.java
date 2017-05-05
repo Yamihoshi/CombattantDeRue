@@ -98,7 +98,6 @@ public class CharacterContract extends CharacterDecorator {
 			throw new PostconditionError("Actuellement en teching..");
 		}
 		
-		
 		checkInvariant();
 		super.moveRight();
 		
@@ -116,7 +115,6 @@ public class CharacterContract extends CharacterDecorator {
 		
 		checkInvariant();
 		
-		
 		if(!(faceRight == isFaceRight() && life == getLife() && combo == getCombo())){
 			throw new PostconditionError("No more faceRight or life..");
 		}
@@ -126,9 +124,7 @@ public class CharacterContract extends CharacterDecorator {
 		
 		if(getHitboxState() != HitboxState.STANDING){
 			throw new PostconditionError("not standing");
-		}
-
-		
+		}	
 	}
 
 	@Override
@@ -146,10 +142,14 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void step(Commande c) {
+		int frame = getComboService().getFrameRestante();
 		checkInvariant();
-		// TODO Auto-generated method stub
 		super.step(c);
 		checkInvariant();
+		if(!(frame -1 == getComboService().getFrameRestante() || getComboService().getFrameRestante() == 95)){
+			throw new PostconditionError("Erreur de frame après step pour els combo" +  getComboService().getFrameRestante()); 
+		}
+		
 	}
 	
 	public void checkInvariant(){
@@ -250,7 +250,7 @@ public class CharacterContract extends CharacterDecorator {
 		int pre_positionX = getPositionX();
 		
 		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
-			throw new PreconditionError("Actuellement en teching..");
+			throw new PreconditionError("Actuellement en teching/blocking..");
 		}
 		
 		checkInvariant();
@@ -346,7 +346,8 @@ public class CharacterContract extends CharacterDecorator {
 				throw new PreconditionError("Trying to End Technique but was not in Teching State");
 		
 		super.endTechnique();
-		
+		if((super.isTeching()))
+			throw new PostconditionError("Trying to End Technique but was not in Teching State");
 		checkInvariant();
 	}
 
@@ -354,7 +355,8 @@ public class CharacterContract extends CharacterDecorator {
 		
 		boolean blocking = isBlocking();
 		int life = getLife();
-	
+		int hit_stun_frame = getHit_stun();
+		int block_stun_frame = getBlock_stun();
 		checkInvariant();
 		
 		if(!(damage>0))
@@ -383,6 +385,10 @@ public class CharacterContract extends CharacterDecorator {
 			if(!(life == getLife())){
 				throw new PostconditionError("Life decrease but attack blocked");
 			}
+			
+			if(!(block_stun_frame + bstun == getBlock_stun())){
+				throw new PostconditionError("BlockStun Not Increased");
+			}
 		}
 		if(!blocking){
 			if(!isHitStunned()){
@@ -390,6 +396,9 @@ public class CharacterContract extends CharacterDecorator {
 			}
 			if(!(life == getLife() + damage)){
 				throw new PostconditionError("Life no decreased...");
+			}
+			if(!(hit_stun_frame + hstun == getHit_stun())){
+				throw new PostconditionError("HitStun Not Increased");
 			}
 		}
 		
@@ -406,61 +415,51 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public int getLargeur() {
-		// TODO Auto-generated method stub
 		return super.getLargeur();
 	}
 
 	@Override
 	public Personnage getPersonnage() {
-		// TODO Auto-generated method stub
 		return super.getPersonnage();
 	}
 	@Override
 	public int getPositionX() {
-		// TODO Auto-generated method stub
 		return super.getPositionX();
 	}
 
 	@Override
 	public int getPositionY() {
-		// TODO Auto-generated method stub
 		return super.getPositionY();
 	}
 
 	@Override
 	public EngineService getEngine() {
-		// TODO Auto-generated method stub
 		return super.getEngine();
 	}
 
 	@Override
 	public HitboxService getCharBox() {
-		// TODO Auto-generated method stub
 		return super.getCharBox();
 	}
 
 	@Override
 	public int getLife() {
-		// TODO Auto-generated method stub
 		return super.getLife();
 	}
 
 	@Override
 	public int getSpeed() {
-		// TODO Auto-generated method stub
 		return super.getSpeed();
 	}
 
 	@Override
 	public boolean isFaceRight() {
-		// TODO Auto-generated method stub
 		return super.isFaceRight();
 	}
 
 
 	@Override
 	public boolean isDead() {
-		// TODO Auto-generated method stub
 		return super.isDead();
 	}
 	

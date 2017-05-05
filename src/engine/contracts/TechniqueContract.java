@@ -78,8 +78,8 @@ public class TechniqueContract extends TechniqueDecorator {
 		int otherLife = other.getLife();
 		boolean recovery = isInRecovery(), startUp = isInStartUp();
 		
-		if(!(this.getFrame()<this.getStart_up_frame()+this.getHit_frame()+this.getRecovery_Frame()))
-			throw new PreconditionError("");
+		if(!(this.getFrame()<this.getStart_up_frame()+this.getHit_frame()+this.getRecovery_Frame()+1))
+			throw new PreconditionError("frame superior to all other" + getFrame());
 		
 		super.step(me, other);
 		

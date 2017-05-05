@@ -7,6 +7,10 @@ import engine.services.TechService;
 public class TechniqueDecorator implements TechService{
 	private TechService technique;
 
+	public boolean hasTouched() {
+		return technique.hasTouched();
+	}
+
 	public TechniqueDecorator(TechService t) {
 		technique = t;
 	}

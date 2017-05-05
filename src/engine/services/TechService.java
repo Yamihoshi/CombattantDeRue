@@ -21,4 +21,5 @@ public interface TechService {
 	public boolean isInStartUp();
 	public boolean isInHit();
 	public boolean isInRecovery();
+	public boolean hasTouched();
 }
