@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-public class StreetTest {
-
+public class CharacterTest {
+	
 	@Before
 	public void beforeTests()
 	{
