@@ -16,7 +16,9 @@ public class TechniqueContract extends TechniqueDecorator {
 	}
 	
 	public void checkInvariant(){
-		
+		if(!(getFrame() <= getHit_frame() + getStart_up_frame() + getRecovery_Frame() )){
+			throw new InvariantError("frame depassed...");
+		}
 	}
 
 	@Override
@@ -76,7 +78,6 @@ public class TechniqueContract extends TechniqueDecorator {
 		
 		int pre_frame = this.getFrame();
 		int otherLife = other.getLife();
-		boolean recovery = isInRecovery(), startUp = isInStartUp();
 		
 		if(!(this.getFrame()<this.getStart_up_frame()+this.getHit_frame()+this.getRecovery_Frame()+1))
 			throw new PreconditionError("frame superior to all other" + getFrame());
@@ -85,7 +86,7 @@ public class TechniqueContract extends TechniqueDecorator {
 		
 		if(!(this.getFrame()==pre_frame+1))
 			throw new PostconditionError("Frame Tech not incremented");
-		
+		boolean recovery = isInRecovery(), startUp = isInStartUp();
 		if((recovery || startUp) && !(otherLife == other.getLife()) 
 				){
 			throw new PostconditionError("Life decreased in start up..");

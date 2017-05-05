@@ -65,6 +65,7 @@ public class Technique implements TechService {
 
 	@Override
 	public void step(FightCharService me, FightCharService other) {
+		frame_actuel++;
 		if(isInStartUp()){
 		}else if(isInHit()){
 			if(me.isFaceRight())
@@ -84,9 +85,8 @@ public class Technique implements TechService {
 			//waiting
 		}else{
 			me.endTechnique();
+			return;
 		}
-		frame_actuel++;
-
 	}
 
 	@Override
