@@ -29,7 +29,7 @@ public class EngineContract extends EngineDecorator{
 	@Override
 	public void init(int h, int w, int s, Player j1, Player j2) {
 		// TODO Auto-generated method stub
-		if(!(h > 0 && w > 0 && s > 0 && w > s && j1.equals(j2)))
+		if(!(h > 0 && w > 0 && s > 0 && w > s && !j1.equals(j2)))
 			throw new PreconditionError("Erreur init engine");
 		super.init(h, w, s, j1, j2);
 		if(!(h== getHeight() && w == getWidth())){
