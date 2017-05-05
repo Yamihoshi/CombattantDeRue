@@ -27,7 +27,7 @@ public class EngineImpl implements EngineService{
 		players[0] = j1;
 		players[1] = j2;
 		getCharacter(0).getCharBox().moveTo((int)width/2 - (int)s/2, getCharacter(0).getPositionY());
-		getCharacter(1).getCharBox().moveTo((int)width/2 + 20 + (int)s/2, getCharacter(1).getPositionY());
+		getCharacter(1).getCharBox().moveTo((int)width/2  + (int)s/2, getCharacter(1).getPositionY());
 	}
 
 	@Override
