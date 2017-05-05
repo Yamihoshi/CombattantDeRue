@@ -45,7 +45,7 @@ public class CharacterContract extends CharacterDecorator {
 	@Override
 	public void moveLeft() {
 		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
-			throw new PostconditionError("Actuellement en teching..");
+			throw new PreconditionError("Actuellement en teching..");
 		}
 		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
@@ -85,7 +85,7 @@ public class CharacterContract extends CharacterDecorator {
 	public void moveRight() {
 		
 		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
-			throw new PostconditionError("Actuellement en teching..");
+			throw new PreconditionError("Actuellement en teching..");
 		}
 		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
