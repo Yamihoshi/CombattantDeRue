@@ -57,7 +57,7 @@ public class EngineTest {
 		
 		try{
 			this.engine.init(720, 1280, 500, J1, J2);
-			assert(false);
+			assertTrue("Engine initialisée même avec des mauvaises val",false);
 		}catch(PreconditionError e){assert(true);};
 	}
 	
