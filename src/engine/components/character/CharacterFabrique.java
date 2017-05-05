@@ -116,4 +116,20 @@ public class CharacterFabrique {
 	         input.close();
 	      }
 	   }
+
+	public static FightCharService init(Personnage personnage, EngineService engine, boolean faceRight) {
+		   FightCharService fc = new FighterImpl();
+		   try {
+			Properties p = CharacterFabrique.load("ressource"+Ressource.character+personnage.toString());
+			fc.init(personnage, new Integer(p.getProperty("vie", "100")), new Integer(p.getProperty("vitesse", "1")), engine, faceRight, new Integer(p.getProperty("ecart", "1")));
+			initHitbox(fc, p);
+			initTechnique(fc, p);
+			initJump(fc, p);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		   return fc;
+	}
 }
