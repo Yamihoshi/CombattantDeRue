@@ -29,8 +29,11 @@ public class EngineContract extends EngineDecorator{
 	@Override
 	public void init(int h, int w, int s, Player j1, Player j2) {
 		// TODO Auto-generated method stub
-		if(!(h > 0 && w > 0 && s > 0 && w > s && !j1.equals(j2)))
+		if(!(h > 0 && w > 0 && s > 0 && w > s && j1!=null && j2!=null && !j1.equals(j2)))
 			throw new PreconditionError("Erreur init engine");
+		if(!(j1.getCharacter().isFaceRight() && !j2.getCharacter().isFaceRight())){
+			throw new PreconditionError("Erreur Orientation Personnage");
+		}
 		super.init(h, w, s, j1, j2);
 		if(!(h== getHeight() && w == getWidth())){
 			throw new PostconditionError("Erreur init engine dimension");
@@ -41,10 +44,11 @@ public class EngineContract extends EngineDecorator{
 			throw new PostconditionError("Erreur init char width");
 		}
 		if(!(getCharacter(0).getPositionY() ==  h-getCharacter(0).getHauteur() && getCharacter(1).getPositionY() == h-getCharacter(1).getHauteur())){
-			throw new PostconditionError("Erreur init char height");
-		}
-		if(!(getCharacter(0).isFaceRight() && !getCharacter(1).isFaceRight())){
-			throw new PostconditionError("Erreur init char face right");
+			{
+				String mess = getCharacter(0).getPositionY()+" =? "+ (h-getCharacter(0).getHauteur())+" ";
+				 mess += getCharacter(1).getPositionY()+" =? "+ (h-getCharacter(1).getHauteur());
+				throw new PostconditionError("Erreur init char height "+mess);
+			}
 		}
 	}
 	
