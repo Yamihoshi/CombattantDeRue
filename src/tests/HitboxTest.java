@@ -39,14 +39,16 @@ public class HitboxTest {
 	
 	@Test
 	public void testInit(){
-		assertEquals("position x: 300",300,hitbox.getPositionX().get());
-		assertEquals("position y : 300",300,hitbox.getPositionY());
+		assertEquals("position x: 100",100,hitbox.getPositionX().get());
+		assertEquals("position y : 120",120,hitbox.getPositionY());
+		assertEquals("largeur : 100", 100, hitbox.getLargeur());
+		assertEquals("largeur : 100", 100, hitbox.getHauteur());
 	}
 	
 	@Test
 	public void testMoveTo(){
 		hitbox.moveTo(300, 300);
-		assertEquals("position x: 300", 300,hitbox.getPositionX());
+		assertEquals("position x: 300", 300,hitbox.getPositionX().get());
 		assertEquals("position y : 300", 300,hitbox.getPositionY());
 	}
 	
@@ -72,5 +74,20 @@ public class HitboxTest {
 	public void testSetPosLargeur(){
 		hitbox.setLargeur(300);
 		assertEquals("largeur: 300", 300,hitbox.getLargeur());
+	}
+	
+	@Test
+	public void testCollision(){
+		HitboxService hitbox2 = new HitboxImpl();
+		hitbox2.init(new AtomicInteger(98), 100, 1001, 800);
+		assertTrue(hitbox2.collidesWith(hitbox));
+		hitbox2.init(new AtomicInteger(20), 300, 1001, 800);
+		assertFalse(hitbox2.collidesWith(hitbox));
+	}
+	@Test
+	public void testResize(){
+		hitbox.resize(500, 600);
+		assertEquals("largeur: 500", 500,hitbox.getLargeur());
+		assertEquals(600, hitbox.getHauteur());
 	}
 }

@@ -33,7 +33,9 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 	@Override
 	public void step(Commande c) {
 	//	state_actuel = State.WAITING;
-		if(isTeching()){
+		if(isJumping()){
+			jump.step(getOtherPlayer());
+		}else if(isTeching()){
 			current_technique.step(this, getOtherPlayer());
 		}else if(isBlockStunned()){
 			this.block_frame_stun--;
@@ -50,8 +52,6 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 			this.frame_stun--;
 		}else if(c == Commande.GUARD){
 			state_actuel = State.GUARDING;
-		}else if(isJumping()){
-			jump.step(getOtherPlayer());
 		}
 		else{
 			state_actuel = State.WAITING;
