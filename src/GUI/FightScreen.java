@@ -184,6 +184,7 @@ public class FightScreen{
         	long lasttimeFPS_keys = System.nanoTime();
         	int[] animation_frame = new int[2];
         	int[] frameAnimationCount = new int[2];
+        	boolean canIAPlay = true;
         	FightCharService J1 = game.getEngine().getCharacter(0);
         	FightCharService J2 = game.getEngine().getCharacter(1);
         	Commande[] commandes = new Commande[2];
@@ -213,6 +214,8 @@ public class FightScreen{
             		if(frameCount==60)
             		{
             			firstRun = System.nanoTime();
+            			canIAPlay=true;
+            			
             		}
             		
             		if(frameCount==0)
@@ -276,7 +279,17 @@ public class FightScreen{
                     	}
                     
         			if(game.isVersusIA())
-        				commandes[1]=IA.getRandomCommande();
+        			{
+        				if(canIAPlay)
+        				{
+        					commandes[1]=((IA)game.getPlayers()[1]).getRandomCommande();
+        					if(commandes[1]!=Commande.LEFT && commandes[1]!=Commande.RIGHT)
+        						canIAPlay=false;
+        				}
+        				else
+        					commandes[1]=Commande.NEUTRAL;
+        			}
+        				
                     
                     /* STEP ENGINE*/
                     System.out.println("CMD :"+commandes[1]);
