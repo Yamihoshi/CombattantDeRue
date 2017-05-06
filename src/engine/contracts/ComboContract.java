@@ -8,6 +8,25 @@ import engine.services.ComboService;
 
 public class ComboContract extends ComboDecorator {
 
+	@Override
+	public void step(boolean hit) {
+		int nb_combo = getCombo();
+		super.step(hit);
+		if(hit){
+			if(!(nb_combo +1 == getCombo())){
+				throw new PostconditionError("Error combo");
+			}
+		}else if(nb_combo != getCombo() || getCombo() == 0){
+			throw new PostconditionError("Error combo");
+		}
+	}
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		super.init();
+	}
+
 	public ComboContract(ComboService combo) {
 		super(combo);
 	}

@@ -98,8 +98,6 @@ public class CharacterImpl implements CharacterService{
 		
 		if(isOutsideLeft(tmp)){
 			new_x.set(1);
-		}else if(isOutsideRight(tmp)){
-			new_x.set(engine.getWidth());
 		}
 		if(tmp.collidesWith(engine.getCharacter(getOtherIndice()).getCharBox()))
 			return;

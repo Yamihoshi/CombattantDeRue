@@ -74,6 +74,8 @@ public class EngineContract extends EngineDecorator{
 				throw new ContractError("Erreur invariant faceRight");
 			}
 		}
+		
+
 	}
 	@Override
 	public int getHeight() {
