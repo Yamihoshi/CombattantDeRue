@@ -13,6 +13,7 @@ import GUI.controller.StageController;
 import engine.components.character.CharacterImpl;
 import engine.components.character.Personnage;
 import engine.components.player.Commande;
+import engine.components.player.IA;
 import engine.services.FightCharService;
 import game.StreetFighterGame;
 import javafx.animation.AnimationTimer;
@@ -274,9 +275,11 @@ public class FightScreen{
             				commandes[i]=Commande.NEUTRAL;
                     	}
                     
-                  
+        			if(game.isVersusIA())
+        				commandes[1]=IA.getRandomCommande();
                     
                     /* STEP ENGINE*/
+                    System.out.println("CMD :"+commandes[1]);
                     game.getEngine().step(commandes[0], commandes[1]);
                     controller.updatePosition(J1.getCharBox(), J2.getCharBox());
                     controller.updateHitbox(J1, J2);

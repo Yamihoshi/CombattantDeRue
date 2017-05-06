@@ -35,6 +35,11 @@ public class AnimationBinder {
 	
 	public AnimationType getAnimation(Commande cmd)
 	{
-		return this.linker.get(cmd);
+		AnimationType anim = this.linker.get(cmd);
+		
+		if(anim==null)
+			return AnimationType.STAND;
+		
+		return anim;
 	}
 }
