@@ -16,7 +16,7 @@ public class IA extends Player{
 	
 	public Commande getRandomCommande()
 	{
-		if(frame>0 && (previousCmd==Commande.LEFT || previousCmd==Commande.RIGHT))
+		if(frame>0 && (previousCmd==Commande.LEFT || previousCmd==Commande.RIGHT || previousCmd==Commande.DOWN))
 		{
 			frame--;
 			return previousCmd;
@@ -24,12 +24,14 @@ public class IA extends Player{
 		
 		frame = 60;
 		
-		Commande[] cmd = Commande.values();
-		int rng = new Random().nextInt(cmd.length);
+		do
+		{
+			Commande[] cmd = Commande.values();
+			int rng = new Random().nextInt(cmd.length);
+			this.previousCmd =  cmd[rng];
+		}while(this.previousCmd==Commande.NEUTRAL);
 		
-		this.previousCmd =  cmd[rng];
-		
-		return cmd[rng];
+		return this.previousCmd;
 	}
 
 }

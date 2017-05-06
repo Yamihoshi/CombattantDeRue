@@ -283,7 +283,7 @@ public class FightScreen{
         				if(canIAPlay)
         				{
         					commandes[1]=((IA)game.getPlayers()[1]).getRandomCommande();
-        					if(commandes[1]!=Commande.LEFT && commandes[1]!=Commande.RIGHT)
+        					if(commandes[1]!=Commande.LEFT && commandes[1]!=Commande.RIGHT && commandes[1]!=Commande.DOWN)
         						canIAPlay=false;
         				}
         				else
