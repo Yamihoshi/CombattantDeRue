@@ -128,13 +128,9 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 			block_frame_stun = bstun;
 		}else{
 			frame_stun = hstun;
-			System.out.println("my vie before " + vie);
-
 			this.vie -= damage;
-			System.out.println("and after" +  vie);
 		}
 		state_actuel = State.WAITING;
-		System.err.println(block_frame_stun + frame_stun);
 		this.compteurCombo.reset();
 	}	
 

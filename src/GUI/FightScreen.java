@@ -294,12 +294,12 @@ public class FightScreen{
 	    	           	{
 	    	           		if(chara.isBlockStunned())
 	    	           		{
-	    	           			System.out.println("Block Stunned");	
+	    	           		//	System.out.println("Block Stunned");	
 	    	           		}
 	    	           		else if (chara.isHitStunned())
 	    	           		{
 	    	           			//Anim hit
-	    	           			System.out.println("Hit Stunned");
+	    	           		//	System.out.println("Hit Stunned");
 	    	           			new_animation=AnimationType.HIT;
 	    	           		}
 	    	           		else if (chara.isTeching())

@@ -386,7 +386,7 @@ public class CharacterContract extends CharacterDecorator {
 				throw new PostconditionError("Life decrease but attack blocked");
 			}
 			
-			if(!(block_stun_frame + bstun == getBlock_stun())){
+			if(!(bstun == getBlock_stun())){
 				throw new PostconditionError("BlockStun Not Increased");
 			}
 		}
@@ -397,8 +397,8 @@ public class CharacterContract extends CharacterDecorator {
 			if(!(life == getLife() + damage)){
 				throw new PostconditionError("Life no decreased...");
 			}
-			if(!(hit_stun_frame + hstun == getHit_stun())){
-				throw new PostconditionError("HitStun Not Increased");
+			if(!(hstun == getHit_stun())){
+				throw new PostconditionError("HitStun Not Increased" + getHit_stun() + " must be equals to" + hit_stun_frame + "+" + hstun );
 			}
 		}
 		
