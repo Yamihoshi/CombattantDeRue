@@ -74,16 +74,13 @@ public class CharacterImpl implements CharacterService{
 	}
 	@Override
 	public void moveUpRight() {
-		gestionJump();
 		
 	}
 	@Override
 	public void moveUpLeft() {
-		gestionJump();
 	}
 	@Override
 	public void moveUp() {
-		gestionJump();
 		jump.launch();
 	}
 	@Override
@@ -281,8 +278,8 @@ public class CharacterImpl implements CharacterService{
 		jump = jumpService;
 	}
 	@Override
-	public void switchJump() {
-		jumping = !jumping;		
+	public void switchJump(boolean jump) {
+		jumping = jump;		
 	}
 	
 	private void gestionStand(){
@@ -291,9 +288,7 @@ public class CharacterImpl implements CharacterService{
 	public boolean isJumping(){
 		return jumping;
 	}
-	private void gestionJump(){
-		//jumping = true;
-	}
+
 	@Override
 	public HitboxState getHitboxState() {
 		return hitboxState;

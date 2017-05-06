@@ -57,7 +57,7 @@ public class Jump implements JumpService{
 	public void launch() {
 		frameRestante = 0;
 		vitesseX = 0;
-		me.switchJump();
+		me.switchJump(true);
 	}
 
 	@Override
@@ -77,7 +77,8 @@ public class Jump implements JumpService{
 		}else if(isLanding()){
 			
 		}else{
-			me.switchJump();
+			me.switchJump(false);
+			System.out.println("end");
 		}
 		frameRestante++;
 	}
@@ -119,7 +120,6 @@ public class Jump implements JumpService{
 		this.landing = landing;
 		this.vitesseX = vitesse_x;
 		this.vitesseY = vitesse_y;
-		this.frameRestante = frameRestante;
 		this.me = joueur;
 	}
 

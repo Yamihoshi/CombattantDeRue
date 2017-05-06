@@ -41,7 +41,6 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 			this.block_frame_stun--;
 			switch (c) {
 			case NEUTRAL:
-				
 				break;
 			case DOWN:
 				break;

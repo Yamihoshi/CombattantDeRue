@@ -31,8 +31,8 @@ public class CharacterDecorator implements FightCharService{
 		return character.isJumping();
 	}
 
-	public void switchJump() {
-		character.switchJump();
+	public void switchJump(boolean jump) {
+		character.switchJump(jump);
 	}
 
 	public int getEcart() {

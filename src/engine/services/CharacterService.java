@@ -31,7 +31,7 @@ public interface CharacterService {
 	public void bindHitbox(HitboxService hitbox, HitboxState state);
 	public void bindJump(JumpService jumpService);
 	public boolean isJumping();
-	public void switchJump();
+	public void switchJump(boolean jump);
 	
 	/* Operators */
 	public void neutral();
