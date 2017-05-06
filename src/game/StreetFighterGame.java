@@ -23,10 +23,7 @@ public class StreetFighterGame {
 		this.players= new Player[2];
 		this.players[0] = new Player(new CharacterContract(new FighterImpl()));
 		this.versus_IA=IA;
-		if(!this.versus_IA)
-			this.players[1] = new Player(new CharacterContract(new FighterImpl()));
-		else
-			this.players[1] = new IA(new CharacterContract(new FighterImpl()));
+		this.setPlayer2();
 	}
 	
 	public EngineService getEngine() {
@@ -44,6 +41,19 @@ public class StreetFighterGame {
 	public boolean isVersusIA()
 	{
 		return this.versus_IA;
+	}
+
+	public void toggleIA() {
+		this.versus_IA=!this.versus_IA;
+		this.setPlayer2();
+	}
+	
+	public void setPlayer2()
+	{
+		if(!this.versus_IA)
+			this.players[1] = new Player(new CharacterContract(new FighterImpl()));
+		else
+			this.players[1] = new IA(new CharacterContract(new FighterImpl()));
 	}
 	
 }

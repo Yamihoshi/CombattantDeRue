@@ -280,7 +280,7 @@ public class FightScreen{
                     
         			if(game.isVersusIA())
         			{
-        				if(canIAPlay)
+        				if(canIAPlay && !game.getEngine().getCharacter(1).isTeching())
         				{
         					commandes[1]=((IA)game.getPlayers()[1]).getRandomCommande();
         					if(commandes[1]!=Commande.LEFT && commandes[1]!=Commande.RIGHT && commandes[1]!=Commande.DOWN)
@@ -319,7 +319,9 @@ public class FightScreen{
 	    	           		}
 	    	           		else if (chara.isTeching())
 	    	           		{	    	           			
-	    	           			if(sprites_manager.getAnimationPlayed(i).getType()==AnimationType.STAND)
+	    	           			if(sprites_manager.getAnimationPlayed(i).getType()==AnimationType.STAND
+	    	           			||sprites_manager.getAnimationPlayed(i).getType()==AnimationType.WALK_FORWARD
+	    	           			)
 	    	           			{
 	    	           				new_animation = animationBinder.getAnimation(commandes[i]);
 	    	           				if(!releasedNeededKey.contains(code[i]))

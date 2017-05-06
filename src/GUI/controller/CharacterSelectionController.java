@@ -30,9 +30,6 @@ public class CharacterSelectionController implements Initializable {
     @FXML 
     private ImageView character_display_J2; 
     
-    @FXML
-    private Text font;
-    
     @Override  
     public void initialize(URL location, ResourceBundle resources) {  
     	

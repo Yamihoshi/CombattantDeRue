@@ -53,8 +53,15 @@ public class CharacterSelection{
             		previousCharacter(1);
             	else if (event.getCode()==KeyCode.D)
             		nextCharacter(1);
+            	else if (event.getCode()==KeyCode.A)
+            		toggleIA();
             }
         });
+	}
+	
+	public void toggleIA()
+	{
+		this.game.toggleIA();
 	}
 	
 	public void switch_to_fight_screen()
