@@ -16,7 +16,7 @@ public class ComboContract extends ComboDecorator {
 			if(!(nb_combo +1 == getCombo())){
 				throw new PostconditionError("Error combo");
 			}
-		}else if(nb_combo != getCombo() || getCombo() == 0){
+		}else if(!(nb_combo == getCombo() || getCombo() == 0)){
 			throw new PostconditionError("Error combo");
 		}
 	}
