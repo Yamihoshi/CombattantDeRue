@@ -120,7 +120,7 @@ public class Technique implements TechService {
 
 	@Override
 	public boolean isInHit() {
-		return frame_actuel < getStart_up_frame() + getHit_frame();
+		return !isInStartUp() && frame_actuel < getStart_up_frame() + getHit_frame();
 	}
 
 	@Override
