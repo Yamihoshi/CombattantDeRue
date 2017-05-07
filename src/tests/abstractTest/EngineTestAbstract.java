@@ -14,27 +14,19 @@ import engine.contracts.error.PreconditionError;
 import engine.impl.EngineImpl;
 import engine.services.FightCharService;
 
-public class EngineTestAbstract {
+public abstract class EngineTestAbstract {
 
-
-	EngineContract engine;
+	protected EngineContract engine;
 	
 	@Before
-	public void beforeTests()
-	{
-
-	}
+	public abstract void beforeTests();
 
 	@After
-	public void afterTests() {
-		
-	}
+	public abstract void afterTests();
 	
 	@Test
 	public void testInit()
-	{
-		this.engine = new EngineContract(new EngineImpl());
-		
+	{		
 		FightCharService chara1 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, true);
 		FightCharService chara2 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, false);
 		
@@ -46,9 +38,7 @@ public class EngineTestAbstract {
 	
 	@Test
 	public void testInit_Negatif()
-	{
-		this.engine = new EngineContract(new EngineImpl());
-		
+	{		
 		FightCharService chara1 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, true);
 		FightCharService chara2 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, false);
 		
@@ -63,9 +53,7 @@ public class EngineTestAbstract {
 	
 	@Test
 	public void testGameOver_J1()
-	{
-		this.engine = new EngineContract(new EngineImpl());
-		
+	{		
 		FightCharService chara1 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, true);
 		FightCharService chara2 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, false);
 		
@@ -83,9 +71,7 @@ public class EngineTestAbstract {
 	
 	@Test
 	public void testGameOver_J2()
-	{
-		this.engine = new EngineContract(new EngineImpl());
-		
+	{		
 		FightCharService chara1 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, true);
 		FightCharService chara2 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, false);
 		
