@@ -1,6 +1,5 @@
 package engine.contracts;
 
-import engine.components.character.Jump;
 import engine.contracts.error.InvariantError;
 import engine.contracts.error.PostconditionError;
 import engine.contracts.error.PreconditionError;
@@ -43,6 +42,5 @@ public class JumpContract extends JumpDecorator{
 		if(startUp != getFrameStartUp() && moveDown != getFrameMoveDown() && onAir != getFrameOnAir() && landing != getFrameLanding()){
 			throw new PostconditionError("Erreur init");
 		}
-		
 	}
 }

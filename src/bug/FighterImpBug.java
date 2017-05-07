@@ -44,7 +44,4 @@ public class FighterImpBug extends FighterImpl implements FightCharService {
 		tmp.init(new_x, y, getHauteur(), getLargeur());
 		getCharBox().moveTo(new_x.get(), getPositionY());
 	}
-
-	
-
 }

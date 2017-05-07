@@ -14,5 +14,4 @@ public class ComboBug extends  ComboIpml implements ComboService {
 	public void addCombo() {
 		super.reset();
 	}
-
 }
