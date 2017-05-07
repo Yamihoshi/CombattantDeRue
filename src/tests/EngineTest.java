@@ -49,14 +49,14 @@ public class EngineTest {
 	{
 		this.engine = new EngineContract(new EngineImpl());
 		
-		FightCharService chara1 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, false);
+		FightCharService chara1 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, true);
 		FightCharService chara2 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, false);
 		
 		Player J1 = new Player(chara1);
 		Player J2 = new Player(chara2);
 		
 		try{
-			this.engine.init(720, 1280, 500, J1, J2);
+			this.engine.init(0, 1280, 500, J1, J2);
 			assertTrue("Engine initialisée même avec des mauvaises val",false);
 		}catch(PreconditionError e){assert(true);};
 	}
