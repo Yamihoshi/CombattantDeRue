@@ -62,6 +62,7 @@ public class CharacterSelection{
 	public void toggleIA()
 	{
 		this.game.toggleIA();
+		this.controller.setIA(this.game.isVersusIA());
 	}
 	
 	public void switch_to_fight_screen()

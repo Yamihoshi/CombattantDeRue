@@ -30,6 +30,9 @@ public class CharacterSelectionController implements Initializable {
     @FXML 
     private ImageView character_display_J2; 
     
+    @FXML
+    private Text IA;
+    
     @Override  
     public void initialize(URL location, ResourceBundle resources) {  
     	
@@ -49,6 +52,11 @@ public class CharacterSelectionController implements Initializable {
 	    	else
 	    		character_display_J2.setImage(new Image(getClass().getResource("/Character_Display/"+Personnage.values()[index_chara]+".png").toURI().toString()));
     	}catch(Exception e){};
+    }
+    
+    public void setIA(boolean val)
+    {
+    	IA.setText("IA set to : "+val);
     }
 
 }
