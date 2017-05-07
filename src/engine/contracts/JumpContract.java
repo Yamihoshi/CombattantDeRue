@@ -1,6 +1,7 @@
 package engine.contracts;
 
 import engine.components.character.Jump;
+import engine.contracts.error.InvariantError;
 import engine.contracts.error.PostconditionError;
 import engine.contracts.error.PreconditionError;
 import engine.decorators.JumpDecorator;
@@ -15,10 +16,15 @@ public class JumpContract extends JumpDecorator{
 
 	@Override
 	public void launch() {
-		// TODO Auto-generated method stub
 		super.launch();
+		if(getFrame() != 0)
+			throw new PostconditionError("Frame dif de 0");
+		invariantError();
 	}
-
+	public void invariantError(){
+		if(getFrame() > getFrameLanding() + getFrameMoveDown() + getFrameMoveUp() + getFrameStartUp() + getFrameOnAir())
+			throw new InvariantError("Frame up");
+	}
 	@Override
 	public void init(int startUp, int moveUp, int onAir, int moveDown, int landing, int vitesse_x, int vitesse_y,
 			CharacterService joueur) {
@@ -29,8 +35,11 @@ public class JumpContract extends JumpDecorator{
 		if(moveDown != moveUp){
 			throw new PreconditionError("Not the same");
 		}
+		invariantError();
+
 		super.init(startUp, moveUp, onAir, moveDown, landing, vitesse_x, vitesse_y, joueur);
-		
+		invariantError();
+
 		if(startUp != getFrameStartUp() && moveDown != getFrameMoveDown() && onAir != getFrameOnAir() && landing != getFrameLanding()){
 			throw new PostconditionError("Erreur init");
 		}
