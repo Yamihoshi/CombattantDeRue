@@ -4,22 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-public class TechniqueTestAbstract {
+public abstract class TechniqueTestAbstract {
 	
 	@Before
-	public void beforeTests()
-	{
-		
-	}
+	public abstract void beforeTests();
 
 	@After
-	public void afterTests() {
-		
-	}
+	public abstract void afterTests();
 	
-	@Test
-	public void test()
-	{
-		assert(true);
-	}
 }

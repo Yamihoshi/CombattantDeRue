@@ -9,7 +9,7 @@ import org.junit.*;
 import engine.components.hitbox.HitboxImpl;
 import engine.services.HitboxService;
 
-public class HitboxTestAbstract {
+public abstract class HitboxTestAbstract {
 	
 
 	private HitboxService hitbox;
