@@ -12,10 +12,10 @@ import engine.services.PlayerService;
 public class EngineImpl implements EngineService{
 
 	public static final int NOMBRE_PERSO = 2;
-	private PlayerService players[];
-	private int width;
-	private int height;
-	private int space;
+	protected PlayerService players[];
+	protected int width;
+	protected int height;
+	protected int space;
 	
 	public EngineImpl() {
 		super();

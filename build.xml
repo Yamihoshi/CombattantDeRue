@@ -53,6 +53,19 @@
 		 	</junit>
 	  </target>
 	
+	<target name="testBugImpl" depends="compile"
+	          description="run JUnit Test">
+	    <echo>================ Testing Application================</echo>
+		 <junit printsummary="no" haltonfailure="no" fork="true">
+		 	<assertions><enable/></assertions>
+		 	    <classpath refid="test.classpath" />
+		 	<formatter type="brief" usefile="false" />
+		 	        <batchtest>
+		 	            <fileset dir="${src}" includes="**/*TestBug.java" />
+		 	        </batchtest>
+		 	</junit>
+	  </target>
+	
 	  <target name="dist" depends="init,clean" description="Generer la distribution" >
     <jar basedir="./" jarfile="../CPS_LAFONTAINE_LAVASTE.jar">
 	      </jar>

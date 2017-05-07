@@ -28,14 +28,7 @@ public abstract class ComboTestAbstract {
 	@Test
 	public void testComboSiNonTouche()
 	{
-		
-		FightCharService chara1 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, true);
-		FightCharService chara2 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, false);
-		
-		Player J1 = new Player(chara1);
-		Player J2 = new Player(chara2);
-		
-		this.engine.init(720, 1280, 500, J1, J2);
+		FightCharService chara1 = this.engine.getCharacter(0);
 		
 		int combo = chara1.getCombo();
 		
@@ -61,13 +54,8 @@ public abstract class ComboTestAbstract {
 	@Test
 	public void testComboSiTouche()
 	{		
-		FightCharService chara1 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, true);
-		FightCharService chara2 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, false);
-		
-		Player J1 = new Player(chara1);
-		Player J2 = new Player(chara2);
-		
-		this.engine.init(720, 1280, 500, J1, J2);
+		FightCharService chara1 = this.engine.getCharacter(0);
+		FightCharService chara2 = this.engine.getCharacter(1);
 		
 		int combo = chara1.getCombo();
 		
@@ -100,13 +88,8 @@ public abstract class ComboTestAbstract {
 	@Test
 	public void testCombo_Reset_Frame_restante()
 	{		
-		FightCharService chara1 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, true);
-		FightCharService chara2 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, false);
-		
-		Player J1 = new Player(chara1);
-		Player J2 = new Player(chara2);
-		
-		this.engine.init(720, 1280, 500, J1, J2);
+		FightCharService chara1 = this.engine.getCharacter(0);
+		FightCharService chara2 = this.engine.getCharacter(1);
 		
 		int combo = chara1.getCombo();
 		
@@ -144,13 +127,8 @@ public abstract class ComboTestAbstract {
 	@Test
 	public void testComboReset()
 	{		
-		FightCharService chara1 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, true);
-		FightCharService chara2 = CharacterFabrique.init(Personnage.CHUN_LI, this.engine, false);
-		
-		Player J1 = new Player(chara1);
-		Player J2 = new Player(chara2);
-		
-		this.engine.init(720, 1280, 500, J1, J2);
+		FightCharService chara1 = this.engine.getCharacter(0);
+		FightCharService chara2 = this.engine.getCharacter(1);
 		
 		int combo = chara1.getCombo();
 		
