@@ -1,10 +1,10 @@
-package tests;
+package tests.abstractTest;
 
 import static org.junit.Assert.*;
 
 import org.junit.*;
 
-public class CharacterTest {
+public class TechniqueTestAbstract {
 	
 	@Before
 	public void beforeTests()

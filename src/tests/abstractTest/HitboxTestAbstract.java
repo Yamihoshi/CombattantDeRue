@@ -1,4 +1,4 @@
-package tests;
+package tests.abstractTest;
 
 import static org.junit.Assert.*;
 
@@ -9,12 +9,12 @@ import org.junit.*;
 import engine.components.hitbox.HitboxImpl;
 import engine.services.HitboxService;
 
-public class HitboxTest {
+public class HitboxTestAbstract {
 	
 
 	private HitboxService hitbox;
 
-	public HitboxTest(){
+	public HitboxTestAbstract(){
 		this.hitbox=null;
 	}
 	
