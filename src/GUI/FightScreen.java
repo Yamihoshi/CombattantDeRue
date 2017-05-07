@@ -78,6 +78,8 @@ public class FightScreen{
     	this.sprites_manager.playAnimation(0,AnimationType.STAND);
     	this.sprites_manager.playAnimation(1,AnimationType.STAND);
     	
+    	this.controller.setPortraits(this.game.getEngine().getCharacters());
+    	
     	launchTimer();
 	}
 	

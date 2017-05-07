@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import GUI.Ressource;
 import GUI.animations.AnimationType;
 import GUI.animations.Sprite;
+import GUI.animations.SpritesLoader;
 import GUI.animations.SpritesManager;
 import engine.components.character.Personnage;
 import engine.services.FightCharService;
@@ -76,6 +78,12 @@ public class StageController implements Initializable {
 	@FXML 
     private ImageView combo_img_J2;
 	
+	@FXML
+	private ImageView portrait_J1;
+	
+	@FXML
+	private ImageView portrait_J2;
+	
 	private boolean showHitbox;
   	public static int SPACE = 70;
     @Override  
@@ -101,6 +109,12 @@ public class StageController implements Initializable {
     public ImageView getCharacterOfJ2()
     {
     	return this.character_J2;
+    }
+    
+    public void setPortraits(FightCharService chara[])
+    {
+    	this.portrait_J1.setImage(new Image(getClass().getResourceAsStream(Ressource.portraits+chara[0].getName()+".png")));
+    	this.portrait_J2.setImage(new Image(getClass().getResourceAsStream(Ressource.portraits+chara[1].getName()+".png")));
     }
 
     public void toggleHitBox()

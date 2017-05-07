@@ -70,15 +70,15 @@
             <Image url="@img/Combo.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="202.0" layoutX="-6.0" layoutY="6.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="portrait_J1" fitHeight="60.0" fitWidth="202.0" layoutX="-6.0" layoutY="6.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Portraits/character_header_chun-li_alt.png" />
+            <Image url="@Portraits/chun_li.png" />
          </image>
       </ImageView>
       <ProgressBar fx:id="life_bar_J1" layoutX="143.0" layoutY="24.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="450.0" progress="0.52" styleClass="life_bar" />
-      <ImageView fitHeight="60.0" fitWidth="202.0" layoutX="1120.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="portrait_J2" fitHeight="60.0" fitWidth="202.0" layoutX="1120.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Portraits/character_header_chun-li_alt.png" />
+            <Image url="@Portraits/ryu.png" />
          </image>
       </ImageView>
       <ProgressBar fx:id="life_bar_J2" layoutX="700.0" layoutY="24.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="450.0" progress="1.0" styleClass="life_bar" />
