@@ -12,6 +12,7 @@ import engine.components.hitbox.HitboxState;
 import engine.components.player.Commande;
 import engine.components.player.Player;
 import engine.contracts.HitboxContract;
+import engine.contracts.JumpContract;
 import engine.contracts.TechniqueContract;
 import engine.services.EngineService;
 import engine.services.FightCharService;
@@ -86,7 +87,7 @@ public class CharacterFabrique {
 	   }
 	   
 	   public static void initJump(FightCharService fc, Properties p){
-		   JumpService jumpService = new Jump();
+		   JumpService jumpService = new JumpContract(new Jump());
 		   jumpService.init(new Integer(p.getProperty("start_up")), new Integer(p.getProperty("move_up")), 
 							   new Integer(p.getProperty("on_air")), new Integer(p.getProperty("move_down")), 
 							   new Integer(p.getProperty("landing")), new Integer(p.getProperty("vitesse_x")),
