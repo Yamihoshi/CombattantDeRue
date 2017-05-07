@@ -53,6 +53,11 @@
 		 	</junit>
 	  </target>
 	
+	  <target name="dist" depends="init,clean" description="Generer la distribution" >
+    <jar basedir="./" jarfile="../CPS_LAFONTAINE_LAVASTE.jar">
+	      </jar>
+	  </target>
+	
 	<target name="clean">
 	  <echo>=== CLEAN ===</echo>
 	  <delete dir="${build}" />
