@@ -15,6 +15,7 @@ public interface TechService {
 	public int getRecovery_Frame();
 	public HitboxService getHitbox();
 	public int getFrame();
+	public int getNbHit();
 	/* Operators */
 	public void step(FightCharService me, FightCharService other);
 	public void launchTechnique();

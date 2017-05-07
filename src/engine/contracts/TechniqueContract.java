@@ -19,6 +19,10 @@ public class TechniqueContract extends TechniqueDecorator {
 		if(!(getFrame() <= getHit_frame() + getStart_up_frame() + getRecovery_Frame() )){
 			throw new InvariantError("frame depassed...");
 		}
+		
+		if(getNbHit() > 1){
+			throw new InvariantError("Le joueur a été touché deux fois !");
+		}
 	}
 
 	@Override

@@ -45,5 +45,6 @@ public interface CharacterService {
 	public void moveDownRight();
 	public void switchSide();
 	public void step(Commande c);
+	public boolean equals(Object o);
 
 }

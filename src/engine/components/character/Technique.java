@@ -24,6 +24,7 @@ public class Technique implements TechService {
 	protected HitboxService hitbox;
 	protected int frame_actuel;
 	private boolean already_touch;
+	private int nb_hit;
 
 
 
@@ -79,6 +80,7 @@ public class Technique implements TechService {
 				already_touch = true;
 				other.takeAttack(damage, hstun, bstun);
 				me.stepCombo(true);
+				nb_hit++;
 				//System.out.println("Touché !!!!!! Combo en cours " + me.getCombo());
 			}
 		}else if(isInRecovery()){
@@ -93,6 +95,7 @@ public class Technique implements TechService {
 	public void launchTechnique() {
 		this.frame_actuel = 0;
 		this.already_touch = false;
+		nb_hit = 0;
 	}
 
 	@Override
@@ -135,8 +138,12 @@ public class Technique implements TechService {
 
 	@Override
 	public boolean hasTouched() {
-		// TODO Auto-generated method stub
 		return already_touch;
+	}
+
+	@Override
+	public int getNbHit() {
+		return nb_hit;
 	}
 
 }

@@ -19,6 +19,10 @@ public class CharacterDecorator implements FightCharService{
 
 	private FightCharService character;
 
+	public boolean equals(Object o) {
+		return character.equals(o);
+	}
+
 	public int getHit_stun() {
 		return character.getHit_stun();
 	}

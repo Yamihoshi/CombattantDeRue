@@ -171,6 +171,56 @@ public class CharacterImpl implements CharacterService{
 		return vie <= 0;
 	}
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CharacterImpl other = (CharacterImpl) obj;
+		if (ecart != other.ecart)
+			return false;
+		if (engine == null) {
+			if (other.engine != null)
+				return false;
+		} else if (!engine.equals(other.engine))
+			return false;
+		if (faceRight != other.faceRight)
+			return false;
+		if (hitboxState != other.hitboxState)
+			return false;
+		if (jump == null) {
+			if (other.jump != null)
+				return false;
+		} else if (!jump.equals(other.jump))
+			return false;
+		if (jumping != other.jumping)
+			return false;
+		if (liste_hitbox == null) {
+			if (other.liste_hitbox != null)
+				return false;
+		} else if (!liste_hitbox.equals(other.liste_hitbox))
+			return false;
+		if (maxLife != other.maxLife)
+			return false;
+		if (myId != other.myId)
+			return false;
+		if (personnage != other.personnage)
+			return false;
+		if (state_actuel != other.state_actuel)
+			return false;
+		if (vie != other.vie)
+			return false;
+		if (vitesse != other.vitesse)
+			return false;
+		if (x != other.x)
+			return false;
+		if (y != other.y)
+			return false;
+		return true;
+	}
+	@Override
 	public String getName() {
 		return personnage.toString();
 	}
@@ -236,10 +286,21 @@ public class CharacterImpl implements CharacterService{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ecart;
 		result = prime * result + ((engine == null) ? 0 : engine.hashCode());
 		result = prime * result + (faceRight ? 1231 : 1237);
+		result = prime * result + ((hitboxState == null) ? 0 : hitboxState.hashCode());
+		result = prime * result + ((jump == null) ? 0 : jump.hashCode());
+		result = prime * result + (jumping ? 1231 : 1237);
+		result = prime * result + ((liste_hitbox == null) ? 0 : liste_hitbox.hashCode());
+		result = prime * result + maxLife;
+		result = prime * result + myId;
+		result = prime * result + ((personnage == null) ? 0 : personnage.hashCode());
+		result = prime * result + ((state_actuel == null) ? 0 : state_actuel.hashCode());
 		result = prime * result + vie;
 		result = prime * result + vitesse;
+		result = prime * result + x;
+		result = prime * result + y;
 		return result;
 	}
 

@@ -72,4 +72,10 @@ public class TechniqueDecorator implements TechService{
 	public int getFrame() {
 		return technique.getFrame();
 	}
+
+	@Override
+	public int getNbHit() {
+		// TODO Auto-generated method stub
+		return technique.getNbHit();
+	}
 }

@@ -78,6 +78,9 @@ public class CharacterContract extends CharacterDecorator {
 			throw new PostconditionError("not standing");
 		}
 
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
 		
 		
 	}
@@ -94,10 +97,7 @@ public class CharacterContract extends CharacterDecorator {
 		int life = getLife();
 		int combo = getCombo();
 		
-		if(isTeching()){
-			throw new PostconditionError("Actuellement en teching..");
-		}
-		
+
 		checkInvariant();
 		super.moveRight();
 		
@@ -107,13 +107,15 @@ public class CharacterContract extends CharacterDecorator {
 			new PostconditionError("Collision with a deplacement of posX on a right deplacement");
 		}
 		
+		checkInvariant();
+
+		
 		if((pre_positionX > getSpeed() && !getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))){
 			if(!(getPositionX() == getEngine().getWidth() - getLargeur())){
 				throw new PostconditionError("x not equals to a width engine - width..");
 			}
 		}
 		
-		checkInvariant();
 		
 		if(!(faceRight == isFaceRight() && life == getLife() && combo == getCombo())){
 			throw new PostconditionError("No more faceRight or life..");
@@ -124,7 +126,11 @@ public class CharacterContract extends CharacterDecorator {
 		
 		if(getHitboxState() != HitboxState.STANDING){
 			throw new PostconditionError("not standing");
-		}	
+		}
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
+		
 	}
 
 	@Override
@@ -179,9 +185,10 @@ public class CharacterContract extends CharacterDecorator {
 		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
 			throw new PostconditionError("Actuellement en teching..");
 		}
-		
-		
 		super.moveUpRight();
+		
+		
+		
 	}
 
 	@Override
@@ -196,11 +203,39 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void moveUp() {
-		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+		
+		int other = getEngine().getOtherIndice(getId());
+		int pre_positionX = getPositionX();
+		boolean faceRight = isFaceRight();
+		int pre_position_y = getPositionY();
+		int life = getLife();
+		int combo = getCombo();
+		
+		
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned() || isJumping()){
 			throw new PostconditionError("Actuellement en teching..");
 		}
 		
 		super.moveUp();
+		
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
+		
+		if((pre_positionX > getSpeed() && !getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))){
+			if(!(getPositionX() == getEngine().getWidth() - getLargeur())){
+				throw new PostconditionError("x not equals to a width engine - width..");
+			}
+		}
+		
+		
+		if(!(faceRight == isFaceRight() && life == getLife() && combo == getCombo())){
+			throw new PostconditionError("No more faceRight or life..");
+		}
+		if(!(pre_position_y == getPositionY())){
+			throw new PostconditionError("Y changing..");
+		}
+		
 	}
 
 	@Override
@@ -208,11 +243,35 @@ public class CharacterContract extends CharacterDecorator {
 		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
 			throw new PostconditionError("Actuellement en teching..");
 		}
+		int other = getEngine().getOtherIndice(getId());
+		int pre_positionX = getPositionX();
+		boolean faceRight = isFaceRight();
+		int pre_position_y = getPositionY();
+		int life = getLife();
+		int combo = getCombo();
 		
 		super.moveDown();
 		
 		if(getHitboxState() != HitboxState.CROUCHING){
 			throw new PostconditionError("not standing");
+		}
+		
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
+		
+		if((pre_positionX > getSpeed() && !getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))){
+			if(!(getPositionX() == getEngine().getWidth() - getLargeur())){
+				throw new PostconditionError("x not equals to a width engine - width..");
+			}
+		}
+		
+		
+		if(!(faceRight == isFaceRight() && life == getLife() && combo == getCombo())){
+			throw new PostconditionError("No more faceRight or life..");
+		}
+		if(!(pre_position_y == getPositionY())){
+			throw new PostconditionError("Y changing..");
 		}
 
 	}
@@ -220,8 +279,14 @@ public class CharacterContract extends CharacterDecorator {
 	@Override
 	public void moveDownLeft() {
 		
+
 		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
+		boolean faceRight = isFaceRight();
+		int pre_position_y = getPositionY();
+		int life = getLife();
+		int combo = getCombo();
+		
 		
 		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
 			throw new PreconditionError("Actuellement en teching..");
@@ -241,6 +306,25 @@ public class CharacterContract extends CharacterDecorator {
 		if(getHitboxState() != HitboxState.CROUCHING){
 			throw new PostconditionError("not standing");
 		}
+		
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
+		
+		if((pre_positionX > getSpeed() && !getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))){
+			if(!(getPositionX() == getEngine().getWidth() - getLargeur())){
+				throw new PostconditionError("x not equals to a width engine - width..");
+			}
+		}
+		
+		
+		if(!(faceRight == isFaceRight() && life == getLife() && combo == getCombo())){
+			throw new PostconditionError("No more faceRight or life..");
+		}
+		if(!(pre_position_y == getPositionY())){
+			throw new PostconditionError("Y changing..");
+		}
+		
 	}
 
 	@Override
@@ -248,6 +332,11 @@ public class CharacterContract extends CharacterDecorator {
 
 		int other = getEngine().getOtherIndice(getId());
 		int pre_positionX = getPositionX();
+		boolean faceRight = isFaceRight();
+		int pre_position_y = getPositionY();
+		int life = getLife();
+		int combo = getCombo();
+		
 		
 		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
 			throw new PreconditionError("Actuellement en teching/blocking..");
@@ -268,11 +357,27 @@ public class CharacterContract extends CharacterDecorator {
 		if(getHitboxState() != HitboxState.CROUCHING){
 			throw new PostconditionError("not standing");
 		}
+		
+		if(isTeching() || isBlocking() || isBlockStunned() || isHitStunned()){
+			throw new PostconditionError("Actuellement en teching..");
+		}
+		if((pre_positionX > getSpeed() && !getCharBox().collidesWith(getEngine().getCharacter(other).getCharBox()))){
+			if(!(getPositionX() == getEngine().getWidth() - getLargeur())){
+				throw new PostconditionError("x not equals to a width engine - width..");
+			}
+		}
+		
+		
+		if(!(faceRight == isFaceRight() && life == getLife() && combo == getCombo())){
+			throw new PostconditionError("No more faceRight or life..");
+		}
+		if(!(pre_position_y == getPositionY())){
+			throw new PostconditionError("Y changing..");
+		}
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return super.getName();
 	}
 
@@ -280,13 +385,11 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public State getState() {
-		// TODO Auto-generated method stub
 		return super.getState();
 	}
 
 	@Override
 	public void neutral() {
-		// TODO Auto-generated method stub
 		super.neutral();
 	}
 
@@ -346,9 +449,12 @@ public class CharacterContract extends CharacterDecorator {
 				throw new PreconditionError("Trying to End Technique but was not in Teching State");
 		
 		super.endTechnique();
+		checkInvariant();
+		if(State.WAITING != getState())
+			throw new PostconditionError("Trying to End Technique but was not in Wainting State");
+
 		if((super.isTeching()))
 			throw new PostconditionError("Trying to End Technique but was not in Teching State");
-		checkInvariant();
 	}
 
 	public void takeAttack(int damage, int hstun, int bstun) {
@@ -356,6 +462,8 @@ public class CharacterContract extends CharacterDecorator {
 		boolean blocking = isBlocking();
 		int life = getLife();
 		int hit_stun_frame = getHit_stun();
+		
+		boolean teching = isTeching();
 		int block_stun_frame = getBlock_stun();
 		checkInvariant();
 		
@@ -394,11 +502,20 @@ public class CharacterContract extends CharacterDecorator {
 			if(!isHitStunned()){
 				throw new PostconditionError("Non hitStun");
 			}
-			if(!(life == getLife() + damage)){
-				throw new PostconditionError("Life no decreased...");
-			}
-			if(!(hstun == getHit_stun())){
-				throw new PostconditionError("HitStun Not Increased" + getHit_stun() + " must be equals to" + hit_stun_frame + "+" + hstun );
+			if(teching){
+				if(!(life == getLife() + damage *2)){
+					throw new PostconditionError("Life no decreased...");
+				}
+				if(!(hstun *2  == getHit_stun())){
+					throw new PostconditionError("HitStun Not Increased" + getHit_stun() + " must be equals to" + hit_stun_frame + "+" + hstun );
+				}
+			}else{
+				if(!(life == getLife() + damage)){
+					throw new PostconditionError("Life no decreased...");
+				}
+				if(!(hstun == getHit_stun())){
+					throw new PostconditionError("HitStun Not Increased" + getHit_stun() + " must be equals to" + hit_stun_frame + "+" + hstun );
+				}
 			}
 		}
 		

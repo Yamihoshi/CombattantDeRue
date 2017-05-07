@@ -30,7 +30,7 @@ public class MainWindow extends Application{
 	 public void start(Stage stageParam) throws Exception {
 		
 		 this.stage = stageParam;
-		 this.game = new StreetFighterGame(false);
+		 this.game = new StreetFighterGame(true);
 		 
 		 this.stage.setResizable(false);
 		 

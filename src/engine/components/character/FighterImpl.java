@@ -123,13 +123,17 @@ public class FighterImpl extends CharacterImpl implements FightCharService{
 	
 	@Override
 	public void takeAttack(int damage, int hstun, int bstun) {
+		if(isTeching()){
+			damage*=2;
+			hstun*=2;
+		}
 		if(isBlocking()){
 			block_frame_stun = bstun;
 		}else{
 			frame_stun = hstun;
 			this.vie -= damage;
 		}
-		state_actuel = State.WAITING;
+		state_actuel = State.STUNNED;
 		this.compteurCombo.reset();
 	}	
 
