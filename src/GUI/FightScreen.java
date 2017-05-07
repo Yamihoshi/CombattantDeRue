@@ -14,7 +14,9 @@ import engine.components.character.CharacterImpl;
 import engine.components.character.Personnage;
 import engine.components.player.Commande;
 import engine.components.player.IA;
+import engine.contracts.IAContract;
 import engine.services.FightCharService;
+import engine.services.IAService;
 import game.StreetFighterGame;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.ObjectProperty;
@@ -284,7 +286,7 @@ public class FightScreen{
         			{
         				if(canIAPlay && !game.getEngine().getCharacter(1).isTeching())
         				{
-        					commandes[1]=((IA)game.getPlayers()[1]).getRandomCommande();
+        					commandes[1]=((IAService)game.getPlayers()[1]).getRandomCommande();
         					if(commandes[1]!=Commande.LEFT && commandes[1]!=Commande.RIGHT && commandes[1]!=Commande.DOWN)
         						canIAPlay=false;
         				}

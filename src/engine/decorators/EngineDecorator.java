@@ -1,9 +1,9 @@
 package engine.decorators;
 
 import engine.components.player.Commande;
-import engine.components.player.Player;
 import engine.services.EngineService;
 import engine.services.FightCharService;
+import engine.services.PlayerService;
 
 public class EngineDecorator implements EngineService{
 
@@ -28,7 +28,7 @@ public class EngineDecorator implements EngineService{
 	}
 	
 	@Override
-	public void init(int h, int w, int s, Player j1, Player j2) {
+	public void init(int h, int w, int s, PlayerService j1, PlayerService j2) {
 		this.delegate.init(h, w, s, j1, j2);
 	}
 
@@ -44,7 +44,7 @@ public class EngineDecorator implements EngineService{
 		return delegate.getCharacter(n);
 	}
 
-	public Player getPlayer(int n) {
+	public PlayerService getPlayer(int n) {
 		return delegate.getPlayer(n);
 	}
 

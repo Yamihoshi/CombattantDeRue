@@ -1,8 +1,9 @@
 package engine.components.player;
 
 import engine.services.FightCharService;
+import engine.services.PlayerService;
 
-public class Player {
+public class Player implements PlayerService{
 
 	private FightCharService character;
 
@@ -19,4 +20,10 @@ public class Player {
 		this.character = character;
 	}
 
+	@Override
+	public void init(FightCharService character) {
+		this.character = character;
+	}
+	
+	public Commande getRandomCommande(){return null;}
 }

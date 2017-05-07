@@ -461,10 +461,10 @@ public class CharacterContract extends CharacterDecorator {
 		
 		boolean blocking = isBlocking();
 		int life = getLife();
-		int hit_stun_frame = getHit_stun();
-		
+		int hit_stun_frame = getHit_stun();	
 		boolean teching = isTeching();
 		int block_stun_frame = getBlock_stun();
+		
 		checkInvariant();
 		
 		if(!(damage>0))
@@ -477,13 +477,18 @@ public class CharacterContract extends CharacterDecorator {
 			throw new PreconditionError("Taking damage but was already DEAD");
 		
 		super.takeAttack(damage, hstun, bstun);
+		
 		checkInvariant();
 		
 		if(isBlocking()){
 			throw new PostconditionError("Impossible de bloquer..");
 		}
+		
 		if(!(getCombo() == 0)){
 			throw new PostconditionError("Combo non remis à 0");
+		}
+		if(getState() != State.STUNNED){
+			throw new PostconditionError("Non Stunned");
 		}
 		if(blocking){
 			if(!isBlockStunned()){
@@ -518,9 +523,6 @@ public class CharacterContract extends CharacterDecorator {
 				}
 			}
 		}
-		
-		
-	
 	}
 	
 

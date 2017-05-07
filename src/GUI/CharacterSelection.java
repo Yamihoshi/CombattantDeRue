@@ -88,7 +88,7 @@ public class CharacterSelection{
 			e.printStackTrace();
 		}
 	}
-	
+	 
 	public AnchorPane getPane()
 	{
 		return this.pane;

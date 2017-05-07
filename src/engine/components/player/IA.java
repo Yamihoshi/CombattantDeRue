@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 import engine.services.FightCharService;
+import engine.services.IAService;
 
-public class IA extends Player{
+public class IA extends Player implements IAService{
 	
 	private Commande previousCmd;
 	private List<Commande> cmd;

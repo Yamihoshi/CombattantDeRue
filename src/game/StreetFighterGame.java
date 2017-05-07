@@ -5,23 +5,28 @@ import engine.components.player.IA;
 import engine.components.player.Player;
 import engine.contracts.CharacterContract;
 import engine.contracts.EngineContract;
+import engine.contracts.IAContract;
+import engine.contracts.PlayerContract;
 import engine.impl.EngineImpl;
 import engine.services.EngineService;
+import engine.services.IAService;
+import engine.services.PlayerService;
 
 public class StreetFighterGame {
 
 	public static final int HEIGHT = 720;
 	public static final int WIDTH = 1280;
 	private EngineService engine;
-	private Player[] players;
+	private PlayerService[] players;
 	
 	public boolean versus_IA;
 	
 	public StreetFighterGame(boolean IA)
 	{
 		this.engine = new EngineContract(new EngineImpl());
-		this.players= new Player[2];
-		this.players[0] = new Player(new CharacterContract(new FighterImpl()));
+		this.players= new PlayerService[2];
+		this.players[0] =  new PlayerContract(new Player
+							(new CharacterContract(new FighterImpl())));
 		this.versus_IA=IA;
 		this.setPlayer2();
 	}
@@ -30,12 +35,12 @@ public class StreetFighterGame {
 		return engine;
 	}
 
-	public Player[] getPlayers() {
+	public PlayerService[] getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(Player[] players) {
-		this.players = players;
+	public void setPlayers(PlayerService[] players) {
+		this.players =  players;
 	}
 	
 	public boolean isVersusIA()
@@ -51,9 +56,11 @@ public class StreetFighterGame {
 	public void setPlayer2()
 	{
 		if(!this.versus_IA)
-			this.players[1] = new Player(new CharacterContract(new FighterImpl()));
+			this.players[1] = new PlayerContract(new Player
+					(new CharacterContract(new FighterImpl())));
 		else
-			this.players[1] = new IA(new CharacterContract(new FighterImpl()));
+			this.players[1] = new IA
+					(new CharacterContract(new FighterImpl()));
 	}
 	
 }

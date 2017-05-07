@@ -5,7 +5,7 @@ import engine.components.player.*;
 public interface EngineService {
 
 	/* Constructors */
-	public void init(int h, int w, int s, Player j1, Player j2); //ou PlayerService ??
+	public void init(int h, int w, int s, PlayerService j1, PlayerService j2); //ou PlayerService ??
 	
 	/* Observators */
 	public int getHeight();
@@ -13,7 +13,7 @@ public interface EngineService {
 	public int getSpace();
 	public FightCharService getCharacter(int n);
 	public FightCharService[] getCharacters();
-	public Player getPlayer(int n);
+	public PlayerService getPlayer(int n);
 	public boolean isGameOver();
 	public int getOtherIndice(int myId);
 	public int getMyIndice(int myId);
@@ -21,5 +21,6 @@ public interface EngineService {
 	/* Operators */
 	
 	public void step(Commande c1,Commande c2);
+
 
 }

@@ -17,13 +17,14 @@ import engine.services.EngineService;
 import engine.services.FightCharService;
 import engine.services.HitboxService;
 import engine.services.JumpService;
+import engine.services.PlayerService;
 import engine.services.TechService;
 import game.StreetFighterGame;
 
 
 public class CharacterFabrique {
 
-	   public static void init(Player player, Personnage personnage, EngineService engine, boolean faceRight){
+	   public static void init(PlayerService player, Personnage personnage, EngineService engine, boolean faceRight){
 		   FightCharService fc = player.getCharacter();
 		   try {
 			Properties p = CharacterFabrique.load("ressource"+Ressource.character+personnage.toString());

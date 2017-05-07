@@ -2,25 +2,28 @@ package engine.impl;
 
 import engine.components.player.Commande;
 import engine.components.player.Player;
+import engine.contracts.IAContract;
+import engine.contracts.PlayerContract;
 import engine.services.CharacterService;
 import engine.services.EngineService;
 import engine.services.FightCharService;
+import engine.services.PlayerService;
 
 public class EngineImpl implements EngineService{
 
 	public static final int NOMBRE_PERSO = 2;
-	private Player players[];
+	private PlayerService players[];
 	private int width;
 	private int height;
 	private int space;
 	
 	public EngineImpl() {
 		super();
-		players = new Player[2];
+		players = new PlayerService[2];
 	}
 
 	@Override
-	public void init(int h, int w, int s, Player j1, Player j2) {
+	public void init(int h, int w, int s, PlayerService j1, PlayerService j2) {
 		width = w;
 		height = h;
 		space = s;
@@ -46,7 +49,7 @@ public class EngineImpl implements EngineService{
 	}
 
 	@Override
-	public Player getPlayer(int n) {
+	public PlayerService getPlayer(int n) {
 		return players[n];
 	}
 

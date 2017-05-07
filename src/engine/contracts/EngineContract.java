@@ -1,7 +1,6 @@
 package engine.contracts;
 
 import engine.components.player.Commande;
-import engine.components.player.Player;
 import engine.contracts.error.ContractError;
 import engine.contracts.error.InvariantError;
 import engine.contracts.error.PostconditionError;
@@ -9,6 +8,7 @@ import engine.contracts.error.PreconditionError;
 import engine.decorators.EngineDecorator;
 import engine.services.EngineService;
 import engine.services.FightCharService;
+import engine.services.PlayerService;
 import engine.components.character.FighterImpl;
 
 public class EngineContract extends EngineDecorator{
@@ -28,7 +28,7 @@ public class EngineContract extends EngineDecorator{
 	}
 
 	@Override
-	public void init(int h, int w, int s, Player j1, Player j2) {
+	public void init(int h, int w, int s, PlayerService j1, PlayerService j2) {
 		// TODO Auto-generated method stub
 		if(!(h > 0 && w > 0 && s > 0 && w > s && j1!=null && j2!=null && !j1.equals(j2)))
 			throw new PreconditionError("Erreur init engine");
@@ -98,7 +98,7 @@ public class EngineContract extends EngineDecorator{
 	}
 
 	@Override
-	public Player getPlayer(int n) {
+	public PlayerService getPlayer(int n) {
 		if(!(n == 0 || n == 1)){
 			throw new PreconditionError("Entier i =/= 0 | 1 ");
 		}
